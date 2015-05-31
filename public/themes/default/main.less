@@ -1,0 +1,42 @@
+// Bootstrap base syles
+@import "../../../bower_components/bootstrap/less/bootstrap.less";
+//@import "../../bootstrap/dist/css/bootstrap.min.css";
+
+@icon-font-path: "./fonts/"; // "../fonts/";
+
+body {
+  padding-top: 70px;
+}
+
+.jumbotron {
+  margin-top: -19px;
+}
+
+.blog-post, .search>li {
+  padding-bottom: 24px;
+  margin-bottom: 24px;
+}
+
+.list-unstyled span, .blog-post-meta span {
+  margin-right: 4px;
+}
+
+@-webkit-viewport   { width: device-width; }
+@-moz-viewport      { width: device-width; }
+@-ms-viewport       { width: device-width; }
+@-o-viewport        { width: device-width; }
+@viewport           { width: device-width; }
+
+.blur(@radius) {
+    -webkit-filter: blur(@radius);
+    -moz-filter: blur(@radius);
+    -o-filter: blur(@radius);
+    -ms-filter: blur(@radius);
+    filter: blur(@radius);
+}
+
+@media print {
+  .container {
+    width: auto;
+  }
+}
