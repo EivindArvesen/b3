@@ -2,16 +2,18 @@
 
     <div class="container">
 
-      <div class="blog-header">
-        <h1 class="blog-title">The Bootstrap Blog</h1>
-        <p class="lead blog-description">The official example template of creating a blog with Bootstrap.</p>
+      <div class="row">
+        <div class="col-sm-12">
+          <h1 class="blog-title">Blog</h1>
+          <p class="lead">Description...</p>
+        </div>
       </div>
 
       <div class="row">
 
 @yield('content')
 
-      <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+      <div class="col-md-3 col-md-offset-1 blog-sidebar">
           <div class="sidebar-module sidebar-module-inset">
             <form action="/blog/search" method="GET">
               <div class="input-group">
@@ -21,6 +23,8 @@
                 </span>
               </div><!-- /input-group -->
             </form>
+          </div>
+          <div class="sidebar-module">
             <h4>About</h4>
             <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
           </div>
@@ -47,6 +51,7 @@
             <ol class="list-unstyled">
               <li><a href="/blog/2015/06">June 2015</a></li>
               <li><a href="/blog/2015/05">May 2015</a></li>
+              <li><a href="/blog">More...</a></li>
             </ol>
           </div>
         </div><!-- /.blog-sidebar -->

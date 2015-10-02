@@ -67,6 +67,7 @@ module.exports = function(grunt) {
     uglify: {
         build: {
             files: {
+                'public/themes/default/jquery.min.js': ['bower_components/jquery/dist/jquery.min.js'],
                 'public/themes/default/base.min.js': ['bower_components/bootstrap/dist/js/bootstrap.min.js']
             }
         }
@@ -104,33 +105,44 @@ module.exports = function(grunt) {
         }
     }
     */
-  watch: {
-      configFiles: {
-        files: [ 'Gruntfile.js', 'config/*.js' ],
-        options: {
-          reload: true
+    browserSync: {
+        dev: {
+            bsFiles: {
+                src : [
+                        'public/themes/**/*.min.css',
+                        'public/themes/**/*.min.js',
+                        'resources/views/**/*.blade.php',
+                        'app/**/*.php'
+                        //'app/css/*.css',
+                        //'app/*.html'
+                    ]
+            },
+            options: {
+                watchTask: true,
+                proxy: 'localhost'
+            }
         }
-      },
-      html: {
-          files: ['index.html'],
-          tasks: ['htmlhint']
-      },
-      js: {
-          files: ['public/themes/default/base.min.js'],
-          tasks: ['uglify']
-      },
-      less: {
-          files: 'public/themes/default/main.less',
-          tasks: ['less', 'cssmin'],
-      },
-      /*
-       livereload: {
-      // These files are sent to the live reload server after less compiles to them
-        options: { livereload: 80 }, // true
-        files: ['public/themes/default/*.css'],
-      },
-      */
-  }
+    },
+    watch: {
+        configFiles: {
+          files: [ 'Gruntfile.js', 'config/*.js' ],
+          options: {
+            reload: true
+          }
+        },
+        html: {
+            files: ['index.html'],
+            tasks: ['htmlhint']
+        },
+        js: {
+            files: ['public/themes/default/base.min.js', 'public/themes/default/jquery.min.js'],
+            tasks: ['uglify']
+        },
+        less: {
+            files: ['public/themes/default/main.less', 'public/themes/default/variables.less'],
+            tasks: ['less', 'cssmin'],
+        },
+    }
   });
 
   // Loading our grunt modules
@@ -143,10 +155,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-qunit');
 
+  grunt.loadNpmTasks('grunt-browser-sync');
+
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   // CSS distribution task.
   // grunt.registerTask('default', ['less:compileCore', 'autoprefixer', 'usebanner', 'cssmin']);
-  grunt.registerTask('default', ['less:compileCore', 'autoprefixer', 'usebanner', 'cssmin', 'uglify', 'watch']);
+  grunt.registerTask('default', ['less:compileCore', 'autoprefixer', 'usebanner', 'cssmin', 'uglify', 'browserSync', 'watch']);
   // grunt.registerTask('test', ['jshint', 'qunit']);
 };

@@ -29,6 +29,5 @@
   },
   "devDependencies": {
     "bootstrap": "~3.3.4",
-    "livereload-js": "~2.2.1"
   }
 }

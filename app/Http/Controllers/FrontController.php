@@ -15,19 +15,7 @@ class FrontController extends Controller {
      */
     public function index()
     {
-        return view('front.index', ['page_title' => 'Index', 'nav_active' => 'home']); //
-        //return view()->file(theme_path().'/views/front.php'); // , $data
-
-    }
-
-    /**
-     * Show about page.
-     *
-     * @return Response
-     */
-    public function about()
-    {
-        return view('front.single', ['page_title' => 'About', 'nav_active' => 'about', 'content' => 'Content']); //
+        return view('front.index', ['page_title' => 'Index', 'nav_active' => 'about']); //
         //return view()->file(theme_path().'/views/front.php'); // , $data
 
     }
@@ -46,22 +34,20 @@ class FrontController extends Controller {
 
     public function debug()
     {
-        $designs="";
-        foreach (scandir(base_path().'/public/themes/debug') as $design) {
-            $designs.='<a href="'.'/themes/debug/'.$design.'">'.$design.'</a><br />';
+        $discard=array('','.','..');
+        $debug_folder="/themes/debug/";
+        $file_list=array();
+        foreach (scandir(base_path().'/public'.$debug_folder) as $file) {
+                if (!array_search($file, $discard)){
+                    $file_list[]=$file;
+                }
         }
-        return '
-        <html>
-            <head>
-                <title>DEBUG</title>
-            </head>
-            <body>
-                <h1>DEBUG</h1>
-                '.$designs.'
-            </body
-        </html>
-        ';
+        return view('debug.index', ['page_title' => 'Debug', 'nav_active' => 'debug', 'content' => 'Content', 'debug_folder' => $debug_folder, 'file_list' => $file_list]);
     }
 
+    public function debugtheme()
+    {
+        return '<html><body>BAJS</body></html>';
+    }
 
 }

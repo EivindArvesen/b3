@@ -24,8 +24,6 @@
 
 $app->group(['namespace' => 'App\Http\Controllers'], function($group){
 
-    $group->get('debug', 'FrontController@debug');
-
     $group->get('/', 'FrontController@index');
 
     $group->get('blog', 'BlogController@showFront');
@@ -41,10 +39,17 @@ $app->group(['namespace' => 'App\Http\Controllers'], function($group){
     $group->get('projects', 'ProjectsController@showList');
     $group->get('projects/{title}', 'ProjectsController@description');
 
-    $group->get('about', 'FrontController@about');
     $group->get('contact', 'FrontController@contact');
 
 });
+
+if (config('bbb_config.site_name')==True)
+{
+    $app->group(['namespace' => 'App\Http\Controllers'], function($group){
+        $group->get('debug', 'FrontController@debug');
+        $group->get('debug/theme', 'FrontController@debugtheme');
+    });
+}
 
 
 // /* NAMED ROUTES */

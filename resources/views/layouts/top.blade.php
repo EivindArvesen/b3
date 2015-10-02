@@ -28,9 +28,13 @@
     @show --}}
 
     @if (isset($menu_style) && $menu_style == 'white')
-    <nav class="navbar navbar-fixed-top">
+    <nav class="navbar navbar-default navbar-fixed-top">
+    @elseif (isset($menu_style) && $menu_style == 'white' && isset($menu_transparent))
+    <nav class="navbar navbar-default transparent navbar-fixed-top">
     @elseif (isset($menu_style) && $menu_style == 'black')
     <nav class="navbar navbar-inverse navbar-fixed-top">
+    @elseif (isset($menu_style) && $menu_style == 'black' && isset($menu_transparent))
+    <nav class="navbar navbar-inverse transparent navbar-fixed-top">
     @else
     <nav class="navbar navbar-inverse navbar-fixed-top">
     @endif
@@ -42,14 +46,21 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">Project name</a>
+          <a class="navbar-brand" href="/"><?php echo config('bbb_config.site_name'); ?></a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li<?php if ($nav_active=="home") echo ' class="active"'; ?>><a href="/">Home</a></li>
+            <?php
+              if (config('bbb_config.debug')==True){
+                $debug_nav='<li><a href="/debug">DEBUG</a></li>';
+                if ($nav_active=="debug")
+                  $debug_nav=substr_replace($debug_nav, ' class="active"', 3, 0);
+                echo $debug_nav;
+              }
+            ?>
+            <li<?php if ($nav_active=="about") echo ' class="active"'; ?>><a href="/">About</a></li>
             <li<?php if ($nav_active=="blog") echo ' class="active"'; ?>><a href="/blog">Blog</a></li>
             <li<?php if ($nav_active=="projects") echo ' class="active"'; ?>><a href="/projects">Projects</a></li>
-            <li<?php if ($nav_active=="about") echo ' class="active"'; ?>><a href="/about">About</a></li>
             <li<?php if ($nav_active=="contact") echo ' class="active"'; ?>><a href="/contact">Contact</a></li>
           </ul>
         </div><!--/.nav-collapse -->
