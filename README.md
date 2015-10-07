@@ -1,5 +1,5 @@
 # BlaBlaBlog
-BlaBlaBlog is a PHP blog system built upon the Laravel Lumen micro-framework.
+BlaBlaBlog is a PHP blog system built upon the Laravel [Lumen](http://lumen.laravel.com) micro-framework.
 
 ### WORK IN PROGRESS
 This project is very much under active development, and is not usable in its current state.
@@ -27,9 +27,11 @@ To set up your developer-environment:
     bower install
     npm install
 
+<!--
 ## Official Documentation
 
-Documentation for the framework can be found [here](https://blablablog.readthedocs.org).
+Documentation for BlaBlaBlog can be found [here](https://blablablog.readthedocs.org).
+-->
 
 ### License
 
