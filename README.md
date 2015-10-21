@@ -5,6 +5,12 @@ BlaBlaBlog is a PHP blog system built upon the Laravel [Lumen](http://lumen.lara
 This project is very much under active development, and is not usable in its current state.
 In fact - this readme is not even necessarily up to date.
 
+#### TODO:
+- Cement php (markdown) dependencies
+- Implement backend functionality
+- Script server setup (production-branch)
+- Make git hook scripts (pre-commit, master: validate markup) + (post-checkout, production: compile markup, build database)
+
 <!--
 [![Build Status](https://travis-ci.org/eivindarvesen/blablablog.svg)](https://travis-ci.org/laravel/lumen-framework)
 [![Total Downloads](https://poser.pugx.org/eivindarvesen/blablablog/downloads.svg)](https://packagist.org/packages/eivindarvesen/blablablog)
@@ -12,6 +18,8 @@ In fact - this readme is not even necessarily up to date.
 [![Latest Unstable Version](https://poser.pugx.org/eivindarvesen/blablablog/v/unstable.svg)](https://packagist.org/packages/eivindarvesen/blablablog)
 [![License](https://poser.pugx.org/eivindarvesen/blablablog/license.svg)](https://packagist.org/packages/eivindarvesen/blablablog)
 -->
+
+## About
 
 Blog posts are written in Markdown in your favourite editor, and pushed via git.
 Posts are validated upon git-commit.
