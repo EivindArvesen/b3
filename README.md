@@ -6,6 +6,7 @@ This project is very much under active development, and is not usable in its cur
 In fact - this readme is not even necessarily up to date.
 
 #### TODO:
+http://tyler.io/importing-jekyll-posts-into-wordpress/
 - Cement php (markdown) dependencies
 - Implement backend functionality
 - Script server setup (production-branch)
@@ -23,7 +24,7 @@ In fact - this readme is not even necessarily up to date.
 
 Blog posts are written in Markdown in your favourite editor, and pushed via git.
 Posts are validated upon git-commit.
-A database of metadata is built or updated on git-pull.
+A database of data/metadata is built or updated on git-pull.
 Pages are rendered serverside.
 Blablablog is themeable; the default theme is built upon Bootstrap 3.
 You set your usersettings in dotenv (do not track this in vcs).
@@ -34,6 +35,12 @@ To set up your developer-environment:
     composer install
     bower install
     npm install
+
+BlaBlaBlog also needs a database called 'blablablog' to exist, and you need to customize the dotenv-file in the project root.
+Then run `php artisan migrate` in the project root.
+
+To populate your database with your markdown blog posts, run `composer dump-autoload`, and then run `php artisan db:seed` (i.e. in your git post-receive script on the server).
+
 
 <!--
 ## Official Documentation

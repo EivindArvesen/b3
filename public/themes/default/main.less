@@ -17,6 +17,51 @@ body {
   }
 }
 
+@media (min-width: @screen-lg-min) {
+    body {
+        width: 80%;
+        float: right;
+        padding: 0;
+        margin: 14px 0;
+
+        .container {
+            margin: 0 14px;
+            width: auto;
+        }
+    }
+    .navbar {
+        width: 20%;
+        min-height: 100%;
+        display: table;
+        .container {
+            width: auto;
+            padding-top: 14px;
+            padding-left: 14px;
+            margin: 14px;
+            .navbar-nav {
+                width: 100%;
+                li {
+                    clear: both;
+                    width: 100%;
+                    border-bottom: 1px dotted @gray;
+                    a {
+                        border-bottom: none !important;
+                        padding-left: 0;
+                        padding-right: 0;
+                    }
+                }
+                li:last-child {
+                        border-bottom: none !important;
+                }
+            }
+            .navbar-collapse {
+                padding: 0;
+                width: 100%;
+            }
+        }
+    }
+}
+
 .navbar, .sidebar-module {
   //font-size: @font-size-small;
 }
@@ -44,7 +89,11 @@ body {
 }
 
 .navbar-inverse .navbar-brand {
-    color: @navbar-inverse-link-active-color;
+  color: @navbar-inverse-link-active-color;
+}
+
+.navbar-brand {
+  font-weight: bold;
 }
 
 @media (min-width: @screen-sm-min) {
@@ -111,6 +160,17 @@ body {
 
 .label {
   //border-radius: @border-radius-base;
+}
+
+.badge {
+  border-radius: 2px;
+}
+
+.breadcrumb {
+    background: none;
+    padding-left: 0;
+    //border-top: 1px dotted #ccc;
+    border-bottom: 1px dotted #ccc;
 }
 
 .blog-sidebar {
@@ -216,6 +276,14 @@ footer {
 
   .container {
   //background: none;
+
+  p {
+    margin-bottom: 20px;
+  }
+
+  a:not(:last-child) {
+    margin-right: 10px;
+  }
 
     @media (min-width: @screen-md-min) {
       hr {

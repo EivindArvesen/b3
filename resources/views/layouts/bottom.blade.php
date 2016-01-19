@@ -7,9 +7,14 @@
         <div class="col-xs-6 text-right">
           {{-- <h4>Elsewhere</h4> --}}
           <p>
-            <a href="#">GitHub</a>&nbsp;&nbsp;&nbsp;
-            <a href="#">Twitter</a>&nbsp;&nbsp;&nbsp;
-            <a href="#">Facebook</a><br /><br />
+            <?php if (config('bbb_config.github') !== '') { ?>
+              <a href="https://www.github.com/<?php echo config('bbb_config.github'); ?>">GitHub</a>
+            <?php ;} ?>
+            <?php if (config('bbb_config.twitter') !== '') { ?>
+              <a href="#">Twitter</a>
+            <?php ;} ?><?php if (config('bbb_config.facebook') !== '') { ?>
+              <a href="#">Facebook</a>
+            <?php ;} ?>
           </p>
         </div>
       </div> <!-- /container -->

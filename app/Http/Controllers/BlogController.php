@@ -140,7 +140,7 @@ class BlogController extends Controller {
     public function showEntry($year, $month, $day, $title)
     {
         if(preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $year.'-'.$month.'-'.$day)){
-            $file = base_path().'/test.md';
+            $file = base_path().'/storage/app/blog/test.md';
             $source = file_get_contents($file);
             $parser = new DocumentParser;
             $document = $parser->parse($source);
@@ -151,7 +151,7 @@ class BlogController extends Controller {
 
             $body = $html;
 
-            return view('blog.entry', ['page_title' => 'Blog', 'nav_active' => 'blog', 'date' => $year.'/'.$month.'/'.$day, 'title' => $title, 'body' => $body]);
+            return view('blog.entry', ['page_title' => 'Blog', 'nav_active' => 'blog', 'date' => $year.'/'.$month.'/'.$day, 'title' => $title, 'language' => $document->get('language'), 'category' => $document->get('category'), 'tags' => explode(",", $document->get('tags')), 'body' => $body]);
             //return view('blog.entry', ['user' => Blog::findOrFail($id)]);
         }else{
             abort(404);
