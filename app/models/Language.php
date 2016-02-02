@@ -1,12 +1,12 @@
 <?php
 
-# app/Models/Blogpost.php
+# app/Models/Language.php
 
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-final class Blogpost extends Model
+final class Language extends Model
 {
     public $timestamps = false;
 }

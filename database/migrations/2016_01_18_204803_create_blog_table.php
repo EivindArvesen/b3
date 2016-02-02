@@ -20,7 +20,7 @@ class CreateBlogTable extends Migration {
 			$table->integer('post_id');
 			$table->increments('category_id');
 
-			$table->unique('category_id');
+			$table->unique('post_id');
 		});
 
 		Schema::create('post_tags', function(Blueprint $table)
@@ -30,8 +30,6 @@ class CreateBlogTable extends Migration {
 			 */
 			$table->integer('post_id');
 			$table->increments('tag_id');
-
-			$table->unique('tag_id');
 		});
 
 		Schema::create('languages', function(Blueprint $table)
@@ -42,7 +40,7 @@ class CreateBlogTable extends Migration {
 			$table->increments('language_id');
 			$table->string('language_title');
 
-			$table->unique('language_id');
+			$table->unique('language_title');
 		});
 
 		Schema::create('categories', function(Blueprint $table)
@@ -53,7 +51,7 @@ class CreateBlogTable extends Migration {
 			$table->increments('category_id');
 			$table->string('category_title');
 
-			$table->unique('category_id');
+			$table->unique('category_title');
 		});
 
 		Schema::create('tags', function(Blueprint $table)
@@ -64,7 +62,7 @@ class CreateBlogTable extends Migration {
 			$table->increments('tag_id');
 			$table->string('tag_title');
 
-			$table->unique('tag_id');
+			$table->unique('tag_title');
 		});
 
 		Schema::create('blogposts', function(Blueprint $table)
@@ -76,7 +74,7 @@ class CreateBlogTable extends Migration {
 			$table->dateTime('created_at');
 			$table->dateTime('modified_at');
 			$table->integer('language_id')->unsigned();
-			$table->foreign('language_id')->references('language_id')->on('languages');
+			//$table->foreign('language_id')->references('language_id')->on('languages');
 			//$table->string('category');
 			//$table->string('tags');
 			$table->string('post_title');
@@ -96,7 +94,12 @@ class CreateBlogTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('blog');
+		Schema::drop('blogposts');
+		Schema::drop('tags');
+		Schema::drop('categories');
+		Schema::drop('languages');
+		Schema::drop('post_tags');
+		Schema::drop('post_categories');
 	}
 
 }

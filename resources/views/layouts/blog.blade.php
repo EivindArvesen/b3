@@ -2,12 +2,14 @@
 
     <div class="container">
 
+      <!--
       <div class="row">
         <div class="col-sm-12">
           <h1 class="blog-title">Blog</h1>
           <p class="lead">Description...</p>
         </div>
       </div>
+      -->
 
       <div class="row">
 

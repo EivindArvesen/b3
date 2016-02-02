@@ -28,6 +28,7 @@
     <script src="/themes/<?php echo config('bbb_config.theme'); ?>/base.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="/themes/<?php echo config('bbb_config.theme'); ?>/ie10-viewport-bug-workaround.js"></script>
+    <script src="/themes/<?php echo config('bbb_config.theme'); ?>/main.js"></script>
   </body>
 </html>
 

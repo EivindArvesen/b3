@@ -2,12 +2,16 @@
 
 @section('content')
   <div class="container">
+
+    <!--
     <div class="row">
       <div class="col-sm-12">
         <h1>List of Projects</h1>
         <p class="lead">Description...</p>
       </div>
     </div>
+    --><br />
+
     <div class="row">
       <!--<div class="media">-->
         <div class="col-xs-12 col-sm-6 col-md-3"> <!-- .media-left -->

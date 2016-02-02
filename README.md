@@ -1,5 +1,5 @@
 # BlaBlaBlog
-BlaBlaBlog is a PHP blog system built upon the Laravel [Lumen](http://lumen.laravel.com) micro-framework.
+BlaBlaBlog is a PHP blog system built upon the [Lumen](http://lumen.laravel.com) micro-framework.
 
 ### WORK IN PROGRESS
 This project is very much under active development, and is not usable in its current state.
@@ -39,7 +39,7 @@ To set up your developer-environment:
 BlaBlaBlog also needs a database called 'blablablog' to exist, and you need to customize the dotenv-file in the project root.
 Then run `php artisan migrate` in the project root.
 
-To populate your database with your markdown blog posts, run `composer dump-autoload`, and then run `php artisan db:seed` (i.e. in your git post-receive script on the server).
+To populate your database with your markdown blog posts, run (`composer dump-autoload`, IF CLASSES HAVE BEEN MODIFIED, and then) run `php artisan db:seed` (i.e. in your git post-receive script on the server).
 
 
 <!--
