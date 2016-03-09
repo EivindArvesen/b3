@@ -21,6 +21,7 @@ http://tyler.io/importing-jekyll-posts-into-wordpress/
 -->
 
 ## About
+Blogposts should not use higher level headers than h3!
 
 Blog posts are written in Markdown in your favourite editor, and pushed via git.
 Posts are validated upon git-commit.

@@ -20,7 +20,7 @@ class CreateBlogTable extends Migration {
 			$table->integer('post_id');
 			$table->increments('category_id');
 
-			$table->unique('post_id');
+			//$table->unique('post_id');
 		});
 
 		Schema::create('post_tags', function(Blueprint $table)
@@ -78,12 +78,13 @@ class CreateBlogTable extends Migration {
 			//$table->string('category');
 			//$table->string('tags');
 			$table->string('post_title');
-			$table->string('slug');
+			$table->string('url_title');
+			$table->string('lead');
 			$table->string('body');
 			$table->string('author');
 			$table->boolean('published');
 
-			$table->unique('post_id');
+			//$table->unique('post_id');
 		});
 	}
 
@@ -94,12 +95,12 @@ class CreateBlogTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('blogposts');
-		Schema::drop('tags');
-		Schema::drop('categories');
-		Schema::drop('languages');
-		Schema::drop('post_tags');
-		Schema::drop('post_categories');
+		Schema::dropIfExists('blogposts');
+		Schema::dropIfExists('tags');
+		Schema::dropIfExists('categories');
+		Schema::dropIfExists('languages');
+		Schema::dropIfExists('post_tags');
+		Schema::dropIfExists('post_categories');
 	}
 
 }

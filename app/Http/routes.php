@@ -27,13 +27,29 @@ $app->group(['namespace' => 'App\Http\Controllers'], function($group){
     $group->get('/', 'FrontController@index');
 
     $group->get('blog', 'BlogController@showFront');
+    $group->get('blog/page/{pageNumber}', 'BlogController@showFront');
+
     $group->get('blog/language/{language}', 'BlogController@listLanguage');
+    $group->get('blog/language/{language}/page/{pageNumber}', 'BlogController@listLanguage');
+
     $group->get('blog/category/{category}', 'BlogController@listCategory');
+    $group->get('blog/category/{category}/page/{pageNumber}', 'BlogController@listCategory');
+
     $group->get('blog/tag/{tag}', 'BlogController@listTag');
+    $group->get('blog/tag/{tag}/page/{pageNumber}', 'BlogController@listTag');
+
     $group->get('blog/search', 'BlogController@search');
-    $group->get('blog/{year}/', 'BlogController@showArchive1');
+    $group->get('blog/search/page/{pageNumber}', 'BlogController@search');
+
+    $group->get('blog/{year}', 'BlogController@showArchive1');
+    $group->get('blog/{year}/page/{pageNumber}', 'BlogController@showArchive1');
+
     $group->get('blog/{year}/{month}', 'BlogController@showArchive2');
+    $group->get('blog/{year}/{month}/page/{pageNumber}', 'BlogController@showArchive2');
+
     $group->get('blog/{year}/{month}/{day}', 'BlogController@showArchive3');
+    $group->get('blog/{year}/{month}/{day}/page/{pageNumber}', 'BlogController@showArchive3');
+
     $group->get('blog/{year}/{month}/{day}/{title}', 'BlogController@showEntry');
 
     $group->get('projects', 'ProjectsController@showList');

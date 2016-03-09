@@ -11,9 +11,9 @@
               <a href="https://www.github.com/<?php echo config('bbb_config.github'); ?>">GitHub</a>
             <?php ;} ?>
             <?php if (config('bbb_config.twitter') !== '') { ?>
-              <a href="#">Twitter</a>
+              <a href="https://twitter.com/<?php echo config('bbb_config.twitter')?>">Twitter</a>
             <?php ;} ?><?php if (config('bbb_config.facebook') !== '') { ?>
-              <a href="#">Facebook</a>
+              <a href="https://www.facebook.com/<?php echo config('bbb_config.facebook')?>">Facebook</a>
             <?php ;} ?>
           </p>
         </div>

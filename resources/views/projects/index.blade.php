@@ -13,6 +13,9 @@
     --><br />
 
     <div class="row">
+        <div class="col-xl-12">
+            <h1>Category (parent folder)</h1>
+        </div>
       <!--<div class="media">-->
         <div class="col-xs-12 col-sm-6 col-md-3"> <!-- .media-left -->
           <a href="#">

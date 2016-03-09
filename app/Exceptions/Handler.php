@@ -1,6 +1,7 @@
 <?php namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler {
@@ -36,6 +37,13 @@ class Handler extends ExceptionHandler {
      */
     public function render($request, Exception $e)
     {
+        if($e instanceOf ModelNotFoundException)
+        {
+            //abort(404);
+            //return view('errors.404');
+            return response(view("errors.404", ['page_title' => '404', 'nav_active' => 'None'])->render(), 404);
+        }
+
         return parent::render($request, $e);
     }
 

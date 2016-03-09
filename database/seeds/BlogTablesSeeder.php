@@ -31,18 +31,18 @@ class BlogTablesSeeder extends Seeder
                 $document = $parser->parse($source);
 
                 $languages = array();
-                if (!array_key_exists($document->get('language'), $languages)) {
+                if (!array_key_exists($document->get('language')[0], $languages)) {
                     Language::create([
-                        'language_title' => $document->get('language')
+                        'language_title' => ucfirst($document->get('language'))
                     ]);
                     $lang_id = Language::where('language_title', $document->get('language'))->get()[0]->language_id;
-                    $languages[$document->get('language')] = $lang_id;
+                    $languages[$document->get('language')[0]] = $lang_id;
                 }
 
                 $categories = array();
                 if (!array_key_exists($document->get('category'), $categories)) {
                     Category::create([
-                        'category_title' => $document->get('category')
+                        'category_title' => ucfirst($document->get('category'))
                     ]);
                     $cat_id = Category::where('category_title', $document->get('category'))->get()[0]->category_id;
                     $categories[$document->get('category')] = $lang_id;
@@ -60,15 +60,18 @@ class BlogTablesSeeder extends Seeder
                 }
 
                 Blogpost::create([
+                    'created_at' => '',
+                    'modified_at' => date('Y-m-d H:i:s',filemtime($file)),
                     'language_id' => $lang_id,
-                    'post_title' => $document->get('title'),
-                    'slug' => ($document->get('slug')||''),
+                    'post_title' => ucfirst($document->get('title')),
+                    'url_title' => substr(str_replace('+', '_', urlencode(strtolower(preg_replace("#[[:punct:]]#", "", $document->get('title'))))), 0, 50),
+                    'lead' => (ucfirst($document->get('lead'))||''),
                     'body' => $document->getHtmlContent(),
                     'author' => ($document->get('author')||''),
                     'published' => ($document->get('published')||'')
                 ]);
 
-                // use hashes here in stead?
+                // use hashes here instead?
                 $post_id = Blogpost::where('body', $document->getHtmlContent())->get()[0]->post_id;
 
                 Post_category::create([
