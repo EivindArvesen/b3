@@ -18,7 +18,7 @@ class CreateBlogTable extends Migration {
 			 * Table for associating posts with a category
 			 */
 			$table->integer('post_id');
-			$table->increments('category_id');
+			$table->integer('category_id');
 
 			//$table->unique('post_id');
 		});
@@ -29,7 +29,7 @@ class CreateBlogTable extends Migration {
 			 * Table associating posts with tags
 			 */
 			$table->integer('post_id');
-			$table->increments('tag_id');
+			$table->integer('tag_id');
 		});
 
 		Schema::create('languages', function(Blueprint $table)

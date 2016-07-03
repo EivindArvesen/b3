@@ -15,6 +15,7 @@ class BlogTablesSeeder extends Seeder
 {
     public function run()
     {
+
         // protected $table = 'my_flights'; // set table
 
         // update tables instead of overwriting (think timestamps, original...)
@@ -31,30 +32,36 @@ class BlogTablesSeeder extends Seeder
                 $document = $parser->parse($source);
 
                 $languages = array();
-                if (!array_key_exists($document->get('language')[0], $languages)) {
+                if (!Language::where('language_title', $document->get('language'))->first()) {
                     Language::create([
                         'language_title' => ucfirst($document->get('language'))
                     ]);
-                    $lang_id = Language::where('language_title', $document->get('language'))->get()[0]->language_id;
+                }
+                $lang_id = Language::where('language_title', $document->get('language'))->first()->language_id;
+                if (!array_key_exists($document->get('language')[0], $languages)) {
                     $languages[$document->get('language')[0]] = $lang_id;
                 }
 
                 $categories = array();
-                if (!array_key_exists($document->get('category'), $categories)) {
+                if (!Category::where('category_title', ucfirst(trim($document->get('category'))))->first()) {
                     Category::create([
-                        'category_title' => ucfirst($document->get('category'))
+                        'category_title' => ucfirst(trim($document->get('category')))
                     ]);
-                    $cat_id = Category::where('category_title', $document->get('category'))->get()[0]->category_id;
+                }
+                $cat_id = Category::where('category_title', ucfirst(trim($document->get('category'))))->first()->category_id;
+                if (!array_key_exists($document->get('category'), $categories)) {
                     $categories[$document->get('category')] = $lang_id;
                 }
 
                 $tags = array();
                 foreach (explode(",", $document->get('tags')) as $tag) {
-                    if (!array_key_exists($tag, $tags)) {
+                    if (!Tag::where('tag_title', ucfirst(trim($tag)))->first()) {
                         Tag::create([
-                        'tag_title' => trim($tag)
+                        'tag_title' => ucfirst(trim($tag))
                         ]);
-                        $tag_id = Tag::where('tag_title', $document->get('tag'))->get();
+                    }
+                    $tag_id = Tag::where('tag_title', ucfirst(trim($tag)))->first()->tag_id;
+                    if (!array_key_exists($tag, $tags)) {
                         $tags[$tag] = $tag_id;
                     }
                 }
@@ -81,7 +88,7 @@ class BlogTablesSeeder extends Seeder
 
                 //post-tags:
                 //legg til post-id, tag-id
-                foreach ($tags as $tag_id => $tag_title) {
+                foreach ($tags as $index => $tag_id) {
                     Post_tag::create([
                         'post_id' => $post_id,
                         'tag_id' => $tag_id

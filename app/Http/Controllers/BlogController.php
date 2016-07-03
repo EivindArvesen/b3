@@ -43,8 +43,6 @@ class BlogController extends Controller {
         return view('blog.index', ['page_title' => 'Blog', 'nav_active' => 'blog', 'results' => $posts]);
         //return view('blog.entry', ['user' => Blog::findOrFail($id)]);
         //
-        //pagination at https://laracasts.com/discuss/channels/lumen/pagination-in-lumen
-        //
         // $small = substr($big, 0, 100);
     }
 
@@ -54,10 +52,33 @@ class BlogController extends Controller {
      * @param  str  $language
      * @return Response
      */
-    public function listLanguage($language, $page = 1)
+    public function listLanguage($language=False, $page = 1)
     {
-        return view('blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => 'Language', 'group' => [$language]]);
-        //return view('blog.entry', ['user' => Blog::findOrFail($id)]);
+        if ($language!=False) {
+            $language_id = Language::where('language_title', $language)->get()[0]->language_id;
+            $posts = Blogpost::where('published', '!', false)->where('language_id', $language_id)
+                   ->paginate(10);
+            foreach ($posts as $post) {
+                $tags = array();
+                foreach (Post_tag::where('post_id', $post->post_id)->get() as $tag) {
+                    array_push($tags, Tag::where('tag_id', $tag->tag_id)->get()[0]->tag_title);
+                }
+                $post->tags = $tags;
+
+                $category = Post_category::where('post_id', $post->post_id)->get()[0];
+                $post->category = Category::where('category_id', $category->category_id)->get()[0]->category_title;
+
+                $language = Language::where('language_id', $post->language_id)->get()[0];
+                $post->language = Language::where('language_id', $language->language_id)->get()[0]->language_title;
+            }
+
+            return view('blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => 'Language', 'group' => [$language->language_title], 'results' => $posts]);
+        }
+        else {
+            $languages = Language::paginate(10);
+
+            return view('blog.list', ['page_title' => 'Blog', 'nav_active' => 'blog', 'list_title' => 'Language', 'results' => $languages]);
+        }
     }
 
     /**
@@ -66,10 +87,39 @@ class BlogController extends Controller {
      * @param  str  $category
      * @return Response
      */
-    public function listCategory($category, $page = 1)
+    public function listCategory($category=False, $page = 1)
     {
-        return view('blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => 'Category', 'group' => [$category]]);
-        //return view('blog.entry', ['user' => Blog::findOrFail($id)]);
+        if ($category!=False) {
+            $category_title = $category;
+            $category_id = Category::where('category_title', $category)->get()[0]->category_id;
+            $post_idx = Post_category::where('category_id', $category_id)->get();
+            $post_ids=[];
+            foreach ($post_idx as $post_id) {
+                array_push($post_ids, $post_id->post_id);
+            }
+            $posts = Blogpost::where('published', '!', false)->whereIn('post_id', $post_ids)
+                   ->paginate(10);
+            foreach ($posts as $post) {
+                $tags = array();
+                foreach (Post_tag::where('post_id', $post->post_id)->get() as $tag) {
+                    array_push($tags, Tag::where('tag_id', $tag->tag_id)->get()[0]->tag_title);
+                }
+                $post->tags = $tags;
+
+                $category = Post_category::where('post_id', $post->post_id)->get()[0];
+                $post->category = Category::where('category_id', $category->category_id)->get()[0]->category_title;
+
+                $language = Language::where('language_id', $post->language_id)->get()[0];
+                $post->language = Language::where('language_id', $language->language_id)->get()[0]->language_title;
+            }
+
+            return view('blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => 'Category', 'group' => [$category_title], 'results' => $posts]);
+        }
+        else {
+            $categories = Category::paginate(10);
+
+            return view('blog.list', ['page_title' => 'Blog', 'nav_active' => 'blog', 'list_title' => 'Category', 'results' => $categories]);
+        }
     }
 
     /**
@@ -78,10 +128,39 @@ class BlogController extends Controller {
      * @param  str  $tag
      * @return Response
      */
-    public function listTag($tag, $page = 1)
+    public function listTag($tag=False, $page = 1)
     {
-        return view('blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => 'Tag', 'group' => [$tag]]);
-        //return view('blog.entry', ['user' => Blog::findOrFail($id)]);
+        if ($tag!=False) {
+            $tag_title = $tag;
+            $tag_id = Tag::where('tag_title', $tag)->get()[0]->tag_id;
+            $post_idx = Post_tag::where('tag_id', $tag_id)->get();
+            $post_ids=[];
+            foreach ($post_idx as $post_id) {
+                array_push($post_ids, $post_id->post_id);
+            }
+            $posts = Blogpost::where('published', '!', false)->whereIn('post_id', $post_ids)
+                   ->paginate(10);
+            foreach ($posts as $post) {
+                $tags = array();
+                foreach (Post_tag::where('post_id', $post->post_id)->get() as $tag) {
+                    array_push($tags, Tag::where('tag_id', $tag->tag_id)->get()[0]->tag_title);
+                }
+                $post->tags = $tags;
+
+                $category = Post_category::where('post_id', $post->post_id)->get()[0];
+                $post->category = Category::where('category_id', $category->category_id)->get()[0]->category_title;
+
+                $language = Language::where('language_id', $post->language_id)->get()[0];
+                $post->language = Language::where('language_id', $language->language_id)->get()[0]->language_title;
+            }
+
+            return view('blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => 'Tag', 'group' => [$tag_title], 'results' => $posts]);
+        }
+        else {
+            $tags = Tag::paginate(10);
+
+            return view('blog.list', ['page_title' => 'Blog', 'nav_active' => 'blog', 'list_title' => 'Tag', 'results' => $tags]);
+        }
     }
 
     /**
@@ -96,7 +175,23 @@ class BlogController extends Controller {
             return redirect('blog');
         }
         else {
-            return view('blog.search', ['page_title' => 'Blog', 'nav_active' => 'blog', 'query' => $request->input('query')]);
+            $posts = Blogpost::where('published', '!', false)->where('body', 'LIKE', '%'.$request->input('query').'%')->orWhere('post_title', 'LIKE', '%'.$request->input('query').'%')
+                   ->paginate(10);
+            foreach ($posts as $post) {
+                $tags = array();
+                foreach (Post_tag::where('post_id', $post->post_id)->get() as $tag) {
+                    array_push($tags, Tag::where('tag_id', $tag->tag_id)->get()[0]->tag_title);
+                }
+                $post->tags = $tags;
+
+                $category = Post_category::where('post_id', $post->post_id)->get()[0];
+                $post->category = Category::where('category_id', $category->category_id)->get()[0]->category_title;
+
+                $language = Language::where('language_id', $post->language_id)->get()[0];
+                $post->language = Language::where('language_id', $language->language_id)->get()[0]->language_title;
+            }
+
+            return view('blog.search', ['page_title' => 'Blog', 'nav_active' => 'blog', 'query' => $request->input('query'), 'results' => $posts]);
             //return view('blog.entry', ['user' => Blog::findOrFail($id)]);
         }
     }
@@ -110,7 +205,23 @@ class BlogController extends Controller {
     public function showArchive1($year, $page = 1)
     {
         if(preg_match('/^[0-9]{4}$/', $year)){
-            return view('blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => '', 'group' => [$year]]);
+            $posts = Blogpost::where('published', '!', false)->whereYear('modified_at', '=', $year)
+                   ->paginate(10);
+            foreach ($posts as $post) {
+                $tags = array();
+                foreach (Post_tag::where('post_id', $post->post_id)->get() as $tag) {
+                    array_push($tags, Tag::where('tag_id', $tag->tag_id)->get()[0]->tag_title);
+                }
+                $post->tags = $tags;
+
+                $category = Post_category::where('post_id', $post->post_id)->get()[0];
+                $post->category = Category::where('category_id', $category->category_id)->get()[0]->category_title;
+
+                $language = Language::where('language_id', $post->language_id)->get()[0];
+                $post->language = Language::where('language_id', $language->language_id)->get()[0]->language_title;
+            }
+
+            return view('blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => '', 'group' => [$year], 'results' => $posts]);
             //return view('blog.entry', ['user' => Blog::findOrFail($id)]);
         }else{
             abort(404);
@@ -127,7 +238,23 @@ class BlogController extends Controller {
     public function showArchive2($year, $month, $page = 1)
     {
         if(preg_match('/^[0-9]{4}-[0-9]{2}$/', $year.'-'.$month)){
-            return view('blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => '', 'group' => [$year, $month]]);
+            $posts = Blogpost::where('published', '!', false)->whereYear('modified_at', '=', $year)
+                   ->paginate(10);
+            foreach ($posts as $post) {
+                $tags = array();
+                foreach (Post_tag::where('post_id', $post->post_id)->get() as $tag) {
+                    array_push($tags, Tag::where('tag_id', $tag->tag_id)->get()[0]->tag_title);
+                }
+                $post->tags = $tags;
+
+                $category = Post_category::where('post_id', $post->post_id)->get()[0];
+                $post->category = Category::where('category_id', $category->category_id)->get()[0]->category_title;
+
+                $language = Language::where('language_id', $post->language_id)->get()[0];
+                $post->language = Language::where('language_id', $language->language_id)->get()[0]->language_title;
+            }
+
+            return view('blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => '', 'group' => [$year, $month], 'results' =>$posts]);
             //return view('blog.entry', ['user' => Blog::findOrFail($id)]);
         }else{
             abort(404);
@@ -145,7 +272,23 @@ class BlogController extends Controller {
     public function showArchive3($year, $month, $day, $page = 1)
     {
         if(preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $year.'-'.$month.'-'.$day)){
-            return view('blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => '', 'group' => [$year, $month, $day]]);
+            $posts = Blogpost::where('published', '!', false)->whereYear('modified_at', '=', $year)
+                   ->paginate(10);
+            foreach ($posts as $post) {
+                $tags = array();
+                foreach (Post_tag::where('post_id', $post->post_id)->get() as $tag) {
+                    array_push($tags, Tag::where('tag_id', $tag->tag_id)->get()[0]->tag_title);
+                }
+                $post->tags = $tags;
+
+                $category = Post_category::where('post_id', $post->post_id)->get()[0];
+                $post->category = Category::where('category_id', $category->category_id)->get()[0]->category_title;
+
+                $language = Language::where('language_id', $post->language_id)->get()[0];
+                $post->language = Language::where('language_id', $language->language_id)->get()[0]->language_title;
+            }
+
+            return view('blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => '', 'group' => [$year, $month, $day], 'results' => $posts]);
             //return view('blog.entry', ['user' => Blog::findOrFail($id)]);
         }else{
             abort(404);

@@ -29,12 +29,15 @@ $app->group(['namespace' => 'App\Http\Controllers'], function($group){
     $group->get('blog', 'BlogController@showFront');
     $group->get('blog/page/{pageNumber}', 'BlogController@showFront');
 
+    $group->get('blog/language', 'BlogController@listLanguage');
     $group->get('blog/language/{language}', 'BlogController@listLanguage');
     $group->get('blog/language/{language}/page/{pageNumber}', 'BlogController@listLanguage');
 
+    $group->get('blog/category', 'BlogController@listCategory');
     $group->get('blog/category/{category}', 'BlogController@listCategory');
     $group->get('blog/category/{category}/page/{pageNumber}', 'BlogController@listCategory');
 
+    $group->get('blog/tag', 'BlogController@listTag');
     $group->get('blog/tag/{tag}', 'BlogController@listTag');
     $group->get('blog/tag/{tag}/page/{pageNumber}', 'BlogController@listTag');
 

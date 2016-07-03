@@ -145,15 +145,9 @@ body {
   box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 0px 0px inset;
 }
 
-#blog-search:hover {
+#blog-search:hover, #blog-search:active {
   box-shadow: none;
-}
-
-#blog-search:active {
   border-color: #ccc;
-  background-color: #fff;
-  box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 0px 0px inset;
-  color: #333;
 }
 
 .blog-main {
@@ -306,27 +300,27 @@ footer {
     }
 }
 
-.btn-primary:hover {
+.btn-primary:hover, .btn-primary:active {
     border-color: @brand-primary;
     background-color: @brand-primary;
     color: #fff;
 }
-.btn-success:hover {
+.btn-success:hover, .btn-success:active {
     border-color: @brand-success;
     background-color: @brand-success;
     color: #fff;
 }
-.btn-info:hover {
+.btn-info:hover, .btn-info:active {
     border-color: @brand-info;
     background-color: @brand-info;
     color: #fff;
 }
-.btn-warning:hover {
+.btn-warning:hover, .btn-warning:active {
     border-color: @brand-warning;
     background-color: @brand-warning;
     color: #fff;
 }
-.btn-danger:hover {
+.btn-danger:hover, .btn-danger:active {
     border-color: @brand-danger;
     background-color: @brand-danger;
     color: #fff;
@@ -360,7 +354,7 @@ footer {
 
 @media (min-width: @screen-xs-min) and (max-width: @screen-xs-max) {
     .navbar-nav li.active {
-        border-left: 2px solid #fff;
+        //border-left: 2px solid #fff;
     }
 }
 
@@ -413,8 +407,8 @@ footer {
                 li.active {
                     a {
                     border-bottom: none;
-                    padding-left: 12px;
-                    border-left: 2px solid #fff; // right?
+                    //padding-left: 12px;
+                    //border-left: 2px solid #fff; // right?
                     }
                 }
                 li:last-child {
