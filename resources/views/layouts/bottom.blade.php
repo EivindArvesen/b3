@@ -4,6 +4,11 @@
         <div class="col-xs-6">
           <p>&copy; <?php echo config('bbb_config.user') . ' ' . date("Y"); ?></p>
         </div>
+        <!--
+        <div class="col-xs-4 text-center">
+          <p>Powered by <a href="#">B3</a></p>
+        </div>
+        -->
         <div class="col-xs-6 text-right">
           {{-- <h4>Elsewhere</h4> --}}
           <p>

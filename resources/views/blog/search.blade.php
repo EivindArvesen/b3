@@ -4,7 +4,7 @@
 
         <div class="col-sm-8 blog-main">
 
-            <h3><small>Results for: </small><?php echo $query; ?></h3>
+            <h3><small>Search results for: </small><?php echo $query; ?></h3>
             <hr />
 
             @foreach ($results as $result)

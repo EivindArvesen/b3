@@ -15,7 +15,7 @@ class FrontController extends Controller {
      */
     public function index()
     {
-        return view('front.index', ['page_title' => 'Index', 'nav_active' => 'about']); //
+        return view('front.index', ['page_title' => 'Index', 'menu_transparent' => false, 'menu_style' => 'black', 'nav_active' => 'about']); //
         //return view()->file(theme_path().'/views/front.php'); // , $data
 
     }

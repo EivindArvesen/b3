@@ -25,9 +25,10 @@ class BlogTablesSeeder extends Seeder
         $display = Array ( 'md' );
         foreach(new RecursiveIteratorIterator($it) as $file)
         {
-            //echo basename($file);
             $exp = explode('.', $file);
             if (basename($file)!=='.' && basename($file)!=='..' && in_array(strtolower(array_pop($exp)), $display)) {
+                $original_date = basename(dirname(dirname(dirname($file)))) . '-' . basename(dirname(dirname($file))) . '-' . basename(dirname($file));
+
                 $source = file_get_contents($file);
                 $document = $parser->parse($source);
 
@@ -66,20 +67,41 @@ class BlogTablesSeeder extends Seeder
                     }
                 }
 
-                Blogpost::create([
-                    'created_at' => '',
-                    'modified_at' => date('Y-m-d H:i:s',filemtime($file)),
+                if ($document->get('slug')) {
+                    $slug = substr(str_replace('+', '-', urlencode(strtolower(preg_replace("#[[:punct:]]#", "-", $document->get('slug'))))), 0, 50);
+                } else {
+                    $slug = substr(str_replace('+', '-', urlencode(strtolower(preg_replace("#[[:punct:]]#", "-", $document->get('title'))))), 0, 50);
+                }
+
+                if ($document->get('type')) {
+                    $type = $document->get('type');
+                } else {
+                    $type = 'default';
+                }
+
+                if ($document->get('style')) {
+                    $style = $document->get('style');
+                } else {
+                    $style = 'default';
+                }
+
+                $blogpost = Blogpost::create([
+                    'created_at' => $original_date . ' 00:00:00',
+                    'modified_at' => $document->get('modified') . ' 00:00:00',
                     'language_id' => $lang_id,
                     'post_title' => ucfirst($document->get('title')),
-                    'url_title' => substr(str_replace('+', '_', urlencode(strtolower(preg_replace("#[[:punct:]]#", "", $document->get('title'))))), 0, 50),
-                    'lead' => (ucfirst($document->get('lead'))||''),
+                    'slug' => $slug,
+                    'lead' => ucfirst($document->get('lead')),
                     'body' => $document->getHtmlContent(),
-                    'author' => ($document->get('author')||''),
-                    'published' => ($document->get('published')||'')
+                    'published' => $document->get('published') == 'false' || false,
+                    'type' => $type,
+                    'style' => $style,
+                    'transparent' => $document->get('transparent') == 'false' || false,
                 ]);
 
+                // $post_id = $blogpost->post_id;
                 // use hashes here instead?
-                $post_id = Blogpost::where('body', $document->getHtmlContent())->get()[0]->post_id;
+                $post_id = Blogpost::where('body', $document->getHtmlContent())->first()->post_id;
 
                 Post_category::create([
                     'post_id' => $post_id,

@@ -1,5 +1,7 @@
 <?php namespace App\Http\Controllers;
 
+use App\Models\Project;
+
 //use App\User;
 //use App\Http\Controllers\Controller;
 use Laravel\Lumen\Routing\Controller;
@@ -16,8 +18,18 @@ class ProjectsController extends Controller {
      */
     public function showList()
     {
-        return view('projects.index', ['page_title' => 'Projects', 'nav_active' => 'projects',]);
-        //return view('blog.entry', ['user' => Blog::findOrFail($id)]);
+        $projects = [];
+
+        $categories = Project::select('category')->groupBy('category')->orderBy('category','asc')->get()->lists('category');
+
+        foreach ($categories as $category) {
+            $collection = [];
+            $collection['name'] = $category;
+            $collection['projects'] = Project::where('category', $category)->orderBy('project_id', 'desc')->get();
+            array_push($projects, $collection);
+        }
+
+        return view('projects.index', ['page_title' => 'Projects', 'nav_active' => 'projects', 'results' => $projects]);
     }
 
     /**
@@ -28,7 +40,8 @@ class ProjectsController extends Controller {
      */
     public function description($title)
     {
-        return view('projects.presentation', ['page_title' => 'Projects', 'nav_active' => 'projects', 'title' => $title]);
+        $project = Project::where('slug', $title)->get()[0];
+        return view('projects.presentation', ['page_title' => 'Projects', 'nav_active' => 'projects', 'project' => $project]);
         //return view('blog.entry', ['user' => Blog::findOrFail($id)]);
     }
 

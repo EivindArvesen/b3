@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBlogTable extends Migration {
+class CreateBlogTables extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -75,14 +75,14 @@ class CreateBlogTable extends Migration {
 			$table->dateTime('modified_at');
 			$table->integer('language_id')->unsigned();
 			//$table->foreign('language_id')->references('language_id')->on('languages');
-			//$table->string('category');
-			//$table->string('tags');
 			$table->string('post_title');
-			$table->string('url_title');
+			$table->string('slug');
 			$table->string('lead');
-			$table->string('body');
-			$table->string('author');
+			$table->longText('body');
 			$table->boolean('published');
+			$table->string('type');
+			$table->string('style');
+			$table->string('transparent');
 
 			//$table->unique('post_id');
 		});

@@ -20,7 +20,7 @@
                     foreach ($results as $language) {
                         ?>
                         <li>
-                            <p><a href="/blog/<?=strtolower($list_title.'/'.$language->language_title)?>"><?=$language->language_title?></a></p>
+                            <h3><a href="/blog/<?=strtolower($list_title.'/'.$language->language_title)?>"><?=$language->language_title?></a></h3>
                         </li>
                         <?php
                     }
@@ -30,7 +30,7 @@
                     foreach ($results as $category) {
                         ?>
                         <li>
-                            <p><a href="/blog/<?=strtolower($list_title.'/'.$category->category_title)?>"><?=$category->category_title?></a></p>
+                            <h3><a href="/blog/<?=strtolower($list_title.'/'.$category->category_title)?>"><?=$category->category_title?></a></h3>
                         </li>
                         <?php
                     }
@@ -40,7 +40,17 @@
                     foreach ($results as $tag) {
                         ?>
                         <li>
-                            <p><a href="/blog/<?=strtolower($list_title.'/'.$tag->tag_title)?>"><?=$tag->tag_title?></a></p>
+                            <h3><a href="/blog/<?=strtolower($list_title.'/'.$tag->tag_title)?>"><?=$tag->tag_title?></a></h3>
+                        </li>
+                        <?php
+                    }
+                }
+                elseif ($list_title=='Archive')
+                {
+                    foreach ($results as $month) {
+                        ?>
+                        <li>
+                            <h3><a href="/blog/<?=$month['link']?>"><?=$month['title']?></a></h3>
                         </li>
                         <?php
                     }

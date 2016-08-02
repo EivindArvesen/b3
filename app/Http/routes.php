@@ -44,6 +44,9 @@ $app->group(['namespace' => 'App\Http\Controllers'], function($group){
     $group->get('blog/search', 'BlogController@search');
     $group->get('blog/search/page/{pageNumber}', 'BlogController@search');
 
+    $group->get('blog/archive', 'BlogController@archive');
+    $group->get('blog/archive/page/{pageNumber}', 'BlogController@archive');
+
     $group->get('blog/{year}', 'BlogController@showArchive1');
     $group->get('blog/{year}/page/{pageNumber}', 'BlogController@showArchive1');
 
