@@ -22,9 +22,17 @@
 // });
 // $app->get('blog/{date}/{id}', 'App\Http\Controllers\BlogController@showEntry');
 
+if (config('bbb_config.debug')==True)
+{
+    $app->group(['namespace' => 'App\Http\Controllers'], function($group){
+        $group->get('debug', 'PageController@debug');
+        $group->get('debug/theme', 'PageController@debugtheme');
+    });
+}
+
 $app->group(['namespace' => 'App\Http\Controllers'], function($group){
 
-    $group->get('/', 'FrontController@index');
+    $group->get('/', 'PageController@index');
 
     $group->get('blog', 'BlogController@showFront');
     $group->get('blog/page/{pageNumber}', 'BlogController@showFront');
@@ -61,17 +69,9 @@ $app->group(['namespace' => 'App\Http\Controllers'], function($group){
     $group->get('projects', 'ProjectsController@showList');
     $group->get('projects/{title}', 'ProjectsController@description');
 
-    $group->get('contact', 'FrontController@contact');
+    $group->get('/{page}', 'PageController@page');
 
 });
-
-if (config('bbb_config.site_name')==True)
-{
-    $app->group(['namespace' => 'App\Http\Controllers'], function($group){
-        $group->get('debug', 'FrontController@debug');
-        $group->get('debug/theme', 'FrontController@debugtheme');
-    });
-}
 
 
 // /* NAMED ROUTES */

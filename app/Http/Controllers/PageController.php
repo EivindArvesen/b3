@@ -1,12 +1,14 @@
 <?php namespace App\Http\Controllers;
 
+use App\Models\Page;
+
 //use App\User;
 //use App\Http\Controllers\Controller;
 use Laravel\Lumen\Routing\Controller;
 // Use the Kurenai document parser.
 use Kurenai\DocumentParser;
 
-class FrontController extends Controller {
+class PageController extends Controller {
 
     /**
      * Show front page.
@@ -15,7 +17,10 @@ class FrontController extends Controller {
      */
     public function index()
     {
-        return view('front.index', ['page_title' => 'Index', 'menu_transparent' => false, 'menu_style' => 'black', 'nav_active' => 'about']); //
+        $page = Page::where('type', 'index')->get()[0];
+
+        return view('front.' . $page->type, ['page_title' => 'Index', 'menu_transparent' => false, 'menu_style' => 'black', 'nav_active' => 'about', 'page' => $page]);
+        // return view('front.index', ['page_title' => 'Index', 'menu_transparent' => false, 'menu_style' => 'black', 'nav_active' => 'about']);
         //return view()->file(theme_path().'/views/front.php'); // , $data
 
     }
@@ -25,10 +30,17 @@ class FrontController extends Controller {
      *
      * @return Response
      */
-    public function contact()
+    public function page($slug)
     {
-        return view('front.single', ['page_title' => 'Contact', 'nav_active' => 'contact', 'content' => 'Content']); //
-        //return view()->file(theme_path().'/views/front.php'); // , $data
+        $page = Page::where('slug', $slug)->get()[0];
+
+        if ($page->type == 'index') {
+            return redirect('/');
+        }
+
+        else {
+            return view('front.' . $page->type, ['page_title' => $page->page_title, 'nav_active' => 'contact', 'page' => $page]);
+        }
 
     }
 
@@ -47,7 +59,7 @@ class FrontController extends Controller {
 
     public function debugtheme()
     {
-        return '<html><body>BAJS</body></html>';
+        return '<html><body>TEST</body></html>';
     }
 
 }

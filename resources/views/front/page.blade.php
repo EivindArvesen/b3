@@ -4,13 +4,12 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-12">
-          <h1>Flat single page: <?php echo $page_title; ?></h1>
-          <p class="lead">Description...</p>
+          <h1>{{$page->page_title}}</h1>
         </div>
       </div>
       <div class="row">
         <div class="col-sm-12">
-          <p><?php echo $content; ?></p>
+          <?php echo $page->body; ?>
         </div>
       </div>
     </div>

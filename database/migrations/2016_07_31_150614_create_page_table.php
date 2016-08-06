@@ -18,6 +18,7 @@ class CreatePageTable extends Migration {
 			 * Table for pages
 			 */
 			$table->increments('page_id');
+			$table->string('slug');
 			$table->string('page_title');
 			$table->longText('body');
 			$table->boolean('published');
