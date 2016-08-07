@@ -2,7 +2,7 @@
 
 @section('content')
 
-        <div class="col-sm-8 blog-main">
+        <div class="col-sm-12 blog-main">
 
           <div class="blog-post">
             <h1 class="blog-post-title"><a href="<?php echo '/blog/'.$year.'/'.$month.'/'.$day.'/'.$slug; ?>"><?php echo $title; ?></a></h1>

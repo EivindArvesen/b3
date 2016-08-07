@@ -61,4 +61,5 @@
         @include('layouts.pagination')
 
         </div><!-- /.blog-main -->
+        @include('blog.sidebar')
 @stop
