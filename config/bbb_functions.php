@@ -1,7 +1,31 @@
 <?php
+use App\Models\Page;
 
 function theme_path() {
     return base_path().'/public/themes/'.Config::get('bbb_config.theme');
+}
+
+function getMenu() {
+  $menu = Page::where('type', 'index')->get(['page_title', 'slug', 'type']);
+  $menu[0]->slug = '';
+
+  $blog = new \stdClass;
+  $blog->page_title = 'Blog';
+  $blog->slug = 'blog';
+  $blog->type = 'collection';
+  $menu->add($blog);
+
+  $projects = new \stdClass;
+  $projects->page_title = 'Projects';
+  $projects->slug = 'projects';
+  $projects->type = 'collection';
+  $menu->add($projects);
+
+  foreach (Page::where('type', '!=', 'index')->get(['page_title', 'slug', 'type']) as $element) {
+    $menu->add($element);
+  }
+
+  return $menu;
 }
 
 function ordinal_suffix($num){

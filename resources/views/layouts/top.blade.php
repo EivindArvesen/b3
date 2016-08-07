@@ -50,10 +50,13 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li<?php if ($nav_active=="about") echo ' class="active"'; ?>><a href="/">About</a></li>
-            <li<?php if ($nav_active=="blog") echo ' class="active"'; ?>><a href="/blog">Blog</a></li>
-            <li<?php if ($nav_active=="projects") echo ' class="active"'; ?>><a href="/projects">Projects</a></li>
-            <li<?php if ($nav_active=="contact") echo ' class="active"'; ?>><a href="/contact">Contact</a></li>
+            <?
+            foreach (getMenu() as $menu_element) {
+              ?>
+              <li<?php if ($nav_active==$menu_element->slug) echo ' class="active"'; ?>><a href="/<?echo $menu_element->slug;?>"><?echo $menu_element->page_title;?></a></li>
+              <?
+            }
+            ?>
             <?php
             if (config('bbb_config.debug')==True){
               $debug_nav='<li><a href="/debug">DEBUG</a></li>';
