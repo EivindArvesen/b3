@@ -54,7 +54,7 @@ class BlogController extends Controller {
      */
     public function showFront($page = 1)
     {
-        $posts = Blogpost::where('published', '!', false)->orderBy('post_id', 'DESC')
+        $posts = Blogpost::where('published', '!', false)->orderBy('created_at', 'DESC')
                ->paginate(10);
         foreach ($posts as $post) {
             $tags = array();
@@ -83,7 +83,7 @@ class BlogController extends Controller {
     {
         if ($language!=False) {
             $language_id = Language::where('language_title', $language)->get()[0]->language_id;
-            $posts = Blogpost::where('published', '!', false)->where('language_id', $language_id)
+            $posts = Blogpost::where('published', '!', false)->where('language_id', $language_id)->orderBy('created_at', 'DESC')
                    ->paginate(10);
             foreach ($posts as $post) {
                 $tags = array();
@@ -125,7 +125,7 @@ class BlogController extends Controller {
                 array_push($post_ids, $post_id->post_id);
             }
             $posts = Blogpost::where('published', '!', false)->whereIn('post_id', $post_ids)
-                   ->paginate(10);
+                   ->orderBy('created_at', 'DESC')->paginate(10);
             foreach ($posts as $post) {
                 $tags = array();
                 foreach (Post_tag::where('post_id', $post->post_id)->get() as $tag) {
@@ -166,7 +166,7 @@ class BlogController extends Controller {
                 array_push($post_ids, $post_id->post_id);
             }
             $posts = Blogpost::where('published', '!', false)->whereIn('post_id', $post_ids)
-                   ->paginate(10);
+                   ->orderBy('created_at', 'DESC')->paginate(10);
             foreach ($posts as $post) {
                 $tags = array();
                 foreach (Post_tag::where('post_id', $post->post_id)->get() as $tag) {
@@ -203,7 +203,7 @@ class BlogController extends Controller {
         }
         else {
             $posts = Blogpost::where('published', '!', false)->where('body', 'LIKE', '%'.$request->input('query').'%')->orWhere('post_title', 'LIKE', '%'.$request->input('query').'%')
-                   ->paginate(10);
+                   ->orderBy('created_at', 'DESC')->paginate(10);
             foreach ($posts as $post) {
                 $tags = array();
                 foreach (Post_tag::where('post_id', $post->post_id)->get() as $tag) {
