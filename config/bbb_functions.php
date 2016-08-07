@@ -28,7 +28,7 @@ function date_links($group, $element) {
     if (count($group)==1) $lastm=DateTime::createFromFormat('!m', $last)->format('F');
     else $lastm=$last;
     if ($element=="li") {
-        if (is_numeric($lastm)) {
+        if (is_numeric($lastm) && strlen($lastm)!==4) {
             echo '<'.$element.' class="active">'.ucfirst(strtolower(ltrim($lastm, '0'))).ordinal_suffix($lastm).'</'.$element.'>';
         } else {
             echo '<'.$element.' class="active">'.ucfirst(strtolower(ltrim($lastm, '0'))).'</'.$element.'>';

@@ -2,17 +2,6 @@
 
     <div class="container">
 
-      <!--
-      <div class="row">
-        <div class="col-sm-12">
-          <h1 class="blog-title">Blog</h1>
-          <p class="lead">Description...</p>
-        </div>
-      </div>
-      -->
-
-      <div class="row">
-
 @yield('content')
 
       <div class="col-md-3 col-md-offset-1 blog-sidebar">
@@ -69,7 +58,5 @@
         </div><!-- /.blog-sidebar -->
 
       </div><!-- /.row -->
-
-    </div><!-- /.container -->
 
 @include('layouts.bottom')
