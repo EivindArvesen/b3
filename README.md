@@ -34,10 +34,9 @@ or run `installB3.sh` in the scripts-directory.
 
 The webroot must be set to 'b3/public'
 
-BlaBlaBlog also needs a database called 'blablablog' to exist, and you need to customize the dotenv-file in the project root.
-Then run `php artisan migrate` in the project root.
+BlaBlaBlog also needs a database, the connection to which is specified in the dotenv-file in the project root.
 
-To populate your database with your markdown blog posts, run `populate-db.sh` in the scripts-directory. (i.e. in your git post-receive script on the server).
+To automatically set up your site, run the `setupB3.sh` script in the scripts-directory.
 
 ## Development
 
