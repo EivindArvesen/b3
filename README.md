@@ -25,19 +25,28 @@ Pages are rendered serverside.
 Blablablog is themeable; the default theme is built upon Bootstrap 3.
 You set your usersettings in dotenv (do not track this in vcs).
 
+## Installation
+To install B3, run
+```shell
+composer create-project eivindarvesen/b3 <SITE> *@dev --prefer-dist
+```
+or run `installB3.sh` in the scripts-directory.
 
-To set up your developer-environment:
-
-    composer install
-    bower install
-    npm install
+The webroot must be set to 'b3/public'
 
 BlaBlaBlog also needs a database called 'blablablog' to exist, and you need to customize the dotenv-file in the project root.
 Then run `php artisan migrate` in the project root.
 
-To populate your database with your markdown blog posts, run (`composer dump-autoload`, IF CLASSES HAVE BEEN MODIFIED, and then) run `php artisan db:seed` (i.e. in your git post-receive script on the server).
+To populate your database with your markdown blog posts, run `populate-db.sh` in the scripts-directory. (i.e. in your git post-receive script on the server).
 
-The webroot must be set to 'b3/public'
+## Development
+
+To set up your developer-environment:
+```shell
+composer install
+bower install
+npm install
+```
 
 <!--
 ## Official Documentation
