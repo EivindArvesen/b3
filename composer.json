@@ -10,6 +10,7 @@
     ],
     "license": "BSD-3-Clause",
     "type": "project",
+    "language": "php",
     "authors": [
         {
             "name": "Eivind Arvesen",
