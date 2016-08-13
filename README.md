@@ -5,13 +5,6 @@ BlaBlaBlog is a PHP blog system built upon the [Lumen](http://lumen.laravel.com)
 This project is very much under active development, and is not usable in its current state.
 In fact - this readme is not even necessarily up to date.
 
-#### TODO:
-http://tyler.io/importing-jekyll-posts-into-wordpress/
-- Cement php (markdown) dependencies
-- Implement backend functionality
-- Script server setup (production-branch)
-- Make git hook scripts (pre-commit, master: validate markup) + (post-checkout, production: compile markup, build database)
-
 <!--
 [![Build Status](https://travis-ci.org/eivindarvesen/blablablog.svg)](https://travis-ci.org/laravel/lumen-framework)
 [![Total Downloads](https://poser.pugx.org/eivindarvesen/blablablog/downloads.svg)](https://packagist.org/packages/eivindarvesen/blablablog)

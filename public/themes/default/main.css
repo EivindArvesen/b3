@@ -6893,6 +6893,12 @@ h1 {
 .prev-next span {
   top: 2px;
 }
+.project-element .lead {
+  margin-bottom: 0;
+}
+.project-element h3 {
+  margin-top: 0;
+}
 img.media-object {
   width: 100%;
   height: 100%;
