@@ -171,6 +171,8 @@ ssh $1 'mkdir repo && cd repo && mkdir site.git && cd site.git && git init --bar
 
 git remote add live ssh://$1/$(dirname $2)/repo/site.git
 
+git add -A && git commit -m "Set up repo"
+
 echo "Now you need only to push to publish!"
 
 cd -
