@@ -1,7 +1,13 @@
 {
-    "name": "eivindarvesen/blablablog",
-    "description": "PHP blog system",
-    "keywords": ["blog", "markdown"],
+    "name": "eivindarvesen/b3",
+    "description": "BlaBlaBlog - a lightweight PHP Markdown Blog System mased on Lumen",
+    "keywords": [
+        "php",
+        "bootstrap",
+        "markdown",
+        "blog",
+        "web"
+    ],
     "license": "BSD-3-Clause",
     "type": "project",
     "authors": [
