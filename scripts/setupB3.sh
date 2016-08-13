@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [ $# -lt 2]
+if [ $# -lt 2 ]
   then
     echo "Arguments needed: <user>@<server> webroot"
     echo "e.g. l33th4x0r@login.servershop.com /var/www/"
