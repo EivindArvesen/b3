@@ -1,13 +1,19 @@
 <?php
 use App\Models\Page;
 
+use Illuminate\Database\Eloquent\Collection;
+
 function theme_path() {
     return base_path().'/public/themes/'.Config::get('bbb_config.theme');
 }
 
 function getMenu() {
-  $menu = Page::where('type', 'index')->get(['page_title', 'slug', 'type']);
-  $menu[0]->slug = '';
+  try {
+    $menu = Page::where('type', 'index')->get(['page_title', 'slug', 'type']);
+    $menu[0]->slug = '';
+  } catch (ErrorException $e) {
+    $menu = new Collection;
+  }
 
   $blog = new \stdClass;
   $blog->page_title = 'Blog';

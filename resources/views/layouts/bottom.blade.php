@@ -1,5 +1,6 @@
     <footer>
       <div class="container">
+      <div class="row">
         <hr>
         <div class="col-xs-6">
           <p>&copy; <?php echo config('bbb_config.user') . ' ' . date("Y"); ?></p>
@@ -22,6 +23,7 @@
             <?php ;} ?>
           </p>
         </div>
+      </div>
       </div> <!-- /container -->
     </footer>
 

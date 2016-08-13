@@ -17,7 +17,11 @@ class PageController extends Controller {
      */
     public function index()
     {
-        $page = Page::where('type', 'index')->get()[0];
+        try {
+            $page = Page::where('type', 'index')->first();
+        } catch (ErrorException $e) {
+            return redirect('/blog');
+        }
 
         return view('front.' . $page->type, ['page_title' => 'Index', 'menu_transparent' => false, 'menu_style' => 'black', 'nav_active' => 'about', 'page' => $page]);
         // return view('front.index', ['page_title' => 'Index', 'menu_transparent' => false, 'menu_style' => 'black', 'nav_active' => 'about']);
