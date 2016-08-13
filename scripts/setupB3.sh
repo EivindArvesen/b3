@@ -22,7 +22,7 @@ EOM
 
 # Configure environment
 cp $DIR/../.env.example $DIR/../.env
-KEY = $(php -r "echo md5(uniqid()).\"\n\";")
+KEY=$(php -r "echo md5(uniqid()).\"\n\";")
 sed 's/secret/$KEY/g' $DIR/../.env > $DIR/../.env
 $EDITOR $DIR/../.env
 
