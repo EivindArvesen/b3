@@ -22,6 +22,7 @@ EOM
 
 # Configure environment
 cp $DIR/../.env.example $DIR/../.env
+php artisan key:generate
 $EDITOR $DIR/../.env
 
 # Create dummy index page
@@ -167,7 +168,7 @@ bash $DIR/populate-db.sh
 cat ~/.ssh/id_rsa.pub | ssh $1 'cat >> .ssh/authorized_keys'
 
 # Set up git hooks and scripts on server and client
-ssh $1 'mkdir repo && cd repo && mkdir site.git && cd site.git && git init --bare && cd hooks && echo "#!/bin/sh\ngit --work-tree='$2' --git-dir='$(dirname $2)'/repo/site.git checkout -f && chmod +x post-receive'
+ssh $1 'mkdir repo && cd repo && mkdir site.git && cd site.git && git init --bare && cd hooks && echo "#!/bin/sh\ngit --work-tree='$2' --git-dir='$(dirname $2)'/repo/site.git checkout -f\nbash '$2'/scripts/populate-db.sh'" > post-receive && chmod +x post-receive'
 
 git remote add live ssh://$1/$(dirname $2)/repo/site.git
 
