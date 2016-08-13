@@ -9,3 +9,4 @@ npm-debug.log
 TODO.md
 SCRATCH.md
 /storage/app/**/*.md
+!/storage/app/
