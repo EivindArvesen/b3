@@ -37,6 +37,7 @@ Then run `php artisan migrate` in the project root.
 
 To populate your database with your markdown blog posts, run (`composer dump-autoload`, IF CLASSES HAVE BEEN MODIFIED, and then) run `php artisan db:seed` (i.e. in your git post-receive script on the server).
 
+The webroot must be set to 'b3/public'
 
 <!--
 ## Official Documentation

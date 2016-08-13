@@ -14,7 +14,8 @@
     "authors": [
         {
             "name": "Eivind Arvesen",
-            "email": "eivind.arvesen@gmail.com"
+            "email": "eivind.arvesen@gmail.com",
+            "homepage": "http://www.eivindarvesen.com"
         }
     ],
     "require": {

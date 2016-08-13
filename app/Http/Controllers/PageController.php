@@ -36,7 +36,11 @@ class PageController extends Controller {
      */
     public function page($slug)
     {
-        $page = Page::where('slug', $slug)->get()[0];
+        try {
+            $page = Page::where('slug', $slug)->first();
+        } catch (ErrorException $e) {
+            return redirect('/');
+        }
 
         if ($page->type == 'index') {
             return redirect('/');
