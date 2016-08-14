@@ -17,25 +17,21 @@ WEBROOT=$SERVERROOT/"$2"
 # remove repo stuff if installed via git
 rm -rf $(dirname $DIR)/.git
 
-# Create git repo and ignore everything except user content and environment config
+# Create git repo
 git init $DIR/..
-cat > $DIR/../.gitignore <<- EOM
-#/*
-#/*/
-#!/storage/app/
-#!/.env
-EOM
 
 # Edit config
 $EDITOR $DIR/../config/_bbb_config.php
 
-# Configure environment
-cp $DIR/../.env.example $DIR/../.env
+# Configure server environment
+cat $DIR/../.env.example > $DIR/../.env
+cat > $DIR/../.env <<- EOM
+# LOCAL ENVIRONMENT CONFIGURATION
+
+EOM
 KEY=$(php -r "echo md5(uniqid()).\"\n\";")
 sed -i '' -e 's/secret/'$KEY'/g' $DIR/../.env
 $EDITOR $DIR/../.env
-
-# SEPARATE ENVIRONMENTS FOR LOCAL/SERVER?
 
 # Create dummy index page
 mkdir -p $DIR/../public/content/pages
@@ -220,6 +216,28 @@ ssh $1 "echo '$ACCESS' > $WEBROOT/.htaccess"
 # Add first commit
 git add -A && git commit -m "Set up repo"
 
-echo "Now you need only to push to publish!"
+# Ignore everything except user content
+cat > $DIR/../.gitignore <<- EOM
+/*
+/*/
+!/public/content/
+EOM
+
+# Add first commit
+git add -A && git commit -m "Remove env-config and CMS from repo"
+
+# Configure local environment
+cat $DIR/../.env.example > $DIR/../.env
+cat > $DIR/../.env <<- EOM
+# LOCAL ENVIRONMENT CONFIGURATION
+
+EOM
+KEY=$(php -r "echo md5(uniqid()).\"\n\";")
+sed -i '' -e 's/secret/'$KEY'/g' $DIR/../.env
+$EDITOR $DIR/../.env
+
+git push live master
 
 cd - > /dev/null 2>&1
+
+echo "To publish changes, issue the following command:    git push live master"
