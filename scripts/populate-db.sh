@@ -1,2 +1,4 @@
 #!/usr/bin/env bash
-php artisan migrate:refresh && composer dump-autoload && php artisan db:seed -vvv
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+php $(dirname $DIR)/artisan migrate:refresh && php $(dirname $DIR)/ composer.phar dump-autoload && php $(dirname $DIR)/artisan db:seed -vvv

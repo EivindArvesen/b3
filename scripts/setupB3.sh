@@ -20,10 +20,10 @@ rm -rf $(dirname $DIR)/.git
 # Create git repo and ignore everything except user content and environment config
 git init $DIR/..
 cat > $DIR/../.gitignore <<- EOM
-/*
-/*/
-!/storage/app/
-!/.env
+#/*
+#/*/
+#!/storage/app/
+#!/.env
 EOM
 
 # Configure environment
@@ -168,6 +168,12 @@ transparent: false | true
 Testings
 EOM
 
+# Install composer
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php -r "if (hash_file('SHA384', 'composer-setup.php') === 'e115a8dc7871f15d853148a7fbac7da27d6c0030b848d9b3dc09e2a0388afed865e6a3d6b3c0fad45c48e2b5fc1196ae') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
+
 # Populate DB
 bash $DIR/populate-db.sh
 
@@ -176,20 +182,19 @@ cat ~/.ssh/id_rsa.pub | ssh $1 'cat >> .ssh/authorized_keys'
 
 # Set up git hooks and scripts on server and client
 HOOK="#!/bin/sh
-git --work-tree=$WEBROOT --git-dir=$SERVERROOT/repo/site.git checkout -f
+git --work-tree=$WEBROOT --git-dir=$SERVERROOT/repo/site.git checkout -f master
 bash $WEBROOT/scripts/populate-db.sh"
 ssh $1 "mkdir repo && cd repo && mkdir site.git && cd site.git && git init --bare && cd hooks && echo '$HOOK' > post-receive && chmod +x post-receive"
 
-git remote add live ssh://$1$SERVERROOT/../repo/site.git
+git remote add live ssh://$1$SERVERROOT/repo/site.git
 
 # Set up apache redirect to public root
-ACCESS="RewriteEngine on
-RewriteCond %{HTTP_HOST} ^$3$ [NC,OR]
-RewriteCond %{HTTP_HOST} ^www.$3$
-RewriteCond %{REQUEST_URI} \!folder/
-RewriteRule (.*) /folder/"'$1 [L]'
+ACCESS="RewriteEngine On
+RewriteCond %{THE_REQUEST} /public/([^\s?]*) [NC]
+RewriteRule ^ %1 [L,NE,R=302]
+RewriteRule ^((?!public/).*)$ public/$1 [L,NC]"
 
-ssh $1 "echo '$ACCESS' > $SERVERROOT/.htaccess"
+ssh $1 "echo '$ACCESS' > $WEBROOT/.htaccess"
 
 # Add first commit
 git add -A && git commit -m "Set up repo"
