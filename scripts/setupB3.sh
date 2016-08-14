@@ -136,7 +136,7 @@ transparent: false | true
 ---
 
 ###Test
-![alt text](/content/blog/`date +%Y/%m/%d`/Lenna.png "Logo Title Text 1")
+![alt text](Lenna.png "Logo Title Text 1")
 This is my **markdown** content!
 EOM
 

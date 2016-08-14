@@ -85,6 +85,10 @@ class BlogTablesSeeder extends Seeder
                     $style = 'default';
                 }
 
+                // Make relative paths (links/images) absolute
+                $path = dirname(explode("/public", $file)[1])."/";
+                $body = preg_replace("/(href|src)\=\"([^(http|www)])(\/)?/", "$1=\"$path/$2", $document->getHtmlContent());
+
                 $blogpost = Blogpost::create([
                     'created_at' => $original_date . ' 00:00:00',
                     'modified_at' => $document->get('modified') . ' 00:00:00',
@@ -92,7 +96,7 @@ class BlogTablesSeeder extends Seeder
                     'post_title' => ucfirst($document->get('title')),
                     'slug' => $slug,
                     'lead' => ucfirst($document->get('lead')),
-                    'body' => $document->getHtmlContent(),
+                    'body' => $body,
                     'published' => $document->get('published') == 'false' || false,
                     'type' => $type,
                     'style' => $style,
@@ -101,7 +105,7 @@ class BlogTablesSeeder extends Seeder
 
                 // $post_id = $blogpost->post_id;
                 // use hashes here instead?
-                $post_id = Blogpost::where('body', $document->getHtmlContent())->first()->post_id;
+                $post_id = Blogpost::where('body', $body)->first()->post_id;
 
                 Post_category::create([
                     'post_id' => $post_id,

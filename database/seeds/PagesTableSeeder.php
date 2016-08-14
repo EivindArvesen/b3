@@ -47,10 +47,14 @@ class PagesTableSeeder extends Seeder
                     $style = 'default';
                 }
 
+                // Make relative paths (links/images) absolute
+                $path = dirname(explode("/public", $file)[1])."/";
+                $body = preg_replace("/(href|src)\=\"([^(http|www)])(\/)?/", "$1=\"$path/$2", $document->getHtmlContent());
+
                 $page = Page::create([
                     'page_title' => ucfirst($document->get('title')),
                     'slug' => $slug,
-                    'body' => $document->getHtmlContent(),
+                    'body' => $body,
                     'published' => $document->get('published') == 'false' || false,
                     'type' => $type,
                     'style' => $style,
