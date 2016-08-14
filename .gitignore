@@ -8,4 +8,4 @@
 npm-debug.log
 TODO.md
 SCRATCH.md
-/public/content/**/*.md
+/public/content/**/*
