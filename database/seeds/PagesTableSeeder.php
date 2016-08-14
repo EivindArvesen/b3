@@ -14,7 +14,7 @@ class PagesTableSeeder extends Seeder
         // update tables instead of overwriting (think timestamps, original...)
 
         $parser = new DocumentParser;
-        $it = new RecursiveDirectoryIterator(realpath(dirname(dirname(dirname(__FILE__)))."/storage/app/pages"));
+        $it = new RecursiveDirectoryIterator(realpath(dirname(dirname(dirname(__FILE__)))."/public/content/pages"));
         $display = Array ( 'md' );
         foreach(new RecursiveIteratorIterator($it) as $file)
         {

@@ -26,11 +26,16 @@ cat > $DIR/../.gitignore <<- EOM
 #!/.env
 EOM
 
+# Edit config
+$EDITOR $DIR/../config/_bbb_config.php
+
 # Configure environment
 cp $DIR/../.env.example $DIR/../.env
 KEY=$(php -r "echo md5(uniqid()).\"\n\";")
 sed -i '' -e 's/secret/'$KEY'/g' $DIR/../.env
 $EDITOR $DIR/../.env
+
+# SEPARATE ENVIRONMENTS FOR LOCAL/SERVER?
 
 # Create dummy index page
 mkdir -p $DIR/../storage/app/pages
@@ -127,7 +132,7 @@ EOM
 
 # Create dummy project
 mkdir -p $DIR/../storage/app/projects/Category
-cat > $DIR/../storage/app/pages/contact.md <<- EOM
+cat > $DIR/../storage/app/projects/Category/project.md <<- EOM
 title: Project One
 slug:
 #    [optional]
@@ -183,7 +188,7 @@ cat ~/.ssh/id_rsa.pub | ssh $1 'cat >> .ssh/authorized_keys'
 # Set up git hooks and scripts on server and client
 HOOK="#!/bin/sh
 git --work-tree=$WEBROOT --git-dir=$SERVERROOT/repo/site.git checkout -f master
-bash $WEBROOT/scripts/populate-db.sh"
+cd $WEBROOT && bash $WEBROOT/scripts/populate-db.sh"
 ssh $1 "mkdir repo && cd repo && mkdir site.git && cd site.git && git init --bare && cd hooks && echo '$HOOK' > post-receive && chmod +x post-receive"
 
 git remote add live ssh://$1$SERVERROOT/repo/site.git
@@ -192,7 +197,7 @@ git remote add live ssh://$1$SERVERROOT/repo/site.git
 ACCESS="RewriteEngine On
 RewriteCond %{THE_REQUEST} /public/([^\s?]*) [NC]
 RewriteRule ^ %1 [L,NE,R=302]
-RewriteRule ^((?!public/).*)$ public/$1 [L,NC]"
+RewriteRule ^((?!public/).*)$ public/"'$1 [L,NC]'
 
 ssh $1 "echo '$ACCESS' > $WEBROOT/.htaccess"
 

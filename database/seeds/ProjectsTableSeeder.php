@@ -14,7 +14,7 @@ class ProjectsTableSeeder extends Seeder
         // update tables instead of overwriting (think timestamps, original...)
 
         $parser = new DocumentParser;
-        $it = new RecursiveDirectoryIterator(realpath(dirname(dirname(dirname(__FILE__)))."/storage/app/projects"));
+        $it = new RecursiveDirectoryIterator(realpath(dirname(dirname(dirname(__FILE__)))."/public/content/projects"));
         $display = Array ( 'md' );
         foreach(new RecursiveIteratorIterator($it) as $file)
         {

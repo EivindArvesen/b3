@@ -21,7 +21,7 @@ class BlogTablesSeeder extends Seeder
         // update tables instead of overwriting (think timestamps, original...)
 
         $parser = new DocumentParser;
-        $it = new RecursiveDirectoryIterator(realpath(dirname(dirname(dirname(__FILE__)))."/storage/app/blog"));
+        $it = new RecursiveDirectoryIterator(realpath(dirname(dirname(dirname(__FILE__)))."/public/content/blog"));
         $display = Array ( 'md' );
         foreach(new RecursiveIteratorIterator($it) as $file)
         {

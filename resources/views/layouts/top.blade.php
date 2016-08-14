@@ -50,13 +50,13 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <?
-            foreach (getMenu() as $menu_element) {
-              ?>
-              <li<?php if ($nav_active==$menu_element->slug) echo ' class="active"'; ?>><a href="/<?echo $menu_element->slug;?>"><?echo $menu_element->page_title;?></a></li>
-              <?
-            }
-            ?>
+            @foreach (getMenu() as $menu_element)
+              @if ($nav_active==$menu_element->slug)
+                <li class="active"><a href="/{{ $menu_element->slug }}">{{ $menu_element->page_title }}</a></li>
+              @else
+                <li><a href="/{{ $menu_element->slug }}">{{ $menu_element->page_title }}</a></li>
+              @endif
+            @endforeach
             <?php
             if (config('bbb_config.debug')==True){
               $debug_nav='<li><a href="/debug">DEBUG</a></li>';
