@@ -168,12 +168,6 @@ transparent: false | true
 Testings
 EOM
 
-# Install composer
-php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-php -r "if (hash_file('SHA384', 'composer-setup.php') === 'e115a8dc7871f15d853148a7fbac7da27d6c0030b848d9b3dc09e2a0388afed865e6a3d6b3c0fad45c48e2b5fc1196ae') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-php composer-setup.php
-php -r "unlink('composer-setup.php');"
-
 # Populate DB
 bash $DIR/populate-db.sh
 
@@ -182,7 +176,7 @@ cat ~/.ssh/id_rsa.pub | ssh $1 'cat >> .ssh/authorized_keys'
 
 # Set up git hooks and scripts on server and client
 HOOK="#!/bin/sh
-git --work-tree=$WEBROOT --git-dir=$SERVERROOT/repo/site.git checkout -f master
+git --work-tree=$WEBROOT --git-dir=$SERVERROOT/repo/site.git checkout -f
 bash $WEBROOT/scripts/populate-db.sh"
 ssh $1 "mkdir repo && cd repo && mkdir site.git && cd site.git && git init --bare && cd hooks && echo '$HOOK' > post-receive && chmod +x post-receive"
 
@@ -194,7 +188,7 @@ RewriteCond %{THE_REQUEST} /public/([^\s?]*) [NC]
 RewriteRule ^ %1 [L,NE,R=302]
 RewriteRule ^((?!public/).*)$ public/$1 [L,NC]"
 
-ssh $1 "echo '$ACCESS' > $WEBROOT/.htaccess"
+ssh $1 "echo '$ACCESS' > $SERVERROOT/.htaccess"
 
 # Add first commit
 git add -A && git commit -m "Set up repo"
