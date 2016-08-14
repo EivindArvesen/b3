@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-if [ $# -lt 2 ]
+if [ $# -lt 3 ]
   then
-    echo "Arguments needed: <user>@<server> webroot"
-    echo "e.g. l33th4x0r@login.servershop.com /var/www/"
+    echo "Arguments needed: <user>@<server> webroot url-without-www"
+    echo "e.g. l33th4x0r@login.servershop.com www/ sitename.com"
     exit 1
 fi
 
@@ -11,9 +11,15 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 cd $(dirname $DIR)
 
+SERVERROOT=$(ssh $1 "pwd")
+WEBROOT=$SERVERROOT/"$2"
+
+# remove repo stuff if installed via git
+rm -rf $(dirname $DIR)/.git
+
 # Create git repo and ignore everything except user content and environment config
 git init $DIR/..
-cat > $DIR/../.git/config <<- EOM
+cat > $DIR/../.gitignore <<- EOM
 /*
 /*/
 !/storage/app/
@@ -23,7 +29,7 @@ EOM
 # Configure environment
 cp $DIR/../.env.example $DIR/../.env
 KEY=$(php -r "echo md5(uniqid()).\"\n\";")
-sed 's/secret/$KEY/g' $DIR/../.env > $DIR/../.env
+sed -i '' -e 's/secret/'$KEY'/g' $DIR/../.env
 $EDITOR $DIR/../.env
 
 # Create dummy index page
@@ -169,13 +175,25 @@ bash $DIR/populate-db.sh
 cat ~/.ssh/id_rsa.pub | ssh $1 'cat >> .ssh/authorized_keys'
 
 # Set up git hooks and scripts on server and client
-HOOK="#!/bin/sh\ngit --work-tree=$2 --git-dir=$(dirname $2)/repo/site.git checkout -f\nbash $2/scripts/populate-db.sh"
-ssh $1 "mkdir repo && cd repo && mkdir site.git && cd site.git && git init --bare && cd hooks && echo $HOOK > post-receive && chmod +x post-receive"
+HOOK="#!/bin/sh
+git --work-tree=$WEBROOT --git-dir=$SERVERROOT/repo/site.git checkout -f
+bash $WEBROOT/scripts/populate-db.sh"
+ssh $1 "mkdir repo && cd repo && mkdir site.git && cd site.git && git init --bare && cd hooks && echo '$HOOK' > post-receive && chmod +x post-receive"
 
-git remote add live ssh://$1/$(dirname $2)/repo/site.git
+git remote add live ssh://$1$SERVERROOT/../repo/site.git
 
+# Set up apache redirect to public root
+ACCESS="RewriteEngine on
+RewriteCond %{HTTP_HOST} ^$3$ [NC,OR]
+RewriteCond %{HTTP_HOST} ^www.$3$
+RewriteCond %{REQUEST_URI} \!folder/
+RewriteRule (.*) /folder/"'$1 [L]'
+
+ssh $1 "echo '$ACCESS' > $SERVERROOT/.htaccess"
+
+# Add first commit
 git add -A && git commit -m "Set up repo"
 
 echo "Now you need only to push to publish!"
 
-cd -
+cd - > /dev/null 2>&1
