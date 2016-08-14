@@ -40,6 +40,8 @@ $EDITOR $DIR/../.env
 # Create dummy index page
 mkdir -p $DIR/../public/content/pages
 cat > $DIR/../public/content/pages/index.md <<- EOM
+---
+
 title: About
 slug: useless
 #    [optional]
@@ -51,7 +53,9 @@ style: dark | light | default
 #    [optional, set css class based on name]
 transparent: false | true
 #    [optional, set css class based on name]
--------
+
+---
+
 <div class="jumbotron">
 <div class="container">
 <div class="row">
@@ -108,6 +112,8 @@ EOM
 mkdir -p $DIR/../public/content/blog/`date +%Y/%m/%d`
 curl -o $DIR/../public/content/blog/`date +%Y/%m/%d`/Lenna.png https://upload.wikimedia.org/wikipedia/en/2/24/Lenna.png
 cat > $DIR/../public/content/blog/`date +%Y/%m/%d`/test.md <<- EOM
+---
+
 title: Blog post
 language: English
 category: Test-Category
@@ -126,7 +132,9 @@ style: dark | light | default
 #    [optional, set css class based on name]
 transparent: false | true
 #    [optional, set css class based on name]
--------
+
+---
+
 ###Test
 ![alt text](/content/blog/`date +%Y/%m/%d`/Lenna.png "Logo Title Text 1")
 This is my **markdown** content!
@@ -135,6 +143,8 @@ EOM
 # Create dummy project
 mkdir -p $DIR/../public/content/projects/Category
 cat > $DIR/../public/content/projects/Category/project.md <<- EOM
+---
+
 title: Project One
 slug:
 #    [optional]
@@ -152,7 +162,9 @@ style: dark | light | default
 #    [optional, set css class based on name]
 transparent: false | true
 #    [optional, set css class based on name]
--------
+
+---
+
 Lorem ipsum
 EOM
 
@@ -169,7 +181,9 @@ style: dark | light | default
 #    [optional, set css class based on name]
 transparent: false | true
 #    [optional, set css class based on name]
--------
+
+---
+
 <p class="lead">Description...</p>
 
 Testings
