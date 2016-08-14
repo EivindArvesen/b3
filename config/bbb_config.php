@@ -7,8 +7,9 @@ return [
     'email' => 'email@provider.com',
     'theme' => 'default',
     'debug' => True,
+    // Blog
+    'about' => "Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.",
     // Meta description
-    // Date format
     // Social media accounts (usernames for links)
     'github' => 'eivind88',
     'twitter' => 'Eivind88',

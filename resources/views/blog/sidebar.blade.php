@@ -2,10 +2,12 @@
   <div class="sidebar-module sidebar-module-inset">
     @include('blog.searchbar')
   </div>
+  @if (config('bbb_config.about'))
   <div class="sidebar-module">
     <h4>About</h4>
-    <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+    <p><?php echo config('bbb_config.about');?></p>
   </div>
+  @endif
   <div class="sidebar-module">
     <h4>Languages</h4>
     <ol class="list-unstyled">

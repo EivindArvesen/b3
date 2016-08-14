@@ -38,8 +38,8 @@ $EDITOR $DIR/../.env
 # SEPARATE ENVIRONMENTS FOR LOCAL/SERVER?
 
 # Create dummy index page
-mkdir -p $DIR/../storage/app/pages
-cat > $DIR/../storage/app/pages/index.md <<- EOM
+mkdir -p $DIR/../public/content/pages
+cat > $DIR/../public/content/pages/index.md <<- EOM
 title: About
 slug: useless
 #    [optional]
@@ -105,8 +105,9 @@ transparent: false | true
 EOM
 
 # Create dummy post
-mkdir -p $DIR/../storage/app/blog/`date +%Y/%m/%d`
-cat > $DIR/../storage/app/blog/`date +%Y/%m/%d`/test.md <<- EOM
+mkdir -p $DIR/../public/content/blog/`date +%Y/%m/%d`
+curl -o $DIR/../public/content/blog/`date +%Y/%m/%d`/Lenna.png https://upload.wikimedia.org/wikipedia/en/2/24/Lenna.png
+cat > $DIR/../public/content/blog/`date +%Y/%m/%d`/test.md <<- EOM
 title: Blog post
 language: English
 category: Test-Category
@@ -127,12 +128,13 @@ transparent: false | true
 #    [optional, set css class based on name]
 -------
 ###Test
+![alt text](/content/blog/`date +%Y/%m/%d`/Lenna.png "Logo Title Text 1")
 This is my **markdown** content!
 EOM
 
 # Create dummy project
-mkdir -p $DIR/../storage/app/projects/Category
-cat > $DIR/../storage/app/projects/Category/project.md <<- EOM
+mkdir -p $DIR/../public/content/projects/Category
+cat > $DIR/../public/content/projects/Category/project.md <<- EOM
 title: Project One
 slug:
 #    [optional]
@@ -155,7 +157,7 @@ Lorem ipsum
 EOM
 
 # Create dummy flat page
-cat > $DIR/../storage/app/pages/contact.md <<- EOM
+cat > $DIR/../public/content/pages/contact.md <<- EOM
 title: Contact
 slug: contact
 #    [optional]
