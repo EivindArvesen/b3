@@ -17,16 +17,13 @@ WEBROOT=$SERVERROOT/"$2"
 # remove repo stuff if installed via git
 rm -rf $(dirname $DIR)/.git
 
-# Create git repo
-git init $DIR/..
-
 # Edit config
-$EDITOR $DIR/../config/_bbb_config.php
+$EDITOR $DIR/../config/bbb_config.php
 
 # Configure server environment
 cat $DIR/../.env.example > $DIR/../.env
 cat > $DIR/../.env <<- EOM
-# LOCAL ENVIRONMENT CONFIGURATION
+# SERVER ENVIRONMENT CONFIGURATION
 
 EOM
 KEY=$(php -r "echo md5(uniqid()).\"\n\";")
@@ -191,19 +188,11 @@ php -r "if (hash_file('SHA384', 'composer-setup.php') === 'e115a8dc7871f15d85314
 php composer-setup.php
 php -r "unlink('composer-setup.php');"
 
-# Populate DB
+# Populate local DB
 bash $DIR/populate-db.sh
 
 # Set up key exchange with server
 cat ~/.ssh/id_rsa.pub | ssh $1 'cat >> .ssh/authorized_keys'
-
-# Set up git hooks and scripts on server and client
-HOOK="#!/bin/sh
-git --work-tree=$WEBROOT --git-dir=$SERVERROOT/repo/site.git checkout -f master
-cd $WEBROOT && bash $WEBROOT/scripts/populate-db.sh"
-ssh $1 "mkdir repo && cd repo && mkdir site.git && cd site.git && git init --bare && cd hooks && echo '$HOOK' > post-receive && chmod +x post-receive"
-
-git remote add live ssh://$1$SERVERROOT/repo/site.git
 
 # Set up apache redirect to public root
 ACCESS="RewriteEngine On
@@ -213,8 +202,11 @@ RewriteRule ^((?!public/).*)$ public/"'$1 [L,NC]'
 
 ssh $1 "echo '$ACCESS' > $WEBROOT/.htaccess"
 
-# Add first commit
-git add -A && git commit -m "Set up repo"
+# Copy B3 installation to server
+scp -rp $DIR/../. $1:$WEBROOT/
+
+# Create git repo
+git init $DIR/..
 
 # Ignore everything except user content
 cat > $DIR/../.gitignore <<- EOM
@@ -224,7 +216,15 @@ cat > $DIR/../.gitignore <<- EOM
 EOM
 
 # Add first commit
-git add -A && git commit -m "Remove env-config and CMS from repo"
+git add -A && git commit -m "Set up repo"
+
+# Set up git hooks and scripts on server and client
+HOOK="#!/bin/sh
+git --work-tree=$WEBROOT --git-dir=$SERVERROOT/repo/site.git checkout -f master
+cd $WEBROOT && bash $WEBROOT/scripts/populate-db.sh"
+ssh $1 "mkdir repo && cd repo && mkdir site.git && cd site.git && git init --bare && cd hooks && echo '$HOOK' > post-receive && chmod +x post-receive"
+
+git remote add live ssh://$1$SERVERROOT/repo/site.git
 
 # Configure local environment
 cat $DIR/../.env.example > $DIR/../.env
