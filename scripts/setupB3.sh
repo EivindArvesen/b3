@@ -21,11 +21,12 @@ rm -rf $(dirname $DIR)/.git
 $EDITOR $DIR/../config/bbb_config.php
 
 # Configure server environment
-cat $DIR/../.env.example > $DIR/../.env
 cat > $DIR/../.env <<- EOM
 # SERVER ENVIRONMENT CONFIGURATION
 
 EOM
+cat $DIR/../.env.example >> $DIR/../.env
+
 KEY=$(php -r "echo md5(uniqid()).\"\n\";")
 sed -i '' -e 's/secret/'$KEY'/g' $DIR/../.env
 $EDITOR $DIR/../.env
@@ -227,11 +228,12 @@ ssh $1 "mkdir repo && cd repo && mkdir site.git && cd site.git && git init --bar
 git remote add live ssh://$1$SERVERROOT/repo/site.git
 
 # Configure local environment
-cat $DIR/../.env.example > $DIR/../.env
 cat > $DIR/../.env <<- EOM
 # LOCAL ENVIRONMENT CONFIGURATION
 
 EOM
+cat $DIR/../.env.example >> $DIR/../.env
+
 KEY=$(php -r "echo md5(uniqid()).\"\n\";")
 sed -i '' -e 's/secret/'$KEY'/g' $DIR/../.env
 $EDITOR $DIR/../.env
