@@ -131,7 +131,9 @@ transparent: false | true
 
 ###Test
 ![alt text](Lenna.png "Logo Title Text 1")
+
 This is my **markdown** content!
+
 EOM
 
 # Create dummy project
@@ -211,9 +213,11 @@ git init $DIR/..
 
 # Ignore everything except user content
 cat > $DIR/../.gitignore <<- EOM
-/*
-/*/
-!/public/content/
+*
+!*/
+/storage
+/vendor
+!/public/content/**
 EOM
 
 # Add first commit
