@@ -27,11 +27,11 @@
         @include('layouts.pager')
 
         @if (isset($prev_url))
-            <a class="prev-next btn btn-primary" href="{{$prev_url}}"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> Previous</a>
+            <a class="prev-next btn btn-primary btn-ghost" href="{{$prev_url}}"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> Previous</a>
         @endif
 
         @if (isset($next_url))
-        <a class="prev-next btn btn-primary pull-right" href="{{$next_url}}">Next <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></a>
+        <a class="prev-next btn btn-primary btn-ghost pull-right" href="{{$next_url}}">Next <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></a>
         @endif
 
         </div><!-- /.blog-main -->
