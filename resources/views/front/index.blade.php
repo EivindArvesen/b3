@@ -7,5 +7,5 @@
 @stop --}}
 
 @section('content')
-   <?php echo $page->body; ?>
+   <?=$page->body;?>
 @stop

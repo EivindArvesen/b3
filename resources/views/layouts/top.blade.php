@@ -9,10 +9,10 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title><?php echo config('bbb_config.site_name'); ?> - <?php echo $page_title; ?></title>
+    <title>{{config('bbb_config.site_name')}} - {{$page_title}}</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="/themes/<?php echo config('bbb_config.theme'); ?>/main.min.css" rel="stylesheet">
+    <link href="/themes/{{config('bbb_config.theme')}}/main.min.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -46,12 +46,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/"><?php echo config('bbb_config.site_name'); ?></a>
+          <a class="navbar-brand" href="/">{{config('bbb_config.site_name')}}></a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             @foreach (getMenu() as $menu_element)
-              @if ($nav_active==$menu_element->slug)
+              @if ($nav_active==$menu_element->slug || $menu->element->)
                 <li class="active"><a href="/{{ $menu_element->slug }}">{{ $menu_element->page_title }}</a></li>
               @else
                 <li><a href="/{{ $menu_element->slug }}">{{ $menu_element->page_title }}</a></li>
