@@ -46,12 +46,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">{{config('bbb_config.site_name')}}></a>
+          <a class="navbar-brand" href="/">{{config('bbb_config.site_name')}}</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             @foreach (getMenu() as $menu_element)
-              @if ($nav_active==$menu_element->slug || $menu->element->)
+              @if ($nav_active==$menu_element->slug)
                 <li class="active"><a href="/{{ $menu_element->slug }}">{{ $menu_element->page_title }}</a></li>
               @else
                 <li><a href="/{{ $menu_element->slug }}">{{ $menu_element->page_title }}</a></li>
