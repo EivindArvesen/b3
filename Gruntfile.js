@@ -112,8 +112,9 @@ module.exports = function(grunt) {
                         'public/themes/**/*.min.css',
                         'public/themes/**/*.min.js',
                         'resources/views/**/*.blade.php',
-                        'app/**/*.php',
-                        'storage/app/blog/**/*.md'
+                        '**/*.php',
+                        'public/**/*.html',
+                        'public/content/**/*.md'
                         //'app/css/*.css',
                         //'app/*.html'
                     ]

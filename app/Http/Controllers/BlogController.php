@@ -202,8 +202,31 @@ class BlogController extends Controller {
             return redirect('blog');
         }
         else {
-            $posts = Blogpost::where('published', '!', false)->where('body', 'LIKE', '%'.$request->input('query').'%')->orWhere('post_title', 'LIKE', '%'.$request->input('query').'%')
+            $posts = Blogpost::where('published', '!', false)->where('body', 'LIKE', '%'.$request->input('query').'%')->orWhere('post_title', 'LIKE', '%'.$request->input('query').'%')->orWhere('slug', 'LIKE', '%'.$request->input('query').'%')->orWhere('lead', 'LIKE', '%'.$request->input('query').'%')
                    ->orderBy('created_at', 'DESC')->paginate(10);
+
+            foreach (Category::where('category_title', 'LIKE', '%'.$request->input('query').'%')->get() as $id) {
+                foreach (Post_category::where('category_id', $id->category_id)->get() as $post_id) {
+                    foreach (Blogpost::where('post_id', $post_id->post_id)->orderBy('created_at', 'DESC')->paginate(10) as $post) {
+                        $posts->add($post);
+                    }
+                }
+            }
+
+            foreach (Tag::where('tag_title', 'LIKE', '%'.$request->input('query').'%')->get() as $id) {
+                foreach (Post_tag::where('tag_id', $id->tag_id)->get() as $post_id) {
+                    foreach (Blogpost::where('post_id', $post_id->post_id)->orderBy('created_at', 'DESC')->paginate(10) as $post) {
+                        $posts->add($post);
+                    }
+                }
+            }
+
+            foreach (Language::where('language_title', 'LIKE', '%'.$request->input('query').'%')->get() as $id) {
+                foreach (Blogpost::where('language_id', $id->language_id)->orderBy('created_at', 'DESC')->paginate(10) as $post) {
+                    $posts->add($post);
+                }
+            }
+
             foreach ($posts as $post) {
                 $tags = array();
                 foreach (Post_tag::where('post_id', $post->post_id)->get() as $tag) {
