@@ -101,6 +101,8 @@ class BlogTablesSeeder extends Seeder
                     'type' => $type,
                     'style' => $style,
                     'transparent' => $document->get('transparent') == 'false' || false,
+                    'sticky' => $document->get('sticky') == 'false' || false,
+                    'seamless' => $document->get('seamless') == 'false' || false,
                 ]);
 
                 // $post_id = $blogpost->post_id;

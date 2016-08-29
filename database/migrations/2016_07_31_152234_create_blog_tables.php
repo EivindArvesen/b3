@@ -83,6 +83,8 @@ class CreateBlogTables extends Migration {
 			$table->string('type');
 			$table->string('style');
 			$table->string('transparent');
+			$table->string('sticky');
+			$table->string('seamless');
 
 			//$table->unique('post_id');
 		});
