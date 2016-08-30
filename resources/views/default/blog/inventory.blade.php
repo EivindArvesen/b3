@@ -1,4 +1,4 @@
-@extends('layouts.blog')
+@extends(config('bbb_config.theme') . '.layouts.blog')
 
 @section('content')
 
@@ -17,11 +17,11 @@
 
 
             @foreach ($results as $result)
-                @include('blog.item')
+                @include(config('bbb_config.theme') . '.blog.item')
             @endforeach
 
-        @include('layouts.pagination')
+        @include(config('bbb_config.theme') . '.layouts.pagination')
 
         </div><!-- /.blog-main -->
-        @include('blog.sidebar')
+        @include(config('bbb_config.theme') . '.blog.sidebar')
 @stop

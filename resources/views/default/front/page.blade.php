@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends(config('bbb_config.theme') . '.layouts.master')
 
 @section('content')
     <div class="container">

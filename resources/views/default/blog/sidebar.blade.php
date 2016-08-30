@@ -1,6 +1,6 @@
 <div class="col-md-3 col-md-offset-1 blog-sidebar">
   <div class="sidebar-module sidebar-module-inset">
-    @include('blog.searchbar')
+    @include(config('bbb_config.theme') . '.blog.searchbar')
   </div>
   @if (config('bbb_config.about'))
   <div class="sidebar-module">

@@ -1,4 +1,4 @@
-@extends('layouts.blog')
+@extends(config('bbb_config.theme') . '.layouts.blog')
 
 @section('content')
 
@@ -39,8 +39,8 @@
                 @endif
             </ul>
 
-        @include('layouts.pagination')
+        @include(config('bbb_config.theme') . '.layouts.pagination')
 
         </div><!-- /.blog-main -->
-        @include('blog.sidebar')
+        @include(config('bbb_config.theme') . '.blog.sidebar')
 @stop

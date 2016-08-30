@@ -1,4 +1,4 @@
-@extends('layouts.blog')
+@extends(config('bbb_config.theme') . '.layouts.blog')
 
 @section('content')
 
@@ -11,14 +11,14 @@
             </ol>
 
             @foreach ($results as $result)
-                @include('blog.item')
+                @include(config('bbb_config.theme') . '.blog.item')
             @endforeach
 
             @if (count($results) === 0)
                 <h2>No results</h2>
             @endif
 
-            @include('layouts.pagination')
+            @include(config('bbb_config.theme') . '.layouts.pagination')
         </div><!-- /.blog-main -->
-        @include('blog.sidebar')
+        @include(config('bbb_config.theme') . '.blog.sidebar')
 @stop
