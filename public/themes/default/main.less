@@ -131,14 +131,6 @@ h1 {
   border-radius: @border-radius-base;
 }
 
-.tag {
-  background-color: @gray-light; //@brand-primary
-}
-
-.tag:hover, .tag:focus {
-  background-color: @gray;
-}
-
 .badge {
   border-radius: 2px;
 }
@@ -295,9 +287,14 @@ img.media-object {
       padding-bottom: 60px;
     }
 
-    .navbar-header, .navbar-collapse ul li {
-      padding-left: 30px !important;
-      padding-right: 30px !important;
+    .navbar-header {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
+    .navbar-collapse ul li {
+      margin-left: 15px;
+      margin-right: 15px;
     }
   }
 }
@@ -489,9 +486,9 @@ footer {
 }
 
 @media (min-width: @screen-xs-min) and (max-width: @screen-xs-max) {
-    .navbar-nav li.active a {
-        padding-left: 12px;
+    .navbar-nav li.active {
         border-left: 2px solid #fff;
+        margin-left: 15px;
     }
 }
 
@@ -544,10 +541,11 @@ footer {
                     }
                 }
                 li.active {
+                    padding-left: 12px;
+                    border-left: 2px solid #fff;
+
                     a {
                     border-bottom: none;
-                    padding-left: 12px;
-                    border-left: 2px solid #fff; // right?
                     }
                 }
                 li:last-child {
