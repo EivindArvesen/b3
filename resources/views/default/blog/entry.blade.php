@@ -13,7 +13,7 @@
             on <a href="/blog/category/{{$category}}" >{{$category}}</a> in <a href="/blog/language/{{ucfirst(strtolower($language))}}" >{{$language}}</a></p>
             <p>
     @foreach ($tags as $tag)
-        <a href="/blog/tag/{{$tag}}" class="label label-default tag">{{ucfirst(strtolower($tag))}}</a>&nbsp;
+        <a href="/blog/tag/{{$tag}}" class="label label-default">{{ucfirst(strtolower($tag))}}</a>&nbsp;
     @endforeach
 </p>
         @if (isset($lead) && $lead !== '' && $lead !== '0')

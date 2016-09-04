@@ -8,7 +8,7 @@
             on <a href="/blog/category/{{$result->category}}" >{{$result->category}}</a> in <a href="/blog/language/{{ucfirst(strtolower($result->language))}}" >{{$result->language}}</a></p>
             <p>
     @foreach ($result->tags as $tag)
-        <a href="/blog/tag/{{$tag}}" class="label label-default tag">{{ucfirst(strtolower($tag))}}</a>&nbsp;
+        <a href="/blog/tag/{{$tag}}" class="label label-default">{{ucfirst(strtolower($tag))}}</a>&nbsp;
     @endforeach
 </p>
 
