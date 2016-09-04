@@ -23,7 +23,7 @@ class PageController extends Controller {
             return redirect('/blog');
         }
 
-        return view(config('bbb_config.theme') . '.front.' . $page->type, ['page_title' => 'Index', 'menu_transparent' => false, 'menu_style' => 'black', 'nav_active' => 'about', 'page' => $page]);
+        return view(config('bbb_config.theme') . '.front.' . $page->type, ['page_title' => $page->page_title, 'menu_transparent' => false, 'menu_style' => 'black', 'nav_active' => '', 'page' => $page]);
         // return view(config('bbb_config.theme') . '.front.index', ['page_title' => 'Index', 'menu_transparent' => false, 'menu_style' => 'black', 'nav_active' => 'about']);
         //return view()->file(theme_path().'/views/front.php'); // , $data
 
@@ -47,7 +47,7 @@ class PageController extends Controller {
         }
 
         else {
-            return view(config('bbb_config.theme') . '.front.' . $page->type, ['page_title' => $page->page_title, 'nav_active' => 'contact', 'page' => $page]);
+            return view(config('bbb_config.theme') . '.front.' . $page->type, ['page_title' => $page->page_title, 'nav_active' => $page->slug, 'page' => $page]);
         }
 
     }
