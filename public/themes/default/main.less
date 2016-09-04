@@ -37,8 +37,28 @@ h1 {
   //background-color: #555e69;
 }
 
-.navbar-nav li:hover {
-    background-color: #1a1a1a;
+.debug-menu {
+  border: none !important;
+
+  a {
+    border: none !important;
+  }
+}
+
+ul.nav.navbar-nav li:hover {
+  //background-color: #1a1a1a;
+
+  a {
+    color: #9d9d9d;
+
+    @media(min-width: @screen-sm-min) {
+      border-bottom: 2px solid #9d9d9d;
+
+        @media(min-width: @screen-lg-min) {
+          border-bottom: none;
+        }
+    }
+  }
 }
 
 .navbar-default .navbar-brand {
@@ -288,13 +308,26 @@ img.media-object {
     }
 
     .navbar-header {
-      padding-left: 15px;
-      padding-right: 15px;
+      padding-left: 30px;
+      padding-right: 30px;
     }
 
     .navbar-collapse ul li {
+      padding-left: 15px;
+      padding-right: 15px;
       margin-left: 15px;
       margin-right: 15px;
+    }
+
+    .navbar-nav li:hover {
+      color: #9d9d9d;
+      border-left: 2px solid #9d9d9d;
+      padding-left: 13px;
+    }
+
+    .navbar-nav li.active {
+      border-left: 2px solid #fff;
+      padding-left: 13px;
     }
   }
 }
@@ -485,13 +518,6 @@ footer {
   }
 }
 
-@media (min-width: @screen-xs-min) and (max-width: @screen-xs-max) {
-    .navbar-nav li.active {
-        border-left: 2px solid #fff;
-        margin-left: 15px;
-    }
-}
-
 @media (min-width: @screen-lg-min) {
     body {
         width: 80%;
@@ -547,6 +573,14 @@ footer {
                     a {
                     border-bottom: none;
                     }
+                }
+                li:hover {
+                  color: #9d9d9d;
+                  border-left: 2px solid #9d9d9d;
+                  padding-left: 12px;
+                }
+                li.active:hover {
+                  border-left: 2px solid #fff;
                 }
                 li:last-child {
                         border-bottom: none !important;

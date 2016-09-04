@@ -62,7 +62,7 @@
               $debug_nav='<li><a href="/debug">DEBUG</a></li>';
               if ($nav_active=="debug")
                 $debug_nav=substr_replace($debug_nav, ' class="active"', 3, 0);
-              echo '<li><a>&nbsp;</a></li>' . $debug_nav;
+              echo '<li class="debug-menu"><a>&nbsp;</a></li>' . $debug_nav;
             }
             ?>
           </ul>
