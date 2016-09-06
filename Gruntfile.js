@@ -14,11 +14,11 @@ module.exports = function(grunt) {
           sourceMap: true,
           outputSourceFiles: true,
           sourceMapURL: 'main.css.map',
-          sourceMapFilename: 'public/themes/default/main.css.map',
+          sourceMapFilename: 'public/themes/default/assets/main.css.map',
           paths: '<%= bspath %>/less'
         },
         files: {
-          'public/themes/default/main.css': 'public/themes/default/main.less'
+          'public/themes/default/assets/main.css': 'public/themes/default/assets/main.less'
         },
       }
 
@@ -40,7 +40,7 @@ module.exports = function(grunt) {
         options: {
           map: true
         },
-        src: 'public/themes/default/main.css'
+        src: 'public/themes/default/assets/main.css'
       }
     },
     cssmin: {
@@ -51,7 +51,7 @@ module.exports = function(grunt) {
       },
       core: {
         files: {
-          'public/themes/default/main.min.css': 'public/themes/default/main.css'
+          'public/themes/default/assets/main.min.css': 'public/themes/default/assets/main.css'
         }
       }
     },
@@ -61,14 +61,14 @@ module.exports = function(grunt) {
         banner: '<%= banner %>'
       },
       files: {
-        src: 'public/themes/default/main.css'
+        src: 'public/themes/default/assets/main.css'
       }
     },
     uglify: {
         build: {
             files: {
-                'public/themes/default/jquery.min.js': ['bower_components/jquery/dist/jquery.min.js'],
-                'public/themes/default/base.min.js': ['bower_components/bootstrap/dist/js/bootstrap.min.js']
+                'public/themes/default/assets/jquery.min.js': ['bower_components/jquery/dist/jquery.min.js'],
+                'public/themes/default/assets/base.min.js': ['bower_components/bootstrap/dist/js/bootstrap.min.js']
             }
         }
     },
@@ -111,6 +111,7 @@ module.exports = function(grunt) {
                 src : [
                         'public/themes/**/*.min.css',
                         'public/themes/**/*.min.js',
+                        'public/**/*.blade.php',
                         'resources/views/**/*.blade.php',
                         '**/*.php',
                         'public/**/*.html',
@@ -137,11 +138,11 @@ module.exports = function(grunt) {
             tasks: ['htmlhint']
         },
         js: {
-            files: ['public/themes/default/base.min.js', 'public/themes/default/jquery.min.js'],
+            files: ['public/themes/default/assets/base.min.js', 'public/themes/assets/default/jquery.min.js'],
             tasks: ['uglify']
         },
         less: {
-            files: ['public/themes/default/main.less', 'public/themes/default/variables.less'],
+            files: ['public/themes/default/assets/main.less', 'public/themes/assets/default/variables.less'],
             tasks: ['less', 'cssmin'],
         },
     }

@@ -70,7 +70,7 @@ class BlogController extends Controller {
             $post->language = Language::where('language_id', $language->language_id)->get()[0]->language_title;
         }
 
-        return view(config('bbb_config.theme') . '.blog.index', ['page_title' => 'Blog', 'nav_active' => 'blog', 'menu_transparent' => false, 'menu_style' => 'black', 'sidebar' => $this->getSidebar() , 'results' => $posts]);
+        return view('.blog.index', ['page_title' => 'Blog', 'nav_active' => 'blog', 'menu_transparent' => false, 'menu_style' => 'black', 'sidebar' => $this->getSidebar() , 'results' => $posts]);
     }
 
     /**
@@ -99,12 +99,12 @@ class BlogController extends Controller {
                 $post->language = Language::where('language_id', $language->language_id)->get()[0]->language_title;
             }
 
-            return view(config('bbb_config.theme') . '.blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => 'Language', 'group' => [$language->language_title], 'sidebar' => $this->getSidebar() , 'results' => $posts]);
+            return view('.blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => 'Language', 'group' => [$language->language_title], 'sidebar' => $this->getSidebar() , 'results' => $posts]);
         }
         else {
             $languages = Language::paginate(10);
 
-            return view(config('bbb_config.theme') . '.blog.list', ['page_title' => 'Blog', 'nav_active' => 'blog', 'list_title' => 'Language', 'sidebar' => $this->getSidebar() , 'results' => $languages]);
+            return view('.blog.list', ['page_title' => 'Blog', 'nav_active' => 'blog', 'list_title' => 'Language', 'sidebar' => $this->getSidebar() , 'results' => $languages]);
         }
     }
 
@@ -140,12 +140,12 @@ class BlogController extends Controller {
                 $post->language = Language::where('language_id', $language->language_id)->get()[0]->language_title;
             }
 
-            return view(config('bbb_config.theme') . '.blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => 'Category', 'group' => [$category_title], 'sidebar' => $this->getSidebar() , 'results' => $posts]);
+            return view('.blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => 'Category', 'group' => [$category_title], 'sidebar' => $this->getSidebar() , 'results' => $posts]);
         }
         else {
             $categories = Category::paginate(10);
 
-            return view(config('bbb_config.theme') . '.blog.list', ['page_title' => 'Blog', 'nav_active' => 'blog', 'list_title' => 'Category', 'sidebar' => $this->getSidebar() , 'results' => $categories]);
+            return view('.blog.list', ['page_title' => 'Blog', 'nav_active' => 'blog', 'list_title' => 'Category', 'sidebar' => $this->getSidebar() , 'results' => $categories]);
         }
     }
 
@@ -181,12 +181,12 @@ class BlogController extends Controller {
                 $post->language = Language::where('language_id', $language->language_id)->get()[0]->language_title;
             }
 
-            return view(config('bbb_config.theme') . '.blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => 'Tag', 'group' => [$tag_title], 'sidebar' => $this->getSidebar() , 'results' => $posts]);
+            return view('.blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => 'Tag', 'group' => [$tag_title], 'sidebar' => $this->getSidebar() , 'results' => $posts]);
         }
         else {
             $tags = Tag::paginate(10);
 
-            return view(config('bbb_config.theme') . '.blog.list', ['page_title' => 'Blog', 'nav_active' => 'blog', 'list_title' => 'Tag', 'sidebar' => $this->getSidebar() , 'results' => $tags]);
+            return view('.blog.list', ['page_title' => 'Blog', 'nav_active' => 'blog', 'list_title' => 'Tag', 'sidebar' => $this->getSidebar() , 'results' => $tags]);
         }
     }
 
@@ -241,7 +241,7 @@ class BlogController extends Controller {
                 $post->language = Language::where('language_id', $language->language_id)->get()[0]->language_title;
             }
 
-            return view(config('bbb_config.theme') . '.blog.search', ['page_title' => 'Blog', 'nav_active' => 'blog', 'query' => $request->input('query'), 'sidebar' => $this->getSidebar() , 'results' => $posts]);
+            return view('.blog.search', ['page_title' => 'Blog', 'nav_active' => 'blog', 'query' => $request->input('query'), 'sidebar' => $this->getSidebar() , 'results' => $posts]);
         }
     }
 
@@ -270,7 +270,7 @@ class BlogController extends Controller {
                 $post->language = Language::where('language_id', $language->language_id)->get()[0]->language_title;
             }
 
-            return view(config('bbb_config.theme') . '.blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => '', 'group' => [$year], 'sidebar' => $this->getSidebar() , 'results' => $posts]);
+            return view('.blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => '', 'group' => [$year], 'sidebar' => $this->getSidebar() , 'results' => $posts]);
         }else{
             abort(404);
         }
@@ -302,7 +302,7 @@ class BlogController extends Controller {
                 $post->language = Language::where('language_id', $language->language_id)->get()[0]->language_title;
             }
 
-            return view(config('bbb_config.theme') . '.blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => '', 'group' => [$year, $month], 'sidebar' => $this->getSidebar() , 'results' =>$posts]);
+            return view('.blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => '', 'group' => [$year, $month], 'sidebar' => $this->getSidebar() , 'results' =>$posts]);
         }else{
             abort(404);
         }
@@ -335,7 +335,7 @@ class BlogController extends Controller {
                 $post->language = Language::where('language_id', $language->language_id)->get()[0]->language_title;
             }
 
-            return view(config('bbb_config.theme') . '.blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => '', 'group' => [$year, $month, $day], 'sidebar' => $this->getSidebar() , 'results' => $posts]);
+            return view('.blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => '', 'group' => [$year, $month, $day], 'sidebar' => $this->getSidebar() , 'results' => $posts]);
         }else{
             abort(404);
         }
@@ -403,7 +403,7 @@ class BlogController extends Controller {
                 $next_url = null;
             }
 
-            return view(config('bbb_config.theme') . '.blog.entry', ['page_title' => 'Blog', 'nav_active' => 'blog', 'sidebar' => $this->getSidebar() , 'year' => $year, 'month' => $month, 'day' => $day, 'slug' => $title, 'title' => $post->post_title, 'language' => $language, 'category' => $category, 'tags' => $tags, 'lead' => $post->lead, 'modified_at' => $post->modified_at, 'body' => $post->body, 'pages' => $pages, 'prev_url' => $prev_url, 'next_url' => $next_url]);
+            return view('.blog.entry', ['page_title' => 'Blog', 'nav_active' => 'blog', 'sidebar' => $this->getSidebar() , 'year' => $year, 'month' => $month, 'day' => $day, 'slug' => $title, 'title' => $post->post_title, 'language' => $language, 'category' => $category, 'tags' => $tags, 'lead' => $post->lead, 'modified_at' => $post->modified_at, 'body' => $post->body, 'pages' => $pages, 'prev_url' => $prev_url, 'next_url' => $next_url]);
         }else{
             abort(404);
         }
@@ -430,7 +430,7 @@ class BlogController extends Controller {
 
         $dates =  new LengthAwarePaginator($dates, sizeof($dates), 10);
 
-        return view(config('bbb_config.theme') . '.blog.list', ['page_title' => 'Blog', 'nav_active' => 'blog', 'list_title' => 'Archive', 'sidebar' => $this->getSidebar() , 'results' => $dates]);
+        return view('.blog.list', ['page_title' => 'Blog', 'nav_active' => 'blog', 'list_title' => 'Archive', 'sidebar' => $this->getSidebar() , 'results' => $dates]);
     }
 
 }

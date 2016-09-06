@@ -29,7 +29,7 @@ class ProjectsController extends Controller {
             array_push($projects, $collection);
         }
 
-        return view(config('bbb_config.theme') . '.projects.index', ['page_title' => 'Projects', 'nav_active' => 'projects', 'results' => $projects]);
+        return view('.projects.index', ['page_title' => 'Projects', 'nav_active' => 'projects', 'results' => $projects]);
     }
 
     /**
@@ -41,8 +41,8 @@ class ProjectsController extends Controller {
     public function description($title)
     {
         $project = Project::where('slug', $title)->get()[0];
-        return view(config('bbb_config.theme') . '.projects.presentation', ['page_title' => 'Projects', 'nav_active' => 'projects', 'project' => $project]);
-        //return view(config('bbb_config.theme') . '.blog.entry', ['user' => Blog::findOrFail($id)]);
+        return view('.projects.presentation', ['page_title' => 'Projects', 'nav_active' => 'projects', 'project' => $project]);
+        //return view('.blog.entry', ['user' => Blog::findOrFail($id)]);
     }
 
 }

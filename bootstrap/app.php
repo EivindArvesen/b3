@@ -21,11 +21,12 @@ Dotenv::load(__DIR__.'/../');
 
 $app = new Laravel\Lumen\Application;
 
-
+/*
+        B3-SPECIFIC
+ */
 // Load BlaBlaBlog stuff...
 $app->configure('bbb_config');
 require_once __DIR__.'/../config/bbb_functions.php';
-
 
 $app->withFacades();
 

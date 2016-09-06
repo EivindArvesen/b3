@@ -1,4 +1,4 @@
-@extends(config('bbb_config.theme') . '.layouts.blog')
+@extends('layouts.blog')
 
 @section('content')
 
@@ -24,7 +24,7 @@
             <?=$body;?>
           </div><!-- /.blog-post -->
 
-        @include(config('bbb_config.theme') . '.layouts.pager')
+        @include('layouts.pager')
 
         @if (isset($prev_url))
             <a class="prev-next btn btn-primary btn-ghost" href="{{$prev_url}}"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> Previous</a>

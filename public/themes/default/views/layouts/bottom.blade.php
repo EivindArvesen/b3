@@ -32,11 +32,11 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/themes/{{config('bbb_config.theme')}}/jquery.min.js"></script>
-    <script src="/themes/{{config('bbb_config.theme')}}/base.min.js"></script>
+    <script src="/themes/{{config('bbb_config.theme')}}/assets/jquery.min.js"></script>
+    <script src="/themes/{{config('bbb_config.theme')}}/assets/base.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="/themes/{{config('bbb_config.theme')}}/ie10-viewport-bug-workaround.js"></script>
-    <script src="/themes/{{config('bbb_config.theme')}}/main.js"></script>
+    <script src="/themes/{{config('bbb_config.theme')}}/assets/ie10-viewport-bug-workaround.js"></script>
+    <script src="/themes/{{config('bbb_config.theme')}}/assets/main.js"></script>
   </body>
 </html>
 

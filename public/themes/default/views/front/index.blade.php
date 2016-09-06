@@ -1,4 +1,4 @@
-@extends(config('bbb_config.theme') . '.layouts.master')
+@extends('layouts.master')
 
 {{-- @section('sidebar')
     @parent
