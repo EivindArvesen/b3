@@ -2,7 +2,7 @@
 
 @section('content')
 
-        <div class="col-sm-8 blog-main">
+        <section class="col-sm-8 blog-main blog-inventory">
 
             <ol class="breadcrumb">
                 <li><a href="/blog">Blog</a></li>
@@ -22,6 +22,6 @@
 
         @include('layouts.pagination')
 
-        </div><!-- /.blog-main -->
+        </section><!-- /.blog-main -->
         @include('blog.sidebar')
 @stop

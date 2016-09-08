@@ -1,4 +1,4 @@
-<div class="col-md-3 col-md-offset-1 blog-sidebar">
+<aside class="col-md-3 col-md-offset-1 blog-sidebar">
   <div class="sidebar-module sidebar-module-inset">
     @include('blog.searchbar')
   </div>
@@ -44,6 +44,6 @@
       <li><a href="/blog/archive">More...</a></li>
     </ol>
   </div>
-</div><!-- /.blog-sidebar -->
+</aside><!-- /.blog-sidebar -->
 
 </div><!-- /.row -->
