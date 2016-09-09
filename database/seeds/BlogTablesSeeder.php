@@ -86,7 +86,7 @@ class BlogTablesSeeder extends Seeder
                 }
 
                 // Make relative paths (links/images) absolute
-                $path = dirname(explode("/public", $file)[1])."/";
+                $path = dirname(explode("/public", $file)[1]);
                 $body = preg_replace("/(href|src)\=\"([^(http|www)])(\/)?/", "$1=\"$path/$2", $document->getHtmlContent());
 
                 $blogpost = Blogpost::create([
