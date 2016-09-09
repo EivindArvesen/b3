@@ -7,7 +7,7 @@
             <ol class="breadcrumb">
                 <li><a href="/blog">Blog</a></li>
                 @if (isset($group_title) && $group_title !== '')
-                    <li><a href="/blog/{{strtolower($group_title)}}'">{{ucfirst(strtolower($group_title))}}</a></li>
+                    <li><a href="/blog/{{strtolower($group_title)}}">{{ucfirst(strtolower($group_title))}}</a></li>
                 @endif
 
                 @if (isset($group) && $group !== '')
