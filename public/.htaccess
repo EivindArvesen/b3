@@ -13,6 +13,6 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 
-    # No access to themes...
-    RewriteRule ^themes - [F]
+    # Deny access to theme view temlates
+    RewriteRule ^themes/(.*)/views - [F]
 </IfModule>
