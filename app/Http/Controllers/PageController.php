@@ -2,11 +2,8 @@
 
 use App\Models\Page;
 
-//use App\User;
-//use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cache;
 use Laravel\Lumen\Routing\Controller;
-// Use the Kurenai document parser.
-use Kurenai\DocumentParser;
 
 class PageController extends Controller {
 
@@ -18,7 +15,9 @@ class PageController extends Controller {
     public function index()
     {
         try {
-            $page = Page::where('type', 'index')->first();
+            $page = $value = Cache::remember('page-index', config('bbb_config.cache-age')*60, function() {
+                return Page::where('type', 'index')->first();
+            });
         } catch (ErrorException $e) {
             return redirect('/blog');
         }
@@ -37,7 +36,9 @@ class PageController extends Controller {
     public function page($slug)
     {
         try {
-            $page = Page::where('slug', $slug)->first();
+            $page = Cache::remember('page-'.$slug, config('bbb_config.cache-age')*60, function() use ($slug) {
+                return Page::where('slug', $slug)->first();
+            });
         } catch (ErrorException $e) {
             return redirect('/');
         }

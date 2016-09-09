@@ -2,11 +2,8 @@
 
 use App\Models\Project;
 
-//use App\User;
-//use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cache;
 use Laravel\Lumen\Routing\Controller;
-// Use the Kurenai document parser.
-use Kurenai\DocumentParser;
 
 class ProjectsController extends Controller {
 
@@ -18,18 +15,20 @@ class ProjectsController extends Controller {
      */
     public function showList()
     {
-        $projects = [];
+        $project_list = Cache::remember('projects-list', config('bbb_config.cache-age')*60, function() {
+            $projects = [];
+            $categories = Project::select('category')->groupBy('category')->orderBy('category','asc')->get()->lists('category');
 
-        $categories = Project::select('category')->groupBy('category')->orderBy('category','asc')->get()->lists('category');
+            foreach ($categories as $category) {
+                $collection = [];
+                $collection['name'] = $category;
+                $collection['projects'] = Project::where('category', $category)->orderBy('project_id', 'desc')->get();
+                array_push($projects, $collection);
+            }
+            return $projects;
+        });
 
-        foreach ($categories as $category) {
-            $collection = [];
-            $collection['name'] = $category;
-            $collection['projects'] = Project::where('category', $category)->orderBy('project_id', 'desc')->get();
-            array_push($projects, $collection);
-        }
-
-        return view('.projects.index', ['page_title' => 'Projects', 'nav_active' => 'projects', 'results' => $projects]);
+        return view('.projects.index', ['page_title' => 'Projects', 'nav_active' => 'projects', 'results' => $project_list]);
     }
 
     /**
@@ -40,7 +39,9 @@ class ProjectsController extends Controller {
      */
     public function description($title)
     {
-        $project = Project::where('slug', $title)->get()[0];
+        $project = Cache::remember('project-'.$title, config('bbb_config.cache-age')*60, function() use ($title) {
+            return Project::where('slug', $title)->get()[0];
+        });
         return view('.projects.presentation', ['page_title' => 'Projects', 'nav_active' => 'projects', 'project' => $project]);
         //return view('.blog.entry', ['user' => Blog::findOrFail($id)]);
     }

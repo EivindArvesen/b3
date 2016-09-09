@@ -7,6 +7,8 @@ return [
     'email' => 'email@provider.com',
     'theme' => 'default',
     'debug' => True,
+    'backend' => 'db',
+    'cache-age' => 24,
     // Blog
     'about' => "Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.",
     // Meta description
