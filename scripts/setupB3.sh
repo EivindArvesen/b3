@@ -31,6 +31,9 @@ KEY=$(php -r "echo md5(uniqid()).\"\n\";")
 sed -i '' -e 's/secret/'$KEY'/g' $DIR/../.env
 $EDITOR $DIR/../.env
 
+# Put site URL in apacheconfig
+sed -i -e 's/example.com/$3/g' $DIR/../public/.htaccess
+
 # Create dummy index page
 mkdir -p $DIR/../public/content/pages
 cat > $DIR/../public/content/pages/index.md <<- EOM

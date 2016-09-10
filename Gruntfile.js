@@ -68,7 +68,8 @@ module.exports = function(grunt) {
         build: {
             files: {
                 'public/themes/default/assets/jquery.min.js': ['bower_components/jquery/dist/jquery.min.js'],
-                'public/themes/default/assets/base.min.js': ['bower_components/bootstrap/dist/js/bootstrap.min.js']
+                'public/themes/default/assets/base.min.js': ['bower_components/bootstrap/dist/js/bootstrap.min.js'],
+                'public/themes/default/assets/main.min.js': ['public/themes/default/assets/main.js']
             }
         }
     },
@@ -103,8 +104,46 @@ module.exports = function(grunt) {
             },
             src: ['index.html']
         }
-    }
+    },
     */
+    clean: [ './public/themes/default/assets/dist/' ],
+    copy: {
+      main: {
+        cwd: './public/themes/default/assets/',
+        src: [
+          '*.min.css',
+          '*.min.js',
+          'fonts/*'
+        ],
+        dest: './public/themes/default/assets/dist/',
+        expand: true,
+      }
+    },
+    replace: {
+      zerocache: {
+        src: ['./public/themes/default/views/**/*.blade.php'],
+        overwrite: true,
+        replacements: [{
+        }, {
+          from: /(min.).*(.css|.js)/g,
+          to: 'min$2'
+        }]
+      }
+    },
+    cacheBust: {
+        taskName: {
+            options: {
+                assets: [
+                '*.min.css',
+                '*.min.js'
+                ],
+                baseDir: './public/themes/default/assets/dist/',
+                deleteOriginals: true,
+                jsonOutput: true
+            },
+            src: ['./public/themes/default/views/**/*.blade.php']
+        }
+    },
     browserSync: {
         dev: {
             bsFiles: {
@@ -121,6 +160,7 @@ module.exports = function(grunt) {
                     ]
             },
             options: {
+                open: false,
                 watchTask: true,
                 proxy: 'localhost'
             }
@@ -139,11 +179,11 @@ module.exports = function(grunt) {
         },
         js: {
             files: ['public/themes/default/assets/base.min.js', 'public/themes/assets/default/jquery.min.js'],
-            tasks: ['uglify']
+            tasks: ['uglify', 'clean', 'copy', 'replace:zerocache', 'cacheBust']
         },
         less: {
             files: ['public/themes/default/assets/main.less', 'public/themes/assets/default/variables.less'],
-            tasks: ['less', 'cssmin'],
+            tasks: ['less', 'cssmin', 'clean', 'copy', 'replace:zerocache', 'cacheBust'],
         },
     }
   });
@@ -151,8 +191,12 @@ module.exports = function(grunt) {
   // Loading our grunt modules
   grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.loadNpmTasks('grunt-banner');
+  grunt.loadNpmTasks('grunt-cache-bust');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-text-replace');
   grunt.loadNpmTasks('grunt-contrib-uglify');
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -164,6 +208,6 @@ module.exports = function(grunt) {
 
   // CSS distribution task.
   // grunt.registerTask('default', ['less:compileCore', 'autoprefixer', 'usebanner', 'cssmin']);
-  grunt.registerTask('default', ['less:compileCore', 'autoprefixer', 'usebanner', 'cssmin', 'uglify', 'browserSync', 'watch']);
+  grunt.registerTask('default', ['less:compileCore', 'autoprefixer', 'usebanner', 'cssmin', 'uglify', 'clean', 'copy', 'replace:zerocache', 'cacheBust', 'browserSync', 'watch']);
   // grunt.registerTask('test', ['jshint', 'qunit']);
 };
