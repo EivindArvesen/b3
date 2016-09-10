@@ -4,8 +4,8 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-12">
-          <h1>404</h1>
-          <p class="lead">Page not found</p>
+          <h1>{{$page_title}}</h1>
+          <p class="lead">{{$notice}}</p>
         </div>
       </div>
     </div>

@@ -43,6 +43,10 @@ class PageController extends Controller {
             return redirect('/');
         }
 
+        if ($page == null) {
+            abort(404);
+        }
+
         if ($page->type == 'index') {
             return redirect('/');
         }

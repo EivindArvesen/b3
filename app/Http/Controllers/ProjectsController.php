@@ -40,7 +40,7 @@ class ProjectsController extends Controller {
     public function description($title)
     {
         $project = Cache::remember('project-'.$title, config('bbb_config.cache-age')*60, function() use ($title) {
-            return Project::where('slug', $title)->get()[0];
+            return Project::where('slug', $title)->firstOrFail();
         });
         return view('.projects.presentation', ['page_title' => 'Projects', 'nav_active' => 'projects', 'project' => $project]);
         //return view('.blog.entry', ['user' => Blog::findOrFail($id)]);
