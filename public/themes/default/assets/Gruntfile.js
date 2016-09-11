@@ -14,11 +14,11 @@ module.exports = function(grunt) {
           sourceMap: true,
           outputSourceFiles: true,
           sourceMapURL: 'main.css.map',
-          sourceMapFilename: 'public/themes/default/assets/main.css.map',
+          sourceMapFilename: 'main.css.map',
           paths: '<%= bspath %>/less'
         },
         files: {
-          'public/themes/default/assets/main.css': 'public/themes/default/assets/main.less'
+          'main.css': 'main.less'
         },
       }
 
@@ -40,7 +40,7 @@ module.exports = function(grunt) {
         options: {
           map: true
         },
-        src: 'public/themes/default/assets/main.css'
+        src: 'main.css'
       }
     },
     cssmin: {
@@ -51,7 +51,7 @@ module.exports = function(grunt) {
       },
       core: {
         files: {
-          'public/themes/default/assets/main.min.css': 'public/themes/default/assets/main.css'
+          'main.min.css': 'main.css'
         }
       }
     },
@@ -61,15 +61,15 @@ module.exports = function(grunt) {
         banner: '<%= banner %>'
       },
       files: {
-        src: 'public/themes/default/assets/main.css'
+        src: 'main.css'
       }
     },
     uglify: {
         build: {
             files: {
-                'public/themes/default/assets/jquery.min.js': ['bower_components/jquery/dist/jquery.min.js'],
-                'public/themes/default/assets/base.min.js': ['bower_components/bootstrap/dist/js/bootstrap.min.js'],
-                'public/themes/default/assets/main.min.js': ['public/themes/default/assets/main.js']
+                'jquery.min.js': ['bower_components/jquery/dist/jquery.min.js'],
+                'base.min.js': ['bower_components/bootstrap/dist/js/bootstrap.min.js'],
+                'main.min.js': ['main.js']
             }
         }
     },
@@ -106,22 +106,22 @@ module.exports = function(grunt) {
         }
     },
     */
-    clean: [ './public/themes/default/assets/dist/' ],
+    clean: [ './dist/' ],
     copy: {
       main: {
-        cwd: './public/themes/default/assets/',
+        cwd: './',
         src: [
           '*.min.css',
           '*.min.js',
           'fonts/*'
         ],
-        dest: './public/themes/default/assets/dist/',
+        dest: './dist/',
         expand: true,
       }
     },
     replace: {
       zerocache: {
-        src: ['./public/themes/default/views/**/*.blade.php'],
+        src: ['./../views/**/*.blade.php'],
         overwrite: true,
         replacements: [{
         }, {
@@ -137,26 +137,23 @@ module.exports = function(grunt) {
                 '*.min.css',
                 '*.min.js'
                 ],
-                baseDir: './public/themes/default/assets/dist/',
+                baseDir: './dist/',
                 deleteOriginals: true,
                 jsonOutput: true
             },
-            src: ['./public/themes/default/views/**/*.blade.php']
+            src: ['./../views/**/*.blade.php']
         }
     },
     browserSync: {
         dev: {
             bsFiles: {
                 src : [
-                        'public/themes/**/*.min.css',
-                        'public/themes/**/*.min.js',
-                        'public/**/*.blade.php',
-                        'resources/views/**/*.blade.php',
-                        '**/*.php',
-                        'public/**/*.html',
-                        'public/content/**/*.md'
-                        //'app/css/*.css',
-                        //'app/*.html'
+                        'dis/*.min.css',
+                        'dis/*.min.js',
+                        '../views/**/*.blade.php',
+                        '../../../../**/*.php',
+                        '../../../**/*.html',
+                        '../../../content/**/*.md'
                     ]
             },
             options: {
@@ -178,11 +175,11 @@ module.exports = function(grunt) {
             tasks: ['htmlhint']
         },
         js: {
-            files: ['public/themes/default/assets/base.min.js', 'public/themes/assets/default/jquery.min.js'],
+            files: ['main.js', 'base.min.js', 'jquery.min.js'],
             tasks: ['uglify', 'clean', 'copy', 'replace:zerocache', 'cacheBust']
         },
         less: {
-            files: ['public/themes/default/assets/main.less', 'public/themes/assets/default/variables.less'],
+            files: ['main.less', 'variables.less'],
             tasks: ['less', 'cssmin', 'clean', 'copy', 'replace:zerocache', 'cacheBust'],
         },
     }

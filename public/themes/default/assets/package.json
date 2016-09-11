@@ -14,8 +14,8 @@
   "scripts": {
     "test": "grunt test"
   },
-  "style": "resources/themes/default/main.css",
-  "less": "resources/themes/default/main.less",
+  "style": "main.css",
+  "less": "main.less",
   "main": "./dist/js/npm",
   "repository": {
     "type": "git",

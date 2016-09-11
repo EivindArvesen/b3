@@ -1,8 +1,6 @@
 /lumen.log
 /vendor
 .env
-/bower_components
-/node_modules
 .sublime-grunt.cache
 /storage/logs
 npm-debug.log
