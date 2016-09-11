@@ -214,13 +214,16 @@ scp -rp $DIR/../. $1:$WEBROOT/
 # Create git repo
 git init $DIR/..
 
-# Ignore everything except user content
+# Ignore everything except user content and themes
 cat > $DIR/../.gitignore <<- EOM
 *
 !*/
 /storage
 /vendor
 !/public/content/**
+!/public/themes/*/
+/public/themes/debug
+/public/themes/default
 EOM
 
 # Add first commit

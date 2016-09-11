@@ -12,7 +12,7 @@
     <title>{{config('bbb_config.site_name')}} - {{$page_title}}</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="/themes/{{config('bbb_config.theme')}}/assets/dist/main.min.efa675b13b9e62df.css" rel="stylesheet">
+    <link href="/themes/{{config('bbb_config.theme')}}/assets/dist/main.min.530838dde40cedaa.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>

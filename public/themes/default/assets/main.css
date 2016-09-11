@@ -6753,9 +6753,6 @@ h1 {
 .debug-menu a {
   border: none !important;
 }
-ul.nav.navbar-nav li:hover {
-  background-color: #1a1a1a;
-}
 ul.nav.navbar-nav li:hover a {
   color: #9d9d9d;
 }

@@ -10,3 +10,6 @@ TODO.md
 SCRATCH.md
 /public/content/**/*
 **/.DS_Store
+/public/themes/*/
+!/public/themes/debug
+!/public/themes/default
