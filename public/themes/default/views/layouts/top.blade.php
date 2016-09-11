@@ -12,7 +12,7 @@
     <title>{{config('bbb_config.site_name')}} - {{$page_title}}</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="/themes/{{config('bbb_config.theme')}}/assets/dist/main.min.d4bb506ca7a866bb.css" rel="stylesheet">
+    <link href="/themes/{{config('bbb_config.theme')}}/assets/dist/main.min.638e6a110f7e5eb1.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -23,20 +23,10 @@
 
   <body>
 
-    {{-- @section('sidebar')
-    This is the master sidebar.
-    @show --}}
-
-    @if (isset($menu_style) && $menu_style == 'white' && isset($menu_transparent) && $menu_transparent == true)
-    <nav class="navbar navbar-default navbar-transparent navbar-fixed-top">
-    @elseif (isset($menu_style) && $menu_style == 'white')
-    <nav class="navbar navbar-default navbar-fixed-top">
-    @elseif (isset($menu_style) && $menu_style == 'black' && isset($menu_transparent) && $menu_transparent == true)
-    <nav class="navbar navbar-inverse navbar-transparent navbar-fixed-top">
-    @elseif (isset($menu_style) && $menu_style == 'black')
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    @if (isset($menu_style) && $menu_style == 'white')
+    <nav class="navbar navbar-default {{ isset($menu_transparent) && $menu_transparent == true ? 'navbar-transparent' : '' }} {{ !isset($menu_sticky) ? 'navbar-fixed-top' : '' }} {{ isset($menu_seamless) ? 'navbar-seamless' : '' }}">
     @else
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-inverse {{ isset($menu_transparent) && $menu_transparent == true ? 'navbar-transparent' : '' }} {{ !isset($menu_sticky) ? 'navbar-fixed-top' : '' }} {{ isset($menu_seamless) ? 'navbar-seamless' : '' }}">
     @endif
       <div class="container">
         <div class="navbar-header">
