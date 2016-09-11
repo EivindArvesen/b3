@@ -498,6 +498,42 @@ footer {
   }
 }
 
+// Custom dark btn
+.btn-dark {
+  .button-variant(#fff; #000; #000);
+
+  &:hover, &:active {
+    background-color: @btn-default-bg;
+    color: #000;
+  }
+}
+.btn-dark.btn-ghost {
+  .button-variant(#000; @btn-default-bg; #000);
+
+  &:hover, &:active {
+    background-color: #000;
+    color: #fff;
+  }
+}
+
+// Custom light btn
+.btn-light {
+  .button-variant(#000; #fff; #fff);
+
+  &:hover, &:active {
+    background-color: @btn-default-bg;
+    color: #fff;
+  }
+}
+.btn-light.btn-ghost {
+  .button-variant(#fff; @btn-default-bg; #fff);
+
+  &:hover, &:active {
+    background-color: #fff;
+    color: #000;
+  }
+}
+
 
 .read-more {
   margin-top: 24px;

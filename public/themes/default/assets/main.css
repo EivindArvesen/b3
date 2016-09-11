@@ -7763,6 +7763,254 @@ fieldset[disabled] .btn-danger.btn-ghost.focus {
   background-color: #ff6e50;
   color: #fff;
 }
+.btn-dark {
+  color: #ffffff;
+  background-color: #000000;
+  border-color: #000000;
+}
+.btn-dark:focus,
+.btn-dark.focus {
+  color: #ffffff;
+  background-color: #000000;
+  border-color: #000000;
+}
+.btn-dark:hover {
+  color: #ffffff;
+  background-color: #000000;
+  border-color: #000000;
+}
+.btn-dark:active,
+.btn-dark.active,
+.open > .dropdown-toggle.btn-dark {
+  color: #ffffff;
+  background-color: #000000;
+  border-color: #000000;
+}
+.btn-dark:active:hover,
+.btn-dark.active:hover,
+.open > .dropdown-toggle.btn-dark:hover,
+.btn-dark:active:focus,
+.btn-dark.active:focus,
+.open > .dropdown-toggle.btn-dark:focus,
+.btn-dark:active.focus,
+.btn-dark.active.focus,
+.open > .dropdown-toggle.btn-dark.focus {
+  color: #ffffff;
+  background-color: #000000;
+  border-color: #000000;
+}
+.btn-dark:active,
+.btn-dark.active,
+.open > .dropdown-toggle.btn-dark {
+  background-image: none;
+}
+.btn-dark.disabled:hover,
+.btn-dark[disabled]:hover,
+fieldset[disabled] .btn-dark:hover,
+.btn-dark.disabled:focus,
+.btn-dark[disabled]:focus,
+fieldset[disabled] .btn-dark:focus,
+.btn-dark.disabled.focus,
+.btn-dark[disabled].focus,
+fieldset[disabled] .btn-dark.focus {
+  background-color: #000000;
+  border-color: #000000;
+}
+.btn-dark .badge {
+  color: #000000;
+  background-color: #ffffff;
+}
+.btn-dark:hover,
+.btn-dark:active {
+  background-color: rgba(0, 0, 0, 0);
+  color: #000;
+}
+.btn-dark.btn-ghost {
+  color: #000000;
+  background-color: rgba(0, 0, 0, 0);
+  border-color: #000000;
+}
+.btn-dark.btn-ghost:focus,
+.btn-dark.btn-ghost.focus {
+  color: #000000;
+  background-color: rgba(0, 0, 0, 0);
+  border-color: #000000;
+}
+.btn-dark.btn-ghost:hover {
+  color: #000000;
+  background-color: rgba(0, 0, 0, 0);
+  border-color: #000000;
+}
+.btn-dark.btn-ghost:active,
+.btn-dark.btn-ghost.active,
+.open > .dropdown-toggle.btn-dark.btn-ghost {
+  color: #000000;
+  background-color: rgba(0, 0, 0, 0);
+  border-color: #000000;
+}
+.btn-dark.btn-ghost:active:hover,
+.btn-dark.btn-ghost.active:hover,
+.open > .dropdown-toggle.btn-dark.btn-ghost:hover,
+.btn-dark.btn-ghost:active:focus,
+.btn-dark.btn-ghost.active:focus,
+.open > .dropdown-toggle.btn-dark.btn-ghost:focus,
+.btn-dark.btn-ghost:active.focus,
+.btn-dark.btn-ghost.active.focus,
+.open > .dropdown-toggle.btn-dark.btn-ghost.focus {
+  color: #000000;
+  background-color: rgba(0, 0, 0, 0);
+  border-color: #000000;
+}
+.btn-dark.btn-ghost:active,
+.btn-dark.btn-ghost.active,
+.open > .dropdown-toggle.btn-dark.btn-ghost {
+  background-image: none;
+}
+.btn-dark.btn-ghost.disabled:hover,
+.btn-dark.btn-ghost[disabled]:hover,
+fieldset[disabled] .btn-dark.btn-ghost:hover,
+.btn-dark.btn-ghost.disabled:focus,
+.btn-dark.btn-ghost[disabled]:focus,
+fieldset[disabled] .btn-dark.btn-ghost:focus,
+.btn-dark.btn-ghost.disabled.focus,
+.btn-dark.btn-ghost[disabled].focus,
+fieldset[disabled] .btn-dark.btn-ghost.focus {
+  background-color: rgba(0, 0, 0, 0);
+  border-color: #000000;
+}
+.btn-dark.btn-ghost .badge {
+  color: rgba(0, 0, 0, 0);
+  background-color: #000000;
+}
+.btn-dark.btn-ghost:hover,
+.btn-dark.btn-ghost:active {
+  background-color: #000;
+  color: #fff;
+}
+.btn-light {
+  color: #000000;
+  background-color: #ffffff;
+  border-color: #ffffff;
+}
+.btn-light:focus,
+.btn-light.focus {
+  color: #000000;
+  background-color: #e6e6e6;
+  border-color: #bfbfbf;
+}
+.btn-light:hover {
+  color: #000000;
+  background-color: #e6e6e6;
+  border-color: #e0e0e0;
+}
+.btn-light:active,
+.btn-light.active,
+.open > .dropdown-toggle.btn-light {
+  color: #000000;
+  background-color: #e6e6e6;
+  border-color: #e0e0e0;
+}
+.btn-light:active:hover,
+.btn-light.active:hover,
+.open > .dropdown-toggle.btn-light:hover,
+.btn-light:active:focus,
+.btn-light.active:focus,
+.open > .dropdown-toggle.btn-light:focus,
+.btn-light:active.focus,
+.btn-light.active.focus,
+.open > .dropdown-toggle.btn-light.focus {
+  color: #000000;
+  background-color: #d4d4d4;
+  border-color: #bfbfbf;
+}
+.btn-light:active,
+.btn-light.active,
+.open > .dropdown-toggle.btn-light {
+  background-image: none;
+}
+.btn-light.disabled:hover,
+.btn-light[disabled]:hover,
+fieldset[disabled] .btn-light:hover,
+.btn-light.disabled:focus,
+.btn-light[disabled]:focus,
+fieldset[disabled] .btn-light:focus,
+.btn-light.disabled.focus,
+.btn-light[disabled].focus,
+fieldset[disabled] .btn-light.focus {
+  background-color: #ffffff;
+  border-color: #ffffff;
+}
+.btn-light .badge {
+  color: #ffffff;
+  background-color: #000000;
+}
+.btn-light:hover,
+.btn-light:active {
+  background-color: rgba(0, 0, 0, 0);
+  color: #fff;
+}
+.btn-light.btn-ghost {
+  color: #ffffff;
+  background-color: rgba(0, 0, 0, 0);
+  border-color: #ffffff;
+}
+.btn-light.btn-ghost:focus,
+.btn-light.btn-ghost.focus {
+  color: #ffffff;
+  background-color: rgba(0, 0, 0, 0);
+  border-color: #bfbfbf;
+}
+.btn-light.btn-ghost:hover {
+  color: #ffffff;
+  background-color: rgba(0, 0, 0, 0);
+  border-color: #e0e0e0;
+}
+.btn-light.btn-ghost:active,
+.btn-light.btn-ghost.active,
+.open > .dropdown-toggle.btn-light.btn-ghost {
+  color: #ffffff;
+  background-color: rgba(0, 0, 0, 0);
+  border-color: #e0e0e0;
+}
+.btn-light.btn-ghost:active:hover,
+.btn-light.btn-ghost.active:hover,
+.open > .dropdown-toggle.btn-light.btn-ghost:hover,
+.btn-light.btn-ghost:active:focus,
+.btn-light.btn-ghost.active:focus,
+.open > .dropdown-toggle.btn-light.btn-ghost:focus,
+.btn-light.btn-ghost:active.focus,
+.btn-light.btn-ghost.active.focus,
+.open > .dropdown-toggle.btn-light.btn-ghost.focus {
+  color: #ffffff;
+  background-color: rgba(0, 0, 0, 0);
+  border-color: #bfbfbf;
+}
+.btn-light.btn-ghost:active,
+.btn-light.btn-ghost.active,
+.open > .dropdown-toggle.btn-light.btn-ghost {
+  background-image: none;
+}
+.btn-light.btn-ghost.disabled:hover,
+.btn-light.btn-ghost[disabled]:hover,
+fieldset[disabled] .btn-light.btn-ghost:hover,
+.btn-light.btn-ghost.disabled:focus,
+.btn-light.btn-ghost[disabled]:focus,
+fieldset[disabled] .btn-light.btn-ghost:focus,
+.btn-light.btn-ghost.disabled.focus,
+.btn-light.btn-ghost[disabled].focus,
+fieldset[disabled] .btn-light.btn-ghost.focus {
+  background-color: rgba(0, 0, 0, 0);
+  border-color: #ffffff;
+}
+.btn-light.btn-ghost .badge {
+  color: rgba(0, 0, 0, 0);
+  background-color: #ffffff;
+}
+.btn-light.btn-ghost:hover,
+.btn-light.btn-ghost:active {
+  background-color: #fff;
+  color: #000;
+}
 .read-more {
   margin-top: 24px;
 }
