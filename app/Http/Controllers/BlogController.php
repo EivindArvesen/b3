@@ -76,7 +76,7 @@ class BlogController extends Controller {
             return $posts;
         });
 
-        return view('.blog.index', ['page_title' => 'Blog', 'nav_active' => 'blog', 'menu_transparent' => false, 'menu_style' => 'black', 'sidebar' => $this->getSidebar() , 'results' => $blog_posts]);
+        return view('blog.index', ['page_title' => 'Blog', 'nav_active' => 'blog', 'menu_transparent' => false, 'menu_style' => 'black', 'sidebar' => $this->getSidebar() , 'results' => $blog_posts]);
     }
 
     /**
@@ -108,14 +108,14 @@ class BlogController extends Controller {
                 return $posts;
             });
 
-            return view('.blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => 'Language', 'group' => [$language], 'sidebar' => $this->getSidebar() , 'results' => $posts]);
+            return view('blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => 'Language', 'group' => [$language], 'sidebar' => $this->getSidebar() , 'results' => $posts]);
         }
         else {
             $languages = Cache::remember('blog-languages-'.$page, config('bbb_config.cache-age')*60, function() use ($page) {
                 return Language::paginate(10);
             });
 
-            return view('.blog.list', ['page_title' => 'Blog', 'nav_active' => 'blog', 'list_title' => 'Language', 'sidebar' => $this->getSidebar() , 'results' => $languages]);
+            return view('blog.list', ['page_title' => 'Blog', 'nav_active' => 'blog', 'list_title' => 'Language', 'sidebar' => $this->getSidebar() , 'results' => $languages]);
         }
     }
 
@@ -154,14 +154,14 @@ class BlogController extends Controller {
                 return $posts;
             });
 
-            return view('.blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => 'Category', 'group' => [$category], 'sidebar' => $this->getSidebar() , 'results' => $posts]);
+            return view('blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => 'Category', 'group' => [$category], 'sidebar' => $this->getSidebar() , 'results' => $posts]);
         }
         else {
             $categories = Cache::remember('blog-categories-'.$page, config('bbb_config.cache-age')*60, function() use ($page) {
                 return Category::paginate(10);
             });
 
-            return view('.blog.list', ['page_title' => 'Blog', 'nav_active' => 'blog', 'list_title' => 'Category', 'sidebar' => $this->getSidebar() , 'results' => $categories]);
+            return view('blog.list', ['page_title' => 'Blog', 'nav_active' => 'blog', 'list_title' => 'Category', 'sidebar' => $this->getSidebar() , 'results' => $categories]);
         }
     }
 
@@ -200,14 +200,14 @@ class BlogController extends Controller {
                 return $posts;
             });
 
-            return view('.blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => 'Tag', 'group' => [$tag], 'sidebar' => $this->getSidebar() , 'results' => $posts]);
+            return view('blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => 'Tag', 'group' => [$tag], 'sidebar' => $this->getSidebar() , 'results' => $posts]);
         }
         else {
             $tags = Cache::remember('blog-tags-'.$page, config('bbb_config.cache-age')*60, function() use ($page) {
                 return Tag::paginate(10);
             });
 
-            return view('.blog.list', ['page_title' => 'Blog', 'nav_active' => 'blog', 'list_title' => 'Tag', 'sidebar' => $this->getSidebar() , 'results' => $tags]);
+            return view('blog.list', ['page_title' => 'Blog', 'nav_active' => 'blog', 'list_title' => 'Tag', 'sidebar' => $this->getSidebar() , 'results' => $tags]);
         }
     }
 
@@ -265,7 +265,7 @@ class BlogController extends Controller {
                 return $posts;
             });
 
-            return view('.blog.search', ['page_title' => 'Blog', 'nav_active' => 'blog', 'query' => $request->input('query'), 'sidebar' => $this->getSidebar() , 'results' => $posts]);
+            return view('blog.search', ['page_title' => 'Blog', 'nav_active' => 'blog', 'query' => $request->input('query'), 'sidebar' => $this->getSidebar() , 'results' => $posts]);
         }
     }
 
@@ -297,7 +297,7 @@ class BlogController extends Controller {
                 return $posts;
             });
 
-            return view('.blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => '', 'group' => [$year], 'sidebar' => $this->getSidebar() , 'results' => $posts]);
+            return view('blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => '', 'group' => [$year], 'sidebar' => $this->getSidebar() , 'results' => $posts]);
         }else{
             abort(404);
         }
@@ -332,7 +332,7 @@ class BlogController extends Controller {
                 return $posts;
             });
 
-            return view('.blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => '', 'group' => [$year, $month], 'sidebar' => $this->getSidebar() , 'results' =>$posts]);
+            return view('blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => '', 'group' => [$year, $month], 'sidebar' => $this->getSidebar() , 'results' =>$posts]);
         }else{
             abort(404);
         }
@@ -368,7 +368,7 @@ class BlogController extends Controller {
                 return $posts;
             });
 
-            return view('.blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => '', 'group' => [$year, $month, $day], 'sidebar' => $this->getSidebar() , 'results' => $posts]);
+            return view('blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => '', 'group' => [$year, $month, $day], 'sidebar' => $this->getSidebar() , 'results' => $posts]);
         }else{
             abort(404);
         }
@@ -448,7 +448,7 @@ class BlogController extends Controller {
                 );
             });
 
-            return view('.blog.entry', ['page_title' => 'Blog', 'nav_active' => 'blog', 'sidebar' => $this->getSidebar() , 'year' => $year, 'month' => $month, 'day' => $day, 'slug' => $title, 'title' => $blogpost['post']->post_title, 'language' => $blogpost['language'], 'category' => $blogpost['category'], 'tags' => $blogpost['tags'], 'lead' => $blogpost['post']->lead, 'modified_at' => $blogpost['post']->modified_at, 'body' => $blogpost['post']->body, 'pages' => $blogpost['pages'], 'prev_url' => $blogpost['prev_url'], 'next_url' => $blogpost['next_url']]);
+            return view('blog.entry', ['page_title' => 'Blog', 'nav_active' => 'blog', 'sidebar' => $this->getSidebar() , 'year' => $year, 'month' => $month, 'day' => $day, 'slug' => $title, 'title' => $blogpost['post']->post_title, 'language' => $blogpost['language'], 'category' => $blogpost['category'], 'tags' => $blogpost['tags'], 'lead' => $blogpost['post']->lead, 'modified_at' => $blogpost['post']->modified_at, 'body' => $blogpost['post']->body, 'pages' => $blogpost['pages'], 'prev_url' => $blogpost['prev_url'], 'next_url' => $blogpost['next_url']]);
         }else{
             abort(404);
         }
@@ -478,7 +478,7 @@ class BlogController extends Controller {
             return $dates;
         });
 
-        return view('.blog.list', ['page_title' => 'Blog', 'nav_active' => 'blog', 'list_title' => 'Archive', 'sidebar' => $this->getSidebar() , 'results' => $dates]);
+        return view('blog.list', ['page_title' => 'Blog', 'nav_active' => 'blog', 'list_title' => 'Archive', 'sidebar' => $this->getSidebar() , 'results' => $dates]);
     }
 
 }

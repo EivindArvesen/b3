@@ -28,7 +28,7 @@ class ProjectsController extends Controller {
             return $projects;
         });
 
-        return view('.projects.index', ['page_title' => 'Projects', 'nav_active' => 'projects', 'results' => $project_list]);
+        return view('projects.index', ['page_title' => 'Projects', 'nav_active' => 'projects', 'results' => $project_list]);
     }
 
     /**
@@ -42,8 +42,8 @@ class ProjectsController extends Controller {
         $project = Cache::remember('project-'.$title, config('bbb_config.cache-age')*60, function() use ($title) {
             return Project::where('slug', $title)->firstOrFail();
         });
-        return view('.projects.presentation', ['page_title' => 'Projects', 'nav_active' => 'projects', 'project' => $project]);
-        //return view('.blog.entry', ['user' => Blog::findOrFail($id)]);
+        return view('projects.presentation', ['page_title' => 'Projects', 'nav_active' => 'projects', 'project' => $project]);
+        //return view('blog.entry', ['user' => Blog::findOrFail($id)]);
     }
 
 }
