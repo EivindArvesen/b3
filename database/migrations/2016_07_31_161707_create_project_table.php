@@ -30,6 +30,8 @@ class CreateProjectTable extends Migration {
 			$table->string('type');
 			$table->string('style');
 			$table->string('transparent');
+			$table->string('sticky');
+			$table->string('seamless');
 		});
 	}
 
