@@ -76,7 +76,7 @@ class BlogController extends Controller {
             return $posts;
         });
 
-        return view('blog.index', ['page_title' => 'Blog', 'nav_active' => 'blog', 'menu_transparent' => false, 'menu_style' => 'black', 'sidebar' => $this->getSidebar() , 'results' => $blog_posts]);
+        return view('blog.index', ['page_title' => 'Blog', 'nav_active' => 'blog', 'menu_transparent' => false, 'style' => 'black', 'sidebar' => $this->getSidebar() , 'results' => $blog_posts]);
     }
 
     /**

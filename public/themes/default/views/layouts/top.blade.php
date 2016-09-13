@@ -23,7 +23,7 @@
 
   <body>
 
-    @if (isset($menu_style) && $menu_style == 'white')
+    @if (isset($style) && $style == 'white')
     <nav class="navbar navbar-default {{ isset($menu_transparent) && $menu_transparent == true ? 'navbar-transparent' : '' }} {{ !isset($menu_sticky) ? 'navbar-fixed-top' : '' }} {{ isset($menu_seamless) ? 'navbar-seamless' : '' }}">
     @else
     <nav class="navbar navbar-inverse {{ isset($menu_transparent) && $menu_transparent == true ? 'navbar-transparent' : '' }} {{ !isset($menu_sticky) ? 'navbar-fixed-top' : '' }} {{ isset($menu_seamless) ? 'navbar-seamless' : '' }}">
