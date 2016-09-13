@@ -113,7 +113,8 @@ module.exports = function(grunt) {
         src: [
           '*.min.css',
           '*.min.js',
-          'fonts/*'
+          'fonts/*',
+          'gfx/*'
         ],
         dest: './dist/',
         expand: true,
