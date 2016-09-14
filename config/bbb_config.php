@@ -12,6 +12,7 @@ return [
     // Blog
     'about' => "Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.",
     // Meta description
+    'description' => 'A page about...',
     // Social media accounts (usernames for links)
     'github' => 'eivind88',
     'twitter' => 'Eivind88',
