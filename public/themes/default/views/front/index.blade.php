@@ -1,11 +1,11 @@
 @extends('layouts.master')
 
-{{-- @section('sidebar')
-    @parent
-
-    <p>This is appended to the master sidebar.</p>
-@stop --}}
-
 @section('content')
-   <?=$page->body;?>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <?=$page->body;?>
+            </div>
+        </div>
+    </div>
 @stop
