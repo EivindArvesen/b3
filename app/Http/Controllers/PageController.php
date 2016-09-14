@@ -1,6 +1,8 @@
 <?php namespace App\Http\Controllers;
 
 use App\Models\Page;
+use App\Models\Blogpost;
+use App\Models\Project;
 
 use Illuminate\Support\Facades\Cache;
 use Laravel\Lumen\Routing\Controller;
@@ -22,10 +24,17 @@ class PageController extends Controller {
             return redirect('/blog');
         }
 
-        return view('front.' . $page->type, ['page_title' => $page->page_title, 'menu_transparent' => false, 'menu_style' => 'black', 'nav_active' => '', 'page' => $page]);
-        // return view('front.index', ['page_title' => 'Index', 'menu_transparent' => false, 'menu_style' => 'black', 'nav_active' => 'about']);
-        //return view()->file(theme_path().'/views/front.php'); // , $data
+        $last_blogposts = Cache::remember('last_posts-', config('bbb_config.cache-age')*60, function() {
+            return Blogpost::where('published', '!', false)->orderBy('created_at', 'DESC')
+                   ->take(3)->get(['post_title', 'created_at', 'slug']);
+        });
 
+        $last_projects = Cache::remember('last_projects', config('bbb_config.cache-age')*60, function() {
+            return Project::where('published', '!', false)->orderBy('project_id', 'DESC')
+                   ->take(3)->get(['slug', 'project_title']);
+        });
+
+        return view('front.' . $page->type, ['page_title' => $page->page_title, 'menu_transparent' => false, 'style' => $page->style, 'nav_active' => '', 'page' => $page, 'last_blogposts' => $last_blogposts, 'last_projects' => $last_projects ]);
     }
 
     /**
