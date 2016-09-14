@@ -16,7 +16,7 @@
     <title>{{config('bbb_config.site_name')}} - {{$page_title}}</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="/themes/{{config('bbb_config.theme')}}/assets/dist/main.min.231deba104fa1a81.css" rel="stylesheet">
+    <link href="/themes/{{config('bbb_config.theme')}}/assets/dist/main.min.bf4077024a090f45.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -25,4 +25,4 @@
     <![endif]-->
   </head>
 
-  <body>
+  <body class="{{ config('bbb_config.status') != 'live' ? 'status' : ''}}">

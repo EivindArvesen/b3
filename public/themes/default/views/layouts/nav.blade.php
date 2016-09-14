@@ -16,7 +16,7 @@
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             @foreach (getMenu() as $menu_element)
-              @if ($nav_active==$menu_element->slug)
+              @if (isset($nav_active) && $nav_active==$menu_element->slug)
                 <li class="active"><a href="/{{ $menu_element->slug }}">{{ $menu_element->page_title }}</a></li>
               @else
                 <li><a href="/{{ $menu_element->slug }}">{{ $menu_element->page_title }}</a></li>
@@ -25,7 +25,7 @@
             <?php
             if (config('bbb_config.debug')==True){
               $debug_nav='<li><a href="/debug">DEBUG</a></li>';
-              if ($nav_active=="debug")
+              if (isset($nav_active) && $nav_active=="debug")
                 $debug_nav=substr_replace($debug_nav, ' class="active"', 3, 0);
               echo '<li class="debug-menu"><a>&nbsp;</a></li>' . $debug_nav;
             }

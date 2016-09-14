@@ -22,56 +22,64 @@
 // });
 // $app->get('blog/{date}/{id}', 'App\Http\Controllers\BlogController@showEntry');
 
-if (config('bbb_config.debug')==True)
-{
+if (config('bbb_config.status')=='live') {
+
+    if (config('bbb_config.debug')==True)
+    {
+        $app->group(['namespace' => 'App\Http\Controllers'], function($group){
+            $group->get('debug', 'PageController@debug');
+            $group->get('debug/theme', 'PageController@debugtheme');
+        });
+    }
+
     $app->group(['namespace' => 'App\Http\Controllers'], function($group){
-        $group->get('debug', 'PageController@debug');
-        $group->get('debug/theme', 'PageController@debugtheme');
+
+        $group->get('/', 'PageController@index');
+
+        $group->get('blog', 'BlogController@showFront');
+        $group->get('blog/page/{pageNumber}', 'BlogController@showFront');
+
+        $group->get('blog/language', 'BlogController@listLanguage');
+        $group->get('blog/language/{language}', 'BlogController@listLanguage');
+        $group->get('blog/language/{language}/page/{pageNumber}', 'BlogController@listLanguage');
+
+        $group->get('blog/category', 'BlogController@listCategory');
+        $group->get('blog/category/{category}', 'BlogController@listCategory');
+        $group->get('blog/category/{category}/page/{pageNumber}', 'BlogController@listCategory');
+
+        $group->get('blog/tag', 'BlogController@listTag');
+        $group->get('blog/tag/{tag}', 'BlogController@listTag');
+        $group->get('blog/tag/{tag}/page/{pageNumber}', 'BlogController@listTag');
+
+        $group->get('blog/search', 'BlogController@search');
+        $group->get('blog/search/page/{pageNumber}', 'BlogController@search');
+
+        $group->get('blog/archive', 'BlogController@archive');
+        $group->get('blog/archive/page/{pageNumber}', 'BlogController@archive');
+
+        $group->get('blog/{year}', 'BlogController@showArchive1');
+        $group->get('blog/{year}/page/{pageNumber}', 'BlogController@showArchive1');
+
+        $group->get('blog/{year}/{month}', 'BlogController@showArchive2');
+        $group->get('blog/{year}/{month}/page/{pageNumber}', 'BlogController@showArchive2');
+
+        $group->get('blog/{year}/{month}/{day}', 'BlogController@showArchive3');
+        $group->get('blog/{year}/{month}/{day}/page/{pageNumber}', 'BlogController@showArchive3');
+
+        $group->get('blog/{year}/{month}/{day}/{title}', 'BlogController@showEntry');
+
+        $group->get('projects', 'ProjectsController@showList');
+        $group->get('projects/{title}', 'ProjectsController@description');
+
+        $group->get('/{page}', 'PageController@page');
+
+    });
+
+} else {
+    $app->group(['namespace' => 'App\Http\Controllers'], function($group){
+        $group->get('/', 'StatusController@status');
     });
 }
-
-$app->group(['namespace' => 'App\Http\Controllers'], function($group){
-
-    $group->get('/', 'PageController@index');
-
-    $group->get('blog', 'BlogController@showFront');
-    $group->get('blog/page/{pageNumber}', 'BlogController@showFront');
-
-    $group->get('blog/language', 'BlogController@listLanguage');
-    $group->get('blog/language/{language}', 'BlogController@listLanguage');
-    $group->get('blog/language/{language}/page/{pageNumber}', 'BlogController@listLanguage');
-
-    $group->get('blog/category', 'BlogController@listCategory');
-    $group->get('blog/category/{category}', 'BlogController@listCategory');
-    $group->get('blog/category/{category}/page/{pageNumber}', 'BlogController@listCategory');
-
-    $group->get('blog/tag', 'BlogController@listTag');
-    $group->get('blog/tag/{tag}', 'BlogController@listTag');
-    $group->get('blog/tag/{tag}/page/{pageNumber}', 'BlogController@listTag');
-
-    $group->get('blog/search', 'BlogController@search');
-    $group->get('blog/search/page/{pageNumber}', 'BlogController@search');
-
-    $group->get('blog/archive', 'BlogController@archive');
-    $group->get('blog/archive/page/{pageNumber}', 'BlogController@archive');
-
-    $group->get('blog/{year}', 'BlogController@showArchive1');
-    $group->get('blog/{year}/page/{pageNumber}', 'BlogController@showArchive1');
-
-    $group->get('blog/{year}/{month}', 'BlogController@showArchive2');
-    $group->get('blog/{year}/{month}/page/{pageNumber}', 'BlogController@showArchive2');
-
-    $group->get('blog/{year}/{month}/{day}', 'BlogController@showArchive3');
-    $group->get('blog/{year}/{month}/{day}/page/{pageNumber}', 'BlogController@showArchive3');
-
-    $group->get('blog/{year}/{month}/{day}/{title}', 'BlogController@showEntry');
-
-    $group->get('projects', 'ProjectsController@showList');
-    $group->get('projects/{title}', 'ProjectsController@description');
-
-    $group->get('/{page}', 'PageController@page');
-
-});
 
 
 // /* NAMED ROUTES */
