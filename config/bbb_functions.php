@@ -69,10 +69,16 @@ function date_links($group, $element) {
 
 }
 
-function read_time($content) {
+function read_time($content, $only_minutes = false) {
   // Originally by Brian Cray: http://briancray.com/posts/estimated-reading-time-web-design/
   $word = str_word_count(strip_tags($content));
-  $m = floor($word / 200);
-  $s = floor($word % 200 / (200 / 60));
-  $est = $m . ' minute' . ($m == 1 ? '' : 's') . ', ' . $s . ' second' . ($s == 1 ? '' : 's');
+  if ($only_minutes) {
+    $m = ceil($word / 200);
+    $est = $m . ' minute' . ($m == 1 ? '' : 's');
+  } else {
+    $m = floor($word / 200);
+    $s = floor($word % 200 / (200 / 60));
+    $est = $m . ' minute' . ($m == 1 ? '' : 's') . ', ' . $s . ' second' . ($s == 1 ? '' : 's');
+  }
+  return $est;
 }
