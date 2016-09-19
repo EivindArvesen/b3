@@ -1,4 +1,5 @@
 <?php
+use App\Models\Blogpost;
 use App\Models\Page;
 
 use Illuminate\Database\Eloquent\Collection;
@@ -81,4 +82,16 @@ function read_time($content, $only_minutes = false, $short = false) {
     $est = $m . ' ' . ($short ? 'min' : 'minute' . ($m == 1 ? '' : 's')) . ', ' . $s . ' ' . ($short ? 'sec' : 'second' . ($s == 1 ? '' : 's'));
   }
   return $est;
+}
+
+function get_intro($id) {
+  $post = Blogpost::where('post_id', $id)->get(['body'])[0]['body'];
+
+  $string = substr($post, 0, 180);
+  //TODO: If string contains image: strip it from string, print it before intro...
+  $last_space = strrpos($string, ' ');
+  $last_word = substr($string, $last_space);
+  $first_chunk = substr($string, 0, $last_space);
+
+  return $first_chunk . '...';
 }
