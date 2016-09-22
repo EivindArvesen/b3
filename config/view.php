@@ -1,5 +1,5 @@
 <?php
-error_log(config('bbb_config.theme'));
+//error_log(config('bbb_config.theme'));
 return [
 
     /*
