@@ -87,11 +87,14 @@ function read_time($content, $only_minutes = false, $short = false) {
 function get_intro($id) {
   $post = Blogpost::where('post_id', $id)->get(['body'])[0]['body'];
 
-  $string = substr($post, 0, 180);
-  //TODO: If string contains image: strip it from string, print it before intro...
+  $string_pp = substr($post, 0, 180);
+  preg_match_all('/<p><img[^>]+><\/p>/i',$string_pp, $image);
+  $string = str_replace($image[0], '', $string_pp);
+  //TODO: If post has cover: use it; else: use 1st image
+
   $last_space = strrpos($string, ' ');
   $last_word = substr($string, $last_space);
   $first_chunk = substr($string, 0, $last_space);
 
-  return $first_chunk . '...';
+  return implode($image[0]).$first_chunk . '...';
 }
