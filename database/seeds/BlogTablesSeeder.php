@@ -32,6 +32,9 @@ class BlogTablesSeeder extends Seeder
                 $source = file_get_contents($file);
                 $document = $parser->parse($source);
 
+                // Build absolute path to content
+                $path = dirname(explode("/public", $file)[1]);
+
                 $languages = array();
                 if (!Language::where('language_title', $document->get('language'))->first()) {
                     Language::create([
@@ -73,6 +76,13 @@ class BlogTablesSeeder extends Seeder
                     $slug = substr(str_replace('+', '-', urlencode(strtolower(preg_replace("#[[:punct:]]#", "-", $document->get('title'))))), 0, 50);
                 }
 
+                if ($document->get('cover')) {
+                    // Fix cover-meta
+                    $cover = $path . '/' . ltrim($document->get('cover'), '/');
+                } else {
+                    $cover = '';
+                }
+
                 if ($document->get('type')) {
                     $type = $document->get('type');
                 } else {
@@ -86,7 +96,6 @@ class BlogTablesSeeder extends Seeder
                 }
 
                 // Make relative paths (links/images) absolute
-                $path = dirname(explode("/public", $file)[1]);
                 $body = preg_replace("/(href|src)\=\"([^(http|www)])(\/)?/", "$1=\"$path/$2", $document->getHtmlContent());
 
                 $blogpost = Blogpost::create([
@@ -95,6 +104,7 @@ class BlogTablesSeeder extends Seeder
                     'language_id' => $lang_id,
                     'post_title' => ucfirst($document->get('title')),
                     'slug' => $slug,
+                    'cover' => $cover,
                     'lead' => ucfirst($document->get('lead')),
                     'body' => $body,
                     'published' => $document->get('published') == 'false' || false,

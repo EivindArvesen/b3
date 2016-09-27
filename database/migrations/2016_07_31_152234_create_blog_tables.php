@@ -77,6 +77,7 @@ class CreateBlogTables extends Migration {
 			//$table->foreign('language_id')->references('language_id')->on('languages');
 			$table->string('post_title');
 			$table->string('slug');
+			$table->string('cover');
 			$table->string('lead');
 			$table->longText('body');
 			$table->boolean('published');
