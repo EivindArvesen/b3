@@ -70,8 +70,9 @@ function date_links($group, $element) {
 
 }
 
-function read_time($content, $only_minutes = false, $short = false) {
+function read_time($id, $only_minutes = false, $short = false) {
   // Originally by Brian Cray: http://briancray.com/posts/estimated-reading-time-web-design/
+  $content = Blogpost::where('post_id', $id)->get(['body'])->first();
   $word = str_word_count(strip_tags($content));
   if ($only_minutes) {
     $m = ceil($word / 200);
@@ -85,12 +86,17 @@ function read_time($content, $only_minutes = false, $short = false) {
 }
 
 function get_intro($id) {
-  $post = Blogpost::where('post_id', $id)->get(['body'])[0]['body'];
+  $post_object = Blogpost::where('post_id', $id)->get(['cover', 'body'])[0];
+  $post = $post_object['body'];
 
   $string_pp = substr($post, 0, 180);
+
   preg_match_all('/<p><img[^>]+><\/p>/i',$string_pp, $image);
   $string = str_replace($image[0], '', $string_pp);
-  //TODO: If post has cover: use it; else: use 1st image
+
+  if ($post_object['cover'] && $post_object['cover'] !== '') {
+    $image[0] = array('<img class="cover" src="' . $post_object['cover'] . '"/>');
+  }
 
   $last_space = strrpos($string, ' ');
   $last_word = substr($string, $last_space);
