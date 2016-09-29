@@ -225,12 +225,14 @@ class BlogController extends Controller {
         else {
             $posts = Cache::remember('blog-search-'.$request->input('query').'-'.$page, config('bbb_config.cache-age')*60, function() use ($request, $page) {
                 $posts = Blogpost::where('published', '!', false)->where('body', 'LIKE', '%'.$request->input('query').'%')->orWhere('post_title', 'LIKE', '%'.$request->input('query').'%')->orWhere('slug', 'LIKE', '%'.$request->input('query').'%')->orWhere('lead', 'LIKE', '%'.$request->input('query').'%')
-                       ->orderBy('created_at', 'DESC')->paginate(10);
+                       ->orderBy('created_at', 'DESC')->get();
 
                 foreach (Category::where('category_title', 'LIKE', '%'.$request->input('query').'%')->get() as $id) {
                     foreach (Post_category::where('category_id', $id->category_id)->get() as $post_id) {
                         foreach (Blogpost::where('post_id', $post_id->post_id)->orderBy('created_at', 'DESC')->paginate(10) as $post) {
-                            $posts->add($post);
+                            if (!$posts->contains('post_id', $post->post_id)) {
+                                $posts->add($post);
+                            }
                         }
                     }
                 }
@@ -238,14 +240,18 @@ class BlogController extends Controller {
                 foreach (Tag::where('tag_title', 'LIKE', '%'.$request->input('query').'%')->get() as $id) {
                     foreach (Post_tag::where('tag_id', $id->tag_id)->get() as $post_id) {
                         foreach (Blogpost::where('post_id', $post_id->post_id)->orderBy('created_at', 'DESC')->paginate(10) as $post) {
-                            $posts->add($post);
+                            if (!$posts->contains('post_id', $post->post_id)) {
+                                $posts->add($post);
+                            }
                         }
                     }
                 }
 
                 foreach (Language::where('language_title', 'LIKE', '%'.$request->input('query').'%')->get() as $id) {
                     foreach (Blogpost::where('language_id', $id->language_id)->orderBy('created_at', 'DESC')->paginate(10) as $post) {
-                        $posts->add($post);
+                        if (!$posts->contains('post_id', $post->post_id)) {
+                            $posts->add($post);
+                        }
                     }
                 }
 
@@ -262,7 +268,10 @@ class BlogController extends Controller {
                     $language = Language::where('language_id', $post->language_id)->firstOrFail();
                     $post->language = Language::where('language_id', $language->language_id)->firstOrFail()->language_title;
                 }
+
+                $posts =  new LengthAwarePaginator($posts, sizeof($posts), 10);
                 return $posts;
+
             });
 
             return view('blog.search', ['page_title' => 'Blog', 'nav_active' => 'blog', 'query' => $request->input('query'), 'sidebar' => $this->getSidebar() , 'results' => $posts]);
