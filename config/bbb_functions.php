@@ -86,7 +86,7 @@ function read_time($id, $only_minutes = false, $short = false) {
 }
 
 function get_intro($id) {
-  $post_object = Blogpost::where('post_id', $id)->get(['cover', 'body'])[0];
+  $post_object = Blogpost::where('post_id', $id)->get(['cover', 'lead', 'body'])[0];
   $post = $post_object['body'];
 
   $string_pp = substr($post, 0, 180);
@@ -98,9 +98,13 @@ function get_intro($id) {
     $image[0] = array('<img class="cover" src="' . $post_object['cover'] . '"/>');
   }
 
-  $last_space = strrpos($string, ' ');
-  $last_word = substr($string, $last_space);
-  $first_chunk = substr($string, 0, $last_space);
+  if ($post_object['lead'] && $post_object['lead'] !== '') {
+    $first_chunk = '<h3 class="lead">'.$post_object['lead'].'</h3>';
+  } else {
+    $last_space = strrpos($string, ' ');
+    $last_word = substr($string, $last_space);
+    $first_chunk = substr($string, 0, $last_space) . '...';
+  }
 
-  return implode($image[0]).$first_chunk . '...';
+  return implode($image[0]).$first_chunk;
 }
