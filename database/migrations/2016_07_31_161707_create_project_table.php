@@ -23,6 +23,7 @@ class CreateProjectTable extends Migration {
 			$table->string('project_title');
 			$table->string('date');
 			$table->string('description');
+			$table->string('list_group');
 			$table->string('list_title');
 			$table->longText('list_content');
 			$table->longText('body');

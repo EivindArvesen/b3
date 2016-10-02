@@ -57,6 +57,7 @@ class ProjectsTableSeeder extends Seeder
                     'description' => ucfirst($document->get('description')),
                     'body' => $body,
                     'published' => $document->get('published') == 'false' || false,
+                    'list_group' => $document->get('list-group'),
                     'list_title' => $document->get('list-title'),
                     'list_content' => $document->get('list-content'),
                     'type' => $type,
