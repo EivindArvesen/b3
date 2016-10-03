@@ -29,10 +29,20 @@ class PagesTableSeeder extends Seeder
                 $source = file_get_contents($file);
                 $document = $parser->parse($source);
 
+                // Build absolute path to content
+                $path = dirname(explode("/public", $file)[1])."/";
+
                 if ($document->get('slug')) {
                     $slug = substr(str_replace('+', '-', urlencode(strtolower(preg_replace("#[[:punct:]]#", "-", $document->get('slug'))))), 0, 50);
                 } else {
                     $slug = substr(str_replace('+', '-', urlencode(strtolower(preg_replace("#[[:punct:]]#", "-", $document->get('title'))))), 0, 50);
+                }
+
+                if ($document->get('cover')) {
+                    // Fix cover-meta
+                    $cover = $path . '/' . ltrim($document->get('cover'), '/');
+                } else {
+                    $cover = '';
                 }
 
                 if ($document->get('type')) {
@@ -48,12 +58,12 @@ class PagesTableSeeder extends Seeder
                 }
 
                 // Make relative paths (links/images) absolute
-                $path = dirname(explode("/public", $file)[1])."/";
                 $body = preg_replace("/(href|src)\=\"([^(http|www)])(\/)?/", "$1=\"$path/$2", $document->getHtmlContent());
 
                 $page = Page::create([
                     'page_title' => ucfirst($document->get('title')),
                     'slug' => $slug,
+                    'cover' => $cover,
                     'body' => $body,
                     'published' => $document->get('published') == 'false' || false,
                     'type' => $type,
