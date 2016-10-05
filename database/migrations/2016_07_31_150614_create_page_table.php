@@ -20,7 +20,8 @@ class CreatePageTable extends Migration {
 			$table->increments('page_id');
 			$table->string('slug');
 			$table->string('page_title');
-			$table->string('cover');
+			$table->string('bg');
+			$table->string('feature');
 			$table->longText('body');
 			$table->boolean('published');
 			$table->string('type');

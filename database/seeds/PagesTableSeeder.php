@@ -30,7 +30,7 @@ class PagesTableSeeder extends Seeder
                 $document = $parser->parse($source);
 
                 // Build absolute path to content
-                $path = dirname(explode("/public", $file)[1])."/";
+                $path = dirname(explode("/public", $file)[1]);
 
                 if ($document->get('slug')) {
                     $slug = substr(str_replace('+', '-', urlencode(strtolower(preg_replace("#[[:punct:]]#", "-", $document->get('slug'))))), 0, 50);
@@ -38,11 +38,16 @@ class PagesTableSeeder extends Seeder
                     $slug = substr(str_replace('+', '-', urlencode(strtolower(preg_replace("#[[:punct:]]#", "-", $document->get('title'))))), 0, 50);
                 }
 
-                if ($document->get('cover')) {
-                    // Fix cover-meta
-                    $cover = $path . '/' . ltrim($document->get('cover'), '/');
+                if ($document->get('bg')) {
+                    $bg = $path . '/' . ltrim($document->get('bg'), '/');
                 } else {
-                    $cover = '';
+                    $bg = '';
+                }
+
+                if ($document->get('feature')) {
+                    $feature = $path . '/' . ltrim($document->get('feature'), '/');
+                } else {
+                    $feature = '';
                 }
 
                 if ($document->get('type')) {
@@ -63,7 +68,8 @@ class PagesTableSeeder extends Seeder
                 $page = Page::create([
                     'page_title' => ucfirst($document->get('title')),
                     'slug' => $slug,
-                    'cover' => $cover,
+                    'feature' => $feature,
+                    'bg' => $bg,
                     'body' => $body,
                     'published' => $document->get('published') == 'false' || false,
                     'type' => $type,

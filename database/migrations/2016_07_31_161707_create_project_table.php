@@ -26,7 +26,7 @@ class CreateProjectTable extends Migration {
 			$table->string('list_group');
 			$table->string('list_title');
 			$table->longText('list_content');
-			$table->string('cover');
+			$table->string('feature');
 			$table->longText('body');
 			$table->boolean('published');
 			$table->string('type');

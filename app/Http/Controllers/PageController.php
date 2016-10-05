@@ -34,7 +34,7 @@ class PageController extends Controller {
                    ->take(3)->get(['slug', 'project_title']);
         });
 
-        return view('front.' . $page->type, ['page_title' => $page->page_title, 'menu_transparent' => false, 'style' => $page->style, 'nav_active' => '', 'page' => $page, 'last_blogposts' => $last_blogposts, 'last_projects' => $last_projects ]);
+        return view('front.' . $page->type, ['page_title' => $page->page_title, 'bg' => $page->bg, 'menu_transparent' => false, 'style' => $page->style, 'nav_active' => '', 'page' => $page, 'last_blogposts' => $last_blogposts, 'last_projects' => $last_projects ]);
     }
 
     /**
@@ -61,7 +61,7 @@ class PageController extends Controller {
         }
 
         else {
-            return view('front.' . $page->type, ['page_title' => $page->page_title, 'nav_active' => $page->slug, 'page' => $page]);
+            return view('front.' . $page->type, ['page_title' => $page->page_title, 'bg' => $page->bg, 'nav_active' => $page->slug, 'page' => $page]);
         }
 
     }
