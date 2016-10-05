@@ -99,7 +99,17 @@ function get_intro($id) {
   }
 
   if ($post_object['lead'] && $post_object['lead'] !== '') {
-    $first_chunk = '<h3 class="lead">'.$post_object['lead'].'</h3>';
+    if (strlen($post_object['lead']) > 180) {
+
+      $lead_piece = substr($post_object['lead'], 0, 180) . '...';
+      $last_space = strrpos($lead_piece, ' ');
+      $last_word = substr($lead_piece, $last_space);
+      $lead = substr($lead_piece, 0, $last_space) . '...';
+
+    } else {
+      $lead = $post_object['lead'];
+    }
+    $first_chunk = '<h3 class="lead">'.$lead.'</h3>';
   } else {
     $last_space = strrpos($string, ' ');
     $last_word = substr($string, $last_space);
