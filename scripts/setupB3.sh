@@ -151,6 +151,7 @@ date: 2016-07-30
     [optional]
 description: desc
 #    [optional]
+list-group: Language/Genre
 list-title: Built with
 list-content: Technology, more technology
 published: true
