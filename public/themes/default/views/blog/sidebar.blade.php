@@ -1,11 +1,11 @@
-<aside class="col-md-3 col-md-offset-1 blog-sidebar">
-  <div class="sidebar-module sidebar-module-inset">
+<aside class="col-sm-3 col-sm-offset-1 blog-sidebar">
+  <div class="sidebar-module sidebar-module-top">
     @include('blog.searchbar')
   </div>
-  @if (config('bbb_config.about'))
+  @if (config('b3_config.about'))
   <div class="sidebar-module">
     <h4>About</h4>
-    <p><?=config('bbb_config.about');?></p>
+    <p><?=config('b3_config.about');?></p>
   </div>
   @endif
   <div class="sidebar-module">

@@ -2,29 +2,78 @@
 
 @section('content')
 
-        <section class="col-sm-12 blog-main">
+    <article class="blog-post">
 
-          <article class="blog-post">
+        @if (isset($cover) && $cover !== '' && $cover !== '0')
+            <header class="cover-header">
+                <div class="cover-container">
+                <figure class="cover-overlay">
+                    <img class="cover" src="{{$cover}}"/>
+                    <div class="col-sm-12 cover-title-container">
+
+                        <div id="blog-title">
+                            <h1 class="blog-post-title"><a href="{{'/blog/'.$year.'/'.$month.'/'.$day.'/'.$slug}}">{{$title}}</a></h1>
+                            @if (isset($lead) && $lead !== '' && $lead !== '0')
+                                <h3 class="lead">{{$lead}}
+                                </h3>
+                            @endif
+                        </div>
+                    </div>
+                </figure>
+            </div>
+            <div class="blog-post-meta">
+                        <p>{{date_links([$year, $month, $day], "span")}}
+                    @if ($modified_at !== '0000-00-00 00:00:00')
+                        <span class="edit-time">{{'(edited ' . substr($modified_at, 0, 4) . ' ' . date('F', mktime(0, 0, 0, substr($modified_at, 5, 2), 10)) . ' ' . ltrim(substr($modified_at, 8, 2), '0') . ordinal_suffix(ltrim(substr($modified_at, 8, 2), '0')) . ')'}}</span>
+                    @endif
+                    </p>
+                    <p>
+                    on <a href="/blog/category/{{$category}}" >{{$category}}</a> in <a href="/blog/language/{{ucfirst(strtolower($language))}}" >{{$language}}</a></p>
+                    <p>{{read_time($post_id, true, true)}} read</p>
+                    </div>
+            </header>
+
+            <div class="col-sm-8 col-sm-offset-2 blog-entry">
+        @else
+            <div class="col-sm-8 col-sm-offset-2 blog-entry">
+
               <header>
-                <h1 class="blog-post-title"><a href="{{'/blog/'.$year.'/'.$month.'/'.$day.'/'.$slug}}">{{$title}}</a></h1>
-                <p class="blog-post-meta">{{date_links([$year, $month, $day], "span")}}
+                <div id="blog-title">
+                    <h1 class="blog-post-title"><a href="{{'/blog/'.$year.'/'.$month.'/'.$day.'/'.$slug}}">{{$title}}</a></h1>
+                    @if (isset($lead) && $lead !== '' && $lead !== '0')
+                        <h3 class="lead">{{$lead}}
+                        </h3>
+                    @endif
+                </div>
+                <div class="blog-post-meta">
+                    <p>{{date_links([$year, $month, $day], "span")}}
                 @if ($modified_at !== '0000-00-00 00:00:00')
-                    {{'(edited ' . substr($modified_at, 0, 10) . ')'}}
+                    <span class="edit-time">{{'(edited ' . substr($modified_at, 0, 4) . ' ' . date('F', mktime(0, 0, 0, substr($modified_at, 5, 2), 10)) . ' ' . ltrim(substr($modified_at, 8, 2), '0') . ordinal_suffix(ltrim(substr($modified_at, 8, 2), '0')) . ')'}}</span>
                 @endif
-                on <a href="/blog/category/{{$category}}" >{{$category}}</a> in <a href="/blog/language/{{ucfirst(strtolower($language))}}" >{{$language}}</a></p>
+                </p>
                 <p>
-        @foreach ($tags as $tag)
-            <a href="/blog/tag/{{$tag}}" class="label label-default">{{ucfirst(strtolower($tag))}}</a>&nbsp;
-        @endforeach
-    </p>
-            @if (isset($lead) && $lead !== '' && $lead !== '0')
-                <h3 class="lead">{{$lead}}
-                </h3>
-            @endif
-        </header>
+                on <a href="/blog/category/{{$category}}" >{{$category}}</a> in <a href="/blog/language/{{ucfirst(strtolower($language))}}" >{{$language}}</a></p>
+                <p>{{read_time($post_id, true, true)}} read</p>
+                </div>
+            </header>
+        @endif
 
-            <?=$body;?>
-          </article><!-- /.blog-post -->
+            <section class="blog-body">
+                <?=$body;?>
+            </section>
+
+            <div class="tags col-sm-6 col-sm-offset-3">
+                <div class="lead">Tags:</div>
+                <p>
+                @foreach ($tags as $tag)
+                    <a href="/blog/tag/{{$tag}}" class="label label-default">{{ucfirst(strtolower($tag))}}</a>&nbsp;
+                @endforeach
+                </p>
+            </div>
+
+        </article><!-- /.blog-post -->
+
+        <div class="col-sm-12">
 
         @include('layouts.pager')
 
@@ -36,6 +85,6 @@
         <a class="prev-next btn btn-primary btn-ghost pull-right" href="{{$next_url}}">Next <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></a>
         @endif
 
-        </section><!-- /.blog-main -->
+        </div><!-- /.blog-main -->
         </div>
 @stop

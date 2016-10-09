@@ -11,7 +11,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">{{config('bbb_config.site_name')}}</a>
+          <a class="navbar-brand" href="/">{{config('b3_config.site_name')}}</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
@@ -23,7 +23,7 @@
               @endif
             @endforeach
             <?php
-            if (config('bbb_config.debug')==True){
+            if (config('b3_config.debug')==True){
               $debug_nav='<li><a href="/debug">DEBUG</a></li>';
               if (isset($nav_active) && $nav_active=="debug")
                 $debug_nav=substr_replace($debug_nav, ' class="active"', 3, 0);
