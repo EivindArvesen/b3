@@ -1,6 +1,6 @@
 {
     "name": "eivindarvesen/b3",
-    "description": "BlaBlaBlog - a lightweight PHP Markdown Blog System mased on Lumen",
+    "description": "BlaBlaBlog - a lightweight PHP Markdown Blog System based on Lumen",
     "keywords": [
         "php",
         "bootstrap",
