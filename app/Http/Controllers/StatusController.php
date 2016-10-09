@@ -15,8 +15,8 @@ class StatusController extends Controller {
      */
     public function status()
     {
-        if (View::exists('status'.config('bbb_config.status'))) {
-            return view('status.' . $status, ['page_title' => ucfirst(config('bbb_config.status'))]);
+        if (View::exists('status'.config('b3_config.status'))) {
+            return view('status.' . $status, ['page_title' => ucfirst(config('b3_config.status'))]);
         }
         else {
             return view('status.unavailable', ['page_title' => 'Unavailable']);

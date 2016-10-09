@@ -5,7 +5,7 @@ return [
     'site_name' => 'Site Name',
     'user' => 'John Doe',
     'email' => 'email@provider.com',
-    'theme' => 'default',
+    'theme' => 'eivindarvesen',
     'status' => 'live', // live, maintenance, unavailable, landing, prelaunch
     'debug' => True, // echo debug info on failure
     'backend' => 'db',

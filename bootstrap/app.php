@@ -25,8 +25,8 @@ $app = new Laravel\Lumen\Application;
         B3-SPECIFIC
  */
 // Load BlaBlaBlog stuff...
-$app->configure('bbb_config');
-require_once __DIR__.'/../config/bbb_functions.php';
+$app->configure('b3_config');
+require_once __DIR__.'/../config/b3_functions.php';
 
 $app->withFacades();
 

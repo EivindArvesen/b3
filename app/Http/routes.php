@@ -22,9 +22,9 @@
 // });
 // $app->get('blog/{date}/{id}', 'App\Http\Controllers\BlogController@showEntry');
 
-if (config('bbb_config.status')=='live') {
+if (config('b3_config.status')=='live') {
 
-    if (config('bbb_config.debug')==True)
+    if (config('b3_config.debug')==True)
     {
         $app->group(['namespace' => 'App\Http\Controllers'], function($group){
             $group->get('debug', 'PageController@debug');

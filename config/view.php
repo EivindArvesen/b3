@@ -1,5 +1,5 @@
 <?php
-//error_log(config('bbb_config.theme'));
+//error_log(config('b3_config.theme'));
 return [
 
     /*
@@ -14,7 +14,7 @@ return [
     */
 
     'paths' => [
-        realpath(base_path('public/themes/' . config('bbb_config.theme') . '/views'))
+        realpath(base_path('public/themes/' . config('b3_config.theme') . '/views'))
         //realpath(base_path('resources/views'))
     ],
 

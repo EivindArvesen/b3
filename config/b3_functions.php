@@ -5,7 +5,7 @@ use App\Models\Page;
 use Illuminate\Database\Eloquent\Collection;
 
 function theme_path() {
-    return base_path().'/public/themes/'.Config::get('bbb_config.theme');
+    return base_path().'/public/themes/'.Config::get('b3_config.theme');
 }
 
 function getMenu() {

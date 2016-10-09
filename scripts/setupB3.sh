@@ -18,7 +18,7 @@ WEBROOT=$SERVERROOT/"$2"
 rm -rf $(dirname $DIR)/.git
 
 # Edit config
-$EDITOR $DIR/../config/bbb_config.php
+$EDITOR $DIR/../config/b3_config.php
 
 # Configure server environment
 cat > $DIR/../.env <<- EOM

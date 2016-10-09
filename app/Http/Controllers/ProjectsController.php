@@ -15,7 +15,7 @@ class ProjectsController extends Controller {
      */
     public function showList()
     {
-        $project_list = Cache::remember('projects-list', config('bbb_config.cache-age')*60, function() {
+        $project_list = Cache::remember('projects-list', config('b3_config.cache-age')*60, function() {
             $projects = [];
             $categories = Project::select('category')->groupBy('category')->orderBy('category','asc')->get()->lists('category');
 
@@ -39,7 +39,7 @@ class ProjectsController extends Controller {
      */
     public function description($title)
     {
-        $project = Cache::remember('project-'.$title, config('bbb_config.cache-age')*60, function() use ($title) {
+        $project = Cache::remember('project-'.$title, config('b3_config.cache-age')*60, function() use ($title) {
             return Project::where('slug', $title)->firstOrFail();
         });
         return view('projects.presentation', ['page_title' => 'Projects', 'nav_active' => 'projects', 'project' => $project]);

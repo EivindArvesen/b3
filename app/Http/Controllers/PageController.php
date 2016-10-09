@@ -17,19 +17,19 @@ class PageController extends Controller {
     public function index()
     {
         try {
-            $page = $value = Cache::remember('page-index', config('bbb_config.cache-age')*60, function() {
+            $page = $value = Cache::remember('page-index', config('b3_config.cache-age')*60, function() {
                 return Page::where('type', 'index')->first();
             });
         } catch (ErrorException $e) {
             return redirect('/blog');
         }
 
-        $last_blogposts = Cache::remember('last_posts-', config('bbb_config.cache-age')*60, function() {
+        $last_blogposts = Cache::remember('last_posts-', config('b3_config.cache-age')*60, function() {
             return Blogpost::where('published', '!', false)->orderBy('created_at', 'DESC')
                    ->take(3)->get(['post_title', 'created_at', 'slug']);
         });
 
-        $last_projects = Cache::remember('last_projects', config('bbb_config.cache-age')*60, function() {
+        $last_projects = Cache::remember('last_projects', config('b3_config.cache-age')*60, function() {
             return Project::where('published', '!', false)->orderBy('project_id', 'DESC')
                    ->take(3)->get(['slug', 'project_title']);
         });
@@ -45,7 +45,7 @@ class PageController extends Controller {
     public function page($slug)
     {
         try {
-            $page = Cache::remember('page-'.$slug, config('bbb_config.cache-age')*60, function() use ($slug) {
+            $page = Cache::remember('page-'.$slug, config('b3_config.cache-age')*60, function() use ($slug) {
                 return Page::where('slug', $slug)->first();
             });
         } catch (ErrorException $e) {
