@@ -118,3 +118,7 @@ function get_intro($id) {
 
   return implode($image[0]).$first_chunk;
 }
+
+function slugify($string) {
+  return substr(str_replace('+', '-', urlencode(strtolower(preg_replace("#[[:punct:]]#", "-", $string)))), 0, 50);
+}

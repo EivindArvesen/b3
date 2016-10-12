@@ -11,7 +11,7 @@
                     @endif
                 </p>
                 <p>
-                on <a href="/blog/category/{{$result->category}}" >{{$result->category}}</a> in <a href="/blog/language/{{ucfirst(strtolower($result->language))}}" >{{$result->language}}</a>
+                on <a href="/blog/category/{{slugify($result->category)}}" >{{$result->category}}</a> in <a href="/blog/language/{{ucfirst(strtolower($result->language))}}" >{{$result->language}}</a>
                 </p>
                 <p>
                 {{read_time($result->post_id, true, true)}} read

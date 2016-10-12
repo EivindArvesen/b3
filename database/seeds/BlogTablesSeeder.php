@@ -49,7 +49,8 @@ class BlogTablesSeeder extends Seeder
                 $categories = array();
                 if (!Category::where('category_title', ucfirst(trim($document->get('category'))))->first()) {
                     Category::create([
-                        'category_title' => ucfirst(trim($document->get('category')))
+                        'category_title' => ucfirst(trim($document->get('category'))),
+                        'category_slug' => substr(str_replace('+', '-', urlencode(strtolower(preg_replace("#[[:punct:]]#", "-", ucfirst(trim($document->get('category'))))))), 0, 50)
                     ]);
                 }
                 $cat_id = Category::where('category_title', ucfirst(trim($document->get('category'))))->first()->category_id;
@@ -61,7 +62,8 @@ class BlogTablesSeeder extends Seeder
                 foreach (explode(",", $document->get('tags')) as $tag) {
                     if (!Tag::where('tag_title', ucfirst(trim($tag)))->first()) {
                         Tag::create([
-                        'tag_title' => ucfirst(trim($tag))
+                        'tag_title' => ucfirst(trim($tag)),
+                        'tag_slug' => substr(str_replace('+', '-', urlencode(strtolower(preg_replace("#[[:punct:]]#", "-", ucfirst(trim($tag)))))), 0, 50)
                         ]);
                     }
                     $tag_id = Tag::where('tag_title', ucfirst(trim($tag)))->first()->tag_id;

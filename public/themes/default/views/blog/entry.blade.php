@@ -28,7 +28,7 @@
                     @endif
                     </p>
                     <p>
-                    on <a href="/blog/category/{{$category}}" >{{$category}}</a> in <a href="/blog/language/{{ucfirst(strtolower($language))}}" >{{$language}}</a></p>
+                    on <a href="/blog/category/{{slugify($category)}}" >{{$category}}</a> in <a href="/blog/language/{{ucfirst(strtolower($language))}}" >{{$language}}</a></p>
                     <p>{{read_time($post_id, true, true)}} read</p>
                     </div>
             </header>
@@ -52,7 +52,7 @@
                 @endif
                 </p>
                 <p>
-                on <a href="/blog/category/{{$category}}" >{{$category}}</a> in <a href="/blog/language/{{ucfirst(strtolower($language))}}" >{{$language}}</a></p>
+                on <a href="/blog/category/{{slugify($category)}}" >{{$category}}</a> in <a href="/blog/language/{{ucfirst(strtolower($language))}}" >{{$language}}</a></p>
                 <p>{{read_time($post_id, true, true)}} read</p>
                 </div>
             </header>
@@ -66,7 +66,7 @@
                 <div class="lead">Tags:</div>
                 <p>
                 @foreach ($tags as $tag)
-                    <a href="/blog/tag/{{$tag}}" class="label label-default">{{ucfirst(strtolower($tag))}}</a>&nbsp;
+                    <a href="/blog/tag/{{slugify($tag)}}" class="label label-default">{{ucfirst(strtolower($tag))}}</a>&nbsp;
                 @endforeach
                 </p>
             </div>

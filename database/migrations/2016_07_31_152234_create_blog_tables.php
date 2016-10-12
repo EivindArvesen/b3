@@ -50,6 +50,7 @@ class CreateBlogTables extends Migration {
 			 */
 			$table->increments('category_id');
 			$table->string('category_title');
+			$table->string('category_slug');
 
 			$table->unique('category_title');
 		});
@@ -61,6 +62,7 @@ class CreateBlogTables extends Migration {
 			 */
 			$table->increments('tag_id');
 			$table->string('tag_title');
+			$table->string('tag_slug');
 
 			$table->unique('tag_title');
 		});

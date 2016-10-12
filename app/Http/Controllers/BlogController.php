@@ -128,9 +128,11 @@ class BlogController extends Controller {
     public function listCategory($category=False, $page = 1)
     {
         if ($category!=False) {
-            $posts = Cache::remember('blog-category-'.$category.'-'.$page, config('b3_config.cache-age')*60, function() use ($category, $page) {
+            $return = Cache::remember('blog-category-'.$category.'-'.$page, config('b3_config.cache-age')*60, function() use ($category, $page) {
                 $category_title = $category;
-                $category_id = Category::where('category_title', $category)->firstOrFail()->category_id;
+                $category_obj = Category::where('category_slug', $category)->firstOrFail();
+                $category_id = $category_obj->category_id;
+                $category_title = $category_obj->category_title;
                 $post_idx = Post_category::where('category_id', $category_id)->get();
                 $post_ids=[];
                 foreach ($post_idx as $post_id) {
@@ -151,10 +153,10 @@ class BlogController extends Controller {
                     $language = Language::where('language_id', $post->language_id)->firstOrFail();
                     $post->language = Language::where('language_id', $language->language_id)->firstOrFail()->language_title;
                 }
-                return $posts;
+                return ['category_title' => $category_title, 'posts' => $posts];
             });
 
-            return view('blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => 'Category', 'group' => [$category], 'sidebar' => $this->getSidebar() , 'results' => $posts]);
+            return view('blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => 'Category', 'group' => [$return['category_title']], 'sidebar' => $this->getSidebar() , 'results' => $return['posts']]);
         }
         else {
             $categories = Cache::remember('blog-categories-'.$page, config('b3_config.cache-age')*60, function() use ($page) {
@@ -174,9 +176,11 @@ class BlogController extends Controller {
     public function listTag($tag=False, $page = 1)
     {
         if ($tag!=False) {
-            $posts = Cache::remember('blog-tag-'.$tag.'-'.$page, config('b3_config.cache-age')*60, function() use ($tag, $page) {
-                $tag_title = $tag;
-                $tag_id = Tag::where('tag_title', $tag)->firstOrFail()->tag_id;
+            $return = Cache::remember('blog-tag-'.$tag.'-'.$page, config('b3_config.cache-age')*60, function() use ($tag, $page) {
+                $tag_slug = $tag;
+                $tag_obj = Tag::where('tag_slug', $tag)->firstOrFail();
+                $tag_id = $tag_obj->tag_id;
+                $tag_title = $tag_obj->tag_title;
                 $post_idx = Post_tag::where('tag_id', $tag_id)->get();
                 $post_ids=[];
                 foreach ($post_idx as $post_id) {
@@ -187,7 +191,7 @@ class BlogController extends Controller {
                 foreach ($posts as $post) {
                     $tags = array();
                     foreach (Post_tag::where('post_id', $post->post_id)->get() as $tag) {
-                        array_push($tags, Tag::where('tag_id', $tag->tag_id)->firstOrFail()->tag_title);
+                        array_push($tags, Tag::where('tag_id', $tag->tag_id)->firstOrFail()->tag_slug);
                     }
                     $post->tags = $tags;
 
@@ -197,10 +201,10 @@ class BlogController extends Controller {
                     $language = Language::where('language_id', $post->language_id)->firstOrFail();
                     $post->language = Language::where('language_id', $language->language_id)->firstOrFail()->language_title;
                 }
-                return $posts;
+                return ['tag_title' => $tag_title, 'posts' => $posts];
             });
 
-            return view('blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => 'Tag', 'group' => [$tag], 'sidebar' => $this->getSidebar() , 'results' => $posts]);
+            return view('blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => 'Tag', 'group' => [$return['tag_title']], 'sidebar' => $this->getSidebar() , 'results' => $return['posts']]);
         }
         else {
             $tags = Cache::remember('blog-tags-'.$page, config('b3_config.cache-age')*60, function() use ($page) {

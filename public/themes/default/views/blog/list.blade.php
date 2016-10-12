@@ -21,13 +21,13 @@
                 @elseif ($list_title=='Category')
                     @foreach ($results as $category)
                         <li>
-                            <h3><a href="/blog/{{strtolower($list_title.'/'.$category->category_title)}}">{{$category->category_title}}</a></h3>
+                            <h3><a href="/blog/{{strtolower($list_title.'/'.slugify($category->category_title))}}">{{$category->category_title}}</a></h3>
                         </li>
                     @endforeach
                 @elseif ($list_title=='Tag')
                     @foreach ($results as $tag)
                         <li>
-                            <h3><a href="/blog/{{strtolower($list_title.'/'.$tag->tag_title)}}">{{$tag->tag_title}}</a></h3>
+                            <h3><a href="/blog/{{strtolower($list_title.'/'.slugify($tag->tag_title))}}">{{$tag->tag_title}}</a></h3>
                         </li>
                     @endforeach
                 @elseif ($list_title=='Archive')
