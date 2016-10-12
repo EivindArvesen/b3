@@ -278,6 +278,10 @@ img.cover {
 }
 
 article.blog-post {
+  .blog-body p {
+    margin-bottom: 22px;
+  }
+
   pre {
     background-color: #1d1f21;
   }
@@ -436,15 +440,14 @@ article.blog-post {
       &:first-letter {
         //color: @brand-primary;
         font-weight: bold;
-        //margin-right: 0.5em;
         //-webkit-initial-letter: 3;
         //initial-letter: 3;
-        //margin-top: 4em;
         float: left;
         font-size: floor((@line-height-computed * 3));
         line-height: floor((@font-size-base * 3));
         margin-left: -4px;
         margin-top: 4px;
+        margin-right: 4px; // 0.5em;
         margin-bottom: 22px;
       }
     }
