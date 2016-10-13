@@ -209,7 +209,6 @@ git init $DIR/..
 
 # Ignore everything except user content and themes
 cat > $DIR/../.gitignore <<- EOM
-.DS_Store
 *
 !*/
 /storage
@@ -218,6 +217,7 @@ cat > $DIR/../.gitignore <<- EOM
 !/public/themes/*/
 /public/themes/debug
 /public/themes/default
+**/.DS_Store
 EOM
 
 # Add first commit
