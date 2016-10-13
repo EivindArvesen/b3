@@ -28,7 +28,7 @@
             <strong>{{$project['list_group']}}</strong>
             <p class="lead">{{$project['description']}}</p>
           </div>
-          <div class="col-xs-12 col-sm-6 col-md-3">
+          <div class="col-xs-12 col-sm-6 col-md-3 project-element">
             @if (isset($project['feature']) && $project['feature'] !== '' && $project['feature'] !== '0')
               <img class="media-object" src="{{$project->feature}}">
             @endif
