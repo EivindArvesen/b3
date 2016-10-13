@@ -201,14 +201,6 @@ bash $DIR/populate-db.sh
 # Set up key exchange with server
 cat ~/.ssh/id_rsa.pub | ssh $1 'cat >> .ssh/authorized_keys'
 
-# Set up apache redirect to public root
-ACCESS="RewriteEngine On
-RewriteCond %{THE_REQUEST} /public/([^\s?]*) [NC]
-RewriteRule ^ %1 [L,NE,R=302]
-RewriteRule ^((?!public/).*)$ public/"'$1 [L,NC]'
-
-ssh $1 "echo '$ACCESS' > $WEBROOT/.htaccess"
-
 # Copy B3 installation to server
 scp -rp $DIR/../. $1:$WEBROOT/
 
@@ -217,6 +209,7 @@ git init $DIR/..
 
 # Ignore everything except user content and themes
 cat > $DIR/../.gitignore <<- EOM
+.DS_Store
 *
 !*/
 /storage
