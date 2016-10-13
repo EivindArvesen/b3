@@ -7,7 +7,7 @@ return [
     'email' => 'email@provider.com',
     'theme' => 'default',
     'status' => 'live', // live, maintenance, unavailable, landing, prelaunch
-    'debug' => True, // echo debug info on failure
+    'debug' => False, // echo DEBUG pages + debug info on failure
     'backend' => 'db',
     'cache-age' => 24, // max cache age in hours
     // Blog sidebar

@@ -31,9 +31,6 @@ KEY=$(php -r "echo md5(uniqid()).\"\n\";")
 sed -i '' -e 's/secret/'$KEY'/g' $DIR/../.env
 $EDITOR $DIR/../.env
 
-# Put site URL in apacheconfig
-sed -i -e 's/example.com/$3/g' $DIR/../public/.htaccess
-
 # Create dummy index page
 mkdir -p $DIR/../public/content/pages
 cat > $DIR/../public/content/pages/index.md <<- EOM
@@ -200,6 +197,9 @@ bash $DIR/populate-db.sh
 
 # Set up key exchange with server
 cat ~/.ssh/id_rsa.pub | ssh $1 'cat >> .ssh/authorized_keys'
+
+# Put site URL in .htaccess
+sed -i -e "s/example.com/$3/g" $DIR/../public/.htaccess
 
 # Copy B3 installation to server
 scp -rp $DIR/../. $1:$WEBROOT/
