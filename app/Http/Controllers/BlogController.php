@@ -112,7 +112,7 @@ class BlogController extends Controller {
         }
         else {
             $languages = Cache::remember('blog-languages-'.$page, config('b3_config.cache-age')*60, function() use ($page) {
-                return Language::paginate(10);
+                return Language::orderBy('language_title', 'ASC')->paginate(10);
             });
 
             return view('blog.list', ['page_title' => 'Blog', 'nav_active' => 'blog', 'list_title' => 'Language', 'sidebar' => $this->getSidebar() , 'results' => $languages]);
@@ -160,7 +160,7 @@ class BlogController extends Controller {
         }
         else {
             $categories = Cache::remember('blog-categories-'.$page, config('b3_config.cache-age')*60, function() use ($page) {
-                return Category::paginate(10);
+                return Category::orderBy('category_title', 'ASC')->paginate(10);
             });
 
             return view('blog.list', ['page_title' => 'Blog', 'nav_active' => 'blog', 'list_title' => 'Category', 'sidebar' => $this->getSidebar() , 'results' => $categories]);
@@ -208,7 +208,7 @@ class BlogController extends Controller {
         }
         else {
             $tags = Cache::remember('blog-tags-'.$page, config('b3_config.cache-age')*60, function() use ($page) {
-                return Tag::paginate(10);
+                return Tag::orderBy('tag_title', 'ASC')->paginate(10);
             });
 
             return view('blog.list', ['page_title' => 'Blog', 'nav_active' => 'blog', 'list_title' => 'Tag', 'sidebar' => $this->getSidebar() , 'results' => $tags]);
