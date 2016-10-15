@@ -26,7 +26,7 @@
 
             <section class="post-bottom">
                 <div class="col-sm-12">
-                <a class="btn btn-primary btn-ghost read-more" href="/blog/{{substr($result->created_at, 0, 4)}}/{{substr($result->created_at, 5, 2)}}/{{substr($result->created_at, 8, 2)}}/{{$result->slug}}">Read more</a>
+                <a class="btn btn-primary read-more" href="/blog/{{substr($result->created_at, 0, 4)}}/{{substr($result->created_at, 5, 2)}}/{{substr($result->created_at, 8, 2)}}/{{$result->slug}}">Read more</a>
                 </div>
             </section>
           </article><!-- /.blog-post -->
