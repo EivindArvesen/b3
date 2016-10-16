@@ -275,6 +275,19 @@ img.cover {
   object-fit: cover;
   background-color: #eee;
   min-height: 200px;
+  display: none;
+}
+
+.cover-img {
+  width: 100%;
+  background-color: #eee;
+  min-height: 200px;
+   -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
 }
 
 article.blog-post {
@@ -306,7 +319,7 @@ article.blog-post {
     max-width: 100%;
   }
 
-  img.cover {
+  img.cover, .cover-img {
     height: 200px;
   }
 
@@ -366,7 +379,7 @@ article.blog-post {
   fit-content: -moz-fill-available;
   fit-content: -webkit-fill-available;
 
-  img.cover {
+  img.cover, .cover-img {
     height: calc(50vh);
   }
 

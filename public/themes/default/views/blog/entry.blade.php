@@ -7,7 +7,8 @@
         @if (isset($cover) && $cover !== '' && $cover !== '0')
             <header class="cover-header">
                 <div class="cover-container">
-                <figure class="cover-overlay">
+                <div class="cover-overlay">
+                    <figure class="cover-img" style="background-image: url('{{$cover}}')"></figure>
                     <img class="cover" src="{{$cover}}"/>
                     <div class="col-sm-12 cover-title-container">
 
@@ -19,7 +20,7 @@
                             @endif
                         </div>
                     </div>
-                </figure>
+                </div>
             </div>
             <div class="blog-post-meta">
                         <p>{{date_links([$year, $month, $day], "span")}}

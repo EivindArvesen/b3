@@ -6941,6 +6941,18 @@ img.cover {
   object-fit: cover;
   background-color: #eee;
   min-height: 200px;
+  display: none;
+}
+.cover-img {
+  width: 100%;
+  background-color: #eee;
+  min-height: 200px;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
 }
 article.blog-post .blog-body p {
   margin-bottom: 22px;
@@ -6962,7 +6974,8 @@ article.blog-post pre {
   max-height: 250px;
   max-width: 100%;
 }
-.blog-inventory img.cover {
+.blog-inventory img.cover,
+.blog-inventory .cover-img {
   height: 200px;
 }
 .blog-inventory .blog-post {
@@ -7010,7 +7023,8 @@ article.blog-post pre {
   fit-content: -moz-fill-available;
   fit-content: -webkit-fill-available;
 }
-.cover-overlay img.cover {
+.cover-overlay img.cover,
+.cover-overlay .cover-img {
   height: calc(50vh);
 }
 .cover-overlay .cover-title-container {
