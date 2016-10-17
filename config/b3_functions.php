@@ -95,7 +95,7 @@ function get_intro($id) {
   $string = str_replace($image[0], '', $string_pp);
 
   if ($post_object['cover'] && $post_object['cover'] !== '') {
-    $image[0] = array('<p><img class="cover" src="' . $post_object['cover'] . '"/></p>');
+    $image[0] = array('<p><figure class="cover-img" style="background-image: url(' . $post_object['cover'] . ')"></figure></p>');
   }
 
   if ($post_object['lead'] && $post_object['lead'] !== '') {
