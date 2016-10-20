@@ -13,7 +13,7 @@
                     <div class="col-sm-12 cover-title-container">
 
                         <div id="blog-title">
-                            <h1 class="blog-post-title"><a href="{{'/blog/'.$year.'/'.$month.'/'.$day.'/'.$slug}}">{{$title}}</a></h1>
+                            <h1 class="blog-post-title">{{$title}}</h1>
                             @if (isset($lead) && $lead !== '' && $lead !== '0')
                                 <h3 class="lead">{{$lead}}
                                 </h3>
@@ -40,7 +40,7 @@
 
               <header>
                 <div id="blog-title">
-                    <h1 class="blog-post-title"><a href="{{'/blog/'.$year.'/'.$month.'/'.$day.'/'.$slug}}">{{$title}}</a></h1>
+                    <h1 class="blog-post-title">{{$title}}</h1>
                     @if (isset($lead) && $lead !== '' && $lead !== '0')
                         <h3 class="lead">{{$lead}}
                         </h3>
