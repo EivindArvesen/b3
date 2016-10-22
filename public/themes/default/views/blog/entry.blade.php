@@ -9,7 +9,6 @@
                 <div class="cover-container">
                 <div class="cover-overlay">
                     <figure class="cover-img" style="background-image: url('{{$cover}}')"></figure>
-                    <img class="cover" src="{{$cover}}"/>
                     <div class="col-sm-12 cover-title-container">
 
                         <div id="blog-title">

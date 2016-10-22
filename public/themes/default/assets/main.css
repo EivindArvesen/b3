@@ -7050,13 +7050,6 @@ ul.nav.navbar-nav li:hover a {
   border-color: #ccc;
   color: #777;
 }
-img.cover {
-  width: 100%;
-  object-fit: cover;
-  background-color: #eee;
-  min-height: 200px;
-  display: none;
-}
 .cover-img {
   width: 100%;
   background-color: #eee;
@@ -7088,7 +7081,6 @@ article.blog-post pre {
   max-height: 250px;
   max-width: 100%;
 }
-.blog-inventory img.cover,
 .blog-inventory .cover-img {
   height: 200px;
 }
