@@ -1,0 +1,20 @@
+// Overwrite darkened background/border
+.button-variant(@color; @background; @border) {
+  &:focus,
+  &.focus {
+    color: @color;
+    background-color: @background;
+    border-color: @border;
+  }
+  &:active,
+  &.active,
+  .open > .dropdown-toggle& {
+    &:hover,
+    &:focus,
+    &.focus {
+      color: @color;
+      background-color: @background;
+      border-color: @border;
+    }
+  }
+}

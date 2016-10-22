@@ -180,7 +180,7 @@ module.exports = function(grunt) {
             tasks: ['uglify', 'clean', 'copy', 'replace:zerocache', 'cacheBust']
         },
         less: {
-            files: ['main.less', 'variables.less'],
+            files: ['*.less'],
             tasks: ['less', 'cssmin', 'clean', 'copy', 'replace:zerocache', 'cacheBust'],
         },
     }

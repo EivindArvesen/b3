@@ -8,16 +8,14 @@ This project is very much under active development, and is not usable in its cur
 In fact - this readme is not even necessarily up to date.
 
 <!--
-[![Build Status](https://travis-ci.org/eivindarvesen/blablablog.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://poser.pugx.org/eivindarvesen/blablablog/downloads.svg)](https://packagist.org/packages/eivindarvesen/blablablog)
-[![Latest Stable Version](https://poser.pugx.org/eivindarvesen/blablablog/v/stable.svg)](https://packagist.org/packages/eivindarvesen/blablablog)
-[![Latest Unstable Version](https://poser.pugx.org/eivindarvesen/blablablog/v/unstable.svg)](https://packagist.org/packages/eivindarvesen/blablablog)
-[![License](https://poser.pugx.org/eivindarvesen/blablablog/license.svg)](https://packagist.org/packages/eivindarvesen/blablablog)
+[![Build Status](https://travis-ci.org/eivindarvesen/b3.svg)](https://travis-ci.org/laravel/lumen-framework)
+[![Total Downloads](https://poser.pugx.org/eivindarvesen/b3/downloads.svg)](https://packagist.org/packages/eivindarvesen/b3)
+[![Latest Stable Version](https://poser.pugx.org/eivindarvesen/b3/v/stable.svg)](https://packagist.org/packages/eivindarvesen/b3)
+[![Latest Unstable Version](https://poser.pugx.org/eivindarvesen/b3/v/unstable.svg)](https://packagist.org/packages/eivindarvesen/b3)
+[![License](https://poser.pugx.org/eivindarvesen/b3/license.svg)](https://packagist.org/packages/eivindarvesen/b3)
 -->
 
 ## About
-Blogposts should not use higher level headers than h3!
-
 Blog posts are written in Markdown in your favourite editor, and pushed via git.
 Posts are validated upon git-commit.
 A database of data/metadata is built or updated on git-pull.
@@ -50,7 +48,7 @@ npm install
 <!--
 ## Official Documentation
 
-Documentation for BlaBlaBlog can be found [here](https://blablablog.readthedocs.org).
+Documentation for BlaBlaBlog can be found [here](https://b3.readthedocs.org).
 -->
 
 ### License
