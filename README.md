@@ -7,6 +7,8 @@ The package is available on [Packagist](https://packagist.org/packages/eivindarv
 This project is very much under active development, and is not usable in its current state.
 In fact - this readme is not even necessarily up to date.
 
+At present, B3 supports all major browser, including IE >= 9.
+
 <!--
 [![Build Status](https://travis-ci.org/eivindarvesen/b3.svg)](https://travis-ci.org/laravel/lumen-framework)
 [![Total Downloads](https://poser.pugx.org/eivindarvesen/b3/downloads.svg)](https://packagist.org/packages/eivindarvesen/b3)
