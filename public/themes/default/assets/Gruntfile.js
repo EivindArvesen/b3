@@ -114,7 +114,7 @@ module.exports = function(grunt) {
           '*.min.css',
           '*.min.js',
           'fonts/**/*',
-          'gfx/*'
+          'icons/*'
         ],
         dest: './dist/',
         expand: true,
