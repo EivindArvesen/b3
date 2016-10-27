@@ -12,10 +12,10 @@
       <meta name="author" content="{{config('b3_config.user')}}">
     @endif
 
-    <title>{{config('b3_config.site_name')}} - {{$page_title}}</title>
+    <title>{{config('b3_config.site-name')}} - {{$page_title}}</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="/themes/{{config('b3_config.theme')}}/assets/dist/main.min.e3cdbfc6eda7f0dd.css" rel="stylesheet">
+    <link href="/themes/{{config('b3_config.theme')}}/assets/dist/main.min.ad154aab21d48880.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>

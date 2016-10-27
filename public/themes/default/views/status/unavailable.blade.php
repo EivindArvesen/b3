@@ -1,13 +1,11 @@
 @extends('layouts.status')
 
 @section('content')
-    <section id="status">
-      <div class="container">
-          <div class="row">
-              <div class="col-sm-12">
-                  <h1>Status is UNAVAILABLE</h1>
-              </div>
+    <div class="container">
+      <div class="row">
+          <div class="col-sm-12">
+              <h1>{{config('b3_config.site-name')}} is currently unavailable</h1>
           </div>
       </div>
-    </section>
+    </div>
 @stop

@@ -2,11 +2,11 @@
 
 return [
     // Basic author information
-    'site_name' => 'Site Name',
+    'site-name' => 'Site Name',
     'user' => 'John Doe',
     'email' => 'email@provider.com',
     'theme' => 'default',
-    'status' => 'live', // live, maintenance, unavailable, landing, prelaunch
+    'status' => 'prelaunch', // live, maintenance, unavailable, landing, prelaunch
     'debug' => False, // echo DEBUG pages + debug info on failure
     'date-format' => 'YMD', // some combination of DMY
     'backend' => 'db',

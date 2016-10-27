@@ -6882,8 +6882,19 @@ body {
   margin-top: 53px;
 }
 body.status {
+  background-color: #000;
   width: auto;
   float: none;
+}
+body.status .container {
+  background: none;
+}
+body.status .jumbotron {
+  background: none;
+  margin-bottom: 0 !important;
+}
+body.status footer {
+  border-top: none;
 }
 h1 {
   margin-bottom: 20px;

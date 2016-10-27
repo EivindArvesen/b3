@@ -1,13 +1,11 @@
 @extends('layouts.status')
 
 @section('content')
-    <section id="status">
-      <div class="container">
-          <div class="row">
-              <div class="col-sm-12">
-                  <h1>Status is PRELAUNCH</h1>
-              </div>
+    <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+              <h1>{{config('b3_config.site-name')}} is launching soon</h1>
           </div>
-      </div>
-    </section>
+        </div>
+    </div>
 @stop
