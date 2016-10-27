@@ -149,12 +149,14 @@ module.exports = function(grunt) {
         dev: {
             bsFiles: {
                 src : [
-                        'dis/*.min.css',
-                        'dis/*.min.js',
-                        '../views/**/*.blade.php',
-                        '../../../../**/*.php',
-                        '../../../**/*.html',
-                        '../../../content/**/*.md'
+                        'dist/*.min.css',
+                        'dist/*.min.js',
+                        './../views/**/*.blade.php',
+                        './../../../../**/*.php',
+                        './../../../**/*.html',
+                        './../../../content/**/*.md',
+                        './../../../../.env',
+                        './../../../../**/*.htaccess',
                     ]
             },
             options: {
