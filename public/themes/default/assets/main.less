@@ -56,14 +56,6 @@ h1 {
   margin-bottom: 20px;
 }
 
-.navbar, .sidebar-module {
-  //font-size: @font-size-small;
-}
-
-.form-control:focus {
-  //border-color: @brand-primary;
-}
-
 #navbar {
   box-shadow: none;
   border-color: #000;
@@ -89,6 +81,13 @@ h1 {
   //background-color: #555e69;
 }
 
+.navbar-nav > li > a {
+  @media(max-width: @screen-lg) {
+    padding: 14px 0;
+    margin: 0 15px;
+  }
+}
+
 .debug-menu {
   border: none !important;
 
@@ -110,13 +109,6 @@ ul.nav.navbar-nav li:hover {
           border-bottom: none;
         }
     }
-  }
-}
-
-.nav>li>a {
-  @media (max-size: @screen-lg) {
-    padding: 14px 0;
-    margin: 0 15px;
   }
 }
 

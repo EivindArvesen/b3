@@ -6892,6 +6892,12 @@ h1 {
   background: none;
   padding-bottom: 0;
 }
+@media (max-width: 1200px) {
+  .navbar-nav > li > a {
+    padding: 14px 0;
+    margin: 0 15px;
+  }
+}
 .debug-menu {
   border: none !important;
 }
@@ -6909,12 +6915,6 @@ ul.nav.navbar-nav li:hover a {
 @media (min-width: 768px) and (min-width: 1200px) {
   ul.nav.navbar-nav li:hover a {
     border-bottom: none;
-  }
-}
-@media (max-size: 1200px) {
-  .nav > li > a {
-    padding: 14px 0;
-    margin: 0 15px;
   }
 }
 .navbar-default .navbar-brand {

@@ -15,7 +15,7 @@
     <title>{{config('b3_config.site-name')}} - {{$page_title}}</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="/themes/{{config('b3_config.theme')}}/assets/dist/main.min.a5c00c16a8b157e2.css" rel="stylesheet">
+    <link href="/themes/{{config('b3_config.theme')}}/assets/dist/main.min.7f505c49eaa4327a.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
