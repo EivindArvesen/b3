@@ -8,6 +8,7 @@ return [
     'theme' => 'default',
     'status' => 'live', // live, maintenance, unavailable, landing, prelaunch
     'debug' => False, // echo DEBUG pages + debug info on failure
+    'date-format' => 'YMD', // some combination of DMY
     'backend' => 'db',
     'cache-age' => 24, // max cache age in hours
     // Blog sidebar
