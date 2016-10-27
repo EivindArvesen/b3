@@ -15,7 +15,7 @@
     <title>{{config('b3_config.site-name')}} - {{$page_title}}</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="/themes/{{config('b3_config.theme')}}/assets/dist/main.min.ad154aab21d48880.css" rel="stylesheet">
+    <link href="/themes/{{config('b3_config.theme')}}/assets/dist/main.min.a5c00c16a8b157e2.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -54,3 +54,7 @@
       style="background-image: url({{ $bg }}); "
     @endif
   >
+
+    @if (isset($indicator))
+        <div class="scroll-line"></div>
+    @endif

@@ -34,7 +34,7 @@
     <script src="/themes/{{config('b3_config.theme')}}/assets/dist/base.min.700893705ebbf955.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="/themes/{{config('b3_config.theme')}}/assets/ie10-viewport-bug-workaround.js"></script>
-    <script src="/themes/{{config('b3_config.theme')}}/assets/dist/main.min.d41d8cd98f00b204.js"></script>
+    <script src="/themes/{{config('b3_config.theme')}}/assets/dist/main.min.9aea13ac6e65029a.js"></script>
   </body>
 </html>
 

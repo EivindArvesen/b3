@@ -39,6 +39,19 @@ body.status {
   }
 }
 
+.scroll-line {
+  height: 2px;
+  margin-bottom: -2px;
+  background: @brand-primary;
+  width: 0%;
+  position:fixed;
+  z-index: 1080;
+
+  @media(max-width: @screen-lg) {
+    margin-top: -53px;
+  }
+}
+
 h1 {
   margin-bottom: 20px;
 }
