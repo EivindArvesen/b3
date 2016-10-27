@@ -22,9 +22,9 @@
                 </div>
             </div>
             <div class="blog-post-meta">
-                        <p>{{date_links([$year, $month, $day], "span")}}
+                        <p>{{date_links([$year, $month, $day])}}
                     @if ($modified_at !== '0000-00-00 00:00:00')
-                        <span class="edit-time">{{'(edited ' . substr($modified_at, 0, 4) . ' ' . date('F', mktime(0, 0, 0, substr($modified_at, 5, 2), 10)) . ' ' . ltrim(substr($modified_at, 8, 2), '0') . ordinal_suffix(ltrim(substr($modified_at, 8, 2), '0')) . ')'}}</span>
+                        <span class="edit-time">{{edit_time($modified_at)}}</span>
                     @endif
                     </p>
                     <p>
@@ -46,9 +46,9 @@
                     @endif
                 </div>
                 <div class="blog-post-meta">
-                    <p>{{date_links([$year, $month, $day], "span")}}
+                    <p>{{date_links([$year, $month, $day])}}
                 @if ($modified_at !== '0000-00-00 00:00:00')
-                    <span class="edit-time">{{'(edited ' . substr($modified_at, 0, 4) . ' ' . date('F', mktime(0, 0, 0, substr($modified_at, 5, 2), 10)) . ' ' . ltrim(substr($modified_at, 8, 2), '0') . ordinal_suffix(ltrim(substr($modified_at, 8, 2), '0')) . ')'}}</span>
+                    <span class="edit-time">{{edit_time($modified_at)}}</span>
                 @endif
                 </p>
                 <p>

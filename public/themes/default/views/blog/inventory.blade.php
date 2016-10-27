@@ -11,7 +11,7 @@
                 @endif
 
                 @if (isset($group) && $group !== '')
-                    {{date_links($group, "li")}}
+                    {{breadcrumb_links($group)}}
                 @endif
             </ol>
 

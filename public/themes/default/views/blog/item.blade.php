@@ -5,9 +5,9 @@
                 <h1 class="blog-post-title"><a href="/blog/{{substr($result->created_at, 0, 4)}}/{{substr($result->created_at, 5, 2)}}/{{substr($result->created_at, 8, 2)}}/{{$result->slug}}">{{$result->post_title}}</a></h1>
                 <div class="blog-post-meta">
                     <p>
-                    {{date_links([substr($result->created_at, 0, 4), substr($result->created_at, 5, 2), substr($result->created_at, 8, 2)], "span")}}
+                    {{date_links([substr($result->created_at, 0, 4), substr($result->created_at, 5, 2), substr($result->created_at, 8, 2)])}}
                     @if ($result->modified_at !== '0000-00-00 00:00:00')
-                    <span class="edit-time">{{'(edited ' . substr($result->modified_at, 0, 4) . ' ' . date('F', mktime(0, 0, 0, substr($result->modified_at, 5, 2), 10)) . ' ' . ltrim(substr($result->modified_at, 8, 2), '0') . ordinal_suffix(ltrim(substr($result->modified_at, 8, 2), '0')) . ')'}}</span>
+                    <span class="edit-time">{{edit_time($result->modified_at)}}</span>
                     @endif
                 </p>
                 <p>

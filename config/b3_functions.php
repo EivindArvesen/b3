@@ -47,27 +47,100 @@ function ordinal_suffix($num){
     return 'th';
 }
 
-function date_links($group, $element) {
+function breadcrumb_links($group) {
     $last = array_pop($group);
     foreach ($group as $key => $g) {
       if ($key>0&&$group[$key-1]) $prev=$group[$key-1].'/';
       else $prev='';
       if ($key==1) $m=DateTime::createFromFormat('!m', $g)->format('F');
       else $m=$g;
-      echo '<'.$element.'><a href="/blog/'.$prev.$g.'">'.$m.'</a></'.$element.'>';
+      echo '<li><a href="/blog/'.$prev.$g.'">'.$m.'</a></li>';
     }
     if (count($group)==1) $lastm=DateTime::createFromFormat('!m', $last)->format('F');
     else $lastm=$last;
-    if ($element=="li") {
-        if (is_numeric($lastm) && strlen($lastm)!==4) {
-            echo '<'.$element.' class="active">'.ucfirst(strtolower(ltrim($lastm, '0'))).ordinal_suffix($lastm).'</'.$element.'>';
-        } else {
-            echo '<'.$element.' class="active">'.ucfirst(strtolower(ltrim($lastm, '0'))).'</'.$element.'>';
-        }
+
+    if (is_numeric($lastm) && strlen($lastm)!==4) {
+        echo '<li class="active">'.ucfirst(strtolower(ltrim($lastm, '0'))).ordinal_suffix($lastm).'</li>';
     } else {
-        echo '<'.$element.'><a href="/blog/'.$group[0].'/'.$group[1].'/'.$last.'">'.ucfirst(strtolower(ltrim($lastm, '0'))).ordinal_suffix($lastm).'</a></'.$element.'>';
+        echo '<li class="active">'.ucfirst(strtolower($lastm)).'</li>';
+    }
+}
+
+function date_links($group, $format=false) {
+  if (isset($format) && $format ==! false) {
+    $order = $format;
+  } else {
+    $order = config('b3_config.date-format');
+  }
+
+    $result = array();
+    $last = array_pop($group);
+    foreach ($group as $key => $g) {
+      if ($key>0&&$group[$key-1]) $prev=$group[$key-1].'/';
+      else $prev='';
+      if ($key==1) $m=DateTime::createFromFormat('!m', $g)->format('F');
+      else $m=$g;
+      array_push($result, '<span><a href="/blog/'.$prev.$g.'">'.$m.'</a></span>');
+    }
+    if (count($group)==1) $lastm=DateTime::createFromFormat('!m', $last)->format('F');
+    else $lastm=$last;
+    array_push($result, '<span><a href="/blog/'.$group[0].'/'.$group[1].'/'.$last.'">'.ucfirst(strtolower(ltrim($lastm, '0'))).ordinal_suffix($lastm).'</a></span>');
+
+    if (isset($order) && strlen($order) == count($group)+1) {
+      switch (strtolower($order)) {
+        case 'dmy':
+          $last = array_pop($result);
+          $result = array_reverse($result);
+          array_unshift($result, '<span>of</span>');
+          $result = array_merge([$last], $result);
+          break;
+
+        case 'mdy':
+          $result = array_merge(array_slice($result, 1), [$result[0]]);
+          break;
+
+        // case 'ymd':
+        default:
+          break;
+      }
     }
 
+    foreach ($result as $key => $value) {
+      echo $value;
+    }
+}
+
+function edit_time($modified_at, $format=false) {
+  if (isset($format) && $format ==! false) {
+    $order = $format;
+  } else {
+    $order = config('b3_config.date-format');
+  }
+
+  $year = substr($modified_at, 0, 4);
+  $month = date('F', mktime(0, 0, 0, substr($modified_at, 5, 2), 10));
+  $day = ltrim(substr($modified_at, 8, 2), '0') . ordinal_suffix(ltrim(substr($modified_at, 8, 2), '0'));
+
+  if (isset($order) && strlen($order) == 3) {
+      switch (strtolower($order)) {
+        case 'dmy':
+          $edited = $day . ' of ' . $month . ' ' . $year;
+          break;
+
+        case 'mdy':
+          $edited = $month . ' ' . $day . ' ' . $year;
+          break;
+
+        // case 'ymd':
+        default:
+          $edited = $year . ' ' . $month . ' ' . $day;
+          break;
+      }
+  } else {
+    $edited = $year . ' ' . $month . ' ' . $day;
+  }
+
+  echo '(edited ' . $edited . ')';
 }
 
 function read_time($id, $only_minutes = false, $short = false) {
