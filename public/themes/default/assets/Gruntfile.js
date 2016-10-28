@@ -131,6 +131,12 @@ module.exports = function(grunt) {
         }]
       }
     },
+    run: {
+      build_content: {
+        cmd: 'bash',
+        args: ['./../../../../scripts/populate-db.sh']
+      }
+    },
     cacheBust: {
         taskName: {
             options: {
@@ -154,7 +160,6 @@ module.exports = function(grunt) {
                         './../views/**/*.blade.php',
                         './../../../../**/*.php',
                         //'./../../../**/*.html',
-                        './../../../content/**/*.md',
                         './../../../../.env',
                         './../../../../**/*.htaccess',
                     ]
@@ -185,6 +190,10 @@ module.exports = function(grunt) {
             files: ['*.less'],
             tasks: ['less', 'cssmin', 'clean', 'copy', 'replace:zerocache', 'cacheBust'],
         },
+        run: {
+            files: ['./../../../content/**/*.md'],
+            tasks: ['run:build_content']
+        }
     }
   });
 
@@ -197,6 +206,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-text-replace');
+  grunt.loadNpmTasks('grunt-run');
   grunt.loadNpmTasks('grunt-contrib-uglify');
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -208,6 +218,6 @@ module.exports = function(grunt) {
 
   // CSS distribution task.
   // grunt.registerTask('default', ['less:compileCore', 'autoprefixer', 'usebanner', 'cssmin']);
-  grunt.registerTask('default', ['less:compileCore', 'autoprefixer', 'usebanner', 'cssmin', 'uglify', 'clean', 'copy', 'replace:zerocache', 'cacheBust', 'browserSync', 'watch']);
+  grunt.registerTask('default', ['less:compileCore', 'autoprefixer', 'usebanner', 'cssmin', 'uglify', 'clean', 'copy', 'replace:zerocache', 'cacheBust', 'run', 'browserSync', 'watch']);
   // grunt.registerTask('test', ['jshint', 'qunit']);
 };
