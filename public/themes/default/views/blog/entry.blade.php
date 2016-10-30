@@ -28,7 +28,7 @@
                     @endif
                     </p>
                     <p>
-                    on <a href="/blog/category/{{slugify($category)}}" >{{$category}}</a> in <a href="/blog/language/{{ucfirst(strtolower($language))}}" >{{$language}}</a></p>
+                    on <a href="/blog/category/{{slugify($category)}}" >{{$category}}</a> in <a href="/blog/language/{{strtolower(slugify($language))}}" >{{ucfirst($language)}}</a></p>
                     <p>{{read_time($post_id, true, true)}} read</p>
                     </div>
             </header>
@@ -52,7 +52,7 @@
                 @endif
                 </p>
                 <p>
-                on <a href="/blog/category/{{slugify($category)}}" >{{$category}}</a> in <a href="/blog/language/{{ucfirst(strtolower($language))}}" >{{$language}}</a></p>
+                on <a href="/blog/category/{{slugify($category)}}" >{{$category}}</a> in <a href="/blog/language/{{strtolower(slugify($language))}}" >{{ucfirst($language)}}</a></p>
                 <p>{{read_time($post_id, true, true)}} read</p>
                 </div>
             </header>

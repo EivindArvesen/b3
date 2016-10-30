@@ -12,7 +12,7 @@
     <h4>Languages</h4>
     <ol class="list-unstyled">
       @foreach ($sidebar['languages'] as $language)
-        <li><a href="/blog/language/{{slugify($language)}}">{{ucfirst($language)}}</a></li>
+        <li><a href="/blog/language/{{strtolower(slugify($language))}}">{{ucfirst($language)}}</a></li>
       @endforeach
       <li><a href="/blog/language">More...</a></li>
     </ol>

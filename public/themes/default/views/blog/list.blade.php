@@ -15,7 +15,7 @@
                 @if ($list_title=='Language')
                     @foreach ($results as $language)
                         <li>
-                            <h3><a href="/blog/{{strtolower($list_title.'/'.$language->language_title)}}">{{$language->language_title}}</a></h3>
+                            <h3><a href="/blog/{{strtolower($list_title.'/'.slugify($language->language_title))}}">{{$language->language_title}}</a></h3>
                         </li>
                     @endforeach
                 @elseif ($list_title=='Category')
