@@ -15,8 +15,9 @@ return [
     'about' => "This appears in the blog sidebar.",
     // Meta description
     'description' => "A site built using B3",
+    'keywords' => ['website', 'blog'],
     // Social media accounts (usernames for links)
-    'github' => '',
-    'twitter' => '',
-    'facebook' => ''
+    'github' => 'eivind88',
+    'twitter' => 'Eivind88',
+    'facebook' => 'arvesen'
 ];

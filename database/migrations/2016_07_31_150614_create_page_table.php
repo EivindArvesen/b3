@@ -29,6 +29,8 @@ class CreatePageTable extends Migration {
 			$table->string('transparent');
 			$table->string('sticky');
 			$table->string('seamless');
+
+			$table->unique('slug');
 		});
 	}
 

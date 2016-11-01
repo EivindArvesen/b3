@@ -89,7 +89,7 @@ class CreateBlogTables extends Migration {
 			$table->string('sticky');
 			$table->string('seamless');
 
-			//$table->unique('post_id');
+			$table->unique('slug');
 		});
 	}
 

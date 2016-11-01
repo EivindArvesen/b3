@@ -14,6 +14,10 @@
 
     <title>{{config('b3_config.site-name')}} - {{$page_title}}</title>
 
+    @if (config('b3_config.keywords') !== '')
+      <meta name="keywords" content="@foreach (config('b3_config.keywords') as $keyword){{$keyword}},@endforeach">
+    @endif
+
     <!-- Bootstrap core CSS -->
     <link href="/themes/{{config('b3_config.theme')}}/assets/dist/main.min.7d1af8dcda72f4ed.css" rel="stylesheet">
 
