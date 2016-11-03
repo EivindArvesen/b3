@@ -39,16 +39,24 @@ body.status {
   }
 }
 
-.scroll-line {
-  height: 2px;
-  margin-bottom: -2px;
-  background: @brand-primary;
-  width: 0%;
+.scroll-line-container {
   position:fixed;
   z-index: 1080;
+  width: 100%;
 
   @media(max-width: @screen-lg) {
     margin-top: -53px;
+  }
+
+  @media(min-width: @screen-lg) {
+    width: 80%;
+  }
+
+  .scroll-line {
+    height: 2px;
+    margin-bottom: -2px;
+    background: @brand-primary;
+    width: 0%;
   }
 }
 

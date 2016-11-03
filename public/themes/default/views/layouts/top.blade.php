@@ -19,7 +19,7 @@
     @endif
 
     <!-- Bootstrap core CSS -->
-    <link href="/themes/{{config('b3_config.theme')}}/assets/dist/main.min.c39f87af9ef60675.css" rel="stylesheet">
+    <link href="/themes/{{config('b3_config.theme')}}/assets/dist/main.min.51584a28a60aa3cf.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -60,5 +60,7 @@
   >
 
     @if (isset($indicator))
-        <div class="scroll-line"></div>
+        <div class="scroll-line-container">
+            <div class="scroll-line"></div>
+        </div>
     @endif

@@ -6864,18 +6864,26 @@ body.status .jumbotron {
 body.status footer {
   border-top: none;
 }
-.scroll-line {
+.scroll-line-container {
+  position: fixed;
+  z-index: 1080;
+  width: 100%;
+}
+@media (max-width: 1200px) {
+  .scroll-line-container {
+    margin-top: -53px;
+  }
+}
+@media (min-width: 1200px) {
+  .scroll-line-container {
+    width: 80%;
+  }
+}
+.scroll-line-container .scroll-line {
   height: 2px;
   margin-bottom: -2px;
   background: #597a9b;
   width: 0%;
-  position: fixed;
-  z-index: 1080;
-}
-@media (max-width: 1200px) {
-  .scroll-line {
-    margin-top: -53px;
-  }
 }
 h1 {
   margin-bottom: 20px;
