@@ -1,15 +1,15 @@
     <footer>
       <div class="container">
       <div class="row">
-        <div class="col-xs-4">
+        <div class="col-sm-4">
           <p>&copy; {{date("Y") . ' ' . config('b3_config.user')}}</p>
         </div>
 
-        <div class="col-xs-4 text-center">
+        <div class="col-sm-4 text-center">
           <p>Powered by <a href="https://github.com/eivind88/b3">B3</a></p>
         </div>
 
-        <div class="col-xs-4 text-right">
+        <div class="col-sm-4 text-right">
           <p>
             @if (config('b3_config.github') !== '')
               <a href="https://www.github.com/{{config('b3_config.github')}}">GitHub</a>

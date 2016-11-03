@@ -2,18 +2,18 @@
 
 return [
     // Basic author information
-    'site-name' => 'Site Name',
-    'user' => 'John Doe',
-    'email' => 'email@provider.com',
+    'site-name' => 'Eivind Arvesen',
+    'user' => 'Eivind Arvesen',
+    'email' => 'eivind.arvesen@gmail.com',
     'theme' => 'default',
-    'status' => 'prelaunch', // live, maintenance, unavailable, landing, prelaunch
+    'status' => 'live', // live, maintenance, unavailable, landing, prelaunch
     'debug' => False, // echo DEBUG pages + debug info on failure
-    'date-format' => 'YMD', // some combination of DMY
+    'date-format' => 'DMY', // some combination of DMY
     'backend' => 'db',
     'cache-age' => 24, // max cache age in hours
     // Blog sidebar
-    'about' => "This appears in the blog sidebar.",
-    // Meta description
+    'about' => "This is where I'll write about anything that interests me.",
+    // Site metadata
     'description' => "A site built using B3",
     'keywords' => ['website', 'blog'],
     // Social media accounts (usernames for links)
