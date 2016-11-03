@@ -16,7 +16,7 @@ WEBROOT=$SERVERROOT/"$2"
 
 $DIR/../. $1:$WEBROOT/
 
-rsync -alz --delete --stats --progress --exclude=".*" --exclude 'public/content' $DIR/../. $1:$WEBROOT/
+rsync -alz --delete --stats --progress --exclude=".env" --exclude=".git" --exclude 'public/content' $DIR/../. $1:$WEBROOT/
 
 cd - > /dev/null 2>&1
 
