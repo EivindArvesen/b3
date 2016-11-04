@@ -164,11 +164,16 @@ function get_intro($id) {
 
   $string_pp = substr($post, 0, 180);
 
-  preg_match_all('/<p><img[^>]+><\/p>/i',$string_pp, $image);
-  $string = str_replace($image[0], '', $string_pp);
+  preg_match_all('/<img[^>]+><\/p>/i',$string_pp, $image);
+  if (is_string($image[0])) {
+    $img = '<p>'.$image[0].'</p>';
+  } else {
+    $img = '';
+  }
+  $string = str_replace($img, '', $string_pp);
 
   if ($post_object['cover'] && $post_object['cover'] !== '') {
-    $image[0] = array('<p><figure class="cover-img" style="background-image: url(' . $post_object['cover'] . ')"></figure></p>');
+    $image[0] = array('<figure class="cover-img" style="background-image: url(' . $post_object['cover'] . ')"></figure>');
   }
 
   if ($post_object['lead'] && $post_object['lead'] !== '') {
