@@ -15,7 +15,9 @@
         @foreach ($sidebar['languages'] as $language)
           <li><a href="/blog/language/{{strtolower(slugify($language))}}">{{ucfirst($language)}}</a></li>
         @endforeach
-        <li><a href="/blog/language">More...</a></li>
+        @if (count($sidebar['languages']) == 5)
+          <li class="more"><a href="/blog/language">More...</a></li>
+        @endif
       </ol>
     </div>
   @endif
@@ -26,7 +28,9 @@
         @foreach ($sidebar['categories'] as $category)
           <li><a href="/blog/category/{{slugify($category)}}">{{ucfirst($category)}}</a></li>
         @endforeach
-        <li><a href="/blog/category">More...</a></li>
+        @if (count($sidebar['categories']) == 5)
+          <li class="more"><a href="/blog/category">More...</a></li>
+        @endif
       </ol>
     </div>
   @endif
@@ -37,7 +41,9 @@
         @foreach ($sidebar['tags'] as $tag)
             <li><a href="/blog/tag/{{slugify($tag)}}">{{ucfirst($tag)}}</a></li>
         @endforeach
-        <li><a href="/blog/tag">More...</a></li>
+        @if (count($sidebar['tags']) == 5)
+          <li class="more"><a href="/blog/tag">More...</a></li>
+        @endif
       </ol>
     </div>
   @endif
@@ -48,7 +54,9 @@
         @foreach ($sidebar['dates'] as $date)
             <li><a href="/blog/{{$date['link']}}">{{ucfirst($date['text'])}}</a></li>
         @endforeach
-        <li><a href="/blog/archive">More...</a></li>
+        @if (count($sidebar['dates']) == 5)
+          <li class="more"><a href="/blog/archive">More...</a></li>
+        @endif
       </ol>
     </div>
   @endif

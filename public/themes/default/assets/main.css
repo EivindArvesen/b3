@@ -7293,6 +7293,10 @@ ul.inventory {
 }
 .sidebar-module {
   margin-top: 22px;
+  margin-bottom: 33px;
+}
+.sidebar-module li.more {
+  margin-top: 11px;
 }
 .sidebar-module-top {
   margin-bottom: 38px;

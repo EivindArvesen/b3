@@ -19,7 +19,7 @@
     @endif
 
     <!-- Bootstrap core CSS -->
-    <link href="/themes/{{config('b3_config.theme')}}/assets/dist/main.min.a0f3bf8b8f130a5e.css" rel="stylesheet">
+    <link href="/themes/{{config('b3_config.theme')}}/assets/dist/main.min.b5350327d08d80bd.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
