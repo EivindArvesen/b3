@@ -1,11 +1,4 @@
-<!--
-<nav>
-    <ul class="pager">
-        <li><a href="#">Previous</a></li>
-        <li><a href="#">Next</a></li>
-    </ul>
-</nav>
--->
-
+<div class="text-center">
 <!-- {!! $pages->render() !!} -->
 {!! str_replace('/?', '?', $pages->render()) !!}
+</div>
