@@ -51,8 +51,9 @@ if (config('b3_config.status')=='live') {
         $group->get('blog/tag/{tag}', 'BlogController@listTag');
         $group->get('blog/tag/{tag}/page/{pageNumber}', 'BlogController@listTag');
 
-        $group->get('blog/search', 'BlogController@search');
-        $group->get('blog/search/page/{pageNumber}', 'BlogController@search');
+        $group->get('blog/search', 'BlogController@search_redirect');
+        $group->get('blog/search/{query}', 'BlogController@search');
+        $group->get('blog/search/{query}/page/{pageNumber}', 'BlogController@search');
 
         $group->get('blog/archive', 'BlogController@archive');
         $group->get('blog/archive/page/{pageNumber}', 'BlogController@archive');

@@ -233,24 +233,40 @@ class BlogController extends Controller {
     }
 
     /**
-     * Search blog.
+     * Search redirect.
      *
-     * @param  str  $query
-     * @return Response
+     * @param  Request $request
+     * @return Redirect
      */
-    public function search(Request $request, $page = 1)
+    public function search_redirect(Request $request)
     {
         if (!$request->input('query') || trim($request->input('query'))=='') {
             return redirect('blog');
         }
         else {
-            $posts = Cache::remember('blog-search-'.$request->input('query').'-'.$page, config('b3_config.cache-age')*60, function() use ($request, $page) {
+            return redirect('blog/search/' . $request->input('query'));
+        }
+    }
+
+    /**
+     * Search blog.
+     *
+     * @param  str  $query
+     * @return Response
+     */
+    public function search(Request $request, $query, $page = 1)
+    {
+        if (!$query || trim($query)=='') {
+            return redirect('blog');
+        }
+        else {
+            $posts = Cache::remember('blog-search-'.$query.'-'.$page, config('b3_config.cache-age')*60, function() use ($query, $page) {
                 $posts = new Collection;
-                foreach (Blogpost::where('published', '!', false)->where('body', 'LIKE', '%'.$request->input('query').'%')->orWhere('post_title', 'LIKE', '%'.$request->input('query').'%')->orWhere('slug', 'LIKE', '%'.$request->input('query').'%')->orWhere('lead', 'LIKE', '%'.$request->input('query').'%')->orderBy('created_at', 'DESC')->orderBy('post_title', 'ASC')->get() as $post) {
+                foreach (Blogpost::where('published', '!', false)->where('body', 'LIKE', '%'.$query.'%')->orWhere('post_title', 'LIKE', '%'.$query.'%')->orWhere('slug', 'LIKE', '%'.$query.'%')->orWhere('lead', 'LIKE', '%'.$query.'%')->orderBy('created_at', 'DESC')->orderBy('post_title', 'ASC')->get() as $post) {
                     $posts->add($post);
                 }
 
-                foreach (Category::where('category_title', 'LIKE', '%'.$request->input('query').'%')->get() as $id) {
+                foreach (Category::where('category_title', 'LIKE', '%'.$query.'%')->get() as $id) {
                     foreach (Post_category::where('category_id', $id->category_id)->get() as $post_id) {
                         foreach (Blogpost::where('post_id', $post_id->post_id)->orderBy('created_at', 'DESC')->orderBy('post_title', 'ASC')->get() as $post) {
                             if (!$posts->contains('post_id', $post->post_id)) {
@@ -260,7 +276,7 @@ class BlogController extends Controller {
                     }
                 }
 
-                foreach (Tag::where('tag_title', 'LIKE', '%'.$request->input('query').'%')->get() as $id) {
+                foreach (Tag::where('tag_title', 'LIKE', '%'.$query.'%')->get() as $id) {
                     foreach (Post_tag::where('tag_id', $id->tag_id)->get() as $post_id) {
                         foreach (Blogpost::where('post_id', $post_id->post_id)->orderBy('created_at', 'DESC')->orderBy('post_title', 'ASC')->get() as $post) {
                             if (!$posts->contains('post_id', $post->post_id)) {
@@ -270,7 +286,7 @@ class BlogController extends Controller {
                     }
                 }
 
-                foreach (Language::where('language_title', 'LIKE', '%'.$request->input('query').'%')->get() as $id) {
+                foreach (Language::where('language_title', 'LIKE', '%'.$query.'%')->get() as $id) {
                     foreach (Blogpost::where('language_id', $id->language_id)->orderBy('created_at', 'DESC')->orderBy('post_title', 'ASC')->get() as $post) {
                         if (!$posts->contains('post_id', $post->post_id)) {
                             $posts->add($post);
@@ -295,13 +311,12 @@ class BlogController extends Controller {
                 $currentPage = LengthAwarePaginator::resolveCurrentPage();
                 $currentPageResults = $posts->slice(($currentPage - 1) * $this->resultsPerPage, $this->resultsPerPage)->all();
                 $posts =  new LengthAwarePaginator($currentPageResults, count($posts), $this->resultsPerPage);
-                $posts->setPath($request->url());
-                $posts->appends($request->except(['page']));
+
                 return $posts;
 
             });
 
-            return view('blog.search', ['page_title' => 'Blog', 'nav_active' => 'blog', 'query' => $request->input('query'), 'sidebar' => $this->getSidebar() , 'results' => $posts]);
+            return view('blog.search', ['page_title' => 'Blog', 'nav_active' => 'blog', 'query' => $query, 'sidebar' => $this->getSidebar() , 'results' => $posts]);
         }
     }
 
