@@ -25,25 +25,39 @@ class BlogController extends Controller {
         return Cache::remember('blog-sidebar', config('b3_config.cache-age')*60, function() {
             $sidebar = array();
 
-            $sidebar['languages'] = Language::select('language_title', DB::raw('COUNT(language_title) as count'))->groupBy('language_title')->orderBy('count', 'desc')->take(5)->get()->lists('language_title'); // pluck
+            if (Language::select('language_title')->count() > 1) {
+                $sidebar['languages'] = Language::select('language_title', DB::raw('COUNT(language_title) as count'))->groupBy('language_title')->orderBy('count', 'desc')->take(5)->get()->lists('language_title'); // pluck
+            } else {
+                $sidebar['languages'] = [];
+            }
 
-            $categories_keys = Post_category::select('category_id', DB::raw('COUNT(category_id) as count'))->groupBy('category_id')->orderBy('count', 'desc')->take(5)->get()->lists('category_id'); // pluck
-            $categories_keys_str = implode(',', $categories_keys);
-            $sidebar['categories'] = Category::select('category_title')->whereIn('category_id', $categories_keys)->orderByRaw(DB::raw("FIELD(category_id, $categories_keys_str)"))->get()->lists('category_title');
+            if (Post_category::select('category_id')->count() > 1) {
+                $categories_keys = Post_category::select('category_id', DB::raw('COUNT(category_id) as count'))->groupBy('category_id')->orderBy('count', 'desc')->take(5)->get()->lists('category_id'); // pluck
+                $categories_keys_str = implode(',', $categories_keys);
+                $sidebar['categories'] = Category::select('category_title')->whereIn('category_id', $categories_keys)->orderByRaw(DB::raw("FIELD(category_id, $categories_keys_str)"))->get()->lists('category_title');
+            } else {
+                $sidebar['categories'] = [];
+            }
 
-            $tags_keys = Post_tag::select('tag_id', DB::raw('COUNT(tag_id) as count'))->groupBy('tag_id')->orderBy('count', 'desc')->take(5)->get()->lists('tag_id'); // pluck
-            $tags_keys_str = implode(',', $tags_keys);
-            $sidebar['tags'] = Tag::select('tag_title')->whereIn('tag_id', $tags_keys)->orderByRaw(DB::raw("FIELD(tag_id, $tags_keys_str)"))->get()->lists('tag_title');
+            if (Post_tag::select('tag_id')->count() > 1) {
+                $tags_keys = Post_tag::select('tag_id', DB::raw('COUNT(tag_id) as count'))->groupBy('tag_id')->orderBy('count', 'desc')->take(5)->get()->lists('tag_id'); // pluck
+                $tags_keys_str = implode(',', $tags_keys);
+                $sidebar['tags'] = Tag::select('tag_title')->whereIn('tag_id', $tags_keys)->orderByRaw(DB::raw("FIELD(tag_id, $tags_keys_str)"))->get()->lists('tag_title');
+            } else {
+                $sidebar['tags'] = [];
+            }
 
             $sidebar['dates'] = [];
 
-            $date_posts = Blogpost::select('created_at', DB::raw("DATE_FORMAT(created_at, '%m-%Y') as month_year"))->groupBy('month_year')->orderBy('month_year','asc')->take(5)->get();
+            if (Blogpost::select('created_at', DB::raw("DATE_FORMAT(created_at, '%m-%Y') as month_year"))->groupBy('month_year')->orderBy('month_year','asc')->get()->count() > 1) {
+                $date_posts = Blogpost::select('created_at', DB::raw("DATE_FORMAT(created_at, '%m-%Y') as month_year"))->groupBy('month_year')->orderBy('month_year','asc')->take(5)->get();
 
-            foreach ($date_posts as $date_post) {
-                $date = [];
-                $date['link'] = substr($date_post->created_at, 0, 4) . '/' . substr($date_post->created_at, 5, 2);
-                $date['text'] = DateTime::createFromFormat('!m', substr($date_post->created_at, 5, 2))->format('F') . ' ' . substr($date_post->created_at, 0, 4);
-                array_push($sidebar['dates'], $date);
+                foreach ($date_posts as $date_post) {
+                    $date = [];
+                    $date['link'] = substr($date_post->created_at, 0, 4) . '/' . substr($date_post->created_at, 5, 2);
+                    $date['text'] = DateTime::createFromFormat('!m', substr($date_post->created_at, 5, 2))->format('F') . ' ' . substr($date_post->created_at, 0, 4);
+                    array_push($sidebar['dates'], $date);
+                }
             }
 
             return $sidebar;

@@ -8,42 +8,50 @@
     <p><?=config('b3_config.about');?></p>
   </div>
   @endif
-  <div class="sidebar-module">
-    <h4>Languages</h4>
-    <ol class="list-unstyled">
-      @foreach ($sidebar['languages'] as $language)
-        <li><a href="/blog/language/{{strtolower(slugify($language))}}">{{ucfirst($language)}}</a></li>
-      @endforeach
-      <li><a href="/blog/language">More...</a></li>
-    </ol>
-  </div>
-  <div class="sidebar-module">
-    <h4>Categories</h4>
-    <ol class="list-unstyled">
-      @foreach ($sidebar['categories'] as $category)
-        <li><a href="/blog/category/{{slugify($category)}}">{{ucfirst($category)}}</a></li>
-      @endforeach
-      <li><a href="/blog/category">More...</a></li>
-    </ol>
-  </div>
-  <div class="sidebar-module">
-    <h4>Tags</h4>
-    <ol class="list-unstyled">
-      @foreach ($sidebar['tags'] as $tag)
-          <li><a href="/blog/tag/{{slugify($tag)}}">{{ucfirst($tag)}}</a></li>
-      @endforeach
-      <li><a href="/blog/tag">More...</a></li>
-    </ol>
-  </div>
-  <div class="sidebar-module">
-    <h4>Archives</h4>
-    <ol class="list-unstyled">
-      @foreach ($sidebar['dates'] as $date)
-          <li><a href="/blog/{{$date['link']}}">{{ucfirst($date['text'])}}</a></li>
-      @endforeach
-      <li><a href="/blog/archive">More...</a></li>
-    </ol>
-  </div>
+  @if ($sidebar['languages'])
+    <div class="sidebar-module">
+      <h4>Languages</h4>
+      <ol class="list-unstyled">
+        @foreach ($sidebar['languages'] as $language)
+          <li><a href="/blog/language/{{strtolower(slugify($language))}}">{{ucfirst($language)}}</a></li>
+        @endforeach
+        <li><a href="/blog/language">More...</a></li>
+      </ol>
+    </div>
+  @endif
+  @if ($sidebar['categories'])
+    <div class="sidebar-module">
+      <h4>Categories</h4>
+      <ol class="list-unstyled">
+        @foreach ($sidebar['categories'] as $category)
+          <li><a href="/blog/category/{{slugify($category)}}">{{ucfirst($category)}}</a></li>
+        @endforeach
+        <li><a href="/blog/category">More...</a></li>
+      </ol>
+    </div>
+  @endif
+  @if ($sidebar['tags'])
+    <div class="sidebar-module">
+      <h4>Tags</h4>
+      <ol class="list-unstyled">
+        @foreach ($sidebar['tags'] as $tag)
+            <li><a href="/blog/tag/{{slugify($tag)}}">{{ucfirst($tag)}}</a></li>
+        @endforeach
+        <li><a href="/blog/tag">More...</a></li>
+      </ol>
+    </div>
+  @endif
+  @if ($sidebar['dates'])
+    <div class="sidebar-module">
+      <h4>Archives</h4>
+      <ol class="list-unstyled">
+        @foreach ($sidebar['dates'] as $date)
+            <li><a href="/blog/{{$date['link']}}">{{ucfirst($date['text'])}}</a></li>
+        @endforeach
+        <li><a href="/blog/archive">More...</a></li>
+      </ol>
+    </div>
+  @endif
 </aside><!-- /.blog-sidebar -->
 
 </div><!-- /.row -->
