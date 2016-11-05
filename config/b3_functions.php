@@ -164,7 +164,7 @@ function get_intro($id) {
 
   $string_pp = substr($post, 0, 180);
 
-  preg_match_all('/<img[^>]+><\/p>/i',$string_pp, $image);
+  preg_match_all('/<img[^>]+>/i', $string_pp, $image);
   if (is_string($image[0])) {
     $img = '<p>'.$image[0].'</p>';
   } else {
