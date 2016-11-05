@@ -18,8 +18,9 @@
                 <h2>No results</h2>
             @endif
 
-            @include('layouts.pagination')
-
         </section><!-- /.blog-main -->
         @include('blog.sidebar')
+
+        @include('layouts.pagination')
+
 @stop

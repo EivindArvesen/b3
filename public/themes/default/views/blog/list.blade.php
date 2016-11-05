@@ -39,8 +39,9 @@
                 @endif
             </ul>
 
-        @include('layouts.pagination')
-
         </div><!-- /.blog-main -->
         @include('blog.sidebar')
+
+        @include('layouts.pagination')
+
 @stop
