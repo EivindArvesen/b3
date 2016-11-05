@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Cache;
 
 class BlogController extends Controller {
 
-    public $resultsPerPage = 1;
+    public $resultsPerPage = 10;
 
     /* Load environments from phpdotenv (/*.env), require certain variables (DB) to be set here...
     Then: Use these for loading
