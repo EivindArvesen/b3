@@ -33,7 +33,7 @@ class BlogTablesSeeder extends Seeder
                 $document = $parser->parse($source);
 
                 // Build absolute path to content
-                $path = dirname(explode("/public", $file)[1]);
+                $path = "/content" . dirname(explode("/content", $file)[1]);
 
                 $languages = array();
                 if (!Language::where('language_title', $document->get('language'))->first()) {

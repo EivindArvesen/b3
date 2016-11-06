@@ -14,7 +14,7 @@ class PagesTableSeeder extends Seeder
         // update tables instead of overwriting (think timestamps, original...)
 
         $parser = new DocumentParser;
-        $it = new RecursiveDirectoryIterator(realpath(dirname(dirname(dirname(__FILE__)))."/public/content/pages"));
+        $it = new RecursiveDirectoryIterator(realpath(dirname(dirname(dirname(__FILE__)))."/public/content/pages"), RecursiveDirectoryIterator::FOLLOW_SYMLINKS);
         $display = Array ( 'md' );
         foreach(new RecursiveIteratorIterator($it) as $file)
         {
@@ -30,7 +30,7 @@ class PagesTableSeeder extends Seeder
                 $document = $parser->parse($source);
 
                 // Build absolute path to content
-                $path = dirname(explode("/public", $file)[1]);
+                $path = "/content" . dirname(explode("/content", $file)[1]);
 
                 if ($document->get('slug')) {
                     $slug = substr(str_replace('+', '-', urlencode(strtolower(preg_replace("#[[:punct:]]#", "-", $document->get('slug'))))), 0, 50);
