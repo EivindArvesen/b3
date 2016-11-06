@@ -79,6 +79,7 @@ if (config('b3_config.status')=='live') {
 } else {
     $app->group(['namespace' => 'App\Http\Controllers'], function($group){
         $group->get('/', 'StatusController@status');
+        $group->get('/{all}', 'StatusController@status');
     });
 }
 
