@@ -26,7 +26,7 @@ AddCharset utf-8 .atom .css .js .json .rss .vtt .xml
     # Remove the following line if you want to block blank referrer too
     RewriteCond %{HTTP_REFERER} !^$
 
-    RewriteCond %{HTTP_REFERER} !^https?://(.+\.)?(localhost|example.com) [NC]
+    RewriteCond %{HTTP_REFERER} !^https?://(.+\.)?(localhost|(.+)\.test|example.com) [NC]
     RewriteRule \.(jpe?g|png|gif|bmp)$ - [NC,F,L]
 
     # If you want to display a “blocked” banner in place of the hotlinked image,
