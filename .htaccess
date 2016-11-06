@@ -22,6 +22,7 @@ Options All -Indexes
 
 # Force WWW
 RewriteCond %{HTTP_HOST} !=localhost
+RewriteCond %{HTTP_HOST} !\.test$
 RewriteCond %{HTTP_HOST} !^$
 RewriteCond %{HTTP_HOST} !^www\. [NC]
 RewriteCond %{HTTPS}s ^on(s)|
