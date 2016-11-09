@@ -12,6 +12,7 @@
     </div>
     -->
 
+    <?php $in_row = 0; ?>
     @foreach ($results as $element)
       <div class="row">
         <div class="col-xl-12">
@@ -20,7 +21,6 @@
       </div>
 
       <div class="row project-row">
-        <?php $in_row = 0; ?>
         @foreach ($element['projects'] as $project)
           <div class="col-xs-12 col-sm-6 col-md-3 project-element"> <!-- .media-body -->
             <h2 class="media-heading"><a href="/projects/{{$project['slug']}}">{{$project['project_title']}}</a></h2>
@@ -34,11 +34,12 @@
             @endif
           </div>
           <?php $in_row++; ?>
-          @if (count($in_row) === 1)
+          @if ($in_row === 1)
               <div class="clearfix visible-sm-block"></div>
-          @elseif (count($in_row) > 1)
+          @elseif ($in_row > 1)
             </div>
             <div class="row project-row">
+            <?php $in_row = 0; ?>
           @endif
         @endforeach
       </div>
