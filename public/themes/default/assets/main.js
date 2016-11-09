@@ -1,6 +1,6 @@
 // Custom JS here
 
-//capture scroll any percentage
+// Capture scroll any percentage
 $(window).scroll(function(){
 var wintop = $(window).scrollTop(), docheight =
 
@@ -9,3 +9,12 @@ var wintop = $(window).scrollTop(), docheight =
 
         $('.scroll-line').css('width', (scrolled + '%'));
 });
+
+// Make img captions from alt text
+var src = [];
+var imgs = document.images;
+for (var i=0, iLen=imgs.length; i<iLen; i++) {
+    if (imgs[i].alt != '') {
+        imgs[i].outerHTML+= '<span class="img-caption">' + imgs[i].alt + '</span';
+    };
+}

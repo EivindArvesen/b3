@@ -162,15 +162,11 @@ function get_intro($id) {
   $post_object = Blogpost::where('post_id', $id)->get(['cover', 'lead', 'body'])[0];
   $post = $post_object['body'];
 
-  $string_pp = substr($post, 0, 180);
+  $string_pp = substr($post, 0, 500);
 
   preg_match_all('/<img[^>]+>/i', $string_pp, $image);
-  if (is_string($image[0])) {
-    $img = '<p>'.$image[0].'</p>';
-  } else {
-    $img = '';
-  }
-  $string = str_replace($img, '', $string_pp);
+
+  $string = preg_replace('/<img[^>]+>/i', '', $string_pp);
 
   if ($post_object['cover'] && $post_object['cover'] !== '') {
     $image[0] = array('<figure class="cover-img" style="background-image: url(' . $post_object['cover'] . ')"></figure>');
@@ -189,6 +185,7 @@ function get_intro($id) {
     }
     $first_chunk = '<h3 class="lead">'.$lead.'</h3>';
   } else {
+    $string = substr($string, 0, 180);
     $last_space = strrpos($string, ' ');
     $last_word = substr($string, $last_space);
     $first_chunk = substr($string, 0, $last_space) . '...';

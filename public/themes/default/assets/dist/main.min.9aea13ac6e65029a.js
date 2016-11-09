@@ -1,1 +1,0 @@
-$(window).scroll(function(){var a=$(window).scrollTop(),b=$(document).height(),c=$(window).height(),d=a/(b-c)*100;$(".scroll-line").css("width",d+"%")});

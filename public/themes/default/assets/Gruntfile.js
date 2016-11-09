@@ -167,7 +167,8 @@ module.exports = function(grunt) {
             options: {
                 open: false,
                 watchTask: true,
-                proxy: 'localhost'
+                //proxy: 'localhost'
+                proxy: 'b3-dev.test'
             }
         }
     },
