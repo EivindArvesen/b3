@@ -22,7 +22,7 @@ class ProjectsController extends Controller {
             foreach ($categories as $category) {
                 $collection = [];
                 $collection['name'] = $category;
-                $collection['projects'] = Project::where('category', $category)->orderBy('project_id', 'desc')->get();
+                $collection['projects'] = Project::where('category', $category)->orderBy('date', 'desc')->get();
                 array_push($projects, $collection);
             }
             return $projects;
