@@ -63,7 +63,7 @@ class PagesTableSeeder extends Seeder
                 }
 
                 // Make relative paths (links/images) absolute
-                $body = preg_replace("/(href|src)\=\"([^(http|www)])(\/)?/", "$1=\"$path/$2", $document->getHtmlContent());
+                $body = preg_replace("/(href|src)\=\"([(www)])(\/)?/", "$1=\"http://$2", preg_replace("/(href|src)\=\"([^(http|www|\/)])(\/)?/", "$1=\"$path/$2", $document->getHtmlContent()));
 
                 $page = Page::create([
                     'page_title' => ucfirst($document->get('title')),
