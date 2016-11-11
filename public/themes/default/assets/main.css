@@ -7276,7 +7276,7 @@ ul.inventory li h3 {
   margin-bottom: 48px;
 }
 .blog-post-title {
-  font-size: 49px;
+  font-size: 52px;
 }
 .blog-post-title a {
   color: #333;
@@ -7318,10 +7318,10 @@ ul.inventory li h3 {
 }
 .sidebar-module {
   margin-top: 22px;
-  margin-bottom: 44px;
+  margin-bottom: 32px;
 }
 .sidebar-module li.more {
-  margin-top: 22px;
+  margin-top: 11px;
 }
 .sidebar-module-top {
   margin-bottom: 32px;
@@ -7357,6 +7357,9 @@ img.project-img {
 }
 .project-body {
   margin-top: 30px;
+}
+ul.meta-list {
+  color: #555;
 }
 .img-circle-thumbnail {
   background-color: #eee;

@@ -10,7 +10,7 @@
         <p class="lead">{{$project['description']}}</p>
 
         <h3><small>{{$project['list_title']}}</small></h3>
-        <ul>
+        <ul class="meta-list">
           @foreach (explode(',', $project['list_content']) as $item)
             <li>{{trim($item)}}</li>
           @endforeach
