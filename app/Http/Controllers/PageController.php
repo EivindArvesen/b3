@@ -30,7 +30,7 @@ class PageController extends Controller {
         });
 
         $last_projects = Cache::remember('last_projects', config('b3_config.cache-age')*60, function() {
-            return Project::where('published', '!', false)->orderBy('project_id', 'DESC')
+            return Project::where('published', '!', false)->orderBy('date', 'desc')
                    ->take(3)->get(['slug', 'project_title']);
         });
 
