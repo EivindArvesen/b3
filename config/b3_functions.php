@@ -110,7 +110,7 @@ function date_links($group, $format=false) {
     }
 }
 
-function edit_time($modified_at, $format=false) {
+function format_time($modified_at, $format=false) {
   if (isset($format) && $format ==! false) {
     $order = $format;
   } else {
@@ -140,7 +140,7 @@ function edit_time($modified_at, $format=false) {
     $edited = $year . ' ' . $month . ' ' . $day;
   }
 
-  echo '(edited ' . $edited . ')';
+  echo $edited;
 }
 
 function read_time($id, $only_minutes = false, $short = false) {

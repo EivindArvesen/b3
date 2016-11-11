@@ -24,9 +24,9 @@
         @foreach ($element['projects'] as $project)
           <div class="col-xs-12 col-sm-6 col-md-3 project-element"> <!-- .media-body -->
             <h2 class="media-heading"><a href="/projects/{{$project['slug']}}">{{$project['project_title']}}</a></h2>
-            <p class="project-date">{{$project['date']}}</p>
             <strong>{{$project['list_group']}}</strong>
-            <p class="lead">{{$project['description']}}</p>
+            <p class="project-date">{{format_time($project['date'])}}</p>
+            <p>{{$project['description']}}</p>
           </div>
           <div class="col-xs-12 col-sm-6 col-md-3 project-element">
             @if (isset($project['feature']) && $project['feature'] !== '' && $project['feature'] !== '0')

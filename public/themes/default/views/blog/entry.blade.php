@@ -24,7 +24,7 @@
             <div class="blog-post-meta">
                         <p>{{date_links([$year, $month, $day])}}
                     @if ($modified_at !== '0000-00-00 00:00:00')
-                        <span class="edit-time">{{edit_time($modified_at)}}</span>
+                        <span class="edit-time">(edited {{format_time($modified_at)}} )</span>
                     @endif
                     </p>
                     <p>
@@ -48,7 +48,7 @@
                 <div class="blog-post-meta">
                     <p>{{date_links([$year, $month, $day])}}
                 @if ($modified_at !== '0000-00-00 00:00:00')
-                    <span class="edit-time">{{edit_time($modified_at)}}</span>
+                    <span class="edit-time">(edited {{format_time($modified_at)}} )</span>
                 @endif
                 </p>
                 <p>

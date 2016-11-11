@@ -5,8 +5,8 @@
     <div class="row">
       <div class="col-xs-12 col-sm-8">
         <h1>{{ucfirst(strtolower($project['project_title']))}}<br /><small>{{$project['category']}}</small></h1>
-        <p class="project-date">{{$project['date']}}</p>
         <strong>{{$project['list_group']}}</strong>
+        <p class="project-date">{{format_time($project['date'])}}</p>
         <p class="lead">{{$project['description']}}</p>
 
         <h3><small>{{$project['list_title']}}</small></h3>

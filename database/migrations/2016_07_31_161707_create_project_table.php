@@ -21,7 +21,7 @@ class CreateProjectTable extends Migration {
 			$table->string('slug');
 			$table->string('category');
 			$table->string('project_title');
-			$table->string('date');
+			$table->dateTime('date');
 			$table->string('description');
 			$table->string('list_group');
 			$table->string('list_title');

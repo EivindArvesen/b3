@@ -7,7 +7,7 @@
                     <p>
                     {{date_links([substr($result->created_at, 0, 4), substr($result->created_at, 5, 2), substr($result->created_at, 8, 2)])}}
                     @if ($result->modified_at !== '0000-00-00 00:00:00')
-                    <span class="edit-time">{{edit_time($result->modified_at)}}</span>
+                    <span class="edit-time">(edited {{format_time($result->modified_at)}} )</span>
                     @endif
                 </p>
                 <p>
