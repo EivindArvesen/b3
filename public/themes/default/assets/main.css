@@ -1286,14 +1286,16 @@ h6,
 p {
   margin: 0 0 11px;
 }
-.lead {
+.lead,
+.index-bg #frontpage p:first-child {
   margin-bottom: 22px;
   font-size: 18px;
   font-weight: 300;
   line-height: 1.4;
 }
 @media (min-width: 768px) {
-  .lead {
+  .lead,
+  .index-bg #frontpage p:first-child {
     font-size: 24px;
   }
 }

@@ -6,7 +6,7 @@ return [
     'user' => 'John Doe',
     'email' => 'email@provider.com',
     'theme' => 'default',
-    'status' => 'prelaunch', // live, maintenance, unavailable, landing, prelaunch
+    'status' => 'live', // live, maintenance, unavailable, landing, prelaunch
     'debug' => False, // echo DEBUG pages + debug info on failure
     'date-format' => 'MDY', // some combination of DMY
     'backend' => 'db',

@@ -185,7 +185,7 @@ function get_intro($id) {
     }
     $first_chunk = '<h3 class="lead">'.$lead.'</h3>';
   } else {
-    $string = substr($string, 0, 180);
+    $string = substr($string, 0, 255);
     $last_space = strrpos($string, ' ');
     $last_word = substr($string, $last_space);
     $first_chunk = substr($string, 0, $last_space) . '...';
