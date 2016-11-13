@@ -7230,9 +7230,6 @@ ul.inventory li h3 {
   padding-bottom: 0;
   margin-bottom: 0;
 }
-.blog-entry .blog-body {
-  text-align: center;
-}
 .blog-entry .blog-body > p:not(:empty):first-of-type {
   min-height: 55px;
 }
@@ -7250,9 +7247,6 @@ ul.inventory li h3 {
 .blog-entry .blog-body h5:not(:first-child),
 .blog-entry .blog-body h6:not(:first-child) {
   padding-top: 22px;
-}
-.blog-entry .blog-body * {
-  text-align: justify;
 }
 .blog-entry .blog-body img {
   clear: both;
