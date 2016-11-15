@@ -17,6 +17,9 @@ WEBROOT=$SERVERROOT/"$2"
 # remove repo stuff if installed via git
 rm -rf $(dirname $DIR)/.git
 
+# Reset config status
+sed -i.bak "s/'live'/'prelaunch'/g" $DIR/../config/b3_config.php && rm $DIR/../config/b3_config.php.bak
+
 # Edit config
 $EDITOR $DIR/../config/b3_config.php
 
@@ -30,6 +33,9 @@ cat $DIR/../.env.example >> $DIR/../.env
 KEY=$(php -r "echo md5(uniqid()).\"\n\";")
 sed -i '' -e 's/secret/'$KEY'/g' $DIR/../.env
 $EDITOR $DIR/../.env
+
+# Only create dummy content if none exists
+if [ $(find $DIR/../public/content/ -maxdepth 0 -type d -empty 2>/dev/null) ]; then
 
 # Create dummy index page
 mkdir -p $DIR/../public/content/pages
@@ -185,6 +191,7 @@ transparent: false | true
 
 Testings
 EOM
+fi
 
 # Install composer
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
@@ -202,7 +209,7 @@ cat ~/.ssh/id_rsa.pub | ssh $1 'cat >> .ssh/authorized_keys'
 sed -i -e "s/example.com/$3/g" $DIR/../public/.htaccess
 
 # Copy B3 installation to server
-scp -rp $DIR/../. $1:$WEBROOT/
+rsync -alz --stats --progress --exclude=".git" --exclude 'public/themes/default/assets/bower_components' --exclude 'public/themes/default/assets/node_modules' $DIR/../. $1:$WEBROOT/
 
 # Create git repo
 git init $DIR/..
@@ -218,6 +225,8 @@ cat > $DIR/../.gitignore <<- EOM
 /public/themes/debug
 /public/themes/default
 **/.DS_Store
+**/node_modules
+**/bower_components
 EOM
 
 # Add first commit

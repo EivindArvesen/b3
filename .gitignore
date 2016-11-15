@@ -11,3 +11,5 @@ SCRATCH.md
 /public/themes/*/
 !/public/themes/debug
 !/public/themes/default
+**/node_modules
+**/bower_components
