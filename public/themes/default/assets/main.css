@@ -7100,7 +7100,12 @@ ul.nav.navbar-nav li:hover a {
   background-repeat: no-repeat;
   background-position: 50% 50%;
 }
-article.blog-post .blog-body p {
+article.blog-post .blog-body p,
+article.blog-post .blog-body ol,
+article.blog-post .blog-body ul,
+article.blog-post .blog-body audio,
+article.blog-post .blog-body video,
+article.blog-post .blog-body iframe {
   margin-bottom: 22px;
 }
 article.blog-post pre {
@@ -7250,12 +7255,23 @@ ul.inventory li h3 {
 .blog-entry .blog-body h6:not(:first-child) {
   padding-top: 22px;
 }
-.blog-entry .blog-body img {
+.blog-entry .blog-body img,
+.blog-entry .blog-body audio,
+.blog-entry .blog-body video,
+.blog-entry .blog-body iframe {
   clear: both;
-  height: auto;
   max-width: 100%;
   display: block;
   margin: 0 auto;
+}
+.blog-entry .blog-body img,
+.blog-entry .blog-body audio,
+.blog-entry .blog-body video {
+  height: auto;
+}
+.blog-entry .blog-body audio,
+.blog-entry .blog-body iframe {
+  width: 100%;
 }
 .blog-entry .blog-body .img-caption {
   text-align: center;

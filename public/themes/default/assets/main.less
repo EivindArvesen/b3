@@ -324,8 +324,10 @@ ul.nav.navbar-nav li:hover {
 }
 
 article.blog-post {
-  .blog-body p {
-    margin-bottom: 22px;
+  .blog-body {
+    p, ol, ul, audio, video, iframe {
+      margin-bottom: 22px;
+    }
   }
 
   pre {
@@ -515,14 +517,21 @@ ul.inventory {
       //text-align: justify;
     }
 
-    img {
+    img, audio, video, iframe {
       clear:both;
       margin: 0 auto;
-      height: auto;
       max-width: 100%;
       //margin: 0 -30px;
       display: block;
       margin: 0 auto;
+    }
+
+    img, audio, video {
+      height: auto;
+    }
+
+    audio, iframe {
+      width: 100%;
     }
 
     .img-caption {
