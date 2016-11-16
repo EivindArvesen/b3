@@ -7167,7 +7167,7 @@ ul.inventory li h3 {
 }
 .cover-container {
   position: relative;
-  height: calc(50vh);
+  height: calc(66vh);
   margin-top: 44px;
   min-height: 200px;
 }
@@ -7188,7 +7188,7 @@ ul.inventory li h3 {
 }
 .cover-overlay img.cover,
 .cover-overlay .cover-img {
-  height: calc(50vh);
+  height: calc(66vh);
 }
 .cover-overlay .cover-title-container {
   text-align: center;
@@ -7274,7 +7274,7 @@ ul.inventory li h3 {
   height: auto;
 }
 .blog-entry .blog-body audio,
-.blog-entry .blog-body iframe {
+.blog-entry .blog-body iframe:not([src*="facebook.com"]) {
   width: 100%;
 }
 .blog-entry .blog-body .img-caption {
