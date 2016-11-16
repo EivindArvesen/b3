@@ -62,8 +62,7 @@
                 <?=$body;?>
             </section>
 
-            <div class="tags col-sm-6 col-sm-offset-3">
-                <div class="lead">Tags:</div>
+            <div class="tags col-sm-10 col-sm-offset-1">
                 <p>
                 @foreach ($tags as $tag)
                     <a href="/blog/tag/{{slugify($tag)}}" class="label label-default">{{ucfirst(strtolower($tag))}}</a>&nbsp;
