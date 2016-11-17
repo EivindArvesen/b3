@@ -7112,6 +7112,10 @@ article.blog-post .blog-body video,
 article.blog-post .blog-body iframe {
   margin-bottom: 22px;
 }
+article.blog-post .blog-body blockquote > p {
+  margin-bottom: 0;
+  color: #777777;
+}
 article.blog-post pre {
   background-color: #1d1f21;
 }
