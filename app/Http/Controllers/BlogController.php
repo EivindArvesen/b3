@@ -260,6 +260,7 @@ class BlogController extends Controller {
             return redirect('blog');
         }
         else {
+            $query = urldecode($query);
             $posts = Cache::remember('blog-search-'.$query.'-'.$page, config('b3_config.cache-age')*60, function() use ($query, $page) {
                 $posts = new Collection;
                 foreach (Blogpost::where('published', '!', false)->where('body', 'LIKE', '%'.$query.'%')->orWhere('post_title', 'LIKE', '%'.$query.'%')->orWhere('slug', 'LIKE', '%'.$query.'%')->orWhere('lead', 'LIKE', '%'.$query.'%')->orderBy('created_at', 'DESC')->orderBy('post_title', 'ASC')->get() as $post) {
