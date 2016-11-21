@@ -4322,7 +4322,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar-fixed-top .navbar-collapse,
 .navbar-fixed-bottom .navbar-collapse {
-  max-height: 340px;
+  max-height: 100%;
 }
 @media (max-device-width: 480px) and (orientation: landscape) {
   .navbar-fixed-top .navbar-collapse,
@@ -6936,8 +6936,19 @@ ul.nav.navbar-nav li:hover a {
 .navbar-brand {
   font-weight: bold;
 }
+.navbar-fixed-top .navbar-collapse,
+.navbar-fixed-bottom .navbar-collapse {
+  max-height: 100%;
+}
+@media (max-width: 767px) {
+  .navbar-fixed-top .navbar-collapse,
+  .navbar-fixed-bottom .navbar-collapse {
+    min-height: 100vh;
+  }
+}
 @media (min-width: 768px) {
-  .navbar-collapse {
+  .navbar-fixed-top .navbar-collapse,
+  .navbar-fixed-bottom .navbar-collapse {
     float: right;
   }
 }
@@ -7296,7 +7307,7 @@ ul.inventory li h3 {
   margin-bottom: 48px;
 }
 .blog-post-title {
-  font-size: 52px;
+  font-size: 56px;
 }
 .blog-post-title a {
   color: #333;
@@ -7422,9 +7433,24 @@ ul.meta-list {
     padding-left: 30px;
     padding-right: 30px;
   }
+  .navbar .container .navbar-collapse {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+  .navbar .container .navbar-collapse ul.navbar-nav {
+    position: absolute;
+    width: 100%;
+    top: calc(50% - 50px);
+    transform: translateY(-50%);
+  }
   .navbar .container .navbar-collapse ul li {
     padding-left: 15px;
     padding-right: 15px;
+    text-align: center;
+  }
+  .navbar .container .navbar-collapse ul li a {
+    margin: 0;
   }
   .navbar .container .navbar-nav li:hover {
     color: #9d9d9d;
