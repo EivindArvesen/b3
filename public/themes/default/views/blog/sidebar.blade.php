@@ -5,7 +5,9 @@
   @if (config('b3_config.about'))
   <div class="sidebar-module">
     <h4>About</h4>
-    <p><?=config('b3_config.about');?></p>
+    @foreach (config('b3_config.about') as $about_para)
+      <p><?=$about_para;?></p>
+    @endforeach
   </div>
   @endif
   @if ($sidebar['languages'])

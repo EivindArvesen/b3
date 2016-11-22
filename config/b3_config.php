@@ -12,10 +12,16 @@ return [
     'backend' => 'db',
     'cache-age' => 24, // max cache age in hours
     // Blog sidebar
-    'about' => "This appears in the blog sidebar.",
+    'about' => [
+        "This appears in the blog sidebar.",
+        "So does this."
+    ],
     // Meta description
     'description' => "A site built using B3",
-    'keywords' => ['Website', 'Blog'],
+    'keywords' => [
+        'Website',
+        'Blog'
+    ],
     // Social media accounts (usernames for links)
     'github' => '',
     'twitter' => '',
