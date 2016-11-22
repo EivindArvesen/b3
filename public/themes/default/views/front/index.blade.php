@@ -2,15 +2,21 @@
 
 @include('layouts.nav')
 
-<div class="container jumbotron" id="frontpage">
+<div class="container jumbotron">
     <div class="row">
-        <div class="col-md-9">
-            <?=$page->body;?>
+        <div class="col-sm-9">
+            <h1><?=config('b3_config.header');?></h1>
+            <p class="lead"><?=config('b3_config.lead');?></p>
+            @foreach (config('b3_config.text') as $text)
+                <p class="text"><?=$text;?></p>
+            @endforeach
 
-        <!--
-        <br />
-        <a class="btn btn-primary btn-ghost btn-lg" href="#">Learn more</a>
-        -->
+            <!--
+            <br />
+            <a class="btn btn-primary btn-ghost btn-lg" href="#">Learn more</a>
+            -->
+
+            <?=$page->body;?>
         </div>
     </div>
 

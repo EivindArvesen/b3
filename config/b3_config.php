@@ -11,6 +11,10 @@ return [
     'date-format' => 'MDY', // some combination of DMY
     'backend' => 'db',
     'cache-age' => 24, // max cache age in hours
+    // Front page
+    'header' => 'Hello, world',
+    'lead' => 'This is a lead',
+    'text' => ['And here is some text.'],
     // Blog sidebar
     'about' => [
         "This appears in the blog sidebar.",
