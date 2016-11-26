@@ -176,6 +176,7 @@ cat > $DIR/../.gitignore <<- EOM
 !/public/themes/*/
 /public/themes/debug
 /public/themes/default
+!/public/subsites/**
 **/.DS_Store
 **/node_modules
 **/bower_components

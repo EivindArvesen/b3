@@ -11,6 +11,13 @@ AddCharset utf-8 .atom .css .js .json .rss .vtt .xml
 
     RewriteEngine On
 
+    # Handle subsites
+    RewriteBase /
+    RewriteCond %{REQUEST_URI} !^/subsites/
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^((?!subsites/).*)$ subsites/$1 [L,NC]
+
     # Handle Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
@@ -35,6 +42,11 @@ AddCharset utf-8 .atom .css .js .json .rss .vtt .xml
 
     # Password protection
     # https://github.com/phanan/htaccess#password-protect-a-directory
+
+    # Remove trailing slashes (except for dirs)
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [R=301,L]
 
 </IfModule>
 
