@@ -32,7 +32,6 @@ cat $DIR/../.env.example >> $DIR/../.env
 
 KEY=$(php -r "echo md5(uniqid()).\"\n\";")
 sed -i '' -e 's/secret/'$KEY'/g' $DIR/../.env
-sed -i -e "s/local/production/g" $DIR/../.env
 $EDITOR $DIR/../.env
 
 # Only create dummy content if none exists
@@ -173,14 +172,17 @@ cat > $DIR/../.gitignore <<- EOM
 !*/
 /storage
 /vendor
+!/config/b3_config.php
 !/public/content/**
-!/public/themes/*/
+/public/content/_*
+!/public/themes/**
 /public/themes/debug
 /public/themes/default
 !/public/subsites/**
 **/.DS_Store
 **/node_modules
 **/bower_components
+
 EOM
 
 # Add first commit
