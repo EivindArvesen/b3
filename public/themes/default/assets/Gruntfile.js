@@ -159,6 +159,7 @@ module.exports = function(grunt) {
                         'dist/*.min.js',
                         './../views/**/*.blade.php',
                         './../../../../**/*.php',
+                        '!../../../../public/subsites/**/*',
                         //'./../../../**/*.html',
                         './../../../../.env',
                         './../../../../**/*.htaccess',
