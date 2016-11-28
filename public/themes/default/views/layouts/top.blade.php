@@ -19,7 +19,7 @@
     @endif
 
     <!-- Bootstrap core CSS -->
-    <link href="/themes/{{config('b3_config.theme')}}/assets/dist/main.min.c92d6f5474105010.css" rel="stylesheet">
+    <link href="/themes/{{config('b3_config.theme')}}/assets/dist/main.min.ce24329a0218493b.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -58,9 +58,3 @@
       style="background-image: url({{ $bg }}); "
     @endif
   >
-
-    @if (isset($indicator))
-        <div class="scroll-line-container">
-            <div class="scroll-line"></div>
-        </div>
-    @endif

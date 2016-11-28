@@ -500,7 +500,7 @@ class BlogController extends Controller {
                 );
             });
 
-            return view('blog.entry', ['page_title' => 'Blog', 'nav_active' => 'blog', 'sidebar' => $this->getSidebar(), 'indicator' => True , 'year' => $year, 'month' => $month, 'day' => $day, 'slug' => $title, 'cover' => $blogpost['post']->cover, 'title' => $blogpost['post']->post_title, 'language' => $blogpost['language'], 'category' => $blogpost['category'], 'tags' => $blogpost['tags'], 'lead' => $blogpost['post']->lead, 'modified_at' => $blogpost['post']->modified_at, 'post_id' => $blogpost['post']->post_id, 'body' => $blogpost['post']->body, 'pages' => $blogpost['pages'], 'prev_url' => $blogpost['prev_url'], 'next_url' => $blogpost['next_url']]);
+            return view('blog.entry', ['page_title' => 'Blog', 'nav_active' => 'blog', 'sidebar' => $this->getSidebar(), 'year' => $year, 'month' => $month, 'day' => $day, 'slug' => $title, 'cover' => $blogpost['post']->cover, 'title' => $blogpost['post']->post_title, 'language' => $blogpost['language'], 'category' => $blogpost['category'], 'tags' => $blogpost['tags'], 'lead' => $blogpost['post']->lead, 'modified_at' => $blogpost['post']->modified_at, 'post_id' => $blogpost['post']->post_id, 'body' => $blogpost['post']->body, 'pages' => $blogpost['pages'], 'prev_url' => $blogpost['prev_url'], 'next_url' => $blogpost['next_url']]);
         }else{
             abort(404);
         }

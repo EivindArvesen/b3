@@ -1,1 +1,0 @@
-$(window).scroll(function(){var a=$(window).scrollTop(),b=$(document).height(),c=$(window).height(),d=a/(b-c)*100;$(".scroll-line").css("width",d+"%")});for(var src=[],imgs=document.images,i=0,iLen=imgs.length;iLen>i;i++)""!=imgs[i].alt&&(imgs[i].outerHTML+='<span class="img-caption">'+imgs[i].alt+"</span");

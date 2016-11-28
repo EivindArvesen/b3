@@ -6867,27 +6867,6 @@ body.status .jumbotron {
 body.status footer {
   border-top: none;
 }
-.scroll-line-container {
-  position: fixed;
-  z-index: 1080;
-  width: 100%;
-}
-@media (max-width: 1200px) {
-  .scroll-line-container {
-    margin-top: -53px;
-  }
-}
-@media (min-width: 1200px) {
-  .scroll-line-container {
-    width: 80%;
-  }
-}
-.scroll-line-container .scroll-line {
-  height: 2px;
-  margin-bottom: -2px;
-  background: #597a9b;
-  width: 0%;
-}
 h1 {
   margin-bottom: 20px;
 }
@@ -6898,6 +6877,9 @@ h1 {
 }
 #navbar ul {
   margin: 0 -15px 0 0;
+}
+.navbar {
+  margin-bottom: 0;
 }
 .navbar .container {
   background: none;
@@ -7460,8 +7442,15 @@ ul.meta-list {
     padding-left: 13px;
   }
   .navbar .container .navbar-nav li.active {
-    border-left: 2px solid #fff;
     padding-left: 13px;
+  }
+}
+@media (max-width: 768px) {
+  .navbar-default .container .navbar-nav li.active {
+    border-left: 2px solid #555555;
+  }
+  .navbar-inverse .container .navbar-nav li.active {
+    border-left: 2px solid #ffffff;
   }
 }
 .col-md-6.media {
