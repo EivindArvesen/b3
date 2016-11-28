@@ -632,8 +632,23 @@ code {
   color: @gray-dark;
 }
 
+.section.project {
+  @media(max-width: @screen-md) {
+    margin-bottom: 30px;
+    display: inline-block;
+  }
+  @media(max-width: @screen-sm) {
+    border-top: 1px solid @gray-lighter;
+    padding-top: 30px;
+    margin-bottom: 0px;
+    width:100%;
+  }
+}
+
 .project-row {
-  margin-bottom: 30px;
+  @media(min-width: @screen-md) {
+    margin-bottom: 30px;
+  }
 }
 
 .project-element {
