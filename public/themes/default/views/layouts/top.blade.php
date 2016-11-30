@@ -12,7 +12,7 @@
       <meta name="author" content="{{config('b3_config.user')}}">
     @endif
 
-    <title>{{config('b3_config.site-name')}} - {{$page_title}}</title>
+    <title>{{isset($page_title) && $page_title !=='' ? $page_title : ''}}{{(isset($page_title) && $page_title !=='') && (isset($page_type) && $page_type !=='') ? ' - ' : ''}}{{isset($page_type) && $page_type !=='' ? $page_type : ''}}{{(isset($page_title) && $page_title !=='') || (isset($page_type) && $page_type !=='') ? ' | ' : ''}}{{config('b3_config.site-name')}}</title>
 
     @if (config('b3_config.keywords') !== '')
       <meta name="keywords" content="@foreach (config('b3_config.keywords') as $keyword){{$keyword}},@endforeach">

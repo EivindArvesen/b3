@@ -93,7 +93,7 @@ class BlogController extends Controller {
             return $posts;
         });
 
-        return view('blog.index', ['page_title' => 'Blog', 'nav_active' => 'blog', 'menu_transparent' => false, 'style' => 'black', 'sidebar' => $this->getSidebar() , 'results' => $blog_posts]);
+        return view('blog.index', ['page_title' => '', 'page_type' => 'Blog', 'nav_active' => 'blog', 'menu_transparent' => false, 'style' => 'black', 'sidebar' => $this->getSidebar() , 'results' => $blog_posts]);
     }
 
     /**
@@ -125,14 +125,14 @@ class BlogController extends Controller {
                 return $posts;
             });
 
-            return view('blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => 'Language', 'group' => [$language], 'sidebar' => $this->getSidebar() , 'results' => $posts]);
+            return view('blog.inventory', ['page_title' => ucfirst($language), 'page_type' => 'Blog', 'nav_active' => 'blog', 'group_title' => 'Language', 'group' => [$language], 'sidebar' => $this->getSidebar() , 'results' => $posts]);
         }
         else {
             $languages = Cache::remember('blog-languages-'.$page, config('b3_config.cache-age')*60, function() use ($page) {
                 return Language::orderBy('language_title', 'ASC')->paginate($this->resultsPerPage);
             });
 
-            return view('blog.list', ['page_title' => 'Blog', 'nav_active' => 'blog', 'list_title' => 'Language', 'sidebar' => $this->getSidebar() , 'results' => $languages]);
+            return view('blog.list', ['page_title' => 'Languages', 'page_type' => 'Blog', 'nav_active' => 'blog', 'list_title' => 'Language', 'sidebar' => $this->getSidebar() , 'results' => $languages]);
         }
     }
 
@@ -173,14 +173,14 @@ class BlogController extends Controller {
                 return ['category_title' => $category_title, 'posts' => $posts];
             });
 
-            return view('blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => 'Category', 'group' => [$return['category_title']], 'sidebar' => $this->getSidebar() , 'results' => $return['posts']]);
+            return view('blog.inventory', ['page_title' => ucfirst($category), 'page_type' => 'Blog', 'nav_active' => 'blog', 'group_title' => 'Category', 'group' => [$return['category_title']], 'sidebar' => $this->getSidebar() , 'results' => $return['posts']]);
         }
         else {
             $categories = Cache::remember('blog-categories-'.$page, config('b3_config.cache-age')*60, function() use ($page) {
                 return Category::orderBy('category_title', 'ASC')->paginate($this->resultsPerPage);
             });
 
-            return view('blog.list', ['page_title' => 'Blog', 'nav_active' => 'blog', 'list_title' => 'Category', 'sidebar' => $this->getSidebar() , 'results' => $categories]);
+            return view('blog.list', ['page_title' => 'Categories', 'page_type' => 'Blog', 'nav_active' => 'blog', 'list_title' => 'Category', 'sidebar' => $this->getSidebar() , 'results' => $categories]);
         }
     }
 
@@ -221,14 +221,14 @@ class BlogController extends Controller {
                 return ['tag_title' => $tag_title, 'posts' => $posts];
             });
 
-            return view('blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => 'Tag', 'group' => [$return['tag_title']], 'sidebar' => $this->getSidebar() , 'results' => $return['posts']]);
+            return view('blog.inventory', ['page_title' => ucfirst($tag), 'page_type' => 'Blog', 'nav_active' => 'blog', 'group_title' => 'Tag', 'group' => [$return['tag_title']], 'sidebar' => $this->getSidebar() , 'results' => $return['posts']]);
         }
         else {
             $tags = Cache::remember('blog-tags-'.$page, config('b3_config.cache-age')*60, function() use ($page) {
                 return Tag::orderBy('tag_title', 'ASC')->paginate($this->resultsPerPage);
             });
 
-            return view('blog.list', ['page_title' => 'Blog', 'nav_active' => 'blog', 'list_title' => 'Tag', 'sidebar' => $this->getSidebar() , 'results' => $tags]);
+            return view('blog.list', ['page_title' => 'Tags', 'page_type' => 'Blog', 'nav_active' => 'blog', 'list_title' => 'Tag', 'sidebar' => $this->getSidebar() , 'results' => $tags]);
         }
     }
 
@@ -317,7 +317,7 @@ class BlogController extends Controller {
 
             });
 
-            return view('blog.search', ['page_title' => 'Blog', 'nav_active' => 'blog', 'query' => $query, 'sidebar' => $this->getSidebar() , 'results' => $posts]);
+            return view('blog.search', ['page_title' => '   Search', 'page_type' => 'Blog', 'nav_active' => 'blog', 'query' => $query, 'sidebar' => $this->getSidebar() , 'results' => $posts]);
         }
     }
 
@@ -349,7 +349,7 @@ class BlogController extends Controller {
                 return $posts;
             });
 
-            return view('blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => '', 'group' => [$year], 'sidebar' => $this->getSidebar() , 'results' => $posts]);
+            return view('blog.inventory', ['page_title' => $year, 'page_type' => 'Blog', 'nav_active' => 'blog', 'group_title' => '', 'group' => [$year], 'sidebar' => $this->getSidebar() , 'results' => $posts]);
         }else{
             abort(404);
         }
@@ -384,7 +384,7 @@ class BlogController extends Controller {
                 return $posts;
             });
 
-            return view('blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => '', 'group' => [$year, $month], 'sidebar' => $this->getSidebar() , 'results' =>$posts]);
+            return view('blog.inventory', ['page_title' => month_name($month).' '.$year, 'page_type' => 'Blog', 'nav_active' => 'blog', 'group_title' => '', 'group' => [$year, $month], 'sidebar' => $this->getSidebar() , 'results' =>$posts]);
         }else{
             abort(404);
         }
@@ -420,7 +420,7 @@ class BlogController extends Controller {
                 return $posts;
             });
 
-            return view('blog.inventory', ['page_title' => 'Blog', 'nav_active' => 'blog', 'group_title' => '', 'group' => [$year, $month, $day], 'sidebar' => $this->getSidebar() , 'results' => $posts]);
+            return view('blog.inventory', ['page_title' => $day.ordinal_suffix($day).' of '.month_name($month).' '.$year, 'page_type' => 'Blog', 'nav_active' => 'blog', 'group_title' => '', 'group' => [$year, $month, $day], 'sidebar' => $this->getSidebar() , 'results' => $posts]);
         }else{
             abort(404);
         }
@@ -500,7 +500,7 @@ class BlogController extends Controller {
                 );
             });
 
-            return view('blog.entry', ['page_title' => 'Blog', 'nav_active' => 'blog', 'sidebar' => $this->getSidebar(), 'year' => $year, 'month' => $month, 'day' => $day, 'slug' => $title, 'cover' => $blogpost['post']->cover, 'title' => $blogpost['post']->post_title, 'language' => $blogpost['language'], 'category' => $blogpost['category'], 'tags' => $blogpost['tags'], 'lead' => $blogpost['post']->lead, 'modified_at' => $blogpost['post']->modified_at, 'post_id' => $blogpost['post']->post_id, 'body' => $blogpost['post']->body, 'pages' => $blogpost['pages'], 'prev_url' => $blogpost['prev_url'], 'next_url' => $blogpost['next_url']]);
+            return view('blog.entry', ['page_title' => $blogpost['post']->post_title, 'page_type' => 'Blog', 'nav_active' => 'blog', 'sidebar' => $this->getSidebar() , 'year' => $year, 'month' => $month, 'day' => $day, 'slug' => $title, 'cover' => $blogpost['post']->cover, 'title' => $blogpost['post']->post_title, 'language' => $blogpost['language'], 'category' => $blogpost['category'], 'tags' => $blogpost['tags'], 'lead' => $blogpost['post']->lead, 'modified_at' => $blogpost['post']->modified_at, 'post_id' => $blogpost['post']->post_id, 'body' => $blogpost['post']->body, 'pages' => $blogpost['pages'], 'prev_url' => $blogpost['prev_url'], 'next_url' => $blogpost['next_url']]);
         }else{
             abort(404);
         }
@@ -511,9 +511,9 @@ class BlogController extends Controller {
      *
      * @return Response
      */
-    public function archive($page = 1)
+    public function archives($page = 1)
     {
-        $dates = Cache::remember('blog-archive-'.$page, config('b3_config.cache-age')*60, function() use ($page) {
+        $dates = Cache::remember('blog-archives-'.$page, config('b3_config.cache-age')*60, function() use ($page) {
             $dates = new Collection;
 
             $date_posts = Blogpost::select('created_at', DB::raw("DATE_FORMAT(created_at, '%m-%Y') as month_year"))->groupBy('month_year')->orderBy('month_year','desc')->get();
@@ -531,7 +531,7 @@ class BlogController extends Controller {
             return $dates;
         });
 
-        return view('blog.list', ['page_title' => 'Blog', 'nav_active' => 'blog', 'list_title' => 'Archive', 'sidebar' => $this->getSidebar() , 'results' => $dates]);
+        return view('blog.list', ['page_title' => 'Archives', 'page_type' => 'Blog', 'nav_active' => 'blog', 'list_title' => 'Archives', 'sidebar' => $this->getSidebar() , 'results' => $dates]);
     }
 
 }

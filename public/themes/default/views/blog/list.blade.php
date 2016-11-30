@@ -30,7 +30,7 @@
                             <h3><a href="/blog/{{strtolower($list_title.'/'.slugify($tag->tag_title))}}">{{$tag->tag_title}}</a></h3>
                         </li>
                     @endforeach
-                @elseif ($list_title=='Archive')
+                @elseif ($list_title=='Archives')
                     @foreach ($results as $month)
                         <li>
                             <h3><a href="/blog/{{$month['link']}}">{{$month['title']}}</a></h3>

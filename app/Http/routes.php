@@ -55,8 +55,8 @@ if (config('b3_config.status')=='live') {
         $group->get('blog/search/{query}', 'BlogController@search');
         $group->get('blog/search/{query}/page/{pageNumber}', 'BlogController@search');
 
-        $group->get('blog/archive', 'BlogController@archive');
-        $group->get('blog/archive/page/{pageNumber}', 'BlogController@archive');
+        $group->get('blog/archives', 'BlogController@archives');
+        $group->get('blog/archives/page/{pageNumber}', 'BlogController@archives');
 
         $group->get('blog/{year}', 'BlogController@showArchive1');
         $group->get('blog/{year}/page/{pageNumber}', 'BlogController@showArchive1');
