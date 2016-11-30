@@ -140,7 +140,7 @@ function format_time($modified_at, $format=false) {
     $edited = $year . ' ' . $month . ' ' . $day;
   }
 
-  echo $edited;
+  return $edited;
 }
 
 function read_time($id, $only_minutes = false, $short = false) {
