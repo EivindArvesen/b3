@@ -110,6 +110,10 @@ function date_links($group, $format=false) {
     }
 }
 
+function month_name($month) {
+  return date('F', mktime(0, 0, 0, $month, 10));
+}
+
 function format_time($modified_at, $format=false) {
   if (isset($format) && $format ==! false) {
     $order = $format;
@@ -118,7 +122,7 @@ function format_time($modified_at, $format=false) {
   }
 
   $year = substr($modified_at, 0, 4);
-  $month = date('F', mktime(0, 0, 0, substr($modified_at, 5, 2), 10));
+  $month = month_name(substr($modified_at, 5, 2));
   $day = ltrim(substr($modified_at, 8, 2), '0') . ordinal_suffix(ltrim(substr($modified_at, 8, 2), '0'));
 
   if (isset($order) && strlen($order) == 3) {
