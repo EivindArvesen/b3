@@ -7104,8 +7104,18 @@ article.blog-post .blog-body ol,
 article.blog-post .blog-body ul,
 article.blog-post .blog-body audio,
 article.blog-post .blog-body video,
-article.blog-post .blog-body iframe {
+article.blog-post .blog-body iframe,
+article.blog-post .blog-body table {
   margin-bottom: 22px;
+}
+article.blog-post .blog-body td {
+  padding: 0 11px;
+}
+article.blog-post .blog-body td:first-child {
+  padding-left: 0;
+}
+article.blog-post .blog-body td:last-child {
+  padding-right: 0;
 }
 article.blog-post .blog-body blockquote > p {
   margin-bottom: 0;
@@ -7311,7 +7321,7 @@ ul.inventory li h3 {
   margin-right: 4px;
 }
 .tags {
-  margin-top: 96px;
+  margin-top: 48px;
   margin-bottom: 48px;
   text-align: center;
 }
@@ -7350,13 +7360,13 @@ code {
   color: #333333;
 }
 @media (max-width: 992px) {
-  .section.project {
+  section.project {
     margin-bottom: 30px;
     display: inline-block;
   }
 }
 @media (max-width: 768px) {
-  .section.project {
+  section.project {
     border-top: 1px solid #eeeeee;
     padding-top: 30px;
     margin-bottom: 0px;

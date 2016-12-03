@@ -318,8 +318,20 @@ input:not([type=checkbox]):not([type=radio]) {
 
 article.blog-post {
   .blog-body {
-    p, ol, ul, audio, video, iframe {
+    p, ol, ul, audio, video, iframe, table {
       margin-bottom: 22px;
+    }
+
+    td {
+      padding: 0 11px;
+
+      &:first-child {
+        padding-left: 0;
+      }
+
+      &:last-child {
+        padding-right: 0;
+      }
     }
 
     blockquote>p {
@@ -576,7 +588,7 @@ ul.inventory {
 }
 
 .tags {
-  margin-top: 96px;
+  margin-top: 48px;
   margin-bottom: 48px;
   text-align: center;
 
@@ -632,7 +644,7 @@ code {
   color: @gray-dark;
 }
 
-.section.project {
+section.project {
   @media(max-width: @screen-md) {
     margin-bottom: 30px;
     display: inline-block;
