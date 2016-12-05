@@ -474,7 +474,7 @@ class BlogController extends Controller {
 
                 $prev_id = Blogpost::where('post_id', '<', $post->post_id)->max('post_id');
                 if (!is_null($prev_id)) {
-                    $prev_post = Blogpost::where('post_id', '=', $prev_id)->orderBy('post_id')->first();
+                    $prev_post = Blogpost::where('post_id', $prev_id)->orderBy('post_id')->first();
                     $prev_url = '/blog/'.substr($prev_post->created_at, 0, 4).'/'.substr($prev_post->created_at, 5, 2).'/'.substr($prev_post->created_at, 8, 2).'/'.$prev_post->slug;
                 }
                 else {
@@ -483,7 +483,7 @@ class BlogController extends Controller {
 
                 $next_id = Blogpost::where('post_id', '>', $post->post_id)->min('post_id');
                 if (!is_null($next_id)) {
-                    $next_post = Blogpost::where('post_id', '=', $next_id)->orderBy('post_id')->first();
+                    $next_post = Blogpost::where('post_id', $next_id)->orderBy('post_id')->first();
                     $next_url = '/blog/'.substr($next_post->created_at, 0, 4).'/'.substr($next_post->created_at, 5, 2).'/'.substr($next_post->created_at, 8, 2).'/'.$next_post->slug;
                 }
                 else {
