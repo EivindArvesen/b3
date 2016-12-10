@@ -77,13 +77,24 @@
         @include('layouts.pager')
 
         @if (isset($prev_url))
-            <a class="prev-next btn btn-primary btn-ghost" href="{{$prev_url}}"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> Previous</a>
+        <div class="col-sm-6 prev-next">
+            <div class="desc">Previous post</div>
+            <a href="{{$prev_url}}">
+                <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>{{$prev_title}}
+            </a>
+        </div>
         @endif
 
         @if (isset($next_url))
-        <a class="prev-next btn btn-primary btn-ghost pull-right" href="{{$next_url}}">Next <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></a>
+        <div class="col-sm-6 prev-next text-right pull-right">
+            <div class="desc">Next post</div>
+            <a href="{{$next_url}}">
+                {{$next_title}}<span class="glyphicon glyphicon-menu-right" aria-hidden="true">
+            </a>
+        </div>
         @endif
 
-        </div><!-- /.blog-main -->
         </div>
+
+        </div><!-- /.blog-main -->
 @stop

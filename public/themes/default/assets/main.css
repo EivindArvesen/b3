@@ -7350,10 +7350,14 @@ ul.inventory li h3 {
 .sidebar-module-top {
   margin-bottom: 32px;
 }
-.prev-next {
-  width: 110px;
+.prev-next .desc {
+  color: #777777;
+  margin: 0 20px;
 }
-.prev-next span {
+.prev-next a {
+  font-size: 20px;
+}
+.prev-next a span.glyphicon {
   top: 2px;
 }
 code {
