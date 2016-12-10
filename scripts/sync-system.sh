@@ -14,8 +14,6 @@ cd $(dirname $DIR)
 SERVERROOT=$(ssh $1 "pwd")
 WEBROOT=$SERVERROOT/"$2"
 
-$DIR/../. $1:$WEBROOT/
-
 rsync -alz --delete --stats --progress --exclude=".env" --exclude=".git" --exclude 'public/content' --exclude 'public/subsites' --exclude 'bower_components' --exclude 'node_modules' $DIR/../. $1:$WEBROOT/
 
 cd - > /dev/null 2>&1
