@@ -15,7 +15,13 @@
     <title>{{isset($page_title) && $page_title !=='' ? $page_title : ''}}{{(isset($page_title) && $page_title !=='') && (isset($page_type) && $page_type !=='') ? ' - ' : ''}}{{isset($page_type) && $page_type !=='' ? $page_type : ''}}{{(isset($page_title) && $page_title !=='') || (isset($page_type) && $page_type !=='') ? ' | ' : ''}}{{config('b3_config.site-name')}}</title>
 
     @if (config('b3_config.keywords') !== '')
-      <meta name="keywords" content="@foreach (config('b3_config.keywords') as $keyword){{$keyword}},@endforeach">
+      <meta name="keywords" content="
+      @if (isset($keywords)) @foreach ($keywords as $keyword)
+        {{$keyword}},
+      @endforeach @endif
+      @foreach (config('b3_config.keywords') as $keyword)
+        {{$keyword}},
+      @endforeach">
     @endif
 
     <!-- Bootstrap core CSS -->
