@@ -476,18 +476,22 @@ class BlogController extends Controller {
                 if (!is_null($prev_id)) {
                     $prev_post = Blogpost::where('created_at', $prev_id)->orderBy('created_at')->first();
                     $prev_url = '/blog/'.substr($prev_post->created_at, 0, 4).'/'.substr($prev_post->created_at, 5, 2).'/'.substr($prev_post->created_at, 8, 2).'/'.$prev_post->slug;
+                    $prev_title = $prev_post->post_title;
                 }
                 else {
                     $prev_url = null;
+                    $prev_title = null;
                 }
 
                 $next_id = Blogpost::where('created_at', '>', $post->created_at)->min('created_at');
                 if (!is_null($next_id)) {
                     $next_post = Blogpost::where('created_at', $next_id)->orderBy('created_at')->first();
                     $next_url = '/blog/'.substr($next_post->created_at, 0, 4).'/'.substr($next_post->created_at, 5, 2).'/'.substr($next_post->created_at, 8, 2).'/'.$next_post->slug;
+                    $next_title = $next_post->post_title;
                 }
                 else {
                     $next_url = null;
+                    $next_title = null;
                 }
 
                 return array(
@@ -497,11 +501,13 @@ class BlogController extends Controller {
                     'tags' => $tags,
                     'pages' => $pages,
                     'prev_url' => $prev_url,
-                    'next_url' => $next_url
+                    'prev_title' => $prev_title,
+                    'next_url' => $next_url,
+                    'next_title' => $next_title
                 );
             });
 
-            return view('blog.entry', ['page_title' => $blogpost['post']->post_title, 'page_type' => 'Blog', 'nav_active' => 'blog', 'sidebar' => $this->getSidebar() , 'year' => $year, 'month' => $month, 'day' => $day, 'slug' => $title, 'cover' => $blogpost['post']->cover, 'title' => $blogpost['post']->post_title, 'language' => $blogpost['language'], 'category' => $blogpost['category'], 'tags' => $blogpost['tags'], 'lead' => $blogpost['post']->lead, 'modified_at' => $blogpost['post']->modified_at, 'post_id' => $blogpost['post']->post_id, 'body' => $blogpost['post']->body, 'pages' => $blogpost['pages'], 'prev_url' => $blogpost['prev_url'], 'next_url' => $blogpost['next_url'], 'keywords' => array_merge(array($blogpost['category']), $blogpost['tags'])]);
+            return view('blog.entry', ['page_title' => $blogpost['post']->post_title, 'page_type' => 'Blog', 'nav_active' => 'blog', 'sidebar' => $this->getSidebar() , 'year' => $year, 'month' => $month, 'day' => $day, 'slug' => $title, 'cover' => $blogpost['post']->cover, 'title' => $blogpost['post']->post_title, 'language' => $blogpost['language'], 'category' => $blogpost['category'], 'tags' => $blogpost['tags'], 'lead' => $blogpost['post']->lead, 'modified_at' => $blogpost['post']->modified_at, 'post_id' => $blogpost['post']->post_id, 'body' => $blogpost['post']->body, 'pages' => $blogpost['pages'], 'prev_url' => $blogpost['prev_url'], 'prev_title' => $blogpost['prev_title'], 'next_url' => $blogpost['next_url'], 'next_title' => $blogpost['next_title'], 'keywords' => array_merge(array($blogpost['category']), $blogpost['tags'])]);
         }else{
             abort(404);
         }
