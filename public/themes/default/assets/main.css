@@ -7350,6 +7350,9 @@ ul.inventory li h3 {
 .sidebar-module-top {
   margin-bottom: 32px;
 }
+.prev-next {
+  padding: 0;
+}
 .prev-next .desc {
   color: #777777;
   margin: 0 20px;
