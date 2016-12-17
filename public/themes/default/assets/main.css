@@ -2,7 +2,6 @@
 @import 'fonts/Libre_Baskerville/stylesheet.css';
 @import 'fonts/Open_Sans/stylesheet.css';
 @import 'fonts/Roboto/stylesheet.css';
-@import 'fonts/Roboto_Slab/stylesheet.css';
 /*!
  * Bootstrap v3.3.6 (http://getbootstrap.com)
  * Copyright 2011-2015 Twitter, Inc.
@@ -6897,16 +6896,19 @@ h1 {
 .debug-menu a {
   border: none !important;
 }
-ul.nav.navbar-nav li:hover a {
+ul.nav.navbar-nav li:hover a,
+ul.nav.navbar-nav li:active a {
   color: #9d9d9d;
 }
 @media (min-width: 768px) {
-  ul.nav.navbar-nav li:hover a {
+  ul.nav.navbar-nav li:hover a,
+  ul.nav.navbar-nav li:active a {
     border-bottom: 2px solid #9d9d9d;
   }
 }
 @media (min-width: 768px) and (min-width: 1200px) {
-  ul.nav.navbar-nav li:hover a {
+  ul.nav.navbar-nav li:hover a,
+  ul.nav.navbar-nav li:active a {
     border-bottom: none;
   }
 }
