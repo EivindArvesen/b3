@@ -52,8 +52,8 @@ class BlogController extends Controller {
 
             $sidebar['dates'] = [];
 
-            if (Blogpost::select('created_at', DB::raw("DATE_FORMAT(created_at, '%m-%Y') as month_year"))->groupBy('month_year')->orderBy('month_year','asc')->get()->count() > 1) {
-                $date_posts = Blogpost::select('created_at', DB::raw("DATE_FORMAT(created_at, '%m-%Y') as month_year"))->groupBy('month_year')->orderBy('month_year','asc')->take(5)->get();
+            if (Blogpost::select('created_at', DB::raw("DATE_FORMAT(created_at, '%m-%Y') as month_year"))->groupBy('month_year')->orderBy('month_year','desc')->get()->count() > 1) {
+                $date_posts = Blogpost::select('created_at', DB::raw("DATE_FORMAT(created_at, '%m-%Y') as month_year"))->groupBy('month_year')->orderBy('month_year','desc')->take(5)->get();
 
                 foreach ($date_posts as $date_post) {
                     $date = [];
