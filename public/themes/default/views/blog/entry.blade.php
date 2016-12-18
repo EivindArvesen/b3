@@ -64,6 +64,7 @@
 
             <div class="tags col-sm-10 col-sm-offset-1">
                 <p>
+                <small class="lead">Tags:</small>
                 @foreach ($tags as $tag)
                     <a href="/blog/tag/{{slugify($tag)}}" class="label label-default">{{ucwords(strtolower($tag))}}</a>&nbsp;
                 @endforeach
@@ -76,20 +77,20 @@
 
         @include('layouts.pager')
 
-        @if (isset($prev_url))
-        <div class="col-sm-6 prev-next">
-            <div class="desc">Previous post</div>
-            <a href="{{$prev_url}}">
-                <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>{{$prev_title}}
+        @if (isset($next_url))
+        <div class="col-xs-12 col-sm-6 prev-next pull-right" id="entry-next">
+            <div class="desc">Next post</div>
+            <a href="{{$next_url}}">
+                {{$next_title}}<span class="glyphicon glyphicon-menu-right" aria-hidden="true">
             </a>
         </div>
         @endif
 
-        @if (isset($next_url))
-        <div class="col-sm-6 prev-next text-right pull-right">
-            <div class="desc">Next post</div>
-            <a href="{{$next_url}}">
-                {{$next_title}}<span class="glyphicon glyphicon-menu-right" aria-hidden="true">
+        @if (isset($prev_url))
+        <div class="col-xs-12 col-sm-6 prev-next" id="entry-left">
+            <div class="desc">Previous post</div>
+            <a href="{{$prev_url}}">
+                <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>{{$prev_title}}
             </a>
         </div>
         @endif

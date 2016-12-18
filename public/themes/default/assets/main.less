@@ -17,7 +17,6 @@
 body {
   background-color: #fff;
   margin-top: 53px;
-  //padding: 20px 0 20px 0; //70px;
   position: relative;
   padding-bottom: 62px !important;
   min-height: calc(100vh);
@@ -57,16 +56,11 @@ h1 {
 }
 
 .navbar {
-  //opacity: 0.99;
-  //border: 0;
-  //.box-shadow(0 1px 10px);
-  //font-weight: bold;
   margin-bottom: 0;
 
   .container {
     background: none;
     padding-bottom: 0;
-    //margin: 0;
   }
 }
 
@@ -77,6 +71,10 @@ h1 {
   }
 }
 
+.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus, .navbar-inverse .navbar-toggle:hover {
+  background: none;
+}
+
 .debug-menu {
   border: none !important;
 
@@ -85,20 +83,19 @@ h1 {
   }
 }
 
-ul.nav.navbar-nav li:hover, ul.nav.navbar-nav li:active {
-  //background-color: #1a1a1a;
+ul.nav.navbar-nav li:not(.active):hover,
+ul.nav.navbar-nav li:not(.active):active {
+    a {
+        color: #9d9d9d;
 
-  a {
-    color: #9d9d9d;
+        @media(min-width: @screen-sm-min) {
+          border-bottom: 2px solid #9d9d9d;
 
-    @media(min-width: @screen-sm-min) {
-      border-bottom: 2px solid #9d9d9d;
-
-        @media(min-width: @screen-lg-min) {
-          border-bottom: none;
+            @media(min-width: @screen-lg-min) {
+              border-bottom: none;
+            }
         }
     }
-  }
 }
 
 .navbar-default .navbar-brand {
@@ -131,17 +128,10 @@ ul.nav.navbar-nav li:hover, ul.nav.navbar-nav li:active {
 .navfix(@color) {
   .navbar-nav>.active>a, .navbar-nav>.active>a:focus, .navbar-nav>.active>a:hover {
     background: none;
-    //text-decoration: underline;
     @media (min-width: @screen-sm-min) {
       border-bottom: 2px solid @color;
     }
   }
-  /*
-  .navbar-nav>li>a:hover {
-    color: #9d9d9d;
-    border-bottom: 2px solid #9d9d9d;
-  }
-  */
 }
 
 .navbar-default, .navbar-inverse {
@@ -167,15 +157,8 @@ ul.nav.navbar-nav li:hover, ul.nav.navbar-nav li:active {
   backdrop-filter: blur(4px);
 }
 
-// .navbar-custom {
-//   &:extend(.navbar-inverse);
-//   //.navfix(#fff);
-//   background-color: #333;
-// }
-
 .index-bg {
   background-color: #000;
-  //background-image: url(gfx/face.png);
   background-repeat: no-repeat;
   background-size: contain; /*cover*/;
   background-attachment: fixed;
@@ -242,7 +225,6 @@ ul.nav.navbar-nav li:hover, ul.nav.navbar-nav li:active {
   }
 
   p.text {
-    //margin-bottom: 0;
     font-size: @font-size-large;
   }
 
@@ -267,8 +249,7 @@ ul.nav.navbar-nav li:hover, ul.nav.navbar-nav li:active {
     margin: 22px 0 14px 0;
     background: none;
     padding-left: 0;
-    //border-top: 1px dotted #ccc;
-    border-bottom: 1px dotted #ccc;
+    border-bottom: 1px dotted #9d9d9d;
 }
 
 .blog-main {
@@ -276,8 +257,6 @@ ul.nav.navbar-nav li:hover, ul.nav.navbar-nav li:active {
 }
 
 .blog-sidebar {
-    //z-index: 1;
-
     p {
       color: #555;
     }
@@ -300,7 +279,7 @@ input:not([type=checkbox]):not([type=radio]) {
 }
 
 #blog-search:hover, #blog-search:active {
-  border-color: #ccc;
+  border-color: #9d9d9d;
   color: #777;
 }
 
@@ -382,8 +361,8 @@ ul.inventory {
 
   .blog-post {
     border-bottom: 1px solid #eee;
-    padding-bottom: 14px; // 90px;
-    margin-bottom: 14px; // 90px;
+    padding-bottom: 30px; // 90px;
+    margin-bottom: 30px; // 90px;
 
     .post-bottom {
       padding-top: 11px;
@@ -404,7 +383,6 @@ ul.inventory {
 }
 
 .edit-time {
-  //color: #999;
   margin: 0;
 }
 
@@ -502,8 +480,6 @@ ul.inventory {
   .blog-body{
 
     >p:not(:empty):first-of-type{
-      //clear: both;
-      //display: inline-block;
       min-height: 55px;
 
       &:first-letter {
@@ -530,7 +506,6 @@ ul.inventory {
       clear:both;
       margin: 0 auto;
       max-width: 100%;
-      //margin: 0 -30px;
       display: block;
       margin: 0 auto;
     }
@@ -593,8 +568,9 @@ ul.inventory {
   text-align: center;
 
   .lead {
-    margin-bottom: 6px;
-    color: @gray;
+    margin-bottom: 0px;
+    display: block;
+    color: @gray-light;
     font-size: @font-size-small;
     text-transform: capitalize;
     clear: both;
@@ -625,18 +601,18 @@ ul.inventory {
   margin-bottom: 32px;
 }
 
-// img {
-//   height: auto;
-//   width: auto;
-//   max-height: 100% !important;
-//   max-width: 100% !important;
-// }
-
 .prev-next {
   padding: 0;
+  @media (max-width: @screen-sm) {
+    text-align: center;
+  }
+
   .desc {
     color: @gray-light;
-    margin: 0 20px;
+
+    @media(min-width: @screen-sm) {
+      margin: 0 20px;
+    }
   }
 
   a {
@@ -644,7 +620,20 @@ ul.inventory {
 
     span.glyphicon {
       top: 2px;
+      @media (max-width: @screen-sm) {
+        display: none;
+      }
     }
+  }
+}
+
+#entry-next {
+  @media(min-width: @screen-sm) {
+    float: right;
+    text-align: right;
+  }
+  @media (max-width: @screen-sm) {
+    margin-bottom: 20px;
   }
 }
 
@@ -778,7 +767,7 @@ ul.meta-list {
       }
     }
 
-    .navbar-nav li:hover {
+    .navbar-nav li:not(.active):hover {
       color: #9d9d9d;
       border-left: 2px solid #9d9d9d;
       padding-left: 13px;
@@ -814,7 +803,6 @@ footer {
   bottom: 0;
   width: 100%;
   height: 62px;
-  //background: #ddd;
 
   .container {
     padding-top: 22px;
@@ -1068,11 +1056,9 @@ footer {
         width: 80%;
         float: right;
         padding: 0;
-        //margin: 14px 0;
         margin: 0;
 
         .container {
-            //margin: 0 14px;
             margin: 0;
             width: auto;
         }
@@ -1086,9 +1072,7 @@ footer {
             width: auto;
             margin: 0 !important;
             padding: 0 !important;
-            //padding-top: 14px;
-            //padding-left: 14px;
-            //margin: 14px 0;
+
             .navbar-header {
                 padding-left: 30px;
                 padding-right: 30px;
@@ -1120,7 +1104,7 @@ footer {
                     border-bottom: none;
                     }
                 }
-                li:hover {
+                li:not(.active):hover {
                   color: #9d9d9d;
                   border-left: 2px solid #9d9d9d;
                   padding-left: 12px;
@@ -1129,7 +1113,7 @@ footer {
                   border-left: 2px solid #fff;
                 }
                 li:last-child {
-                        border-bottom: none !important;
+                  border-bottom: none !important;
                 }
             }
             .navbar-collapse {
