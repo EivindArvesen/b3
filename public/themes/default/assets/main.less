@@ -291,11 +291,12 @@ input:not([type=checkbox]):not([type=radio]) {
   border-left: none;
   box-shadow: none;
   background-color: #fff;
-}
 
-#blog-search:hover, #blog-search:active {
-  border-color: #9d9d9d;
-  color: #777;
+  &:hover, &:active, &:focus {
+    border-color: #ccc;
+    //border-left: 1px solid #ccc;
+    color: #777;
+  }
 }
 
 .cover-img {

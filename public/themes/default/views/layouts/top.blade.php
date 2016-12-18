@@ -25,7 +25,7 @@
     @endif
 
     <!-- Theme CSS -->
-    <link href="/themes/{{config('b3_config.theme')}}/assets/dist/main.min.a61e71e55f5757aa.css" rel="stylesheet">
+    <link href="/themes/{{config('b3_config.theme')}}/assets/dist/main.min.44e0560f9bbe567b.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>

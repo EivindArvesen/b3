@@ -7096,8 +7096,9 @@ input:not([type=checkbox]):not([type=radio]) {
   background-color: #fff;
 }
 #blog-search:hover,
-#blog-search:active {
-  border-color: #9d9d9d;
+#blog-search:active,
+#blog-search:focus {
+  border-color: #ccc;
   color: #777;
 }
 .cover-img {
