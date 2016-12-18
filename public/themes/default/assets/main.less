@@ -249,7 +249,7 @@ ul.nav.navbar-nav li:not(.active):active {
     margin: 22px 0 14px 0;
     background: none;
     padding-left: 0;
-    border-bottom: 1px dotted #9d9d9d;
+    border-bottom: 1px solid @gray-lighter;
 }
 
 .blog-main {
@@ -285,7 +285,7 @@ input:not([type=checkbox]):not([type=radio]) {
 
 .cover-img {
   width: 100%;
-  background-color: #eee;
+  background-color: @gray-lighter;
   min-height: 200px;
    -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -360,9 +360,8 @@ ul.inventory {
   }
 
   .blog-post {
-    border-bottom: 1px solid #eee;
-    padding-bottom: 30px; // 90px;
-    margin-bottom: 30px; // 90px;
+    padding-bottom: 22px; // 30px;
+    margin-bottom: 22px; // 30px;
 
     .post-bottom {
       padding-top: 11px;
@@ -442,7 +441,7 @@ ul.inventory {
     }
 
     p {
-      color: #eee;
+      color: @gray-lighter;
     }
   }
 }
@@ -533,7 +532,7 @@ ul.inventory {
 
 .search>li {
   padding-bottom: 48px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid @gray-lighter;
   margin-bottom: 48px;
 }
 
@@ -695,7 +694,7 @@ ul.meta-list {
 .img-circle-thumbnail {
   &:extend(.img-thumbnail);
   &:extend(.img-circle);
-  background-color: #eee;
+  background-color: @gray-lighter;
 }
 
 [class*="col-"] .img-circle-thumbnail {
@@ -797,7 +796,7 @@ ul.meta-list {
 
 footer {
   color: #777;
-  border-top: 1px solid #eee;
+  border-top: 1px solid @gray-lighter;
   font-size: @font-size-small;
   position: absolute;
   bottom: 0;
