@@ -80,8 +80,8 @@
         @if (isset($next_url))
         <div class="col-xs-12 col-sm-6 prev-next pull-right" id="entry-next">
             <div class="desc">Next post</div>
-            <a href="{{$next_url}}">
-                {{$next_title}}<span class="glyphicon glyphicon-menu-right" aria-hidden="true">
+            <a href="{{$next_url}}"><span class="title">
+                {{$next_title}}</span><span class="glyphicon glyphicon-menu-right" aria-hidden="true">
             </a>
         </div>
         @endif

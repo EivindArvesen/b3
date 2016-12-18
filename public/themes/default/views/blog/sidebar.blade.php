@@ -1,7 +1,4 @@
-<aside class="col-sm-3 col-sm-offset-1 blog-sidebar">
-  <div class="sidebar-module sidebar-module-top">
-    @include('blog.searchbar')
-  </div>
+<aside class="col-sm-3 col-sm-offset-1">
   @if (config('b3_config.about'))
   <div class="sidebar-module">
     <h4>About</h4>
