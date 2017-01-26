@@ -28,7 +28,7 @@ cat > $DIR/../.env <<- EOM
 # SERVER ENVIRONMENT CONFIGURATION
 
 EOM
-cat $DIR/../.env.example >> $DIR/../.env
+cat $DIR/../.env.example | sed 's/array/database/g' >> $DIR/../.env
 
 KEY=$(php -r "echo md5(uniqid()).\"\n\";")
 sed -i '' -e 's/secret/'$KEY'/g' $DIR/../.env
