@@ -52,8 +52,8 @@ class BlogController extends Controller {
 
             $sidebar['dates'] = [];
 
-            if (Blogpost::select('created_at', DB::raw("DATE_FORMAT(created_at, '%m-%Y') as month_year"))->groupBy('month_year')->orderBy('created_at','desc')->get()->count() > 1) {
-                $date_posts = Blogpost::select('created_at', DB::raw("DATE_FORMAT(created_at, '%m-%Y') as month_year"))->groupBy('month_year')->orderBy('created_at','desc')->take(5)->get();
+            if (Blogpost::where('published', '!', false)->select('created_at', DB::raw("DATE_FORMAT(created_at, '%m-%Y') as month_year"))->groupBy('month_year')->orderBy('created_at','desc')->get()->count() > 1) {
+                $date_posts = Blogpost::where('published', '!', false)->select('created_at', DB::raw("DATE_FORMAT(created_at, '%m-%Y') as month_year"))->groupBy('month_year')->orderBy('created_at','desc')->take(5)->get();
 
                 foreach ($date_posts as $date_post) {
                     $date = [];
@@ -264,13 +264,15 @@ class BlogController extends Controller {
             $posts = Cache::remember('blog-search-'.$query.'-'.$page, config('b3_config.cache-age')*60, function() use ($query, $page) {
                 $posts = new Collection;
                 foreach (Blogpost::where('published', '!', false)->where('body', 'LIKE', '%'.$query.'%')->orWhere('post_title', 'LIKE', '%'.$query.'%')->orWhere('slug', 'LIKE', '%'.$query.'%')->orWhere('lead', 'LIKE', '%'.$query.'%')->orderBy('created_at', 'DESC')->orderBy('post_title', 'ASC')->get() as $post) {
-                    $posts->add($post);
+                    if ($post->published != '1') {
+                        $posts->add($post);
+                    }
                 }
 
                 foreach (Category::where('category_title', 'LIKE', '%'.$query.'%')->get() as $id) {
                     foreach (Post_category::where('category_id', $id->category_id)->get() as $post_id) {
-                        foreach (Blogpost::where('post_id', $post_id->post_id)->orderBy('created_at', 'DESC')->orderBy('post_title', 'ASC')->get() as $post) {
-                            if (!$posts->contains('post_id', $post->post_id)) {
+                        foreach (Blogpost::where('published', '!', false)->where('post_id', $post_id->post_id)->orderBy('created_at', 'DESC')->orderBy('post_title', 'ASC')->get() as $post) {
+                            if (!$posts->contains('post_id', $post->post_id) && $post->published != '1') {
                                 $posts->add($post);
                             }
                         }
@@ -279,8 +281,8 @@ class BlogController extends Controller {
 
                 foreach (Tag::where('tag_title', 'LIKE', '%'.$query.'%')->get() as $id) {
                     foreach (Post_tag::where('tag_id', $id->tag_id)->get() as $post_id) {
-                        foreach (Blogpost::where('post_id', $post_id->post_id)->orderBy('created_at', 'DESC')->orderBy('post_title', 'ASC')->get() as $post) {
-                            if (!$posts->contains('post_id', $post->post_id)) {
+                        foreach (Blogpost::where('published', '!', false)->where('post_id', $post_id->post_id)->orderBy('created_at', 'DESC')->orderBy('post_title', 'ASC')->get() as $post) {
+                            if (!$posts->contains('post_id', $post->post_id) && $post->published != '1') {
                                 $posts->add($post);
                             }
                         }
@@ -288,8 +290,8 @@ class BlogController extends Controller {
                 }
 
                 foreach (Language::where('language_title', 'LIKE', '%'.$query.'%')->get() as $id) {
-                    foreach (Blogpost::where('language_id', $id->language_id)->orderBy('created_at', 'DESC')->orderBy('post_title', 'ASC')->get() as $post) {
-                        if (!$posts->contains('post_id', $post->post_id)) {
+                    foreach (Blogpost::where('published', '!', false)->where('language_id', $id->language_id)->orderBy('created_at', 'DESC')->orderBy('post_title', 'ASC')->get() as $post) {
+                        if (!$posts->contains('post_id', $post->post_id) && $post->published != '1') {
                             $posts->add($post);
                         }
                     }
@@ -452,12 +454,12 @@ class BlogController extends Controller {
 
             $blogpost = Cache::remember('blog-post-'.$year.'-'.$month.'-'.$day.'-'.$title, config('b3_config.cache-age')*60, function() use ($year, $month, $day, $title) {
 
-                $pages = Blogpost::where('slug', $title)
+                $pages = Blogpost::where('published', '!', false)->where('slug', $title)
                    ->whereDate('created_at', '=', $year.'-'.$month.'-'.$day)->simplePaginate(15);
 
                 $title = strtolower($title);
 
-                $post = Blogpost::where('slug', $title)
+                $post = Blogpost::where('published', '!', false)->where('slug', $title)
                    ->whereDate('created_at', '=', $year.'-'.$month.'-'.$day)
                    ->firstOrFail();
 
@@ -472,9 +474,9 @@ class BlogController extends Controller {
 
                 $language = Language::where('language_id', $post->language_id)->firstOrFail()->language_title;
 
-                $prev_id = Blogpost::where('created_at', '<', $post->created_at)->max('created_at');
+                $prev_id = Blogpost::where('published', '!', false)->where('created_at', '<', $post->created_at)->max('created_at');
                 if (!is_null($prev_id)) {
-                    $prev_post = Blogpost::where('created_at', $prev_id)->orderBy('created_at')->first();
+                    $prev_post = Blogpost::where('published', '!', false)->where('created_at', $prev_id)->orderBy('created_at')->first();
                     $prev_url = '/blog/'.substr($prev_post->created_at, 0, 4).'/'.substr($prev_post->created_at, 5, 2).'/'.substr($prev_post->created_at, 8, 2).'/'.$prev_post->slug;
                     $prev_title = $prev_post->post_title;
                 }
@@ -483,9 +485,9 @@ class BlogController extends Controller {
                     $prev_title = null;
                 }
 
-                $next_id = Blogpost::where('created_at', '>', $post->created_at)->min('created_at');
+                $next_id = Blogpost::where('published', '!', false)->where('created_at', '>', $post->created_at)->min('created_at');
                 if (!is_null($next_id)) {
-                    $next_post = Blogpost::where('created_at', $next_id)->orderBy('created_at')->first();
+                    $next_post = Blogpost::where('published', '!', false)->where('created_at', $next_id)->orderBy('created_at')->first();
                     $next_url = '/blog/'.substr($next_post->created_at, 0, 4).'/'.substr($next_post->created_at, 5, 2).'/'.substr($next_post->created_at, 8, 2).'/'.$next_post->slug;
                     $next_title = $next_post->post_title;
                 }
@@ -523,7 +525,7 @@ class BlogController extends Controller {
         $dates = Cache::remember('blog-archives-'.$page, config('b3_config.cache-age')*60, function() use ($page) {
             $dates = new Collection;
 
-            $date_posts = Blogpost::select('created_at', DB::raw("DATE_FORMAT(created_at, '%m-%Y') as month_year"))->groupBy('month_year')->orderBy('month_year','desc')->get();
+            $date_posts = Blogpost::where('published', '!', false)->select('created_at', DB::raw("DATE_FORMAT(created_at, '%m-%Y') as month_year"))->groupBy('month_year')->orderBy('created_at','desc')->get();
 
             foreach ($date_posts as $date_post) {
                 $date = [];
