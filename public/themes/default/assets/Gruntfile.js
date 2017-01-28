@@ -124,13 +124,22 @@ module.exports = function(grunt) {
       }
     },
     replace: {
-      zerocache: {
+      styles: {
         src: ['./../views/**/*.blade.php'],
         overwrite: true,
         replacements: [{
         }, {
-          from: /(min.).*(.css|.js)/g,
-          to: 'min$2'
+          from: /(min.).*.css/g,
+          to: 'min.css'
+        }]
+      },
+      scripts: {
+        src: ['./../views/**/*.blade.php'],
+        overwrite: true,
+        replacements: [{
+        }, {
+          from: /(min.).*.js/g,
+          to: 'min.js'
         }]
       }
     },
@@ -141,10 +150,20 @@ module.exports = function(grunt) {
       }
     },
     cacheBust: {
-        taskName: {
+        styles: {
             options: {
                 assets: [
-                'styles/*.min.css',
+                'styles/*.css'
+                ],
+                baseDir: './dist/',
+                deleteOriginals: true,
+                jsonOutput: true
+            },
+            src: ['./../views/**/*.blade.php']
+        },
+        scripts: {
+            options: {
+                assets: [
                 'scripts/*.js'
                 ],
                 baseDir: './dist/',
@@ -188,11 +207,11 @@ module.exports = function(grunt) {
         },
         js: {
             files: ['./scripts/*.js'],
-            tasks: ['clean:dist_scripts', 'webpack', 'replace:zerocache', 'cacheBust']
+            tasks: ['clean:dist_scripts', 'webpack', 'replace:scripts', 'cacheBust:scripts']
         },
         less: {
             files: ['./styles/*.less'],
-            tasks: ['clean:dist_styles', 'less:compileCore', 'autoprefixer', 'usebanner', 'cssmin', 'copy','replace:zerocache', 'cacheBust', 'clean:temp'],
+            tasks: ['clean:dist_styles', 'less:compileCore', 'autoprefixer', 'usebanner', 'cssmin', 'copy','replace:styles', 'cacheBust:styles', 'clean:temp'],
         },
         run: {
             files: ['./../../../content/**/*.md'],
@@ -223,6 +242,6 @@ module.exports = function(grunt) {
 
   // CSS distribution task.
   // grunt.registerTask('default', ['less:compileCore', 'autoprefixer', 'usebanner', 'cssmin']);
-  grunt.registerTask('default', ['clean:dist', 'less:compileCore', 'autoprefixer', 'usebanner', 'cssmin', 'copy', 'webpack', 'replace:zerocache', 'cacheBust', 'clean:temp', 'run', 'browserSync', 'watch']);
+  grunt.registerTask('default', ['clean:dist', 'less:compileCore', 'autoprefixer', 'usebanner', 'cssmin', 'copy', 'webpack', 'replace:styles', 'cacheBust:styles', 'replace:scripts', 'cacheBust:scripts', 'clean:temp', 'run', 'browserSync', 'watch']);
   // grunt.registerTask('test', ['jshint', 'qunit']);
 };
