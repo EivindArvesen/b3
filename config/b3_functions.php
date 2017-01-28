@@ -4,6 +4,10 @@ use App\Models\Page;
 
 use Illuminate\Database\Eloquent\Collection;
 
+function documentHead() {
+  return file_get_contents('b3_documentHead.php');
+}
+
 function theme_path() {
     return base_path().'/public/themes/'.Config::get('b3_config.theme');
 }
