@@ -25,15 +25,13 @@
     @endif
 
     <!-- Theme CSS -->
-    <link href="/themes/{{config('b3_config.theme')}}/assets/dist/main.min.2c0512172f08de43.css" rel="stylesheet">
+    <link href="/themes/{{config('b3_config.theme')}}/assets/dist/styles/style.min.6fb5cab93fa7e239.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/tomorrow-night.min.css">
 
     <!-- Icons -->
     <link rel="icon" href="/themes/{{config('b3_config.theme')}}/assets/dist/icons/favicon.ico">
@@ -54,6 +52,10 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/themes/{{config('b3_config.theme')}}/assets/dist/icons/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
+
+    @if (getenv('APP_ENV') !== 'local')
+       {{documentHead()}}
+    @endif
 
   </head>
 

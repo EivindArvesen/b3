@@ -1,11 +1,10 @@
+var webpack = require('webpack');
 module.exports = function(grunt) {
   grunt.initConfig({
-    bspkg: grunt.file.readJSON('bower_components/bootstrap/package.json'),
-    bspath: 'bower_components/bootstrap',
     banner: '/*!\n' +
-            ' * Bootstrap v<%= bspkg.version %> (<%= bspkg.homepage %>)\n' +
-            ' * Copyright 2011-<%= grunt.template.today("yyyy") %> <%= bspkg.author %>\n' +
-            ' * Licensed under <%= bspkg.license.type %> (<%= bspkg.license.url %>)\n' +
+            ' * B3 Default Theme\n' +
+            ' * Copyright 2016-<%= grunt.template.today("yyyy") %> Eivind Arvesen\n' +
+            ' * Licensed under BSD-3 (https://opensource.org/licenses/BSD-3-Clause)\n' +
             ' */\n',
     less: {
       compileCore: {
@@ -13,15 +12,13 @@ module.exports = function(grunt) {
           strictMath: true,
           sourceMap: true,
           outputSourceFiles: true,
-          sourceMapURL: 'main.css.map',
-          sourceMapFilename: 'main.css.map',
-          paths: '<%= bspath %>/less'
+          sourceMapURL: 'style.css.map',
+          sourceMapFilename: 'style.css.map',
         },
         files: {
-          'main.css': 'main.less'
+          './styles/style.css': './styles/main.less'
         },
       }
-
     },
     autoprefixer: {
       options: {
@@ -40,7 +37,7 @@ module.exports = function(grunt) {
         options: {
           map: true
         },
-        src: 'main.css'
+        src: './styles/style.css'
       }
     },
     cssmin: {
@@ -51,7 +48,7 @@ module.exports = function(grunt) {
       },
       core: {
         files: {
-          'main.min.css': 'main.css'
+          './styles/style.min.css': './styles/style.css'
         }
       }
     },
@@ -61,17 +58,8 @@ module.exports = function(grunt) {
         banner: '<%= banner %>'
       },
       files: {
-        src: 'main.css'
+        src: './styles/style.css'
       }
-    },
-    uglify: {
-        build: {
-            files: {
-                'jquery.min.js': ['bower_components/jquery/dist/jquery.min.js'],
-                'base.min.js': ['bower_components/bootstrap/dist/js/bootstrap.min.js'],
-                'main.min.js': ['main.js']
-            }
-        }
     },
     qunit: {
       files: ['test/**/*.html']
@@ -88,36 +76,51 @@ module.exports = function(grunt) {
         }
       }
     },
-    /*
-    htmlhint: {
-        build: {
-            options: {
-                'tag-pair': true,
-                'tagname-lowercase': true,
-                'attr-lowercase': true,
-                'attr-value-double-quotes': true,
-                'doctype-first': true,
-                'spec-char-escape': true,
-                'id-unique': true,
-                'head-script-disabled': true,
-                'style-disabled': true
-            },
-            src: ['index.html']
-        }
+    clean: {
+      dist: [
+        './dist/styles/*.css',
+        './dist/scripts/*.js',
+      ],
+      dist_styles: [
+        './dist/styles/*.css',
+      ],
+      dist_scripts: [
+        './dist/scripts/*.js',
+      ],
+      temp: [
+        './styles/*.css',
+        './*.map'
+      ]
     },
-    */
-    clean: [ './dist/' ],
     copy: {
       main: {
         cwd: './',
         src: [
-          '*.min.css',
-          '*.min.js',
-          'fonts/**/*',
-          'icons/*'
+          'styles/*.min.css'
         ],
         dest: './dist/',
         expand: true,
+      }
+    },
+    webpack: {
+      someName: {
+        // webpack options
+        entry: "./scripts/main.js",
+        output: {
+            path: "./dist/scripts/",
+            //filename: "script.min.[hash].js",
+            filename: "script.min.js",
+        },
+        plugins: [
+          new webpack.optimize.UglifyJsPlugin({minimize: true})
+        ],
+        stats: {
+            // Configure the console output
+            colors: true,
+            modules: true,
+            reasons: true
+        },
+        watch: false
       }
     },
     replace: {
@@ -141,8 +144,8 @@ module.exports = function(grunt) {
         taskName: {
             options: {
                 assets: [
-                '*.min.css',
-                '*.min.js'
+                'styles/*.min.css',
+                'scripts/*.js'
                 ],
                 baseDir: './dist/',
                 deleteOriginals: true,
@@ -155,9 +158,9 @@ module.exports = function(grunt) {
         dev: {
             bsFiles: {
                 src : [
-                        'dist/*.min.css',
-                        'dist/*.min.js',
-                        './../views/**/*.blade.php',
+                        'dist/styles/*.css',
+                        'dist/scripts/*.js',
+                        //'./../views/**/*.blade.php',
                         './../../../../**/*.php',
                         '!../../../../public/subsites/**/*',
                         //'./../../../**/*.html',
@@ -168,8 +171,7 @@ module.exports = function(grunt) {
             options: {
                 open: false,
                 watchTask: true,
-                //proxy: 'localhost'
-                proxy: 'b3-dev.test'
+                proxy: 'eivindarvesen.test'
             }
         }
     },
@@ -185,12 +187,12 @@ module.exports = function(grunt) {
             tasks: ['htmlhint']
         },
         js: {
-            files: ['main.js', 'base.min.js', 'jquery.min.js'],
-            tasks: ['uglify', 'clean', 'copy', 'replace:zerocache', 'cacheBust']
+            files: ['./scripts/*.js'],
+            tasks: ['clean:dist_scripts', 'webpack', 'replace:zerocache', 'cacheBust']
         },
         less: {
-            files: ['*.less'],
-            tasks: ['less', 'cssmin', 'clean', 'copy', 'replace:zerocache', 'cacheBust'],
+            files: ['./styles/*.less'],
+            tasks: ['clean:dist_styles', 'less:compileCore', 'autoprefixer', 'usebanner', 'cssmin', 'copy','replace:zerocache', 'cacheBust', 'clean:temp'],
         },
         run: {
             files: ['./../../../content/**/*.md'],
@@ -209,7 +211,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-text-replace');
   grunt.loadNpmTasks('grunt-run');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-qunit');
@@ -218,8 +219,10 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-contrib-watch');
 
+  grunt.loadNpmTasks('grunt-webpack');
+
   // CSS distribution task.
   // grunt.registerTask('default', ['less:compileCore', 'autoprefixer', 'usebanner', 'cssmin']);
-  grunt.registerTask('default', ['less:compileCore', 'autoprefixer', 'usebanner', 'cssmin', 'uglify', 'clean', 'copy', 'replace:zerocache', 'cacheBust', 'run', 'browserSync', 'watch']);
+  grunt.registerTask('default', ['clean:dist', 'less:compileCore', 'autoprefixer', 'usebanner', 'cssmin', 'copy', 'webpack', 'replace:zerocache', 'cacheBust', 'clean:temp', 'run', 'browserSync', 'watch']);
   // grunt.registerTask('test', ['jshint', 'qunit']);
 };

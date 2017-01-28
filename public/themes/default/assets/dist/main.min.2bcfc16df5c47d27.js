@@ -1,1 +1,0 @@
-for(var src=[],imgs=document.images,i=0,iLen=imgs.length;iLen>i;i++)""!=imgs[i].alt&&(imgs[i].outerHTML+='<span class="img-caption">'+imgs[i].alt+"</span");

@@ -1,12 +1,12 @@
 // Bootstrap base syles
-@import "bower_components/bootstrap/less/bootstrap.less";
+@import "../node_modules/bootstrap/less/bootstrap.less";
 
 // Custom fonts
-@import './fonts/Inconsolata/stylesheet.css';
-@import './fonts/Libre_Baskerville/stylesheet.css';
-@import './fonts/Open_Sans/stylesheet.css';
-@import './fonts/Roboto/stylesheet.css';
-//@import './fonts/Roboto_Slab/stylesheet.css';
+@import (css) 'fonts/Inconsolata/stylesheet.css';
+@import (css) 'fonts/Libre_Baskerville/stylesheet.css';
+@import (css) 'fonts/Open_Sans/stylesheet.css';
+@import (css) 'fonts/Roboto/stylesheet.css';
+//@import (css) 'fonts/Roboto_Slab/stylesheet.css';
 
 // Custom variables
 @import "./variables.less";
@@ -1159,3 +1159,7 @@ footer {
     display: none;
   }
 }
+
+// highlight.js
+@import (css) "../node_modules/highlight.js/styles/tomorrow-night.css";
+

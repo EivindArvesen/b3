@@ -29,6 +29,7 @@
     "url": "https://github.com/eivind88/b3/LICENSE.txt"
   },
   "devDependencies": {
+    "bootstrap": "^3.3.7",
     "btoa": "~1.1.2",
     "glob": "~5.0.3",
     "grunt": "^0.4.5",
@@ -58,10 +59,13 @@
     "grunt-saucelabs": "~8.6.0",
     "grunt-sed": "~0.1.1",
     "grunt-text-replace": "^0.4.0",
+    "grunt-webpack": "^1.0.18",
+    "jquery": "^3.1.1",
     "load-grunt-tasks": "~3.1.0",
     "markdown-it": "^4.0.1",
     "npm-shrinkwrap": "^200.1.0",
-    "time-grunt": "^1.1.0"
+    "time-grunt": "^1.1.0",
+    "webpack-dev-server": "^1.16.2"
   },
   "engines": {
     "node": ">=0.10.1"
