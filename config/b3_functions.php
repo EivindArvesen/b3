@@ -4,8 +4,9 @@ use App\Models\Page;
 
 use Illuminate\Database\Eloquent\Collection;
 
+
 function documentHead() {
-  return file_get_contents('b3_documentHead.php');
+    echo file_get_contents('b3_documentHead.php', true);
 }
 
 function theme_path() {
