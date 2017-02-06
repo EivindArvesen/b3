@@ -29,55 +29,58 @@ class PagesTableSeeder extends Seeder
                 $source = file_get_contents($file);
                 $document = $parser->parse($source);
 
-                // Build absolute path to content
-                $path = "/content" . dirname(explode("/content", $file)[1]);
+                if ($document->get('published') != 'false' ) {
 
-                if ($document->get('slug')) {
-                    $slug = substr(str_replace('+', '-', urlencode(strtolower(preg_replace("#[[:punct:]]#", "-", $document->get('slug'))))), 0, 50);
-                } else {
-                    $slug = substr(str_replace('+', '-', urlencode(strtolower(preg_replace("#[[:punct:]]#", "-", $document->get('title'))))), 0, 50);
+                    // Build absolute path to content
+                    $path = "/content" . dirname(explode("/content", $file)[1]);
+
+                    if ($document->get('slug')) {
+                        $slug = substr(str_replace('+', '-', urlencode(strtolower(preg_replace("#[[:punct:]]#", "-", $document->get('slug'))))), 0, 50);
+                    } else {
+                        $slug = substr(str_replace('+', '-', urlencode(strtolower(preg_replace("#[[:punct:]]#", "-", $document->get('title'))))), 0, 50);
+                    }
+
+                    if ($document->get('bg')) {
+                        $bg = $path . '/' . ltrim($document->get('bg'), '/');
+                    } else {
+                        $bg = '';
+                    }
+
+                    if ($document->get('feature')) {
+                        $feature = $path . '/' . ltrim($document->get('feature'), '/');
+                    } else {
+                        $feature = '';
+                    }
+
+                    if ($document->get('type')) {
+                        $type = $document->get('type');
+                    } else {
+                        $type = 'default';
+                    }
+
+                    if ($document->get('style')) {
+                        $style = $document->get('style');
+                    } else {
+                        $style = 'default';
+                    }
+
+                    // Make relative paths (links/images) absolute
+                    $body = preg_replace("/(href|src)\=\"([(www)])(\/)?/", "$1=\"http://$2", preg_replace("/(href|src)\=\"([^(http|www|\/)])(\/)?/", "$1=\"$path/$2", $document->getHtmlContent()));
+
+                    $page = Page::create([
+                        'page_title' => ucfirst($document->get('title')),
+                        'slug' => $slug,
+                        'feature' => $feature,
+                        'bg' => $bg,
+                        'body' => $body,
+                        'published' => $document->get('published') == 'false' || false,
+                        'type' => $type,
+                        'style' => $style,
+                        'transparent' => $document->get('transparent') == 'false' || false,
+                        'sticky' => $document->get('sticky') == 'false' || false,
+                        'seamless' => $document->get('seamless') == 'false' || false,
+                    ]);
                 }
-
-                if ($document->get('bg')) {
-                    $bg = $path . '/' . ltrim($document->get('bg'), '/');
-                } else {
-                    $bg = '';
-                }
-
-                if ($document->get('feature')) {
-                    $feature = $path . '/' . ltrim($document->get('feature'), '/');
-                } else {
-                    $feature = '';
-                }
-
-                if ($document->get('type')) {
-                    $type = $document->get('type');
-                } else {
-                    $type = 'default';
-                }
-
-                if ($document->get('style')) {
-                    $style = $document->get('style');
-                } else {
-                    $style = 'default';
-                }
-
-                // Make relative paths (links/images) absolute
-                $body = preg_replace("/(href|src)\=\"([(www)])(\/)?/", "$1=\"http://$2", preg_replace("/(href|src)\=\"([^(http|www|\/)])(\/)?/", "$1=\"$path/$2", $document->getHtmlContent()));
-
-                $page = Page::create([
-                    'page_title' => ucfirst($document->get('title')),
-                    'slug' => $slug,
-                    'feature' => $feature,
-                    'bg' => $bg,
-                    'body' => $body,
-                    'published' => $document->get('published') == 'false' || false,
-                    'type' => $type,
-                    'style' => $style,
-                    'transparent' => $document->get('transparent') == 'false' || false,
-                    'sticky' => $document->get('sticky') == 'false' || false,
-                    'seamless' => $document->get('seamless') == 'false' || false,
-                ]);
             }
         }
     }
