@@ -24,9 +24,11 @@
                 @include('blog.item')
             @endforeach
 
+            @include('layouts.pagination')
+
         </section><!-- /.blog-main -->
         @include('blog.sidebar')
 
-        @include('layouts.pagination')
+        </div>
 
 @stop

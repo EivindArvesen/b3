@@ -2,7 +2,7 @@
       <div class="container">
       <div class="row">
         <div class="col-sm-4">
-          <p>&copy; {{date("Y")}} <a href="mailto:{{config('b3_config.email')}}">{{config('b3_config.user')}}</a></p>
+          <p>Copyright &copy; {{date("Y")}} <a href="mailto:{{config('b3_config.email')}}">{{config('b3_config.user')}}</a></p>
         </div>
 
         <div class="col-sm-4 text-center">

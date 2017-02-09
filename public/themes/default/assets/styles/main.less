@@ -349,7 +349,9 @@ ul.inventory {
 }
 
 .blog-inventory {
-  padding-right: 5px;
+  @media (min-width: @screen-md-min) {
+    padding-right: 5px;
+  }
 
   h1 {
     margin: 11px 0 0 0;
@@ -496,7 +498,7 @@ ul.inventory {
     margin-bottom: 0;
   }
 
-  .blog-body{
+  .blog-body {
 
     >p:not(:empty):first-of-type{
       min-height: 55px;

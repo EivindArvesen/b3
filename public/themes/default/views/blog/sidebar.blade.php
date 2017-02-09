@@ -60,5 +60,3 @@
     </div>
   @endif
 </aside><!-- /.blog-sidebar -->
-
-</div><!-- /.row -->
