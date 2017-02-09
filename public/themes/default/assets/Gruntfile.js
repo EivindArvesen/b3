@@ -20,6 +20,14 @@ module.exports = function(grunt) {
         },
       }
     },
+    purifycss: {
+      options: {},
+      target: {
+        src: ['./../views/**/*.blade.php'],
+        css: ['./styles/style.css'],
+        dest: './styles/style.css'
+      },
+    },
     autoprefixer: {
       options: {
         browsers: [
@@ -44,7 +52,7 @@ module.exports = function(grunt) {
       options: {
         compatibility: 'ie8',
         keepSpecialComments: '*',
-        noAdvanced: true
+        //noAdvanced: true
       },
       core: {
         files: {
@@ -190,7 +198,7 @@ module.exports = function(grunt) {
             options: {
                 open: false,
                 watchTask: true,
-                proxy: 'eivindarvesen.test'
+                proxy: 'localhost'
             }
         }
     },
@@ -211,7 +219,7 @@ module.exports = function(grunt) {
         },
         less: {
             files: ['./styles/*.less'],
-            tasks: ['clean:dist_styles', 'less:compileCore', 'autoprefixer', 'usebanner', 'cssmin', 'copy','replace:styles', 'cacheBust:styles', 'clean:temp'],
+            tasks: ['clean:dist_styles', 'less:compileCore', 'purifycss', 'autoprefixer', 'usebanner', 'cssmin', 'copy','replace:styles', 'cacheBust:styles', 'clean:temp'],
         },
         run: {
             files: ['./../../../content/**/*.md'],
@@ -240,8 +248,10 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-webpack');
 
+  grunt.loadNpmTasks('grunt-purifycss');
+
   // CSS distribution task.
   // grunt.registerTask('default', ['less:compileCore', 'autoprefixer', 'usebanner', 'cssmin']);
-  grunt.registerTask('default', ['clean:dist', 'less:compileCore', 'autoprefixer', 'usebanner', 'cssmin', 'copy', 'webpack', 'replace:styles', 'cacheBust:styles', 'replace:scripts', 'cacheBust:scripts', 'clean:temp', 'run', 'browserSync', 'watch']);
+  grunt.registerTask('default', ['clean:dist', 'less:compileCore', 'purifycss', 'autoprefixer', 'usebanner', 'cssmin', 'copy', 'webpack', 'replace:styles', 'cacheBust:styles', 'replace:scripts', 'cacheBust:scripts', 'clean:temp', 'run', 'browserSync', 'watch']);
   // grunt.registerTask('test', ['jshint', 'qunit']);
 };
