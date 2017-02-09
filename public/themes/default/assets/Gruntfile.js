@@ -21,7 +21,11 @@ module.exports = function(grunt) {
       }
     },
     purifycss: {
-      options: {},
+      options: {
+        whitelist: [
+          'img-caption'
+        ]
+      },
       target: {
         src: ['./../views/**/*.blade.php'],
         css: ['./styles/style.css'],
