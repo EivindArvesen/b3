@@ -23,7 +23,8 @@ module.exports = function(grunt) {
     purifycss: {
       options: {
         whitelist: [
-          'img-caption'
+          'img-caption',
+          'code'
         ]
       },
       target: {
