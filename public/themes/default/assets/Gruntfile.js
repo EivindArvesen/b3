@@ -30,7 +30,11 @@ module.exports = function(grunt) {
         ]
       },
       target: {
-        src: ['./../views/**/*.blade.php'],
+        src: [
+          './../views/**/*.blade.php',
+          './scripts/*.js',
+          './../../../content/**/*.md'
+          ],
         css: ['./styles/style.css'],
         dest: './styles/style.css'
       },
@@ -205,7 +209,7 @@ module.exports = function(grunt) {
             options: {
                 open: false,
                 watchTask: true,
-                proxy: 'localhost'
+                proxy: 'eivindarvesen.test'
             }
         }
     },
