@@ -4,7 +4,7 @@ B3 (BlaBlaBlog) is a PHP blog system built upon the [Lumen](http://lumen.laravel
 The package is available on [Packagist](https://packagist.org/packages/eivindarvesen/b3)
 
 ### WORK IN PROGRESS
-This project is very much under active development, and is not usable in its current state.
+This project is very much under active development, and while it is usable in its current state, the documentation is yet to be written.
 In fact - this readme is not even necessarily up to date.
 
 At present, B3 supports all major browser, including IE >= 9.
