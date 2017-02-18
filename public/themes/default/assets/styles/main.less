@@ -65,8 +65,9 @@ h1 {
 }
 
 .navbar-nav > li > a {
-  @media(max-width: @screen-lg) {
+  @media(max-width: @screen-lg-min) {
     padding: 14px 0;
+    margin: 0 15px;
   }
 }
 
@@ -1120,6 +1121,7 @@ footer {
                     a {
                         padding-left: 14px;
                         padding-right: 14px;
+                        margin: 0;
                     }
                 }
                 li.active {
