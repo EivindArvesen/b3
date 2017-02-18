@@ -25,7 +25,7 @@
     @endif
 
     <!-- Theme CSS -->
-    <link href="/themes/{{config('b3_config.theme')}}/assets/dist/styles/style.min.87f16edf6503a1bb.css" rel="stylesheet">
+    <link href="/themes/{{config('b3_config.theme')}}/assets/dist/styles/style.min.6485c0e1db05a649.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -52,6 +52,18 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/themes/{{config('b3_config.theme')}}/assets/dist/icons/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
+
+    <meta property="og:title" content="{{isset($page_title) && $page_title !=='' ? $page_title : ''}}{{(isset($page_title) && $page_title !=='') && (isset($page_type) && $page_type !=='') ? ' - ' : ''}}{{isset($page_type) && $page_type !=='' ? $page_type : ''}}{{(isset($page_title) && $page_title !=='') || (isset($page_type) && $page_type !=='') ? ' | ' : ''}}{{config('b3_config.site-name')}}">
+    <meta property="og:description" content="Offering tour packages for individuals or groups.">
+    <meta property="og:image" content="http://euro-travel-example.com/thumbnail.jpg">
+    <meta property="og:url" content="{{Request::url()}}">
+    <meta property="og:site_name" content="{{config('b3_config.site-name')}}">
+
+    <meta name="twitter:title" content="{{isset($page_title) && $page_title !=='' ? $page_title : ''}}{{(isset($page_title) && $page_title !=='') && (isset($page_type) && $page_type !=='') ? ' - ' : ''}}{{isset($page_type) && $page_type !=='' ? $page_type : ''}}{{(isset($page_title) && $page_title !=='') || (isset($page_type) && $page_type !=='') ? ' | ' : ''}}{{config('b3_config.site-name')}}">
+    <meta name="twitter:description" content=" Offering tour packages for individuals or groups.">
+    <meta name="twitter:image" content=" http://euro-travel-example.com/thumbnail.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="{{config('b3_config.twitter')}}">
 
     @if (getenv('APP_ENV') !== 'local')
        {{documentHead()}}

@@ -63,17 +63,19 @@
             </section>
 
             <div class="tags col-sm-10 col-sm-offset-1">
-                <p>
-                <small class="lead">Tags:</small>
+                <p><strong>Tags</strong></p>
+                <div class="tag-container">
                 @foreach ($tags as $tag)
                     <a href="/blog/tag/{{slugify($tag)}}" class="label label-default">{{ucwords(strtolower($tag))}}</a>&nbsp;
                 @endforeach
-                </p>
+                </div>
             </div>
 
         </article><!-- /.blog-post -->
 
         <div class="col-sm-12">
+
+        @include('layouts.sharebuttons')
 
         @include('layouts.pager')
 
