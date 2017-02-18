@@ -25,7 +25,7 @@
     @endif
 
     <!-- Theme CSS -->
-    <link href="/themes/{{config('b3_config.theme')}}/assets/dist/styles/style.min.8a52e3fbe1d83536.css" rel="stylesheet">
+    <link href="/themes/{{config('b3_config.theme')}}/assets/dist/styles/style.min.b87f439d9b97efd4.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -54,7 +54,7 @@
     <meta name="theme-color" content="#ffffff">
 
     <meta property="og:title" content="{{isset($page_title) && $page_title !=='' ? $page_title : $page_type}}">
-    <meta property="og:description" content="{{isset($body) ? getDescription($body) : $page_type . ' - ' . config('b3_config.description')}}">
+    <meta property="og:description" content="{{isset($body) ? getDescription($body) : ''}}{{!isset($body) && isset ($page_type) ? $page_type . ' - ' . config('b3_config.description') : config('b3_config.description')}}">
     @if (isset($cover) || isset ($body))
       <meta property="og:image" content="{{url()}}{{isset($cover) ? $cover : ''}}{{!isset($cover) && isset($body) ? getFirstImage($body) : ''}}">
     @endif
@@ -62,7 +62,7 @@
     <meta property="og:site_name" content="{{config('b3_config.site-name')}}">
 
     <meta name="twitter:title" content="{{isset($page_title) && $page_title !=='' ? $page_title : $page_type}}">
-    <meta name="twitter:description" content="{{isset($body) ? getDescription($body) : $page_type . ' - ' . config('b3_config.description')}}">
+    <meta name="twitter:description" content="{{isset($body) ? getDescription($body) : ''}}{{!isset($body) && isset ($page_type) ? $page_type . ' - ' . config('b3_config.description') : config('b3_config.description')}}">
     @if (isset($cover) || isset ($body))
       <meta name="twitter:image" content="{{url()}}{{isset($cover) ? $cover : ''}}{{!isset($cover) && isset($body) ? getFirstImage($body) : ''}}">
     @endif

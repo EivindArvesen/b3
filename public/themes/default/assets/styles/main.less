@@ -6,7 +6,7 @@
 @import (css) 'fonts/Libre_Baskerville/stylesheet.css';
 @import (css) 'fonts/Open_Sans/stylesheet.css';
 @import (css) 'fonts/Roboto/stylesheet.css';
-//@import (css) 'fonts/Roboto_Slab/stylesheet.css';
+@import (css) 'fonts/Roboto_Slab/stylesheet.css';
 
 // Custom variables
 @import "./variables.less";
@@ -363,7 +363,7 @@ ul.inventory {
   }
 
   h1 {
-    margin: 11px 0 0 0;
+    margin: 11px 0 11px 0;
   }
 
   .lead {
@@ -383,6 +383,7 @@ ul.inventory {
   .cover-img {
     height: 200px;
     max-width: 800px;
+    margin-bottom: 11px;
   }
 
   .img-caption {
@@ -393,6 +394,11 @@ ul.inventory {
     padding-bottom: 22px; // 30px;
     margin-bottom: 22px; // 30px;
     max-width: 1200px;
+    border-bottom: 1px solid #eee;
+
+    .blog-body {
+      padding-top: 11px;
+    }
 
     .post-bottom {
       padding-top: 11px;
@@ -409,6 +415,9 @@ ul.inventory {
         text-align: left;
       }
     }
+  }
+  .blog-post:last-of-type {
+    border-bottom: none;
   }
 }
 
