@@ -203,6 +203,21 @@ function get_intro($id) {
   return implode($image[0]).$first_chunk;
 }
 
+function getDescription($body) {
+  $string_pp = substr($body, 0, 255);
+
+  $string = substr(strip_tags($string_pp), 0, 67);
+  $last_space = strrpos($string, ' ');
+  $last_word = substr($string, $last_space);
+  $first_chunk = substr($string, 0, $last_space) . '...';
+
+  return $first_chunk;
+}
+
+function getFirstImage() {
+  return '';
+}
+
 function slugify($string) {
   return substr(str_replace('+', '-', urlencode(strtolower(preg_replace("#[[:punct:]]#", "-", $string)))), 0, 50);
 }
