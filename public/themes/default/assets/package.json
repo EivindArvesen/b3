@@ -1,7 +1,7 @@
 {
-  "name": "B3",
-  "description": "BlaBlaBlog - a lightweight PHP Markdown Blog System mased on Lumen",
-  "version": "0.0.2",
+  "name": "B3 Default Theme",
+  "description": "Default theme of BlaBlaBlog - a lightweight PHP Markdown Blog System.",
+  "version": "0.5.0",
   "keywords": [
     "php",
     "bootstrap",
