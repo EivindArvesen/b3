@@ -72,8 +72,9 @@ class BlogController extends Controller {
      *
      * @return Response
      */
-    public function showFront($page = 1)
+    public function showFront(Request $request)
     {
+        $page = $request->input('page') ?: 1;
         $blog_posts = Cache::remember('blog-front-'.$page, config('b3_config.cache-age')*60, function() use ($page) {
             $posts = Blogpost::where('published', '!', false)->orderBy('created_at', 'DESC')->orderBy('post_title', 'ASC')
                    ->paginate($this->resultsPerPage);
@@ -102,8 +103,9 @@ class BlogController extends Controller {
      * @param  str  $language
      * @return Response
      */
-    public function listLanguage($language=False, $page = 1)
+    public function listLanguage($language=False, Request $request)
     {
+        $page = $request->input('page') ?: 1;
         if ($language!=False) {
             $posts = Cache::remember('blog-language-'.$language.'-'.$page, config('b3_config.cache-age')*60, function() use ($language, $page) {
                 $language_id = Language::where('language_title', $language)->firstOrFail()->language_id;
@@ -142,8 +144,9 @@ class BlogController extends Controller {
      * @param  str  $category
      * @return Response
      */
-    public function listCategory($category=False, $page = 1)
+    public function listCategory($category=False, Request $request)
     {
+        $page = $request->input('page') ?: 1;
         if ($category!=False) {
             $return = Cache::remember('blog-category-'.$category.'-'.$page, config('b3_config.cache-age')*60, function() use ($category, $page) {
                 $category_title = $category;
@@ -190,8 +193,9 @@ class BlogController extends Controller {
      * @param  str  $tag
      * @return Response
      */
-    public function listTag($tag=False, $page = 1)
+    public function listTag($tag=False, Request $request)
     {
+        $page = $request->input('page') ?: 1;
         if ($tag!=False) {
             $return = Cache::remember('blog-tag-'.$tag.'-'.$page, config('b3_config.cache-age')*60, function() use ($tag, $page) {
                 $tag_slug = $tag;
@@ -329,8 +333,9 @@ class BlogController extends Controller {
      * @param  int  $year
      * @return Response
      */
-    public function showArchive1($year, $page = 1)
+    public function showArchive1($year, Request $request)
     {
+        $page = $request->input('page') ?: 1;
         if(preg_match('/^[0-9]{4}$/', $year)){
             $posts = Cache::remember('blog-archive1-'.$year.'-'.$page, config('b3_config.cache-age')*60, function() use ($year, $page) {
                 $posts = Blogpost::where('published', '!', false)->whereYear('created_at', '=', $year)->orderBy('created_at', 'DESC')->orderBy('post_title', 'ASC')
@@ -364,8 +369,9 @@ class BlogController extends Controller {
      * @param  int  $month
      * @return Response
      */
-    public function showArchive2($year, $month, $page = 1)
+    public function showArchive2($year, $month, Request $request)
     {
+        $page = $request->input('page') ?: 1;
         if(preg_match('/^[0-9]{4}-[0-9]{2}$/', $year.'-'.$month)){
             $posts = Cache::remember('blog-archive2-'.$year.'-'.$month.'-'.$page, config('b3_config.cache-age')*60, function() use ($year, $month, $page) {
                 $posts = Blogpost::where('published', '!', false)->whereYear('created_at', '=', $year)->whereMonth('created_at', '=', $month)->orderBy('created_at', 'DESC')->orderBy('post_title', 'ASC')
@@ -400,8 +406,9 @@ class BlogController extends Controller {
      * @param  int  $day
      * @return Response
      */
-    public function showArchive3($year, $month, $day, $page = 1)
+    public function showArchive3($year, $month, $day, Request $request)
     {
+        $page = $request->input('page') ?: 1;
         if(preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/', $year.'-'.$month.'-'.$day)){
             $posts = Cache::remember('blog-archive3-'.$year.'-'.$month.'-'.$day.'-'.$page, config('b3_config.cache-age')*60, function() use ($year, $month, $day, $page) {
                 $posts = Blogpost::where('published', '!', false)->whereYear('created_at', '=', $year)->whereMonth('created_at', '=', $month)->whereDay('created_at', '=', $day)->orderBy('created_at', 'DESC')->orderBy('post_title', 'ASC')
@@ -520,8 +527,9 @@ class BlogController extends Controller {
      *
      * @return Response
      */
-    public function archives($page = 1)
+    public function archives(Request $request)
     {
+        $page = $request->input('page') ?: 1;
         $dates = Cache::remember('blog-archives-'.$page, config('b3_config.cache-age')*60, function() use ($page) {
             $dates = new Collection;
 
