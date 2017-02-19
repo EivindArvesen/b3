@@ -33,12 +33,12 @@ AddCharset utf-8 .atom .css .js .json .rss .vtt .xml
     # Remove the following line if you want to block blank referrer too
     RewriteCond %{HTTP_REFERER} !^$
 
-    RewriteCond %{HTTP_REFERER} !^https?://(.+\.)?(localhost|(.+)\.test|example.com) [NC]
+    RewriteCond %{HTTP_REFERER} !^https?://(.+\.)?(localhost|(.+)\.test|eivindarvesen.com) [NC]
     RewriteRule \.(jpe?g|png|gif|bmp)$ - [NC,F,L]
 
     # If you want to display a “blocked” banner in place of the hotlinked image,
     # replace the above rule with:
-    # RewriteRule \.(jpe?g|png|gif|bmp) http://example.com/blocked.png [R,L]
+    # RewriteRule \.(jpe?g|png|gif|bmp) http://eivindarvesen.com/blocked.png [R,L]
 
     # Password protection
     # https://github.com/phanan/htaccess#password-protect-a-directory
@@ -107,7 +107,7 @@ AddCharset utf-8 .atom .css .js .json .rss .vtt .xml
     ExpiresByType text/x-component                      "access plus 1 month"
 
   # HTML
-    ExpiresByType text/html                             "access plus 0 seconds"
+    ExpiresByType text/html                             "access plus 1 month"
 
   # JavaScript
     ExpiresByType application/javascript                "access plus 1 year"
