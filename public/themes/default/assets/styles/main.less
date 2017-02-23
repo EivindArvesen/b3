@@ -202,15 +202,6 @@ ul.nav.navbar-nav li:not(.active):active {
   color: #fff;
   z-index: 42;
 
- .modal {
-  background-color: rgba(0, 0, 0, .9);;
-
-    .modal-dialog {
-      text-shadow: none;
-      color: @text-color;
-    }
- }
-
   .row {
     margin-bottom: 30px;
   }
@@ -243,6 +234,19 @@ ul.nav.navbar-nav li:not(.active):active {
 
   p {
     font-size: @font-size-base;
+  }
+}
+
+a[data-toggle="modal"]:hover {
+  cursor: pointer;
+}
+
+.modal {
+background-color: rgba(0, 0, 0, .9);;
+
+  .modal-dialog {
+    text-shadow: none;
+    color: @text-color;
   }
 }
 
@@ -529,7 +533,7 @@ ul.inventory {
         float: left;
         font-size: floor((@line-height-computed * 2.5));
         line-height: floor((@font-size-base * 2.5));
-        margin: 0px 8px 0px 4px;
+        margin: 0px 4px 0px 0px;
       }
     }
 
