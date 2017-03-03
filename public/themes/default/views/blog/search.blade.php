@@ -11,6 +11,7 @@
             <div class="col-sm-3 col-sm-offset-1 searchbar">
                 @include('blog.searchbar')
             </div>
+        </section>
 
         <section class="col-sm-8 blog-main blog-inventory">
 
