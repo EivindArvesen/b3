@@ -96,5 +96,9 @@
     "buildConfig": {
       "uglify": true
     }
+  },
+  "dependencies": {
+    "babel-preset-es2015": "^6.24.0",
+    "babel-webpack-plugin": "^0.1.1"
   }
 }

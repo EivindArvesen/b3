@@ -1,4 +1,5 @@
 var webpack = require('webpack');
+var BabelPlugin = require("babel-webpack-plugin");
 module.exports = function(grunt) {
   grunt.initConfig({
     banner: '/*!\n' +
@@ -131,7 +132,13 @@ module.exports = function(grunt) {
             filename: "script.min.js",
         },
         plugins: [
-          new webpack.optimize.UglifyJsPlugin({minimize: true})
+          new webpack.optimize.UglifyJsPlugin({minimize: true}),
+          new BabelPlugin({
+              test: /\.js$/,
+              presets: ['es2015'],
+              sourceMaps: false,
+              compact: true
+          })
         ],
         stats: {
             // Configure the console output
@@ -209,7 +216,7 @@ module.exports = function(grunt) {
             options: {
                 open: false,
                 watchTask: true,
-                proxy: 'eivindarvesen.test'
+                proxy: 'localhost'
             }
         }
     },
