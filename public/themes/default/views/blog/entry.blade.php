@@ -60,9 +60,6 @@
 
             <section class="blog-body">
                 <?=$body;?>
-                <script>
-
-                </script>
             </section>
 
             <div class="tags col-sm-10 col-sm-offset-1">

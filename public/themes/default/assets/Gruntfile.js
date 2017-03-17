@@ -24,6 +24,7 @@ module.exports = function(grunt) {
     purifycss: {
       options: {
         whitelist: [
+          'glyphicon-repeat',
           '*blog-post*',
           '*blog-body*',
           'blockquote',

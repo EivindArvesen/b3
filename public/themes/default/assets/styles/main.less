@@ -1196,6 +1196,72 @@ footer {
     overflow: hidden;
     cursor: pointer;
 
+  .message {
+    color: #333;
+    position: absolute;
+    top: 33%;
+    width: 100%;
+    text-align: center;
+
+    p {
+      width: 90%;
+      margin: 0 auto !important;
+
+      @media (min-width: @screen-xs-min) {
+        margin-bottom: 6px !important;
+      }
+      @media (min-width: @screen-sm-min) {
+        margin-bottom: 12px !important;
+      }
+      @media (min-width: @screen-md-min) {
+        margin-bottom: 18px !important;
+      }
+      @media (min-width: @screen-lg-min) {
+        margin-bottom: 24px !important;
+      }
+    }
+
+    p, strong {
+      transition: all 0.3s ease-in-out;
+    }
+
+    strong {
+      color: #555;
+    }
+
+    span {
+      transition: all 0.3s ease-in-out;
+
+      @media (min-width: @screen-xs-min) {
+        font-size: ceil((@font-size-h4 * 1.5));
+      }
+      @media (min-width: @screen-sm-min) {
+        font-size: ceil((@font-size-h3 * 1.5));
+      }
+      @media (min-width: @screen-md-min) {
+        font-size: ceil((@font-size-h2 * 1.5));
+      }
+      @media (min-width: @screen-lg-min) {
+        font-size: ceil((@font-size-h1 * 1.5));
+      }
+    }
+  }
+
+  &:hover {
+    p{
+      color: #555;
+    }
+
+    strong {
+      color: #777;
+    }
+
+    span {
+      color: #555;
+      transform: rotate(360deg);
+    }
+  }
+
   img {
       width: 100%;
       top: -16.84%;
