@@ -557,7 +557,8 @@ ul.inventory {
       height: auto;
     }
 
-    audio, iframe:not([src*="facebook.com"]) {
+    //audio, iframe:not([src*="facebook.com"]) {
+    audio {
       width: 100%;
     }
 
@@ -1190,23 +1191,26 @@ footer {
 // Lazy loaded embeds
 .embed {
     background-color: #000;
-    margin-bottom: 30px;
+    margin: 0 auto 30px auto;
     position: relative;
-    padding-top: 56.25%;
+    //padding-top: 56.25%;
     overflow: hidden;
     cursor: pointer;
+    max-width: 100%;
 
   .message {
     color: #333;
-    position: absolute;
-    top: 33%;
     width: 100%;
     text-align: center;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
 
     p {
       width: 90%;
-      margin: 0 auto !important;
+      margin: 0 auto 6px auto !important;
 
+      /*
       @media (min-width: @screen-xs-min) {
         margin-bottom: 6px !important;
       }
@@ -1219,6 +1223,7 @@ footer {
       @media (min-width: @screen-lg-min) {
         margin-bottom: 24px !important;
       }
+      */
     }
 
     p, strong {
@@ -1231,7 +1236,9 @@ footer {
 
     span {
       transition: all 0.3s ease-in-out;
+      font-size: 32px;
 
+      /*
       @media (min-width: @screen-xs-min) {
         font-size: ceil((@font-size-h4 * 1.5));
       }
@@ -1244,6 +1251,7 @@ footer {
       @media (min-width: @screen-lg-min) {
         font-size: ceil((@font-size-h1 * 1.5));
       }
+      */
     }
   }
 

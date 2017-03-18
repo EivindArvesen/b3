@@ -31,17 +31,21 @@ for (var i=0, iLen=imgs.length; i<iLen; i++) {
 var iframes = $("iframe");
 for (var i = 0; i < iframes.length; i++) {
 
-    var id, host, url, height, width, style = undefined;
+    var id, host, url, height, width, style, size = undefined;
     host = /[^\/]*/.exec(iframes[i].getAttribute('src').replace(/(^\w+:|^)\/\//, '').replace('www.', ''))[0];
     url = iframes[i].getAttribute('src')
     height = iframes[i].getAttribute('height');
     width = iframes[i].getAttribute('width');
     style = iframes[i].getAttribute('style');
 
+    if (iframes[i].getAttribute('width') && iframes[i].getAttribute('height')) {
+        size = "width: " + iframes[i].getAttribute('width') + "px; height: " + iframes[i].getAttribute('height') + "px;";
+    } else {
+        size = style;
+    }
+
     if (host == 'youtube.com') {
         id = iframes[i].getAttribute('src').substr(iframes[i].getAttribute('src').lastIndexOf('/') + 1);
-    } else {
-
     }
 
     var replacement = document.createElement("div");
@@ -50,11 +54,9 @@ for (var i = 0; i < iframes.length; i++) {
     replacement.setAttribute('data-host', host);
     replacement.setAttribute('data-url', url);
     replacement.setAttribute('data-height', height);
-    replacement.setAttribute('height', height);
     replacement.setAttribute('data-width', width);
-    replacement.setAttribute('width', width);
     replacement.setAttribute('data-style', style);
-    replacement.setAttribute('style', style);
+    replacement.setAttribute('style', size);
 
     if (host == 'youtube.com') {
         var btn = document.createElement('div');
