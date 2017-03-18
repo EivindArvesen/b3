@@ -17,17 +17,8 @@ hljs.initHighlightingOnLoad();
         Custom JS here
  */
 
-// Make img captions from alt text
-var src = [];
-var imgs = document.images;
-for (var i=0, iLen=imgs.length; i<iLen; i++) {
-    if (imgs[i].alt != '') {
-        imgs[i].outerHTML+= '<span class="img-caption">' + imgs[i].alt + '</span';
-    };
-}
 
-
-// Process
+// Process embeds
 var iframes = $("iframe");
 for (var i = 0; i < iframes.length; i++) {
 
@@ -83,6 +74,7 @@ for (var i = 0; i < embeds.length; i++) {
         image.addEventListener( "load", function() {
             embeds[ i ].appendChild( image );
         }( i ) );
+        //image.setAttribute('style', " padding-top: 56.25%;");
     } else {
         var message = document.createElement( "div" );
         message.setAttribute('class', 'message');

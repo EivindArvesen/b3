@@ -178,7 +178,12 @@ function get_intro($id) {
   $string = preg_replace('/<img[^>]+>/i', '', $string_pp);
 
   if ($post_object['cover'] && $post_object['cover'] !== '') {
-    $image[0] = array('<figure class="cover-img" style="background-image: url(' . $post_object['cover'] . ')"></figure>');
+    $image[0] = array('<figure class="cover-img" style="background-image: url(' . preg_replace('/(\.[^.]+)$/', sprintf('%s$1', '-thumbnail'), $post_object['cover']) . ')"></figure>');
+  } else if ($image[0]) {
+    $dom = new DOMDocument();
+    $dom->loadHTML($image[0][0]);
+    $dom->getElementsByTagName('img')->item(0)->setAttribute('src', preg_replace('/(\.[^.]+)$/', sprintf('%s$1', '-thumbnail'), $dom->getElementsByTagName('img')->item(0)->getAttribute('src')));
+      $image[0] = array(substr($dom->saveHTML($dom->getElementsByTagName('img')->item(0)), 0, -1).' />');
   }
 
   if ($post_object['lead'] && $post_object['lead'] !== '') {

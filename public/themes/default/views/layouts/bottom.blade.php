@@ -28,7 +28,7 @@
 
     <!-- JS placed at the end of the document so the pages load faster -->
 
-    <script src="/themes/{{config('b3_config.theme')}}/assets/dist/scripts/script.min.71bd09a74840a0b2.js"></script>
+    <script src="/themes/{{config('b3_config.theme')}}/assets/dist/scripts/script.min.faf5c1c31053fd25.js"></script>
 
   </body>
 </html>
