@@ -152,8 +152,6 @@ class BlogTablesSeeder extends Seeder
                     // Make relative paths (links/images) absolute
                     $body = preg_replace("/(href|src)\=\"([(www)])(\/)?/", "$1=\"http://$2", preg_replace("/(href|src)\=\"([^(http|www|\/)])(\/)?/", "$1=\"$path/$2", $document->getHtmlContent()));
 
-                    /* TODO */
-
                     $doc = new DOMDocument();
                     @$doc->loadHTML('<html><body>'.$body.'</body></html>');
 
@@ -174,7 +172,7 @@ class BlogTablesSeeder extends Seeder
                                 // Convert and optimize images
                                 $img->encode(pathinfo($image_path)['extension'], 75)->resize(1920, null, function ($constraint) {
                                     $constraint->aspectRatio();
-                                    //$constraint->upsize();
+                                    $constraint->upsize();
                                 });
 
                                 $new_path = dirname($image_path).'/'.pathinfo($image_path)['filename']. ".".pathinfo($image_path)['extension'];
