@@ -25,7 +25,7 @@
     @endif
 
     <!-- Theme CSS -->
-    <link href="/themes/{{config('b3_config.theme')}}/assets/dist/styles/style.min.1215e524ed51a7e2.css" rel="stylesheet">
+    <link href="/themes/{{config('b3_config.theme')}}/assets/dist/styles/style.min.a816a20c72512574.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -75,8 +75,7 @@
 
   </head>
 
-  <body class="{{ config('b3_config.status') != 'live' ? 'status' : ''}} {{ isset($style) && $style == 'light' ? 'light-bg' : ''}} {{ isset($style) && $style == 'dark' ? 'dark-bg' : ''}} {{ isset($page) && $page->type == 'index' ? 'index-bg' : ''}}"
-    @if (isset($bg) && $bg !== '' && $bg !== '0')
-      style="background-image: url({{ $bg }}); "
-    @endif
-  >
+  <body class="{{ config('b3_config.status') != 'live' ? 'status' : ''}} {{ isset($style) && $style == 'light' ? 'light-bg' : ''}} {{ isset($style) && $style == 'dark' ? 'dark-bg' : ''}} {{ isset($page) && $page->type == 'index' ? 'index-bg' : ''}}">
+  @if (isset($bg) && $bg !== '' && $bg !== '0')
+      <img class="background" src="{{ $bg }}" />
+  @endif
