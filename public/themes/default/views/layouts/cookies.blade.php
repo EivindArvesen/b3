@@ -1,5 +1,5 @@
 <!-- Trigger the modal with a button -->
-You can read this site's cookie policy <a data-toggle="modal" data-target="#cookiesModal">here</a>.
+You can read this site's cookie policy <a href="#" data-toggle="modal" data-target="#cookiesModal">here</a>.
 
 <!-- Modal -->
 <div id="cookiesModal" class="modal fade" role="dialog">
