@@ -77,5 +77,5 @@
 
   <body class="{{ config('b3_config.status') != 'live' ? 'status' : ''}} {{ isset($style) && $style == 'light' ? 'light-bg' : ''}} {{ isset($style) && $style == 'dark' ? 'dark-bg' : ''}} {{ isset($page) && $page->type == 'index' ? 'index-bg' : ''}}">
   @if (isset($bg) && $bg !== '' && $bg !== '0')
-      <img class="background" src="{{ $bg }}" />
+      <img class="background" alt="background-image" src="{{ $bg }}" />
   @endif
