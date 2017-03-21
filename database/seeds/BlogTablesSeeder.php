@@ -10,7 +10,9 @@ use App\Models\Post_tag;
 use App\Models\Post_series;
 use App\Models\Series;
 use App\Models\Tag;
+
 use Illuminate\Database\Seeder;
+
 use Kurenai\DocumentParser;
 use Intervention\Image\ImageManager;
 
@@ -18,8 +20,6 @@ class BlogTablesSeeder extends Seeder
 {
     public function run()
     {
-
-        // protected $table = 'my_flights'; // set table
 
         // update tables instead of overwriting (think timestamps, original...)
         $manager = new ImageManager;
@@ -103,23 +103,19 @@ class BlogTablesSeeder extends Seeder
                         $cover = $path . '/' . ltrim($document->get('cover'), '/');
 
                         $image_path = $pub_path . $cover;
-                        // Append "-original" to original and replace it
-                        $original = preg_replace('/(\.[^.]+)$/', sprintf('%s$1', '-original'), $image_path);
+                        $optimized = preg_replace('/(\.[^.]+)$/', sprintf('%s$1', '-optimized'), $image_path);
                         $thumbnail = preg_replace('/(\.[^.]+)$/', sprintf('%s$1', '-thumbnail'), $image_path);
 
-                        if (!file_exists($original) || !file_exists($thumbnail)) {
+                        if (!file_exists($optimized) || !file_exists($thumbnail)) {
                             $img = $manager->make($image_path);
 
-                            if (!file_exists($original)) {
-                                rename($image_path, $original);
+                            if (!file_exists($optimized)) {
                                 // Convert and optimize images
                                 $img->encode(pathinfo($image_path)['extension'], 75)->resize(4096, null, function ($constraint) {
                                     $constraint->upsize();
                                     $constraint->aspectRatio();
                                 });
-
-                                $new_path = dirname($image_path).'/'.pathinfo($image_path)['filename']. ".".pathinfo($image_path)['extension'];
-                                $img->save($new_path);
+                                $img->save($optimized);
                             }
 
                             if (!file_exists($thumbnail)) {
@@ -132,6 +128,7 @@ class BlogTablesSeeder extends Seeder
                             }
                             $img->destroy();
                         }
+                        $cover = str_replace($pub_path, '', $optimized);
 
                     } else {
                         $cover = '';
@@ -159,24 +156,20 @@ class BlogTablesSeeder extends Seeder
 
                     foreach ($images as $image) {
                         $image_path = $pub_path . $image->getAttribute('src');
-                        // Append "-original" to original and replace it
-                        $original = preg_replace('/(\.[^.]+)$/', sprintf('%s$1', '-original'), $image_path);
+                        $optimized = preg_replace('/(\.[^.]+)$/', sprintf('%s$1', '-optimized'), $image_path);
                         $thumbnail = preg_replace('/(\.[^.]+)$/', sprintf('%s$1', '-thumbnail'), $image_path);
 
-                        if (!file_exists($original) || !file_exists($thumbnail)) {
+                        if (!file_exists($optimized) || !file_exists($thumbnail)) {
                             $img = $manager->make($image_path);
 
-                            if (!file_exists($original)) {
-                                rename($image_path, $original);
+                            if (!file_exists($optimized)) {
 
                                 // Convert and optimize images
                                 $img->encode(pathinfo($image_path)['extension'], 75)->resize(1920, null, function ($constraint) {
                                     $constraint->aspectRatio();
                                     $constraint->upsize();
                                 });
-
-                                $new_path = dirname($image_path).'/'.pathinfo($image_path)['filename']. ".".pathinfo($image_path)['extension'];
-                                $img->save($new_path);
+                                $img->save($optimized);
                             }
 
                             if (!file_exists($thumbnail)) {
@@ -195,12 +188,14 @@ class BlogTablesSeeder extends Seeder
                         $caption = $image->getAttribute('title');
 
                         // Make optimized image link to original image on click
+                        $old_image_element = $doc->saveHTML($image);
+                        $image->setAttribute('src', str_replace($pub_path, '', $optimized));
                         $image_element = $doc->saveHTML($image);
-                        str_replace($image->getAttribute('src'), dirname($image->getAttribute('src')).'/'.basename($image->getAttribute('src'), ".jpg") , $image_element);
-                        $new_stuff = '<a href="' . str_replace($pub_path, '', $original) . '">' . $image_element . '</a><span class="img-caption">' . $caption . '</span>';
+
+                        $new_stuff = '<a href="' . str_replace($pub_path, '', $image_path) . '">' . $image_element . '</a><span class="img-caption">' . $caption . '</span>';
 
                         // Replace the old with the new
-                        $body = str_replace(substr($doc->saveHTML($image), 0, -1).' />', $new_stuff, $body);
+                        $body = str_replace(substr($old_image_element, 0, -1).' />', $new_stuff, $body);
                     }
 
                     $blogpost = Blogpost::create([

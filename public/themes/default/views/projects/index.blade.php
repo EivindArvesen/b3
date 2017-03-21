@@ -22,7 +22,7 @@
             </div>
             <div class="col-xs-12 col-sm-6 col-md-3 project-element">
               @if (isset($project['feature']) && $project['feature'] !== '' && $project['feature'] !== '0')
-                <img class="media-object" src="{{$project->feature}}">
+                <img class="media-object" src="{{projectThumbnail($project->feature)}}">
               @endif
             </div>
           </section>

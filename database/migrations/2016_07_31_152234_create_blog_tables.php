@@ -32,6 +32,17 @@ class CreateBlogTables extends Migration {
 			$table->integer('tag_id');
 		});
 
+		Schema::create('post_series', function(Blueprint $table)
+		{
+			/**
+			 * Table for associating posts with a series
+			 */
+			$table->integer('post_id');
+			$table->integer('series_id');
+
+			//$table->unique('post_id');
+		});
+
 		Schema::create('languages', function(Blueprint $table)
 		{
 			/**
@@ -65,6 +76,19 @@ class CreateBlogTables extends Migration {
 			$table->string('tag_slug');
 
 			$table->unique('tag_title');
+		});
+
+
+		Schema::create('series', function(Blueprint $table)
+		{
+			/**
+			 * Table for series
+			 */
+			$table->increments('series_id');
+			$table->string('series_title');
+			$table->string('series_slug');
+
+			$table->unique('series_title');
 		});
 
 		Schema::create('blogposts', function(Blueprint $table)
@@ -103,9 +127,11 @@ class CreateBlogTables extends Migration {
 		Schema::dropIfExists('blogposts');
 		Schema::dropIfExists('tags');
 		Schema::dropIfExists('categories');
+		Schema::dropIfExists('series');
 		Schema::dropIfExists('languages');
 		Schema::dropIfExists('post_tags');
 		Schema::dropIfExists('post_categories');
+		Schema::dropIfExists('post_series');
 	}
 
 }

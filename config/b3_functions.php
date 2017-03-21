@@ -178,12 +178,12 @@ function get_intro($id) {
   $string = preg_replace('/<img[^>]+>/i', '', $string_pp);
 
   if ($post_object['cover'] && $post_object['cover'] !== '') {
-    $image[0] = array('<figure class="cover-img" style="background-image: url(' . preg_replace('/(\.[^.]+)$/', sprintf('%s$1', '-thumbnail'), $post_object['cover']) . ')"></figure>');
+    $image[0] = array('<figure class="cover-img" style="background-image: url(' . preg_replace('/(\.[^.]+)$/', sprintf('%s$1', '-thumbnail'), str_replace('-optimized.', '.', $post_object['cover'])) . ')"></figure>');
   } else if ($image[0]) {
     $dom = new DOMDocument();
     $dom->loadHTML($image[0][0]);
-    $dom->getElementsByTagName('img')->item(0)->setAttribute('src', preg_replace('/(\.[^.]+)$/', sprintf('%s$1', '-thumbnail'), $dom->getElementsByTagName('img')->item(0)->getAttribute('src')));
-      $image[0] = array(substr($dom->saveHTML($dom->getElementsByTagName('img')->item(0)), 0, -1).' />');
+    $dom->getElementsByTagName('img')->item(0)->setAttribute('src', preg_replace('/(\.[^.]+)$/', sprintf('%s$1', '-thumbnail'), str_replace('-optimized.', '.', $dom->getElementsByTagName('img')->item(0)->getAttribute('src'))));
+      $image[0] = array(substr($doc->saveHTML($dom->getElementsByTagName('img')->item(0)), 0, -1).' />');
   }
 
   if ($post_object['lead'] && $post_object['lead'] !== '') {
@@ -219,8 +219,12 @@ function getDescription($body) {
   return $first_chunk;
 }
 
-function getFirstImage() {
-  return '';
+function projectThumbnail($image) {
+  return substr_compare($image, '.gif', strlen($image)-strlen('.gif'), strlen('.gif')) === 0 ? str_replace('-optimized', '', $image) : str_replace('-optimized', '-thumbnail', $image);
+}
+
+function projectHero($image) {
+  return substr_compare($image, '.gif', strlen($image)-strlen('.gif'), strlen('.gif')) === 0 ? str_replace('-optimized', '', $image) : $image;
 }
 
 function slugify($string) {

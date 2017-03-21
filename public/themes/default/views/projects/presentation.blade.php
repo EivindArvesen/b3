@@ -18,7 +18,7 @@
       </div>
       <div class="col-xs-12 col-sm-4">
         @if (isset($project['feature']) && $project['feature'] !== '' && $project['feature'] !== '0')
-          <img class="media-object" src="{{$project->feature}}">
+          <img class="media-object" src="{{projectHero($project->feature)}}">
         @endif
       </div>
     </div>
