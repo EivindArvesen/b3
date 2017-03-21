@@ -174,6 +174,8 @@ cat > $DIR/../.gitignore <<- EOM
 /vendor
 !/config/b3_config.php
 !/public/content/**
+/public/content/**/*-optimized.*
+/public/content/**/*-thumbnail.*
 /public/content/_*
 !/public/themes/**
 /public/themes/debug
@@ -182,6 +184,8 @@ cat > $DIR/../.gitignore <<- EOM
 **/.DS_Store
 **/node_modules
 **/bower_components
+!/public/subsites/**/node_modules
+!/public/subsites/**/bower_components
 
 EOM
 
