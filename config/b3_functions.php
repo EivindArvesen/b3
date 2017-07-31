@@ -183,7 +183,7 @@ function get_intro($id) {
     $dom = new DOMDocument();
     $dom->loadHTML($image[0][0]);
     $dom->getElementsByTagName('img')->item(0)->setAttribute('src', preg_replace('/(\.[^.]+)$/', sprintf('%s$1', '-thumbnail'), str_replace('-optimized.', '.', $dom->getElementsByTagName('img')->item(0)->getAttribute('src'))));
-      $image[0] = array(substr($doc->saveHTML($dom->getElementsByTagName('img')->item(0)), 0, -1).' />');
+      $image[0] = array(substr($dom->saveHTML($dom->getElementsByTagName('img')->item(0)), 0, -1).' />');
   }
 
   if ($post_object['lead'] && $post_object['lead'] !== '') {
