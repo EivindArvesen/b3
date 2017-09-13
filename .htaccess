@@ -1,5 +1,15 @@
 RewriteEngine On
 
+# Force HTTPS
+RewriteCond %{HTTPS} !on
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
+# Note: It’s also recommended to enable HTTP Strict Transport Security (HSTS)
+# on your HTTPS website to help prevent man-in-the-middle attacks.
+# See https://developer.mozilla.org/en-US/docs/Web/Security/HTTP_strict_transport_security
+<IfModule mod_headers.c>
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+</IfModule>
+
 # Deny access to hidden files
 RewriteCond %{SCRIPT_FILENAME} -d [OR]
 RewriteCond %{SCRIPT_FILENAME} -f
@@ -26,7 +36,7 @@ RewriteCond %{HTTP_HOST} !\.test$
 RewriteCond %{HTTP_HOST} !^$
 RewriteCond %{HTTP_HOST} !^www\. [NC]
 RewriteCond %{HTTPS}s ^on(s)|
-RewriteRule ^ http%1://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+RewriteRule ^ https%1://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
 # Redirect to public folder
 RewriteCond %{THE_REQUEST} /public/([^\s?]*) [NC]

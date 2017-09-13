@@ -23,11 +23,8 @@ AddCharset utf-8 .atom .css .js .json .rss .vtt .xml
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 
-    # Deny access to theme view temlates
+    # Deny access to theme view templates
     RewriteRule ^themes/(.*)/views - [F]
-
-    # TODO: HTTPS via https://letsencrypt.org
-    # https://github.com/phanan/htaccess#force-https
 
     # Disable image hotlinking
     # Remove the following line if you want to block blank referrer too
