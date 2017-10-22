@@ -12,6 +12,17 @@
       <meta name="author" content="{{config('b3_config.user')}}">
     @endif
 
+    @if (isset($results))
+      @if ($results->currentPage() === 1)
+        <link rel="next" href="{{Request::url()}}?page={{$results->currentPage()+1}}" />
+      @elseif ($results->currentPage() === $results->lastPage())
+        <link rel="prev" href="{{Request::url()}}{{$results->currentPage()===2?'':$results->currentPage()-1}}" />
+      @else
+        <link rel="prev" href="{{Request::url()}}{{$results->currentPage()===2?'':$results->currentPage()-1}}" />
+        <link rel="next" href="{{Request::url()}}?page={{$results->currentPage()+1}}" />
+      @endif
+    @endif
+
     <title>{{isset($page_title) && $page_title !=='' ? $page_title : ''}}{{(isset($page_title) && $page_title !=='') && (isset($page_type) && $page_type !=='') ? ' - ' : ''}}{{isset($page_type) && $page_type !=='' ? $page_type : ''}}{{(isset($page_title) && $page_title !=='') || (isset($page_type) && $page_type !=='') ? ' | ' : ''}}{{config('b3_config.site-name')}}</title>
 
     @if (config('b3_config.keywords') !== '')
@@ -25,7 +36,7 @@
     @endif
 
     <!-- Theme CSS -->
-    <link href="/themes/{{config('b3_config.theme')}}/assets/dist/styles/style.min.95667da3dc0b21e6.css" rel="stylesheet">
+    <link href="/themes/{{config('b3_config.theme')}}/assets/dist/styles/style.min.9205cf2c28a69933.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
