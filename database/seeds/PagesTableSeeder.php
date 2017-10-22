@@ -154,10 +154,17 @@ class PagesTableSeeder extends Seeder
 
                     foreach ($links as $link) {
                         // Check if link is relative
-                        if (substr($link->getAttribute('href'), 0, 1) !== '/' && strpos($link->getAttribute('href'), 'http://') === false && strpos($link->getAttribute('href'), 'https://') === false && strpos($link->getAttribute('href'), 'www.') === false)
-                        {
+                        if (substr($link->getAttribute('href'), 0, 1) !== '/' && strpos($link->getAttribute('href'), 'http://') === false && strpos($link->getAttribute('href'), 'https://') === false && strpos($link->getAttribute('href'), 'www.') === false) {
+                            $old_link = $doc->saveHTML($link);
                             $link_path = $path . '/' . $link->getAttribute('href');
                             $link->setAttribute('href', $link_path);
+                            $body = str_replace($old_link, $doc->saveHTML($link), $body);
+                        } else if (substr($link->getAttribute('href'), 0, 1) !== '/') {
+                            // Open external links in new tab/window
+                            $old_link = $doc->saveHTML($link);
+                            $link->setAttribute('target', '_blank');
+                            $link->setAttribute('rel', 'noopener noreferrer');
+                            $body = str_replace($old_link, $doc->saveHTML($link), $body);
                         }
                     }
 
