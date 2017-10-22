@@ -152,6 +152,12 @@ class ProjectsTableSeeder extends Seeder
                             $link_path = $path . '/' . $link->getAttribute('href');
                             $link->setAttribute('href', $link_path);
                             $body = str_replace($old_link, $doc->saveHTML($link), $body);
+                        } else if (substr($link->getAttribute('href'), 0, 1) !== '/') {
+                            // Open external links in new tab/window
+                            $old_link = $doc->saveHTML($link);
+                            $link->setAttribute('target', '_blank');
+                            $link->setAttribute('rel', 'noopener noreferrer');
+                            $body = str_replace($old_link, $doc->saveHTML($link), $body);
                         }
                     }
 
