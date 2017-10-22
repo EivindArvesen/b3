@@ -198,6 +198,17 @@ class BlogTablesSeeder extends Seeder
                         $body = str_replace(substr($old_image_element, 0, -1).' />', $new_stuff, $body);
                     }
 
+                    $links = $doc->getElementsByTagName('a');
+
+                    foreach ($links as $link) {
+                        // Check if link is relative
+                        if (substr($link->getAttribute('href'), 0, 1) !== '/' && strpos($link->getAttribute('href'), 'http://') === false && strpos($link->getAttribute('href'), 'https://') === false && strpos($link->getAttribute('href'), 'www.') === false)
+                        {
+                            $link_path = $path . '/' . $link->getAttribute('href');
+                            $link->setAttribute('href', $link_path);
+                        }
+                    }
+
                     $blogpost = Blogpost::create([
                         'created_at' => $original_date . ' 00:00:00',
                         'modified_at' => $document->get('modified') . ' 00:00:00',
