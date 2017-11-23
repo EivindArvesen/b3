@@ -12,6 +12,17 @@
       <meta name="author" content="{{config('b3_config.user')}}">
     @endif
 
+    @if (isset($results->currentPage))
+      @if ($results->currentPage() === 1)
+        <link rel="next" href="{{Request::url()}}?page={{$results->currentPage()+1}}" />
+      @elseif ($results->currentPage() === $results->lastPage())
+        <link rel="prev" href="{{Request::url()}}{{$results->currentPage()===2?'':$results->currentPage()-1}}" />
+      @else
+        <link rel="prev" href="{{Request::url()}}{{$results->currentPage()===2?'':$results->currentPage()-1}}" />
+        <link rel="next" href="{{Request::url()}}?page={{$results->currentPage()+1}}" />
+      @endif
+    @endif
+
     <title>{{isset($page_title) && $page_title !=='' ? $page_title : ''}}{{(isset($page_title) && $page_title !=='') && (isset($page_type) && $page_type !=='') ? ' - ' : ''}}{{isset($page_type) && $page_type !=='' ? $page_type : ''}}{{(isset($page_title) && $page_title !=='') || (isset($page_type) && $page_type !=='') ? ' | ' : ''}}{{config('b3_config.site-name')}}</title>
 
     @if (config('b3_config.keywords') !== '')
