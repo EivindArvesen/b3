@@ -13,6 +13,11 @@ function theme_path() {
     return base_path().'/public/themes/'.Config::get('b3_config.theme');
 }
 
+function getFirstImage($body) {
+    preg_match('/<img.+src=[\'"](?P<src>.+?)[\'"].*>/i', $body, $image);
+    return $image['src'];
+}
+
 function getMenu() {
   try {
     $menu = Page::where('type', 'index')->get(['page_title', 'slug', 'type']);

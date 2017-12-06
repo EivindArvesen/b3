@@ -66,8 +66,8 @@
 
     <meta property="og:title" content="{{isset($page_title) && $page_title !=='' ? $page_title : $page_type}}">
     <meta property="og:description" content="{{isset($body) ? getDescription($body) : ''}}{{!isset($body) && isset ($page_type) ? $page_type . ' - ' . config('b3_config.description') : config('b3_config.description')}}">
-    @if (isset($cover) || isset ($body))
-      <meta property="og:image" content="{{url()}}{{isset($cover) ? $cover : ''}}{{!isset($cover) && isset($body) ? getFirstImage($body) : ''}}">
+    @if (isset($cover) || isset($body))
+      <meta property="og:image" content="{{url()}}{{$cover ? $cover : getFirstImage($body)}}">
     @endif
     <meta property="og:url" content="{{Request::url()}}">
     <meta property="og:site_name" content="{{config('b3_config.site-name')}}">
