@@ -14,8 +14,8 @@ function theme_path() {
 }
 
 function getFirstImage($body) {
-    preg_match('/<img.+src=[\'"](?P<src>.+?)[\'"].*>/i', $body, $image);
-    return $image['src'];
+    $match = preg_match('/<img.+src=[\'"](?P<src>.+?)[\'"].*>/i', $body, $image);
+    if ($match) return $image['src'];
 }
 
 function getMenu() {
@@ -176,7 +176,10 @@ function get_intro($id) {
   $post_object = Blogpost::where('post_id', $id)->get(['cover', 'lead', 'body'])[0];
   $post = $post_object['body'];
 
-  $string_pp = substr($post, 0, 500);
+  ob_start();
+  addslashes(printTruncated(255, $post) . '...');
+  $string_pp = ob_get_contents();
+  ob_end_clean();
 
   preg_match_all('/<img[^>]+>/i', $string_pp, $image);
 
@@ -204,13 +207,86 @@ function get_intro($id) {
     }
     $first_chunk = '<h3 class="lead">'.$lead.'</h3>';
   } else {
-    $string = substr($string, 0, 255);
     $last_space = strrpos($string, ' ');
     $last_word = substr($string, $last_space);
     $first_chunk = substr($string, 0, $last_space) . '...';
   }
 
   return implode($image[0]).$first_chunk;
+}
+
+function printTruncated($maxLength, $html, $isUtf8=true)
+{
+    // https://stackoverflow.com/questions/1193500/truncate-text-containing-html-ignoring-tags
+    $printedLength = 0;
+    $position = 0;
+    $tags = array();
+
+    // For UTF-8, we need to count multibyte sequences as one character.
+    $re = $isUtf8
+        ? '{</?([a-z]+)[^>]*>|&#?[a-zA-Z0-9]+;|[\x80-\xFF][\x80-\xBF]*}'
+        : '{</?([a-z]+)[^>]*>|&#?[a-zA-Z0-9]+;}';
+
+    while ($printedLength < $maxLength && preg_match($re, $html, $match, PREG_OFFSET_CAPTURE, $position))
+    {
+        list($tag, $tagPosition) = $match[0];
+
+        // Print text leading up to the tag.
+        $str = substr($html, $position, $tagPosition - $position);
+        if ($printedLength + strlen($str) > $maxLength)
+        {
+            print(substr($str, 0, $maxLength - $printedLength));
+            $printedLength = $maxLength;
+            break;
+        }
+
+        print($str);
+        $printedLength += strlen($str);
+        if ($printedLength >= $maxLength) break;
+
+        if ($tag[0] == '&' || ord($tag) >= 0x80)
+        {
+            // Pass the entity or UTF-8 multibyte sequence through unchanged.
+            print($tag);
+            $printedLength++;
+        }
+        else
+        {
+            // Handle the tag.
+            $tagName = $match[1][0];
+            if ($tag[1] == '/')
+            {
+                // This is a closing tag.
+
+                $openingTag = array_pop($tags);
+                assert($openingTag == $tagName); // check that tags are properly nested.
+
+                print($tag);
+            }
+            else if ($tag[strlen($tag) - 2] == '/')
+            {
+                // Self-closing tag.
+                print($tag);
+            }
+            else
+            {
+                // Opening tag.
+                print($tag);
+                $tags[] = $tagName;
+            }
+        }
+
+        // Continue after the tag.
+        $position = $tagPosition + strlen($tag);
+    }
+
+    // Print any remaining text.
+    if ($printedLength < $maxLength && $position < strlen($html))
+        print(substr($html, $position, $maxLength - $printedLength));
+
+    // Close any open tags.
+    while (!empty($tags))
+        printf('</%s>', array_pop($tags));
 }
 
 function getDescription($body) {
