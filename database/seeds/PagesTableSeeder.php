@@ -99,8 +99,7 @@ class PagesTableSeeder extends Seeder
                     }
 
                     // Make relative paths (links/images) absolute
-                    $body = preg_replace("/(href|src)\=\"([(www)])(\/)?/", "$1=\"http://$2", preg_replace("/(href|src)\=\"([^(http|www|\/)])(\/)?/", "$1=\"$path/$2", $document->getHtmlContent()));
-
+                    $body = preg_replace("/(href|src)\=\"([(www)])(\/)?/", "$1=\"http://$2", preg_replace("/(href|src)\=\"(?!(http|www|mailto))(\/)?/", "$1=\"$path/$2", $document->getHtmlContent()));
                     $doc = new DOMDocument();
                     @$doc->loadHTML('<html><body>'.$body.'</body></html>');
 
@@ -154,7 +153,7 @@ class PagesTableSeeder extends Seeder
 
                     foreach ($links as $link) {
                         // Check if link is relative
-                        if (substr($link->getAttribute('href'), 0, 1) !== '/' && strpos($link->getAttribute('href'), 'http://') === false && strpos($link->getAttribute('href'), 'https://') === false && strpos($link->getAttribute('href'), 'www.') === false) {
+                        if (substr($link->getAttribute('href'), 0, 1) !== '/' && strpos($link->getAttribute('href'), 'http://') === false && strpos($link->getAttribute('href'), 'https://') === false && strpos($link->getAttribute('href'), 'www.') === false && strpos($link->getAttribute('href'), 'mailto:') === false) {
                             $old_link = $doc->saveHTML($link);
                             $link_path = $path . '/' . $link->getAttribute('href');
                             $link->setAttribute('href', $link_path);
