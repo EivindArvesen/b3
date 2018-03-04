@@ -92,7 +92,7 @@ class ProjectsTableSeeder extends Seeder
                     $category = ucfirst(basename(dirname($file)));
 
                     // Make relative paths (links/images) absolute
-                    $body = preg_replace("/(href|src)\=\"([(www)])(\/)?/", "$1=\"http://$2", preg_replace("/(href|src)\=\"(?!(http|www|mailto))(\/)?/", "$1=\"$path/$2", $document->getHtmlContent()));
+                    $body = preg_replace("/(href|src)\=\"([(www)])(\/)?/", "$1=\"http://$2", preg_replace("/(href|src)\=\"(?!(http|www|mailto|\/))(\/)?/", "$1=\"$path/$2", $document->getHtmlContent()));
                     $doc = new DOMDocument();
                     @$doc->loadHTML('<html><body>'.$body.'</body></html>');
 
