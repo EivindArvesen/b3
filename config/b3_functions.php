@@ -15,7 +15,11 @@ function theme_path() {
 
 function getFirstImage($body) {
     $match = preg_match('/<img.+src=[\'"](?P<src>.+?)[\'"].*>/i', $body, $image);
-    if ($match) return $image['src'];
+    if ($match) {
+      return $image['src'];
+    } else {
+      return '';
+    }
 }
 
 function getMenu() {
