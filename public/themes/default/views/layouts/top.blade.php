@@ -46,29 +46,29 @@
     <![endif]-->
 
     <!-- Icons -->
-    <link rel="icon" href="/themes/{{config('b3_config.theme')}}/assets/dist/icons/favicon.ico">
-    <link rel="apple-touch-icon" sizes="57x57" href="/themes/{{config('b3_config.theme')}}/assets/dist/icons/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="/themes/{{config('b3_config.theme')}}/assets/dist/icons/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="/themes/{{config('b3_config.theme')}}/assets/dist/icons/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="/themes/{{config('b3_config.theme')}}/assets/dist/icons/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="/themes/{{config('b3_config.theme')}}/assets/dist/icons/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/themes/{{config('b3_config.theme')}}/assets/dist/icons/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="/themes/{{config('b3_config.theme')}}/assets/dist/icons/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/themes/{{config('b3_config.theme')}}/assets/dist/icons/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/themes/{{config('b3_config.theme')}}/assets/dist/icons/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="/themes/{{config('b3_config.theme')}}/assets/dist/icons/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/themes/{{config('b3_config.theme')}}/assets/dist/icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="/themes/{{config('b3_config.theme')}}/assets/dist/icons/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/themes/{{config('b3_config.theme')}}/assets/dist/icons/favicon-16x16.png">
-    <link rel="manifest" href="/themes/{{config('b3_config.theme')}}/assets/dist/icons/manifest.json">
+    <link rel="icon" href="/themes/{{config('b3_config.theme')}}/assets/dist/styles/icons/favicon.ico">
+    <link rel="apple-touch-icon" sizes="57x57" href="/themes/{{config('b3_config.theme')}}/assets/dist/styles/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/themes/{{config('b3_config.theme')}}/assets/dist/styles/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/themes/{{config('b3_config.theme')}}/assets/dist/styles/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/themes/{{config('b3_config.theme')}}/assets/dist/styles/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/themes/{{config('b3_config.theme')}}/assets/dist/styles/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/themes/{{config('b3_config.theme')}}/assets/dist/styles/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/themes/{{config('b3_config.theme')}}/assets/dist/styles/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/themes/{{config('b3_config.theme')}}/assets/dist/styles/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/themes/{{config('b3_config.theme')}}/assets/dist/styles/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/themes/{{config('b3_config.theme')}}/assets/dist/styles/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/themes/{{config('b3_config.theme')}}/assets/dist/styles/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/themes/{{config('b3_config.theme')}}/assets/dist/styles/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/themes/{{config('b3_config.theme')}}/assets/dist/styles/icons/favicon-16x16.png">
+    <link rel="manifest" href="/themes/{{config('b3_config.theme')}}/assets/dist/styles/icons/manifest.json">
     <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="/themes/{{config('b3_config.theme')}}/assets/dist/icons/ms-icon-144x144.png">
+    <meta name="msapplication-TileImage" content="/themes/{{config('b3_config.theme')}}/assets/dist/styles/icons/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
 
     <meta property="og:title" content="{{isset($page_title) && $page_title !=='' ? $page_title : $page_type}}">
     <meta property="og:description" content="{{isset($body) ? getDescription($body) : ''}}{{!isset($body) && isset ($page_type) ? $page_type . ' - ' . config('b3_config.description') : config('b3_config.description')}}">
     @if (isset($cover) || isset($body) && getFirstImage($body))
-      <meta property="og:image" content="{{url()}}{{$cover ? $cover : getFirstImage($body)}}">
+      <meta property="og:image" content="{{url()}}{{$cover ? $cover : (getFirstImage($body) || '/themes/'.config('b3_config.theme').'/assets/dist/styles/gfx/default.png')}}">
     @endif
     <meta property="og:url" content="{{Request::url()}}">
     <meta property="og:site_name" content="{{config('b3_config.site-name')}}">
