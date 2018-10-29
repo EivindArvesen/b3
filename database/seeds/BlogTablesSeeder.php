@@ -154,47 +154,49 @@ class BlogTablesSeeder extends Seeder
                     $images = $doc->getElementsByTagName('img');
 
                     foreach ($images as $image) {
-                        $image_path = $pub_path . $image->getAttribute('src');
-                        $optimized = preg_replace('/(\.[^.]+)$/', sprintf('%s$1', '-optimized'), $image_path);
-                        $thumbnail = preg_replace('/(\.[^.]+)$/', sprintf('%s$1', '-thumbnail'), $image_path);
+                        if (!pathinfo($image_path)['extension'] === 'gif') {
+                            $image_path = $pub_path . $image->getAttribute('src');
+                            $optimized = preg_replace('/(\.[^.]+)$/', sprintf('%s$1', '-optimized'), $image_path);
+                            $thumbnail = preg_replace('/(\.[^.]+)$/', sprintf('%s$1', '-thumbnail'), $image_path);
 
-                        if (!file_exists($optimized) || !file_exists($thumbnail)) {
-                            $img = $manager->make($image_path);
+                            if (!file_exists($optimized) || !file_exists($thumbnail)) {
+                                $img = $manager->make($image_path);
 
-                            if (!file_exists($optimized)) {
+                                if (!file_exists($optimized)) {
 
-                                // Convert and optimize images
-                                $img->encode(pathinfo($image_path)['extension'], 75)->resize(1920, null, function ($constraint) {
-                                    $constraint->aspectRatio();
-                                    $constraint->upsize();
-                                });
-                                $img->save($optimized);
+                                    // Convert and optimize images
+                                    $img->encode(pathinfo($image_path)['extension'], 75)->resize(1920, null, function ($constraint) {
+                                        $constraint->aspectRatio();
+                                        $constraint->upsize();
+                                    });
+                                    $img->save($optimized);
+                                }
+
+                                if (!file_exists($thumbnail)) {
+                                    // Generate thumbnail
+                                    $img->resize(800, null, function ($constraint) {
+                                        $constraint->aspectRatio();
+                                        //$constraint->upsize();
+                                    });
+                                    $img->save($thumbnail);
+                                }
+
+                                $img->destroy();
                             }
 
-                            if (!file_exists($thumbnail)) {
-                                // Generate thumbnail
-                                $img->resize(800, null, function ($constraint) {
-                                    $constraint->aspectRatio();
-                                    //$constraint->upsize();
-                                });
-                                $img->save($thumbnail);
-                            }
+                            // Generate image caption based on img title attribute
+                            $caption = $image->getAttribute('title');
 
-                            $img->destroy();
+                            // Make optimized image link to original image on click
+                            $old_image_element = $doc->saveHTML($image);
+                            $image->setAttribute('src', str_replace($pub_path, '', $optimized));
+                            $image_element = $doc->saveHTML($image);
+
+                            $new_stuff = '<a href="' . str_replace($pub_path, '', $image_path) . '">' . $image_element . '</a><span class="img-caption">' . $caption . '</span>';
+
+                            // Replace the old with the new
+                            $body = str_replace(substr($old_image_element, 0, -1).' />', $new_stuff, $body);
                         }
-
-                        // Generate image caption based on img title attribute
-                        $caption = $image->getAttribute('title');
-
-                        // Make optimized image link to original image on click
-                        $old_image_element = $doc->saveHTML($image);
-                        $image->setAttribute('src', str_replace($pub_path, '', $optimized));
-                        $image_element = $doc->saveHTML($image);
-
-                        $new_stuff = '<a href="' . str_replace($pub_path, '', $image_path) . '">' . $image_element . '</a><span class="img-caption">' . $caption . '</span>';
-
-                        // Replace the old with the new
-                        $body = str_replace(substr($old_image_element, 0, -1).' />', $new_stuff, $body);
                     }
 
                     $links = $doc->getElementsByTagName('a');
