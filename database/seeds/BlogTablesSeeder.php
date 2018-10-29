@@ -154,8 +154,8 @@ class BlogTablesSeeder extends Seeder
                     $images = $doc->getElementsByTagName('img');
 
                     foreach ($images as $image) {
+                        $image_path = $pub_path . $image->getAttribute('src');
                         if (!pathinfo($image_path)['extension'] === 'gif') {
-                            $image_path = $pub_path . $image->getAttribute('src');
                             $optimized = preg_replace('/(\.[^.]+)$/', sprintf('%s$1', '-optimized'), $image_path);
                             $thumbnail = preg_replace('/(\.[^.]+)$/', sprintf('%s$1', '-thumbnail'), $image_path);
 
