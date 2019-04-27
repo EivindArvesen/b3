@@ -35,7 +35,7 @@ for (var i = 0; i < iframes.length; i++) {
         size = style;
     }
 
-    if (host == 'youtube.com') {
+    if (host == 'youtube.com' || host == 'youtube-nocookie.com') {
         id = iframes[i].getAttribute('src').substr(iframes[i].getAttribute('src').lastIndexOf('/') + 1);
     }
 
@@ -48,8 +48,9 @@ for (var i = 0; i < iframes.length; i++) {
     replacement.setAttribute('data-width', width);
     replacement.setAttribute('data-style', style);
     replacement.setAttribute('style', size);
+    replacement.setAttribute('allow', 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture');
 
-    if (host == 'youtube.com') {
+    if (host == 'youtube.com' || host == 'youtube-nocookie.com') {
         var btn = document.createElement('div');
         btn.setAttribute('class', 'play-button');
         replacement.appendChild(btn);
@@ -67,7 +68,7 @@ for (var i = 0; i < embeds.length; i++) {
 
     var source = undefined;
 
-    if (host == 'youtube.com') {
+    if (host == 'youtube.com' || host == 'youtube-nocookie.com') {
         // Load the image asynchronously
         var image = new Image();
         image.src = "https://img.youtube.com/vi/"+ embeds[i].dataset.id+"/sddefault.jpg";
