@@ -1,5 +1,37 @@
 RewriteEngine On
 
+# SECURITY HEADERS
+<IfModule mod_headers.c>
+   # X-Frame-Options
+  Header append X-FRAME-OPTIONS "SAMEORIGIN"
+
+  # X-XSS-Protection
+  Header set X-XSS-Protection "1; mode=block"
+
+  # X-Content-Type nosniff
+  Header set X-Content-Type-Options nosniff
+
+  # Expect-CT
+  #Header set Expect-CT enforce,max-age=2592000,report-uri="https://foo.example/report"
+
+  # Feature-policy
+  Header always set Feature-Policy "microphone 'none'; payment 'none'; sync-xhr 'self' https://www.eivindarvesen.com"
+
+  # Acces-Control
+  Header set Access-Control-Allow-Origin http://www.example.com
+
+  # Referrer Policy
+  Header always set Referrer-Policy "same-origin"
+
+  # HSTS
+  Header set Strict-Transport-Security "max-age=31536000" env=HTTPS
+
+  # Content-Security-Policy (CSP)
+  Header set Content-Security-Policy "base-uri 'self';"
+  Header set Content-Security-Policy "default-src 'self';"
+  Header set Content-Security-Policy "style-src 'self' 'unsafe-inline';"
+</IfModule>
+
 # Force WWW
 RewriteCond %{HTTP_HOST} !=localhost
 RewriteCond %{HTTP_HOST} !\.test$

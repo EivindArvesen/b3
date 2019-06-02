@@ -158,6 +158,7 @@ bash $DIR/populate-db.sh
 cat ~/.ssh/id_rsa.pub | ssh $1 'cat >> .ssh/authorized_keys'
 
 # Put site URL in .htaccess
+sed -i -e "s/example.com/$3/g" $DIR/../.htaccess
 sed -i -e "s/example.com/$3/g" $DIR/../public/.htaccess
 
 # Copy B3 installation to server
