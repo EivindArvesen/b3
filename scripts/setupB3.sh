@@ -158,7 +158,6 @@ bash $DIR/populate-db.sh
 cat ~/.ssh/id_rsa.pub | ssh $1 'cat >> .ssh/authorized_keys'
 
 # Put site URL in .htaccess
-sed -i -e "s/example.com/$3/g" $DIR/../.htaccess
 sed -i -e "s/example.com/$3/g" $DIR/../public/.htaccess
 
 # Copy B3 installation to server
@@ -196,7 +195,8 @@ git add -A && git commit -m "Set up repo"
 # Set up git hooks and scripts on server and client
 HOOK="#!/bin/sh
 git --work-tree=$WEBROOT --git-dir=$SERVERROOT/repo/site.git checkout -f master
-cd $WEBROOT && bash $WEBROOT/scripts/populate-db.sh"
+cd $WEBROOT && bash $WEBROOT/scripts/populate-db.sh
+rm -rf $WEBROOT/storage/framework/cache/ && bash $WEBROOT/scripts/clearCache.sh"
 ssh $1 "mkdir repo && cd repo && mkdir site.git && cd site.git && git init --bare && cd hooks && echo '$HOOK' > post-receive && chmod +x post-receive"
 
 git remote add live ssh://$1$SERVERROOT/repo/site.git
