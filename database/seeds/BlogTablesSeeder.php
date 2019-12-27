@@ -217,9 +217,11 @@ class BlogTablesSeeder extends Seeder
                         }
                     }
 
+                    $modified_date = $document->get('modified') ? $document->get('modified') : $original_date;
+
                     $blogpost = Blogpost::create([
                         'created_at' => $original_date . ' 00:00:00',
-                        'modified_at' => $document->get('modified') . ' 00:00:00',
+                        'modified_at' => $modified_date . ' 00:00:00',
                         'language_id' => $lang_id,
                         'post_title' => ucfirst($document->get('title')),
                         'slug' => $slug,
