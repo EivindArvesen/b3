@@ -29,5 +29,6 @@ return [
     // Social media accounts (usernames for links)
     'github' => '',
     'twitter' => '',
-    'facebook' => ''
+    'facebook' => '',
+    'linkedin' => ''
 ];

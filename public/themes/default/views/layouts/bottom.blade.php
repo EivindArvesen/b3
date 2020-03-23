@@ -20,6 +20,9 @@
             @if (config('b3_config.facebook') !== '')
               <a href="https://www.facebook.com/{{config('b3_config.facebook')}}">Facebook</a>
             @endif
+            @if (config('b3_config.linkedin') !== '')
+              <a href="https://www.linkedin.com/in/{{config('b3_config.linkedin')}}/">LinkedIn</a>
+            @endif
           </p>
         </div>
       </div>
