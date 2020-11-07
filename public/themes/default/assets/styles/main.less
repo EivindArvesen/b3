@@ -20,6 +20,7 @@ body {
   position: relative;
   padding-bottom: 62px !important;
   min-height: calc(100vh);
+  font-weight: 300;
 }
 
 body.status {
@@ -232,11 +233,13 @@ ul.nav.navbar-nav li:not(.active):active {
     margin-bottom: 0;
   }
 
+  p.lead, p.text {
+    font-weight: 300;
+  }
 
   p.lead {
     //margin-bottom: 30px;
     font-size: @font-size-h3;
-    font-weight: 200;
   }
 
   p.text {
@@ -249,6 +252,7 @@ ul.nav.navbar-nav li:not(.active):active {
 
   p {
     font-size: @font-size-base;
+    font-weight: 400;
   }
 }
 
@@ -361,6 +365,10 @@ article.blog-post {
       margin-bottom: 0;
       color: @gray-light;
     }
+    blockquote cite {
+      color: #999;
+      font-size: @font-size-small;
+    }
   }
 
   pre {
@@ -445,6 +453,16 @@ ul.inventory {
   margin: 0;
 }
 
+.cover-bg {
+  width: 100%;
+  background-color: @navbar-inverse-bg;
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: calc(66vh);
+}
+
 .cover-header {
   .blog-post-meta {
     text-align: center;
@@ -456,6 +474,7 @@ ul.inventory {
   height: calc(66vh);
   margin-top: 44px;
   min-height: 200px;
+  z-index: 2;
 
   @media (min-size: @screen-lg) {
     margin-top: none;
@@ -561,6 +580,10 @@ ul.inventory {
       //text-align: justify;
     }
 
+    table {
+      width: 100%;
+    }
+
     img, audio, video, iframe {
       clear:both;
       margin: 0 auto;
@@ -612,6 +635,7 @@ ul.inventory {
 
 .blog-post-meta {
   margin-bottom: 44px;
+  //font-weight: 300;
 
   p {
     margin-bottom: 0;

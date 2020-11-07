@@ -101,6 +101,5 @@
       "uglify": true
     }
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }

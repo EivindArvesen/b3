@@ -5,6 +5,7 @@
     <article class="blog-post">
 
         @if (isset($cover) && $cover !== '' && $cover !== '0')
+            <div class="cover-bg"></div>
             <header class="cover-header">
                 <div class="cover-container">
                 <div class="cover-overlay">

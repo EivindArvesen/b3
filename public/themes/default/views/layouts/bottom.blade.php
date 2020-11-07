@@ -31,7 +31,7 @@
 
     <!-- JS placed at the end of the document so the pages load faster -->
 
-    <script src="/themes/{{config('b3_config.theme')}}/assets/dist/scripts/script.min.c177e02cf02e772d.js"></script>
+    <script src="/themes/{{config('b3_config.theme')}}/assets/dist/scripts/script.min.js"></script>
 
   </body>
 </html>
